@@ -9,6 +9,11 @@
 # testing
 /coverage
 
+# Playwright
+/test-results/
+/playwright-report/
+/.playwright-state/
+
 # next.js
 /.next/
 /out/

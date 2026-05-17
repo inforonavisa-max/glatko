@@ -49,33 +49,30 @@ export async function updateSession(request: NextRequest) {
         },
     })
 
+    // Use the official @supabase/ssr getAll/setAll pattern. The deprecated
+    // get/set/remove API was used previously and reassigned `response` per
+    // `set` call, which clobbered earlier Set-Cookie entries during a chunked
+    // token refresh — see supabase/ssr cookies.js:50-67. setAll receives the
+    // entire batch in one call, so we mutate request cookies and rebuild the
+    // response exactly once.
     const supabase = createServerClient(
         supabaseUrl,
         supabaseAnonKey,
         {
             cookies: {
-                get(name: string) {
-                    return request.cookies.get(name)?.value
+                getAll() {
+                    return request.cookies.getAll()
                 },
-                set(name: string, value: string, options: CookieOptions) {
-                    const merged = mergeSessionCookieOptions(options)
-                    request.cookies.set({ name, value, ...merged })
-                    response = NextResponse.next({
-                        request: { headers: request.headers },
-                    })
-                    response.cookies.set({ name, value, ...merged })
-                },
-                remove(name: string, options: CookieOptions) {
-                    const merged: CookieOptions = {
-                        ...options,
-                        path: options.path ?? '/',
-                        sameSite: options.sameSite ?? 'lax',
+                setAll(cookiesToSet) {
+                    for (const { name, value } of cookiesToSet) {
+                        request.cookies.set(name, value)
                     }
-                    request.cookies.set({ name, value: '', ...merged })
                     response = NextResponse.next({
                         request: { headers: request.headers },
                     })
-                    response.cookies.set({ name, value: '', ...merged })
+                    for (const { name, value, options } of cookiesToSet) {
+                        response.cookies.set(name, value, mergeSessionCookieOptions(options))
+                    }
                 },
             },
         }
