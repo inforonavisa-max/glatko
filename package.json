@@ -9,6 +9,7 @@
     "lint": "next lint",
     "smoke": "bash scripts/smoke-test.sh",
     "i18n-check": "bash scripts/i18n-check.sh",
+    "verify:seo": "bash scripts/verify-seo-canonical.sh",
     "precommit": "bash scripts/pre-commit-check.sh",
     "safe-push": "bash scripts/pre-commit-check.sh && git push",
     "studio:dev": "sanity dev --config-path sanity/sanity.config.ts",
