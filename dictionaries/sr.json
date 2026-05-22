@@ -596,7 +596,22 @@
       "confirmApprove": "Da li ste sigurni da želite da odobrite ovog profesionalca?",
       "confirmReject": "Da li ste sigurni da želite da odbijete ovu prijavu?",
       "approved_success": "Profesionalac uspešno odobren",
-      "rejected_success": "Prijava odbijena"
+      "rejected_success": "Prijava odbijena",
+      "editPro": "Izmeni",
+      "editProTitle": "Izmeni profil profesionalca",
+      "editProSubtitle": "Ažurirajte sve podatke. Polja koja ostavite prazna ostaju nepromenjena.",
+      "removePro": "Ukloni profesionalca",
+      "removeProConfirmTitle": "Da li ste sigurni da želite da uklonite ovog profesionalca?",
+      "removeProConfirmBody": "{name} će biti deaktiviran. Neće se prikazivati u javnoj listi, ali podaci se čuvaju. Možete ga vratiti u bilo kom trenutku.",
+      "removeProConfirmAction": "Da, deaktiviraj",
+      "removeProSuccess": "Profesionalac je uspešno deaktiviran.",
+      "removeProError": "Deaktivacija nije uspela.",
+      "restorePro": "Aktiviraj",
+      "restoreProSuccess": "Profesionalac je ponovo aktivan.",
+      "restoreProError": "Aktivacija nije uspela.",
+      "proInactiveBadge": "NEAKTIVAN",
+      "proInactiveBanner": "Ovaj profesionalac je neaktivan. Ne prikazuje se u javnoj listi.",
+      "proInactiveEditWarning": "Ovaj profesionalac je trenutno neaktivan. Izmena ga ostavlja neaktivnim."
     },
     "requests": {
       "title": "Moderacija zahteva",

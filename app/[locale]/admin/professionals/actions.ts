@@ -1,11 +1,13 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient, createAdminClient } from "@/supabase/server";
 import {
   updateVerificationStatus,
   createNotification,
 } from "@/lib/supabase/glatko.server";
 import { isAdminEmail } from "@/lib/admin";
+import { logAdminAction } from "@/lib/admin/audit";
 import {
   sendProApprovedEmail,
   sendProRejectedEmail,
@@ -233,4 +235,90 @@ export async function adminSetProTier(
   }
 
   return { success: true };
+}
+
+interface ProActiveToggleResult {
+  ok: boolean;
+  error?: string;
+}
+
+/**
+ * Sprint B2 — soft "remove from pro" by flipping is_active=false via the
+ * glatko_admin_update_provider RPC (migration 051). The row + all data are
+ * preserved; the pro just drops out of the public active listing
+ * (RLS "Anyone can view active profiles" is gated on is_active=true).
+ * Reversible with restoreProAction.
+ */
+export async function removeProAction(
+  providerId: string,
+): Promise<ProActiveToggleResult> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!isAdminEmail(user?.email)) {
+    return { ok: false, error: "Unauthorized" };
+  }
+
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("glatko_admin_update_provider", {
+    p_provider_id: providerId,
+    p_payload: { is_active: false },
+  });
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  await logAdminAction({
+    actionType: "pro_remove",
+    targetTable: "glatko_professional_profiles",
+    targetId: providerId,
+    payload: { is_active: false },
+    reason: "Admin soft-removed provider (is_active=false)",
+  });
+
+  revalidatePath(`/[locale]/admin/professionals`, "page");
+  revalidatePath(`/[locale]/admin/professionals/${providerId}`, "page");
+  revalidatePath(`/[locale]/admin/users`, "page");
+  revalidatePath(`/[locale]/admin/users/${providerId}`, "page");
+  return { ok: true };
+}
+
+/**
+ * Sprint B2 — re-activate a soft-removed pro (is_active=true). Technically a
+ * normal update, so the audit type is pro_update_admin (not a dedicated one).
+ */
+export async function restoreProAction(
+  providerId: string,
+): Promise<ProActiveToggleResult> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!isAdminEmail(user?.email)) {
+    return { ok: false, error: "Unauthorized" };
+  }
+
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("glatko_admin_update_provider", {
+    p_provider_id: providerId,
+    p_payload: { is_active: true },
+  });
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  await logAdminAction({
+    actionType: "pro_update_admin",
+    targetTable: "glatko_professional_profiles",
+    targetId: providerId,
+    payload: { is_active: true },
+    reason: "Admin re-activated provider (is_active=true)",
+  });
+
+  revalidatePath(`/[locale]/admin/professionals`, "page");
+  revalidatePath(`/[locale]/admin/professionals/${providerId}`, "page");
+  revalidatePath(`/[locale]/admin/users`, "page");
+  revalidatePath(`/[locale]/admin/users/${providerId}`, "page");
+  return { ok: true };
 }

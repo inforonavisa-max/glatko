@@ -596,7 +596,22 @@
       "confirmApprove": "Möchten Sie diesen Profi wirklich genehmigen?",
       "confirmReject": "Möchten Sie diese Bewerbung wirklich ablehnen?",
       "approved_success": "Profi erfolgreich genehmigt",
-      "rejected_success": "Bewerbung abgelehnt"
+      "rejected_success": "Bewerbung abgelehnt",
+      "editPro": "Bearbeiten",
+      "editProTitle": "Pro-Profil bearbeiten",
+      "editProSubtitle": "Aktualisieren Sie alle Angaben. Leer gelassene Felder bleiben unverändert.",
+      "removePro": "Pro entfernen",
+      "removeProConfirmTitle": "Möchten Sie diesen Pro wirklich entfernen?",
+      "removeProConfirmBody": "{name} wird deaktiviert. Der Pro erscheint nicht mehr in der öffentlichen Liste, aber die Daten bleiben erhalten. Sie können ihn jederzeit wiederherstellen.",
+      "removeProConfirmAction": "Ja, deaktivieren",
+      "removeProSuccess": "Pro erfolgreich deaktiviert.",
+      "removeProError": "Deaktivierung fehlgeschlagen.",
+      "restorePro": "Aktivieren",
+      "restoreProSuccess": "Pro ist wieder aktiv.",
+      "restoreProError": "Aktivierung fehlgeschlagen.",
+      "proInactiveBadge": "INAKTIV",
+      "proInactiveBanner": "Dieser Pro ist inaktiv. Er erscheint nicht in der öffentlichen Liste.",
+      "proInactiveEditWarning": "Dieser Pro ist derzeit inaktiv. Beim Bearbeiten bleibt er inaktiv."
     },
     "requests": {
       "title": "Anfragen-Moderation",

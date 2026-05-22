@@ -596,7 +596,22 @@
       "confirmApprove": "Are you sure you want to approve this professional?",
       "confirmReject": "Are you sure you want to reject this application?",
       "approved_success": "Professional approved successfully",
-      "rejected_success": "Application rejected"
+      "rejected_success": "Application rejected",
+      "editPro": "Edit",
+      "editProTitle": "Edit Pro Profile",
+      "editProSubtitle": "Update all information. Fields you leave empty stay unchanged.",
+      "removePro": "Remove Pro",
+      "removeProConfirmTitle": "Are you sure you want to remove this pro?",
+      "removeProConfirmBody": "{name} will be deactivated. They won't appear in the public listing, but their data is preserved. You can restore them anytime.",
+      "removeProConfirmAction": "Yes, Deactivate",
+      "removeProSuccess": "Pro deactivated successfully.",
+      "removeProError": "Deactivation failed.",
+      "restorePro": "Activate",
+      "restoreProSuccess": "Pro is active again.",
+      "restoreProError": "Activation failed.",
+      "proInactiveBadge": "INACTIVE",
+      "proInactiveBanner": "This pro is inactive. It does not appear in the public listing.",
+      "proInactiveEditWarning": "This pro is currently inactive. Editing keeps it inactive."
     },
     "requests": {
       "title": "Request moderation",

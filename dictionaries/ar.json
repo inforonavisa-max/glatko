@@ -596,7 +596,22 @@
       "confirmApprove": "هل أنت متأكد أنك تريد الموافقة على هذا المحترف؟",
       "confirmReject": "هل أنت متأكد أنك تريد رفض هذا الطلب؟",
       "approved_success": "تمت الموافقة على المحترف بنجاح",
-      "rejected_success": "تم رفض الطلب"
+      "rejected_success": "تم رفض الطلب",
+      "editPro": "تعديل",
+      "editProTitle": "تعديل ملف المحترف",
+      "editProSubtitle": "حدّث جميع المعلومات. الحقول التي تتركها فارغة تبقى دون تغيير.",
+      "removePro": "إزالة المحترف",
+      "removeProConfirmTitle": "هل أنت متأكد أنك تريد إزالة هذا المحترف؟",
+      "removeProConfirmBody": "سيتم إلغاء تنشيط {name}. لن يظهر في القائمة العامة، لكن البيانات محفوظة. يمكنك استعادته في أي وقت.",
+      "removeProConfirmAction": "نعم، إلغاء التنشيط",
+      "removeProSuccess": "تم إلغاء تنشيط المحترف بنجاح.",
+      "removeProError": "فشل إلغاء التنشيط.",
+      "restorePro": "تنشيط",
+      "restoreProSuccess": "المحترف نشط مرة أخرى.",
+      "restoreProError": "فشل التنشيط.",
+      "proInactiveBadge": "غير نشط",
+      "proInactiveBanner": "هذا المحترف غير نشط. لا يظهر في القائمة العامة.",
+      "proInactiveEditWarning": "هذا المحترف غير نشط حاليًا. التعديل يُبقيه غير نشط."
     },
     "requests": {
       "title": "اعتدال الطلبات",

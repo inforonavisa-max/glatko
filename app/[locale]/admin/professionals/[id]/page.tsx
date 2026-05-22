@@ -7,8 +7,9 @@ import {
 } from "@/lib/supabase/glatko.server";
 import { AdminActions } from "@/components/glatko/admin/AdminActions";
 import { AdminTierEditor } from "@/components/glatko/admin/AdminTierEditor";
+import { ProActiveToggle } from "@/components/glatko/admin/ProActiveToggle";
 import type { VerificationTier } from "@/app/[locale]/admin/professionals/actions";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 import type { VerificationStatus, DocumentStatus } from "@/types/glatko";
 
 type Props = {
@@ -58,6 +59,9 @@ export default async function ProfessionalDetailPage({ params }: Props) {
 
   const displayName =
     profile.profile?.full_name ?? profile.business_name ?? "---";
+  const isActive =
+    (profile as unknown as { is_active?: boolean }).is_active ?? true;
+  const businessName = profile.business_name ?? displayName;
 
   return (
     <div>
@@ -69,18 +73,39 @@ export default async function ProfessionalDetailPage({ params }: Props) {
         {t("common.back")}
       </Link>
 
+      {!isActive && (
+        <div className="mb-6 rounded-2xl border border-red-300/60 bg-red-50 px-5 py-4 text-sm font-medium text-red-700 dark:border-red-500/30 dark:bg-red-500/[0.08] dark:text-red-300">
+          {t("admin.professionals.proInactiveBanner")}
+        </div>
+      )}
+
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
             {displayName}
           </h1>
           <div className="mt-1 h-0.5 w-12 rounded-full bg-gradient-to-r from-teal-500 to-teal-600" />
-          <span
-            className={`mt-3 inline-flex rounded-full border px-3 py-1 text-xs font-medium ${STATUS_STYLES[profile.verification_status]}`}
-          >
-            {t(STATUS_KEYS[profile.verification_status])}
-          </span>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span
+              className={`inline-flex rounded-full border px-3 py-1 text-xs font-medium ${STATUS_STYLES[profile.verification_status]}`}
+            >
+              {t(STATUS_KEYS[profile.verification_status])}
+            </span>
+            {!isActive && (
+              <span className="inline-flex rounded-full border border-red-300 bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 dark:border-red-500/30 dark:bg-red-500/15 dark:text-red-300">
+                {t("admin.professionals.proInactiveBadge")}
+              </span>
+            )}
+          </div>
         </div>
+
+        <Link
+          href={`/${locale}/admin/professionals/${id}/edit`}
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-[#D4AF37]/10 px-5 py-2.5 text-sm font-semibold text-[#9a7d1e] transition-colors hover:bg-[#D4AF37]/20 dark:text-[#D4AF37]"
+        >
+          <Pencil className="h-4 w-4" />
+          {t("admin.professionals.editPro")}
+        </Link>
       </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -201,6 +226,14 @@ export default async function ProfessionalDetailPage({ params }: Props) {
             <AdminActions
               professionalId={profile.id}
               currentStatus={profile.verification_status}
+            />
+          </section>
+
+          <section className="rounded-2xl border border-gray-200/50 bg-white/70 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
+            <ProActiveToggle
+              professionalId={profile.id}
+              businessName={businessName}
+              isActive={isActive}
             />
           </section>
 

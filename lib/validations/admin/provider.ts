@@ -119,6 +119,87 @@ export const adminProviderCreateSchema = z
 export type AdminProviderCreateInput = z.infer<typeof adminProviderCreateSchema>;
 
 /**
+ * Sprint B2 — admin provider EDIT schema.
+ *
+ * Standalone (NOT part of adminProviderCreateSchema's union) so the create
+ * action keeps parsing exactly promote|create. Every field is optional:
+ * the payload is sparse and `glatko_admin_update_provider` (migration 051)
+ * merges by jsonb key-existence — an absent key leaves the column unchanged,
+ * an explicit `null` clears it.
+ *
+ * Editable set mirrors the RPC whitelist. Intentionally absent (immutable or
+ * own-flow): slug, is_verified, verification_status, is_founding_provider,
+ * email, password.
+ */
+const editableFieldsShape = {
+  // profiles-side
+  full_name: z.string().min(2).max(120).optional(),
+  phone: z.string().regex(PHONE_E164, "International format e.g. +382 69 868 069").optional(),
+  city_display: z.string().min(2).max(80).optional(),
+  preferred_locale: z.enum(SUPPORTED_LOCALES).optional(),
+  avatar_url: z.string().url().nullable().optional().or(z.literal("")),
+
+  // pro profile-side (existing)
+  business_name: z.string().min(2).max(120).optional(),
+  bio: z.string().max(2000).nullable().optional().or(z.literal("")),
+  location_city: z
+    .string()
+    .regex(CITY_SLUG_RE, "lowercase kebab-case, e.g. herceg-novi")
+    .min(2)
+    .max(80)
+    .optional(),
+  hourly_rate_min: z.coerce.number().min(0).max(10000).nullable().optional(),
+  hourly_rate_max: z.coerce.number().min(0).max(10000).nullable().optional(),
+  years_experience: z.coerce.number().int().min(0).max(60).nullable().optional(),
+  service_radius_km: z.coerce.number().int().min(5).max(500).optional(),
+  languages: z.array(z.enum(SUPPORTED_LOCALES)).min(1, "Pick at least one language").optional(),
+  verification_tier: z.enum(["basic", "business", "professional"]).optional(),
+  is_active: z.boolean().optional(),
+  portfolio_images: z.array(z.string().url()).max(10).optional(),
+  services: z
+    .array(
+      z.object({
+        category_id: z.string().uuid(),
+        is_primary: z.coerce.boolean(),
+      }),
+    )
+    .min(1, "Pick at least one service category")
+    .refine(
+      (arr) => arr.filter((s) => s.is_primary).length === 1,
+      "Exactly one service must be marked as primary",
+    )
+    .optional(),
+
+  // pro profile-side (NEW — Sprint B1 columns)
+  admin_notes: z.string().max(2000).nullable().optional(),
+  subscription_plan: z
+    .enum(["trial", "monthly", "quarterly", "annual", "lifetime"])
+    .nullable()
+    .optional(),
+  subscription_started_at: z.string().datetime().nullable().optional(),
+  subscription_end_date: z.string().datetime().nullable().optional(),
+} as const;
+
+export const adminProviderEditSchema = z
+  .object({
+    mode: z.literal("edit"),
+    provider_id: z.string().uuid(),
+    ...editableFieldsShape,
+  })
+  .refine(
+    (v) =>
+      v.hourly_rate_min == null ||
+      v.hourly_rate_max == null ||
+      v.hourly_rate_max >= v.hourly_rate_min,
+    {
+      message: "hourly_rate_max must be ≥ hourly_rate_min",
+      path: ["hourly_rate_max"],
+    },
+  );
+
+export type AdminProviderEditPayload = z.infer<typeof adminProviderEditSchema>;
+
+/**
  * Slug helper: business name → kebab-case slug. Mirrors the rule documented
  * in docs/operations/founding-majstor-onboarding.md. ASCII-folds Turkish
  * and Slavic diacritics, replaces non-[a-z0-9] with hyphens, collapses

@@ -596,7 +596,22 @@
       "confirmApprove": "Bu profesyoneli onaylamak istediğinizden emin misiniz?",
       "confirmReject": "Bu başvuruyu reddetmek istediğinizden emin misiniz?",
       "approved_success": "Profesyonel başarıyla onaylandı",
-      "rejected_success": "Başvuru reddedildi"
+      "rejected_success": "Başvuru reddedildi",
+      "editPro": "Düzenle",
+      "editProTitle": "Pro Profilini Düzenle",
+      "editProSubtitle": "Tüm bilgileri güncelleyin. Boş bıraktığınız alanlar değişmez.",
+      "removePro": "Pro'dan Çıkar",
+      "removeProConfirmTitle": "Pro'dan Çıkarmak İstediğinize Emin Misiniz?",
+      "removeProConfirmBody": "{name} adlı pro pasif duruma alınacak. Public listede görünmeyecek ama veriler korunacak. İstediğinizde geri yükleyebilirsiniz.",
+      "removeProConfirmAction": "Evet, Pasifleştir",
+      "removeProSuccess": "Pro başarıyla pasifleştirildi.",
+      "removeProError": "Pasifleştirme başarısız.",
+      "restorePro": "Aktifleştir",
+      "restoreProSuccess": "Pro tekrar aktif.",
+      "restoreProError": "Aktifleştirme başarısız.",
+      "proInactiveBadge": "PASİF",
+      "proInactiveBanner": "Bu pro pasif. Public listede görünmüyor.",
+      "proInactiveEditWarning": "Bu pro şu an pasif. Düzenleme yaparsanız pasif kalmaya devam eder."
     },
     "requests": {
       "title": "Talep moderasyonu",

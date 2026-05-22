@@ -596,7 +596,22 @@
       "confirmApprove": "Sei sicuro di voler approvare questo professionista?",
       "confirmReject": "Sei sicuro di voler rifiutare questa candidatura?",
       "approved_success": "Professionista approvato con successo",
-      "rejected_success": "Candidatura rifiutata"
+      "rejected_success": "Candidatura rifiutata",
+      "editPro": "Modifica",
+      "editProTitle": "Modifica profilo pro",
+      "editProSubtitle": "Aggiorna tutte le informazioni. I campi lasciati vuoti restano invariati.",
+      "removePro": "Rimuovi pro",
+      "removeProConfirmTitle": "Sei sicuro di voler rimuovere questo pro?",
+      "removeProConfirmBody": "{name} verrà disattivato. Non comparirà nell'elenco pubblico, ma i dati saranno conservati. Puoi ripristinarlo in qualsiasi momento.",
+      "removeProConfirmAction": "Sì, disattiva",
+      "removeProSuccess": "Pro disattivato con successo.",
+      "removeProError": "Disattivazione non riuscita.",
+      "restorePro": "Attiva",
+      "restoreProSuccess": "Il pro è di nuovo attivo.",
+      "restoreProError": "Attivazione non riuscita.",
+      "proInactiveBadge": "INATTIVO",
+      "proInactiveBanner": "Questo pro è inattivo. Non compare nell'elenco pubblico.",
+      "proInactiveEditWarning": "Questo pro è attualmente inattivo. La modifica lo mantiene inattivo."
     },
     "requests": {
       "title": "Moderazione richieste",
