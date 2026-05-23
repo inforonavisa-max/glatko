@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import {
   getAllActiveCategories,
+  getApprovedProviderCategoryIds,
   getProfessionalsForSitemap,
 } from "@/lib/supabase/glatko.server";
 import { getAllPostSlugs } from "@/lib/sanity/fetch";
@@ -97,13 +98,15 @@ const STATIC_PAGES = [
  * deduplicate locale variants.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, professionals, blogSlugs] = await Promise.all([
-    getAllActiveCategories(),
-    getProfessionalsForSitemap(),
-    // Sanity fetch — tolerate failure so a CMS hiccup never breaks
-    // the catalog half of the sitemap.
-    getAllPostSlugs("me").catch(() => []),
-  ]);
+  const [categories, professionals, blogSlugs, approvedCatIds] =
+    await Promise.all([
+      getAllActiveCategories(),
+      getProfessionalsForSitemap(),
+      // Sanity fetch — tolerate failure so a CMS hiccup never breaks
+      // the catalog half of the sitemap.
+      getAllPostSlugs("me").catch(() => []),
+      getApprovedProviderCategoryIds(),
+    ]);
   const buildTime = new Date();
   const routes: MetadataRoute.Sitemap = [];
 
@@ -119,7 +122,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  for (const category of categories) {
+  // G-SEO-FIX-1 / A1 (Phase 1 — sitemap-exclude only, NO noindex):
+  // A category enters the sitemap iff it is a root (taxonomy backbone, always
+  // indexed), OR has >=1 approved+active provider, OR carries real editorial
+  // content (any localized description > 100 chars). Empty leaf sub-categories
+  // are dropped so Google's crawl priority follows content quality — the pages
+  // stay live and reachable via internal links (noindex deferred to Phase 2).
+  const hasEditorial = (d: Record<string, string> | null): boolean =>
+    !!d && Object.values(d).some((v) => typeof v === "string" && v.length > 100);
+  const childIdsByParent = new Map<string, string[]>();
+  for (const c of categories) {
+    if (c.parent_id) {
+      const arr = childIdsByParent.get(c.parent_id) ?? [];
+      arr.push(c.id);
+      childIdsByParent.set(c.parent_id, arr);
+    }
+  }
+  const isIndexable = (c: (typeof categories)[number]): boolean => {
+    if (c.parent_id === null) return true; // root: taxonomy backbone
+    if (approvedCatIds.has(c.id)) return true; // own approved+active provider
+    // rollup safety net for any future 3rd taxonomy level (leaves: no-op)
+    if ((childIdsByParent.get(c.id) ?? []).some((id) => approvedCatIds.has(id)))
+      return true;
+    return hasEditorial(c.description); // real editorial content
+  };
+  const indexableCategories = categories.filter(isIndexable);
+
+  for (const category of indexableCategories) {
     const params = { slug: category.slug };
     const lastModified = category.created_at
       ? new Date(category.created_at)

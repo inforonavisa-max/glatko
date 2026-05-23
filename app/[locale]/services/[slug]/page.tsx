@@ -19,7 +19,7 @@ import {
 import { getPostsByServiceCategory } from "@/lib/sanity/fetch";
 import { urlFor } from "@/lib/sanity/image";
 import Image from "next/image";
-import { SEO_BASE, buildAlternates } from "@/lib/seo";
+import { buildAlternates, localizedUrl } from "@/lib/seo";
 import {
   generateBreadcrumbSchema,
   generateCategoryLocalBusinessSchema,
@@ -165,17 +165,17 @@ export default async function CategoryDetailPage({ params }: Props) {
     );
     breadcrumbCrumbs.push({
       name: parentName,
-      href: `/services/${category.parent_slug}`,
+      href: { pathname: "/services/[slug]", params: { slug: category.parent_slug } },
     });
   }
   breadcrumbCrumbs.push({
     name: categoryName,
-    href: `/services/${slug}`,
+    href: { pathname: "/services/[slug]", params: { slug } },
   });
 
   const breadcrumbSchemaItems: JsonLdBreadcrumbItem[] = [
-    { name: homeLabel, url: `${SEO_BASE}/${locale}` },
-    { name: servicesLabel, url: `${SEO_BASE}/${locale}/services` },
+    { name: homeLabel, url: localizedUrl(locale, "/") },
+    { name: servicesLabel, url: localizedUrl(locale, "/services") },
   ];
   if (category.parent_slug) {
     breadcrumbSchemaItems.push({
@@ -184,12 +184,12 @@ export default async function CategoryDetailPage({ params }: Props) {
         locale,
         category.parent_slug,
       ),
-      url: `${SEO_BASE}/${locale}/services/${category.parent_slug}`,
+      url: localizedUrl(locale, "/services/[slug]", { slug: category.parent_slug }),
     });
   }
   breadcrumbSchemaItems.push({
     name: categoryName,
-    url: `${SEO_BASE}/${locale}/services/${slug}`,
+    url: localizedUrl(locale, "/services/[slug]", { slug }),
   });
   const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbSchemaItems);
 

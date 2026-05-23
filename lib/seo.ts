@@ -80,3 +80,35 @@ export function buildAlternates(
     languages,
   };
 }
+
+/**
+ * Absolute, locale-correct URL for a route declared in i18n/routing.ts.
+ *
+ *   localizedUrl("de", "/services")                  → https://glatko.app/de/dienstleistungen
+ *   localizedUrl("de", "/services/[slug]", { slug }) → https://glatko.app/de/dienstleistungen/<slug>
+ *
+ * Single source for absolute URLs emitted OUTSIDE Next's metadata pipeline —
+ * schema.org/JSON-LD `url`/`item`, breadcrumbs, anywhere a hard-coded
+ * `${SEO_BASE}/${locale}/...` would bake in a non-localized path segment.
+ * A non-localized `/de/services/...` 307/308-redirects to
+ * `/de/dienstleistungen/...` (the GSC "Page with redirect" bucket — SEO-FIX-1),
+ * so routing every absolute URL through this helper keeps schema / canonical /
+ * hreflang / sitemap in lockstep with the `pathnames` map.
+ */
+export function localizedUrl(
+  locale: string,
+  href: Href,
+  params?: Record<string, string>,
+): string {
+  const isParametric =
+    typeof href === "string" && (href.includes("[") || href.includes(":"));
+  if (isParametric && !params) {
+    throw new Error(
+      `localizedUrl: route "${href}" is parametric but no params were provided`,
+    );
+  }
+  const hrefArg: GetPathnameHref = (params
+    ? { pathname: href, params }
+    : href) as GetPathnameHref;
+  return `${SEO_BASE}${getPathname({ locale: locale as Locale, href: hrefArg })}`;
+}

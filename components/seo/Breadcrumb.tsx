@@ -2,13 +2,19 @@
 
 import { ChevronRight, Home } from "lucide-react";
 import { useLocale } from "next-intl";
+import type { ComponentProps } from "react";
 import { Link } from "@/i18n/navigation";
 
 export interface BreadcrumbCrumb {
   /** Localized display label. */
   name: string;
-  /** Path relative to the current locale (e.g. "/services/boat-services"). */
-  href: string;
+  /**
+   * next-intl Link href: a route key ("/services") or a parametric pathname
+   * object ({ pathname: "/services/[slug]", params: { slug } }). Concrete
+   * strings like `/services/${slug}` are NOT localized by next-intl and would
+   * emit non-localized /services/... links (SEO-FIX-1 A2).
+   */
+  href: ComponentProps<typeof Link>["href"];
 }
 
 interface BreadcrumbProps {
@@ -50,7 +56,6 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                 </span>
               ) : (
                 <Link
-                  // @ts-expect-error -- breadcrumb items.href is string-typed; runtime URLs are valid pathnames
                   href={item.href}
                   className="max-w-[14rem] truncate transition hover:text-gray-900 dark:hover:text-white"
                 >

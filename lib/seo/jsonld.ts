@@ -14,7 +14,7 @@
  * deterministically so HTML diffs stay stable across renders.
  */
 
-import { SEO_BASE, SEO_LOCALES } from "@/lib/seo";
+import { SEO_BASE, SEO_LOCALES, localizedUrl, type Href } from "@/lib/seo";
 
 const ORG_NAME = "Glatko" as const;
 
@@ -78,7 +78,7 @@ export function generateOrganizationSchema(locale: string) {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: ORG_NAME,
-    url: `${SEO_BASE}/${locale}`,
+    url: localizedUrl(locale, "/"),
     logo: `${SEO_BASE}/logo.png`,
     description: ORG_DESCRIPTIONS[locale] || ORG_DESCRIPTIONS.en,
     address: {
@@ -103,14 +103,14 @@ export function generateWebSiteSchema(locale: string) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: ORG_NAME,
-    url: `${SEO_BASE}/${locale}`,
+    url: localizedUrl(locale, "/"),
     description: ORG_DESCRIPTIONS[locale] || ORG_DESCRIPTIONS.en,
     inLanguage: locale,
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SEO_BASE}/${locale}/services?openSearch=1&q={search_term_string}`,
+        urlTemplate: `${localizedUrl(locale, "/services")}?openSearch=1&q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -125,7 +125,7 @@ export function generateServiceSchema(
 ) {
   const name = pickLocalized(category.name, locale, category.slug);
   const description = pickLocalized(category.description, locale, name);
-  const url = `${SEO_BASE}/${locale}/services/${category.slug}`;
+  const url = localizedUrl(locale, "/services/[slug]", { slug: category.slug });
   const englishName = pickLocalized(category.name, "en", category.slug);
 
   // areaServed: union of pro cities and the 6 Karadağ defaults.
@@ -180,7 +180,7 @@ export function generateCategoryLocalBusinessSchema(
     "@type": "LocalBusiness",
     name: `${ORG_NAME} — ${name}`,
     description,
-    url: `${SEO_BASE}/${locale}/services/${category.slug}`,
+    url: localizedUrl(locale, "/services/[slug]", { slug: category.slug }),
     image: category.hero_image_url || undefined,
     address: {
       "@type": "PostalAddress",
@@ -212,7 +212,7 @@ export function generateItemListSchema(
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: `${SEO_BASE}/${locale}${basePath}/${item.slug}`,
+      url: localizedUrl(locale, `${basePath}/[slug]` as Href, { slug: item.slug }),
       name: pickLocalized(item.name, locale, item.slug),
     })),
   };
