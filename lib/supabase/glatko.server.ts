@@ -1627,15 +1627,43 @@ export async function getAllActiveCategories() {
   const supabase = createClient();
   const { data } = await supabase
     .from("glatko_service_categories")
-    .select("id, slug, parent_id, name, created_at")
+    .select("id, slug, parent_id, name, description, created_at")
     .eq("is_active", true);
   return (data ?? []) as Array<{
     id: string;
     slug: string;
     parent_id: string | null;
     name: Record<string, string>;
+    description: Record<string, string> | null;
     created_at: string | null;
   }>;
+}
+
+/**
+ * Set of service-category ids that have at least one approved + active
+ * provider (G-SEO-FIX-1 / A1). Queried from the profile side — where the
+ * approved+active filter lives — embedding each provider's pro_services
+ * category links, so it stays a single round-trip (no N+1). The sitemap uses
+ * this to drop empty leaf sub-categories (Phase 1: sitemap-exclude only, NO
+ * noindex). "approved+active" mirrors getProfessionalsForSitemap exactly.
+ */
+export async function getApprovedProviderCategoryIds(): Promise<Set<string>> {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("glatko_professional_profiles")
+    .select("id, glatko_pro_services(category_id)")
+    .eq("is_active", true)
+    .eq("verification_status", "approved");
+  const ids = new Set<string>();
+  if (error || !data) return ids;
+  for (const pro of data as Array<{
+    glatko_pro_services?: { category_id: string | null }[] | null;
+  }>) {
+    for (const svc of pro.glatko_pro_services ?? []) {
+      if (svc.category_id) ids.add(svc.category_id);
+    }
+  }
+  return ids;
 }
 
 /**
