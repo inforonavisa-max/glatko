@@ -10,7 +10,12 @@ import { PortableText } from "@/components/sanity/PortableText";
 import { getPostBySlug } from "@/lib/sanity/fetch";
 import { urlFor } from "@/lib/sanity/image";
 import { buildAlternates, localizedUrl } from "@/lib/seo";
-import { generateArticleSchema, jsonLdScriptProps } from "@/lib/seo/jsonld";
+import {
+  generateArticleSchema,
+  generateFAQPageSchema,
+  jsonLdScriptProps,
+} from "@/lib/seo/jsonld";
+import { type FAQBlockItem } from "@/components/blog/FAQBlock";
 
 // Dynamic with a short ISR window. The [locale] layout reads the auth
 // session (cookies → dynamic), so the whole tree is dynamic regardless;
@@ -93,9 +98,26 @@ export default async function BlogPostPage({ params }: Props) {
     locale,
   });
 
+  // FAQPage JSON-LD — additive: emitted only when the body has FAQ block(s).
+  // post.content is already the active-locale array, so the Q/A strings are
+  // localized; wrap each per-locale to reuse generateFAQPageSchema's picker.
+  const faqItems: FAQBlockItem[] = (
+    Array.isArray(post.content) ? post.content : []
+  )
+    .filter((b) => (b as { _type?: string })._type === "faqBlock")
+    .flatMap((b) => (b as { questions?: FAQBlockItem[] }).questions ?? []);
+  const faqSchema = generateFAQPageSchema(
+    faqItems.map((item) => ({
+      q: { [locale]: item.question },
+      a: { [locale]: item.answer },
+    })),
+    locale,
+  );
+
   return (
     <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
       <script {...jsonLdScriptProps(articleSchema)} />
+      {faqSchema ? <script {...jsonLdScriptProps(faqSchema)} /> : null}
       <Link
         href="/blog"
         className="text-xs font-medium text-teal-700 hover:underline dark:text-teal-400"

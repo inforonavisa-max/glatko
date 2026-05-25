@@ -11,6 +11,7 @@ import Link from "next/link";
 import { urlFor } from "@/lib/sanity/image";
 import type { SanityImage } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
+import { FAQBlock, type FAQBlockItem } from "@/components/blog/FAQBlock";
 
 /**
  * Glatko Portable Text renderer.
@@ -42,6 +43,14 @@ const components: PortableTextComponents = {
           ) : null}
         </figure>
       );
+    },
+    faqBlock: ({
+      value,
+    }: {
+      value: { heading?: string; questions?: FAQBlockItem[] };
+    }) => {
+      if (!value?.questions?.length) return null;
+      return <FAQBlock heading={value.heading} questions={value.questions} />;
     },
   },
   block: {

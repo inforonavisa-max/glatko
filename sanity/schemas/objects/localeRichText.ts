@@ -6,9 +6,9 @@
  * picks the active locale and falls back to ME → EN → first non-empty when
  * the target language is missing.
  *
- * Custom block types kept minimal in v1 (image only). When/if articles
- * grow callout boxes, comparison tables, etc., add objects/<name>.ts and
- * include them in the `of: []` array below.
+ * Embedded block types: image and faqBlock (structured Q&A → FAQPage
+ * schema). Add further blocks via objects/<name>.ts + the `of: []` array
+ * below.
  */
 
 import { defineType, defineField } from "sanity";
@@ -82,6 +82,7 @@ const richTextOf = [
       },
     ],
   },
+  { type: "faqBlock" },
 ];
 
 export default defineType({

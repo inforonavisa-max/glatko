@@ -17,6 +17,8 @@ import localeSlug from "./objects/localeSlug";
 import localeRichText from "./objects/localeRichText";
 // objects — composites
 import seoMeta from "./objects/seoMeta";
+// objects — body blocks (embedded in localeRichText)
+import faqBlock from "./objects/faqBlock";
 
 // documents
 import author from "./documents/author";
@@ -31,6 +33,7 @@ const schemas: SchemaTypeDefinition[] = [
   localeSlug,
   localeRichText,
   seoMeta,
+  faqBlock,
   // documents
   author,
   category,
