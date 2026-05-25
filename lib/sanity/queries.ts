@@ -42,7 +42,9 @@ const POST_DETAIL_PROJECTION = `
   "content": content.$$LOCALE$$,
   coverImage,
   publishedAt,
+  "updatedAt": _updatedAt,
   featured,
+  schemaType,
   serviceCategoryRefs,
   "author": author->{
     name,

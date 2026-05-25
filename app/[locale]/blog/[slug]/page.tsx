@@ -9,7 +9,8 @@ import { routing } from "@/i18n/routing";
 import { PortableText } from "@/components/sanity/PortableText";
 import { getPostBySlug } from "@/lib/sanity/fetch";
 import { urlFor } from "@/lib/sanity/image";
-import { buildAlternates } from "@/lib/seo";
+import { buildAlternates, localizedUrl } from "@/lib/seo";
+import { generateArticleSchema, jsonLdScriptProps } from "@/lib/seo/jsonld";
 
 // Dynamic with a short ISR window. The [locale] layout reads the auth
 // session (cookies → dynamic), so the whole tree is dynamic regardless;
@@ -71,8 +72,30 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(slug, locale).catch(() => null);
   if (!post) notFound();
 
+  // Article JSON-LD — emitted for every post (the dominant case). FAQPage is
+  // layered in additively when the body contains an FAQ block. The canonical
+  // URL comes from localizedUrl() so structured data stays in lockstep with
+  // the page canonical / hreflang built by buildAlternates().
+  const articleUrl = localizedUrl(locale, "/blog/[slug]", { slug });
+  const articleImage = post.seo?.ogImage?.asset
+    ? urlFor(post.seo.ogImage).width(1200).height(630).url()
+    : post.coverImage?.asset
+      ? urlFor(post.coverImage).width(1200).height(630).url()
+      : undefined;
+  const articleSchema = generateArticleSchema({
+    title: post.title,
+    description: post.excerpt ?? undefined,
+    url: articleUrl,
+    imageUrl: articleImage,
+    authorName: post.author?.name ?? undefined,
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt ?? undefined,
+    locale,
+  });
+
   return (
     <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+      <script {...jsonLdScriptProps(articleSchema)} />
       <Link
         href="/blog"
         className="text-xs font-medium text-teal-700 hover:underline dark:text-teal-400"

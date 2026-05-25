@@ -130,6 +130,28 @@ export default defineType({
       title: "SEO overrides",
       type: "seoMeta",
     }),
+    defineField({
+      name: "schemaType",
+      title: "Schema.org type",
+      type: "string",
+      description:
+        "JSON-LD structured-data type emitted on the article page. " +
+        "Article suits most posts; HowTo for step-by-step guides; FAQPage " +
+        "when the post is Q&A-led; ItemList for ranked lists; Service for " +
+        "service-focused pages. (FAQPage schema is also emitted automatically " +
+        "whenever the body contains an FAQ block, regardless of this setting.)",
+      options: {
+        list: [
+          { title: "Article (default)", value: "article" },
+          { title: "How-To", value: "howto" },
+          { title: "FAQ Page", value: "faq" },
+          { title: "Item List", value: "itemlist" },
+          { title: "Service", value: "service" },
+        ],
+        layout: "dropdown",
+      },
+      initialValue: "article",
+    }),
   ],
   preview: {
     select: {

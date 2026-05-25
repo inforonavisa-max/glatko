@@ -1,13 +1,16 @@
 /**
  * G-CAT-4: Type-safe schema.org JSON-LD generators for Glatko.
  *
- * Six shapes are produced by this module:
+ * Shapes produced by this module:
  *   1. Organization        (root, single source — rendered once in app/[locale]/layout.tsx)
  *   2. WebSite + SearchAction (landing only)
  *   3. Service             (category detail)
  *   4. LocalBusiness       (category detail — Google local rich-snippet)
  *   5. ItemList            (services index sub-cats; per-category sub-cats)
  *   6. BreadcrumbList      (category detail)
+ *   7. FAQPage             (category detail; blog posts with an FAQ block)
+ *   8. Article             (blog post detail)
+ *   9. HowTo               (step-by-step blog posts)
  *
  * `jsonLdScriptProps` returns a typed object suitable for spreading onto a
  * `<script type="application/ld+json">` element. Schemas are minified
@@ -277,6 +280,85 @@ export function generateFAQPageSchema(
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity,
+  };
+}
+
+/**
+ * 8. Article — blog post detail. `title`/`description` arrive already
+ * localized (the GROQ projection flattens `content.$locale`), so callers
+ * pass plain strings, not locale dicts. `url` should be the canonical
+ * absolute URL from `localizedUrl()` so schema stays in lockstep with the
+ * page canonical / hreflang.
+ */
+export function generateArticleSchema(input: {
+  title: string;
+  description?: string;
+  url: string;
+  imageUrl?: string;
+  authorName?: string;
+  publishedAt: string;
+  updatedAt?: string;
+  locale: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description || undefined,
+    url: input.url,
+    image: input.imageUrl || undefined,
+    author: input.authorName
+      ? { "@type": "Person", name: input.authorName }
+      : { "@type": "Organization", name: ORG_NAME },
+    publisher: {
+      "@type": "Organization",
+      name: ORG_NAME,
+      url: SEO_BASE,
+      logo: { "@type": "ImageObject", url: `${SEO_BASE}/logo.png` },
+    },
+    datePublished: input.publishedAt,
+    dateModified: input.updatedAt || input.publishedAt,
+    inLanguage: input.locale,
+    mainEntityOfPage: { "@type": "WebPage", "@id": input.url },
+  };
+}
+
+export interface HowToStep {
+  name: string;
+  text: string;
+  image?: string;
+}
+
+/**
+ * 9. HowTo — step-by-step guides. The generator is ready for CONTENT-ENGINE
+ * how-to posts; it is wired on the article page once a structured `steps`
+ * source exists (a body block parsed into steps, or a dedicated field).
+ */
+export function generateHowToSchema(input: {
+  title: string;
+  description?: string;
+  url: string;
+  imageUrl?: string;
+  steps: HowToStep[];
+  totalTime?: string;
+  locale: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: input.title,
+    description: input.description || undefined,
+    url: input.url,
+    image: input.imageUrl || undefined,
+    inLanguage: input.locale,
+    totalTime: input.totalTime || undefined,
+    step: input.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+      image: s.image || undefined,
+    })),
   };
 }
 

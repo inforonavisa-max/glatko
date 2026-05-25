@@ -55,6 +55,8 @@ export interface PostListItem {
 export interface PostDetail extends PostListItem {
   content: PortableTextBlock[] | null;
   bio?: string | null;
+  updatedAt?: string | null;
+  schemaType?: string | null;
   tags: Array<{ title: string; slug: string }> | null;
   seo: {
     metaTitle: string | null;
