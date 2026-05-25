@@ -9,6 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t("auth.register"),
     description: t("brand.tagline"),
+    robots: { index: false, follow: false },
   };
 }
 
