@@ -12,6 +12,7 @@ import { urlFor } from "@/lib/sanity/image";
 import type { SanityImage } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 import { FAQBlock, type FAQBlockItem } from "@/components/blog/FAQBlock";
+import { PriceTable, type PriceTableRow } from "@/components/blog/PriceTable";
 
 /**
  * Glatko Portable Text renderer.
@@ -51,6 +52,26 @@ const components: PortableTextComponents = {
     }) => {
       if (!value?.questions?.length) return null;
       return <FAQBlock heading={value.heading} questions={value.questions} />;
+    },
+    priceTable: ({
+      value,
+    }: {
+      value: {
+        heading?: string;
+        currency?: string;
+        rows?: PriceTableRow[];
+        caption?: string;
+      };
+    }) => {
+      if (!value?.rows?.length) return null;
+      return (
+        <PriceTable
+          heading={value.heading}
+          currency={value.currency}
+          rows={value.rows}
+          caption={value.caption}
+        />
+      );
     },
   },
   block: {

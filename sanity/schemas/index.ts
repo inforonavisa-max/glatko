@@ -19,6 +19,7 @@ import localeRichText from "./objects/localeRichText";
 import seoMeta from "./objects/seoMeta";
 // objects — body blocks (embedded in localeRichText)
 import faqBlock from "./objects/faqBlock";
+import priceTable from "./objects/priceTable";
 
 // documents
 import author from "./documents/author";
@@ -34,6 +35,7 @@ const schemas: SchemaTypeDefinition[] = [
   localeRichText,
   seoMeta,
   faqBlock,
+  priceTable,
   // documents
   author,
   category,

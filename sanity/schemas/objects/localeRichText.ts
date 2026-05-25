@@ -6,9 +6,9 @@
  * picks the active locale and falls back to ME → EN → first non-empty when
  * the target language is missing.
  *
- * Embedded block types: image and faqBlock (structured Q&A → FAQPage
- * schema). Add further blocks via objects/<name>.ts + the `of: []` array
- * below.
+ * Embedded block types: image, faqBlock (structured Q&A → FAQPage schema),
+ * and priceTable (cost-guide price ranges). Add further blocks via
+ * objects/<name>.ts + the `of: []` array below.
  */
 
 import { defineType, defineField } from "sanity";
@@ -83,6 +83,7 @@ const richTextOf = [
     ],
   },
   { type: "faqBlock" },
+  { type: "priceTable" },
 ];
 
 export default defineType({
