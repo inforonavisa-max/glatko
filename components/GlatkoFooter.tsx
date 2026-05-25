@@ -14,9 +14,7 @@ export function GlatkoFooter() {
       title: t("nav.services"),
       links: [
         { label: t("services.title"), href: "/services" },
-        { label: t("search.title"), href: "/providers" },
-        { label: t("categories.home.title"), href: "/providers?category=home-services" },
-        { label: t("categories.boat.title"), href: "/providers?category=boat-services" },
+        { label: t("howItWorks.title"), href: "/how-it-works" },
       ],
     },
     {

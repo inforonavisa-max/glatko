@@ -121,15 +121,22 @@ function pickLocalized(text: MultiLangText | null, locale: Locale): string {
   );
 }
 
+export interface RootCategoryLink {
+  slug: string;
+  name: MultiLangText;
+}
+
 interface LandingPageClientProps {
   featuredCategories: FeaturedCategoryCard[];
   totalCategoryCount: number;
+  allCategories: RootCategoryLink[];
   locale: Locale;
 }
 
 export default function LandingPageClient({
   featuredCategories,
   totalCategoryCount,
+  allCategories,
   locale,
 }: LandingPageClientProps) {
   const t = useTranslations();
@@ -331,6 +338,23 @@ export default function LandingPageClient({
               );
             })}
           </div>
+
+          {allCategories.length > 0 && (
+            <nav
+              aria-label={t("categories.title")}
+              className="mt-12 flex flex-wrap justify-center gap-x-5 gap-y-2"
+            >
+              {allCategories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={{ pathname: "/services/[slug]", params: { slug: cat.slug } }}
+                  className="text-sm text-gray-600 transition-colors hover:text-teal-600 hover:underline dark:text-white/60 dark:hover:text-teal-400"
+                >
+                  {pickLocalized(cat.name, locale)}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           <div className="mt-12 text-center">
             <Link
