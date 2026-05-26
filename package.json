@@ -11,10 +11,7 @@
     "i18n-check": "bash scripts/i18n-check.sh",
     "verify:seo": "bash scripts/verify-seo-canonical.sh",
     "precommit": "bash scripts/pre-commit-check.sh",
-    "safe-push": "bash scripts/pre-commit-check.sh && git push",
-    "studio:dev": "sanity dev --config-path sanity/sanity.config.ts",
-    "studio:build": "sanity build --config-path sanity/sanity.config.ts",
-    "studio:deploy": "sanity deploy --config-path sanity/sanity.config.ts"
+    "safe-push": "bash scripts/pre-commit-check.sh && git push"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -27,7 +24,6 @@
     "@react-email/tailwind": "^2.0.7",
     "@sanity/client": "^7.22.0",
     "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^5.23.0",
     "@sentry/nextjs": "^8.55.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.100.0",
@@ -57,7 +53,6 @@
     "react-hook-form": "^7.72.0",
     "replicate": "^1.4.0",
     "resend": "^6.9.4",
-    "sanity": "^5.23.0",
     "shadcn": "^4.1.0",
     "sonner": "^2.0.7",
     "standardwebhooks": "^1.0.0",

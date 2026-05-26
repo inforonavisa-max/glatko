@@ -1,8 +1,8 @@
 /**
  * Sanity Studio configuration for Glatko.
  *
- * Mounts at /studio via app/studio/[[...tool]]/page.tsx (Next.js embedded
- * mode). Two top-nav tools:
+ * Standalone studio: its own React-19 package in `studio/`, deployed to
+ * glatko.sanity.studio via `sanity deploy`. Two top-nav tools:
  *   - structureTool with the custom desk hierarchy from
  *     ./structure/structure.ts (All / Featured / By language / Authors /
  *     Categories / Tags)
@@ -21,15 +21,13 @@ import { visionTool } from "@sanity/vision";
 import schemas from "./schemas";
 import { structure } from "./structure/structure";
 
-const SANITY_API_VERSION =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-02-19";
+const SANITY_API_VERSION = "2025-02-19";
 
 export default defineConfig({
   name: "glatko",
   title: "Glatko Content",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  basePath: "/studio",
+  projectId: "txobbpuq",
+  dataset: "production",
   plugins: [
     structureTool({ structure }),
     visionTool({ defaultApiVersion: SANITY_API_VERSION }),

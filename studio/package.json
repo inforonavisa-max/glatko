@@ -1,0 +1,23 @@
+{
+  "name": "glatko-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone Sanity Studio for Glatko (own React 19 — decoupled from the React-18 Next app).",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@sanity/vision": "^5.23.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanity": "^5.23.0",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5"
+  }
+}
