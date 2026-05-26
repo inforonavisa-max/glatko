@@ -37,10 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = post.seo?.metaTitle ?? post.title;
   const description = post.seo?.metaDescription ?? post.excerpt;
 
+  // OG/Twitter image: force WebP explicitly (fm=webp) instead of relying on
+  // auto=format. Social crawlers that omit `Accept: image/webp` were served the
+  // full-size source PNG (~1.65 MB); forcing WebP keeps it well under 100 KB.
   const ogImageSrc = post.seo?.ogImage?.asset
-    ? urlFor(post.seo.ogImage).width(1200).height(630).url()
+    ? urlFor(post.seo.ogImage).width(1200).height(630).format("webp").quality(80).url()
     : post.coverImage?.asset
-      ? urlFor(post.coverImage).width(1200).height(630).url()
+      ? urlFor(post.coverImage).width(1200).height(630).format("webp").quality(80).url()
       : undefined;
 
   const alternates = buildAlternates(locale, "/blog/[slug]", { slug });
@@ -83,9 +86,9 @@ export default async function BlogPostPage({ params }: Props) {
   // the page canonical / hreflang built by buildAlternates().
   const articleUrl = localizedUrl(locale, "/blog/[slug]", { slug });
   const articleImage = post.seo?.ogImage?.asset
-    ? urlFor(post.seo.ogImage).width(1200).height(630).url()
+    ? urlFor(post.seo.ogImage).width(1200).height(630).format("webp").quality(80).url()
     : post.coverImage?.asset
-      ? urlFor(post.coverImage).width(1200).height(630).url()
+      ? urlFor(post.coverImage).width(1200).height(630).format("webp").quality(80).url()
       : undefined;
   const articleSchema = generateArticleSchema({
     title: post.title,
