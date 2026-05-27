@@ -65,6 +65,24 @@ const POST_DETAIL_PROJECTION = `
     "metaTitle": metaTitle.$$LOCALE$$,
     "metaDescription": metaDescription.$$LOCALE$$,
     ogImage
+  },
+  "translations": translations[]->{
+    "locale": select(
+      defined(slug.me.current) => "me",
+      defined(slug.en.current) => "en",
+      defined(slug.tr.current) => "tr",
+      defined(slug.ru.current) => "ru",
+      defined(slug.de.current) => "de",
+      defined(slug.it.current) => "it",
+      defined(slug.sr.current) => "sr",
+      defined(slug.ar.current) => "ar",
+      defined(slug.uk.current) => "uk"
+    ),
+    "slug": coalesce(
+      slug.me.current, slug.en.current, slug.tr.current, slug.ru.current,
+      slug.de.current, slug.it.current, slug.sr.current, slug.ar.current,
+      slug.uk.current
+    )
   }
 `;
 

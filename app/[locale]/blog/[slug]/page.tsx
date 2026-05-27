@@ -9,7 +9,7 @@ import { routing } from "@/i18n/routing";
 import { PortableText } from "@/components/sanity/PortableText";
 import { getPostBySlug } from "@/lib/sanity/fetch";
 import { urlFor } from "@/lib/sanity/image";
-import { buildAlternates, localizedUrl } from "@/lib/seo";
+import { buildPostAlternates, localizedUrl } from "@/lib/seo";
 import {
   generateArticleSchema,
   generateFAQPageSchema,
@@ -46,7 +46,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? urlFor(post.coverImage).width(1200).height(630).format("webp").quality(80).url()
       : undefined;
 
-  const alternates = buildAlternates(locale, "/blog/[slug]", { slug });
+  // Per-post hreflang: link only the locales that actually have a version
+  // (this post + its translations), each at its own localized slug.
+  const alternates = buildPostAlternates(locale, slug, post.translations ?? []);
 
   return {
     title,

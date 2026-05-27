@@ -63,6 +63,12 @@ export interface PostDetail extends PostListItem {
     metaDescription: string | null;
     ogImage: SanityImage | null;
   } | null;
+  // Other-language versions of this post (separate docs), resolved to the
+  // locale + that locale's own slug. Powers cross-locale hreflang.
+  translations?: Array<{
+    locale: string | null;
+    slug: string | null;
+  }> | null;
 }
 
 export interface PostSlug {

@@ -112,3 +112,52 @@ export function localizedUrl(
     : href) as GetPathnameHref;
   return `${SEO_BASE}${getPathname({ locale: locale as Locale, href: hrefArg })}`;
 }
+
+/**
+ * Cross-locale hreflang for a blog post whose language versions are SEPARATE
+ * Sanity documents, each with its own localized slug.
+ *
+ * Unlike `buildAlternates` (one logical page whose single slug is spread across
+ * every locale via the pathnames map), this emits hreflang ONLY for locales
+ * that actually have a published version — the current post plus each linked
+ * translation — so Google never receives an alternate pointing at a slug that
+ * doesn't exist in that language. URLs route through `localizedUrl()` to stay
+ * in lockstep with the pathnames map; keys use `hreflangForLocale()` (BCP 47).
+ * `x-default` → en, else me, else the current post.
+ *
+ * Additive: `buildAlternates` is unchanged and remains the source for
+ * path-translated, all-locale routes (services, static pages).
+ */
+export function buildPostAlternates(
+  currentLocale: string,
+  currentSlug: string,
+  translations: Array<{ locale?: string | null; slug?: string | null }>,
+): {
+  canonical: string;
+  languages: Record<string, string>;
+} {
+  const canonical = localizedUrl(currentLocale, "/blog/[slug]", {
+    slug: currentSlug,
+  });
+
+  const languages: Record<string, string> = {};
+  // raw locale → url, kept separately to resolve x-default (which needs the
+  // bare `en`/`me` codes, not their BCP-47 forms used as the language keys)
+  const byLocale: Record<string, string> = {};
+
+  const add = (loc: string, slug: string) => {
+    if (!SEO_LOCALES.includes(loc as (typeof SEO_LOCALES)[number])) return;
+    const url = localizedUrl(loc, "/blog/[slug]", { slug });
+    languages[hreflangForLocale(loc)] = url;
+    byLocale[loc] = url;
+  };
+
+  add(currentLocale, currentSlug);
+  for (const t of translations) {
+    if (t?.locale && t?.slug) add(t.locale, t.slug);
+  }
+
+  languages["x-default"] = byLocale["en"] ?? byLocale["me"] ?? canonical;
+
+  return { canonical, languages };
+}
