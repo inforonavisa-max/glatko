@@ -152,6 +152,35 @@ export default defineType({
       },
       initialValue: "article",
     }),
+    defineField({
+      name: "translations",
+      title: "Translations (other language versions of this post)",
+      type: "array",
+      description:
+        "References to this post's versions in other languages. Powers " +
+        "cross-locale hreflang SEO mapping on the blog. Link the equivalent " +
+        "post in each other language; for clean bidirectional hreflang, add " +
+        "the reverse link on the other post too.",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "post" }],
+          options: {
+            // Prevent self-reference (strip the drafts. prefix when comparing).
+            filter: ({ document }: { document?: { _id?: string } }) => {
+              if (!document?._id) return {};
+              return {
+                filter: "_id != $currentId",
+                params: {
+                  currentId: document._id.replace(/^drafts\./, ""),
+                },
+              };
+            },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.max(9),
+    }),
   ],
   preview: {
     select: {
