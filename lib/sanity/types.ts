@@ -71,7 +71,16 @@ export interface PostDetail extends PostListItem {
   }> | null;
 }
 
-export interface PostSlug {
+/**
+ * Sitemap projection: per-locale slug + publishedAt + the post's other-language
+ * versions resolved to `{locale, slug}`. Feeds buildPostAlternates() so each
+ * sitemap entry gets a correct hreflang cluster instead of single-slug spread.
+ */
+export interface PostSlugWithTranslations {
   slug: string;
   publishedAt: string;
+  translations?: Array<{
+    locale: string | null;
+    slug: string | null;
+  }> | null;
 }

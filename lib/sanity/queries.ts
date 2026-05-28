@@ -113,10 +113,39 @@ export const POSTS_BY_SERVICE_CATEGORY_QUERY = groq`
   }
 `;
 
-export const ALL_POST_SLUGS_QUERY = groq`
+/**
+ * Sitemap projection — per-locale slug + publishedAt + translations resolved to
+ * `{locale, slug}` per other-language version. Replaces the older slugs-only
+ * query so the sitemap can emit each post at its OWN per-locale slug (not
+ * cross-spread one slug across nine locales) and attach correct hreflang
+ * alternates from the post's `translations` field.
+ *
+ * The locale list inside select()/coalesce() mirrors POST_DETAIL_PROJECTION's
+ * translations sub-projection (lib/seo.ts buildPostAlternates consumes the
+ * same shape).
+ */
+export const ALL_POST_SLUGS_WITH_TRANSLATIONS_QUERY = groq`
   *[_type == "post" && defined(slug.$$LOCALE$$.current) && length(coalesce(title.$$LOCALE$$, "")) > 0] {
     "slug": slug.$$LOCALE$$.current,
-    publishedAt
+    publishedAt,
+    "translations": translations[]->{
+      "locale": select(
+        defined(slug.me.current) => "me",
+        defined(slug.en.current) => "en",
+        defined(slug.tr.current) => "tr",
+        defined(slug.ru.current) => "ru",
+        defined(slug.de.current) => "de",
+        defined(slug.it.current) => "it",
+        defined(slug.sr.current) => "sr",
+        defined(slug.ar.current) => "ar",
+        defined(slug.uk.current) => "uk"
+      ),
+      "slug": coalesce(
+        slug.me.current, slug.en.current, slug.tr.current, slug.ru.current,
+        slug.de.current, slug.it.current, slug.sr.current, slug.ar.current,
+        slug.uk.current
+      )
+    }
   }
 `;
 
