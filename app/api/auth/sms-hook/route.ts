@@ -25,6 +25,13 @@ type SmsHookPayload = {
   user: {
     id: string;
     phone?: string | null;
+    /**
+     * Pending new phone during a phone-change flow (updateUser({ phone })).
+     * For a user with no confirmed phone yet, GoTrue leaves `phone` empty and
+     * carries the destination number here — so the OTP target is
+     * `phone || phone_change`.
+     */
+    phone_change?: string | null;
     user_metadata?: {
       preferred_locale?: string;
       locale?: string;
@@ -107,10 +114,23 @@ export async function POST(request: NextRequest) {
     return jsonError("Invalid webhook signature", 401);
   }
 
-  const phone = payload?.user?.phone?.trim();
+  const user = payload?.user;
+  // phone-change flow leaves `phone` empty and carries the new number in
+  // `phone_change`; phone signup/login uses `phone`. Accept either.
+  const phone = user?.phone?.trim() || user?.phone_change?.trim();
   const otp = payload?.sms?.otp?.trim();
-  const userId = payload?.user?.id;
+  const userId = user?.id;
   if (!phone || !otp || !userId) {
+    console.error(
+      "[GLATKO:sms-hook] malformed payload",
+      JSON.stringify({
+        hasPhone: Boolean(user?.phone),
+        hasPhoneChange: Boolean(user?.phone_change),
+        hasOtp: Boolean(otp),
+        hasUserId: Boolean(userId),
+        userKeys: user ? Object.keys(user) : null,
+      }),
+    );
     return jsonError("Malformed hook payload", 400);
   }
 
