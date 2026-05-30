@@ -28,9 +28,12 @@ type SmsHookPayload = {
     /**
      * Pending new phone during a phone-change flow (updateUser({ phone })).
      * For a user with no confirmed phone yet, GoTrue leaves `phone` empty and
-     * carries the destination number here — so the OTP target is
-     * `phone || phone_change`.
+     * carries the destination number here. GoTrue's User model serializes the
+     * PhoneChange field as `new_phone` (mirrors `new_email` for email change);
+     * `phone_change` is the DB column name, kept as a defensive fallback. The
+     * OTP target is `phone || new_phone || phone_change`.
      */
+    new_phone?: string | null;
     phone_change?: string | null;
     user_metadata?: {
       preferred_locale?: string;
@@ -115,9 +118,13 @@ export async function POST(request: NextRequest) {
   }
 
   const user = payload?.user;
-  // phone-change flow leaves `phone` empty and carries the new number in
-  // `phone_change`; phone signup/login uses `phone`. Accept either.
-  const phone = user?.phone?.trim() || user?.phone_change?.trim();
+  // phone signup/login uses `phone`; a phone-change leaves `phone` empty and
+  // carries the new number in `new_phone` (GoTrue JSON tag; `phone_change` is
+  // the DB column, kept as a fallback). Accept whichever is present.
+  const phone =
+    user?.phone?.trim() ||
+    user?.new_phone?.trim() ||
+    user?.phone_change?.trim();
   const otp = payload?.sms?.otp?.trim();
   const userId = user?.id;
   if (!phone || !otp || !userId) {
@@ -125,6 +132,7 @@ export async function POST(request: NextRequest) {
       "[GLATKO:sms-hook] malformed payload",
       JSON.stringify({
         hasPhone: Boolean(user?.phone),
+        hasNewPhone: Boolean(user?.new_phone),
         hasPhoneChange: Boolean(user?.phone_change),
         hasOtp: Boolean(otp),
         hasUserId: Boolean(userId),
@@ -171,6 +179,8 @@ export async function POST(request: NextRequest) {
     return jsonError(result.error, 502);
   }
 
-  // Success: Supabase only needs a 2xx with an empty body.
-  return new NextResponse(null, { status: 200 });
+  // Success: GoTrue requires the hook response to carry
+  // `Content-Type: application/json` (a bare 200 is rejected with
+  // hook_payload_invalid_content_type). An empty JSON object satisfies it.
+  return NextResponse.json({}, { status: 200 });
 }
