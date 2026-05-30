@@ -1203,6 +1203,9 @@
     "newRequestMatch": {
       "title": "Novi zahtev",
       "body": "Novi zahtev koji odgovara vašim uslugama"
+    },
+    "sms": {
+      "otp": "Vaš Glatko verifikacioni kod: {otp}"
     }
   },
   "settings": {
@@ -2112,5 +2115,25 @@
   },
   "relatedArticles": {
     "title": "Povezani članci"
+  },
+  "phoneVerify": {
+    "title": "Verifikacija telefona",
+    "description": "Verifikujte svoj broj telefona kako bi profesionalci mogli da vas kontaktiraju u vezi sa vašim zahtevima.",
+    "phoneLabel": "Broj telefona",
+    "phonePlaceholder": "+382 69 868 069",
+    "sendCode": "Pošalji kod",
+    "codeLabel": "Unesite šestocifreni kod koji smo poslali na {phone}",
+    "verify": "Potvrdi",
+    "resend": "Pošalji kod ponovo",
+    "resendIn": "Ponovo pošalji za {seconds} s",
+    "verified": "Vaš broj telefona je verifikovan.",
+    "verifiedBadge": "Verifikovano",
+    "errorInvalidPhone": "Unesite ispravan broj telefona.",
+    "errorRateLimited": "Previše pokušaja. Pokušajte ponovo kasnije.",
+    "errorPhoneInUse": "Ovaj broj je već povezan sa drugim nalogom.",
+    "errorWrongCode": "Kod je netačan ili je istekao.",
+    "errorGeneric": "Nešto je pošlo naopako. Pokušajte ponovo.",
+    "codeSentToast": "Verifikacioni kod je poslat",
+    "verifiedToast": "Broj telefona je verifikovan"
   }
 }

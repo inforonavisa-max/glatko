@@ -1203,6 +1203,9 @@
     "newRequestMatch": {
       "title": "Neue Anfrage",
       "body": "Neue passende Serviceanfrage"
+    },
+    "sms": {
+      "otp": "Ihr Glatko-Bestätigungscode: {otp}"
     }
   },
   "settings": {
@@ -2109,5 +2112,25 @@
   },
   "relatedArticles": {
     "title": "Verwandte Artikel"
+  },
+  "phoneVerify": {
+    "title": "Telefonverifizierung",
+    "description": "Verifizieren Sie Ihre Telefonnummer, damit Fachleute Sie zu Ihren Anfragen erreichen können.",
+    "phoneLabel": "Telefonnummer",
+    "phonePlaceholder": "+382 69 868 069",
+    "sendCode": "Code senden",
+    "codeLabel": "Geben Sie den 6-stelligen Code ein, den wir an {phone} gesendet haben",
+    "verify": "Bestätigen",
+    "resend": "Code erneut senden",
+    "resendIn": "Erneut senden in {seconds} s",
+    "verified": "Ihre Telefonnummer ist verifiziert.",
+    "verifiedBadge": "Verifiziert",
+    "errorInvalidPhone": "Bitte geben Sie eine gültige Telefonnummer ein.",
+    "errorRateLimited": "Zu viele Versuche. Bitte versuchen Sie es später erneut.",
+    "errorPhoneInUse": "Diese Nummer ist bereits mit einem anderen Konto verknüpft.",
+    "errorWrongCode": "Der Code ist falsch oder abgelaufen.",
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "codeSentToast": "Bestätigungscode gesendet",
+    "verifiedToast": "Telefonnummer verifiziert"
   }
 }

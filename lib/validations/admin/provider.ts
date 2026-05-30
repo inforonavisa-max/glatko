@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PHONE_E164 } from "@/lib/utils/phone";
 
 /**
  * G-ADMIN-PROVIDER-CREATE-01 — Zod schema for the admin provider-create form.
@@ -16,7 +17,6 @@ import { z } from "zod";
  * founding number race, FK validity).
  */
 
-const PHONE_E164 = /^\+?[1-9]\d{6,14}$/;
 const SLUG_RE = /^[a-z0-9-]+$/;
 const CITY_SLUG_RE = /^[a-z][a-z0-9-]*$/;
 

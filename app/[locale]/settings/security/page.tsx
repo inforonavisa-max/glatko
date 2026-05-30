@@ -44,12 +44,21 @@ export default async function SecuritySettingsPage({
     ? methods.oauth_providers
     : [];
 
+  // Phone-verification state (Sprint A) for the verification card.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("phone, phone_verified")
+    .eq("id", user.id)
+    .maybeSingle<{ phone: string | null; phone_verified: boolean | null }>();
+
   return (
     <PageBackground opacity={0.08}>
       <SecuritySection
         email={user.email}
         hasPassword={hasPassword}
         oauthProviders={oauthProviders}
+        phone={profile?.phone ?? null}
+        phoneVerified={Boolean(profile?.phone_verified)}
       />
     </PageBackground>
   );

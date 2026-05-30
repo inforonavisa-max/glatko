@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { PasswordChangeModal } from "./PasswordChangeModal";
 import { SetPasswordModal } from "./SetPasswordModal";
+import { PhoneVerification } from "./PhoneVerification";
 import { signOutEverywhere } from "@/lib/actions/profile";
 
 const PROVIDER_LABEL: Record<string, string> = {
@@ -21,9 +22,17 @@ type Props = {
   email: string;
   hasPassword: boolean;
   oauthProviders: string[];
+  phone: string | null;
+  phoneVerified: boolean;
 };
 
-export function SecuritySection({ email, hasPassword, oauthProviders }: Props) {
+export function SecuritySection({
+  email,
+  hasPassword,
+  oauthProviders,
+  phone,
+  phoneVerified,
+}: Props) {
   const t = useTranslations("settings.security");
   const router = useRouter();
   const [changePwdOpen, setChangePwdOpen] = useState(false);
@@ -87,6 +96,11 @@ export function SecuritySection({ email, hasPassword, oauthProviders }: Props) {
             </div>
           </div>
         </section>
+
+        <PhoneVerification
+          initialPhone={phone}
+          initialVerified={phoneVerified}
+        />
 
         {oauthProviders.length > 0 && (
           <section className="rounded-2xl border border-gray-200/70 bg-white/80 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5">

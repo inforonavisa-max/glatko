@@ -1203,6 +1203,9 @@
     "newRequestMatch": {
       "title": "طلب جديد",
       "body": "طلب خدمة يطابق تخصصك"
+    },
+    "sms": {
+      "otp": "رمز التحقق الخاص بك من Glatko: {otp}"
     }
   },
   "settings": {
@@ -2109,5 +2112,25 @@
   },
   "relatedArticles": {
     "title": "مقالات ذات صلة"
+  },
+  "phoneVerify": {
+    "title": "التحقق من الهاتف",
+    "description": "تحقّق من رقم هاتفك حتى يتمكّن المحترفون من التواصل معك بشأن طلباتك.",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "+382 69 868 069",
+    "sendCode": "إرسال الرمز",
+    "codeLabel": "أدخل الرمز المكوّن من 6 أرقام الذي أرسلناه إلى {phone}",
+    "verify": "تحقّق",
+    "resend": "إعادة إرسال الرمز",
+    "resendIn": "إعادة الإرسال خلال {seconds} ثانية",
+    "verified": "تم التحقق من رقم هاتفك.",
+    "verifiedBadge": "تم التحقق",
+    "errorInvalidPhone": "يرجى إدخال رقم هاتف صالح.",
+    "errorRateLimited": "محاولات كثيرة جدًا. حاول مرة أخرى لاحقًا.",
+    "errorPhoneInUse": "هذا الرقم مرتبط بالفعل بحساب آخر.",
+    "errorWrongCode": "الرمز غير صحيح أو انتهت صلاحيته.",
+    "errorGeneric": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "codeSentToast": "تم إرسال رمز التحقق",
+    "verifiedToast": "تم التحقق من رقم الهاتف"
   }
 }
