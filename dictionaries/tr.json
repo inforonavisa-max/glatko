@@ -1203,6 +1203,9 @@
     "newRequestMatch": {
       "title": "Yeni talep",
       "body": "Hizmetlerinizle eşleşen yeni bir talep var"
+    },
+    "sms": {
+      "otp": "Glatko doğrulama kodunuz: {otp}"
     }
   },
   "settings": {
@@ -2112,5 +2115,25 @@
   },
   "relatedArticles": {
     "title": "İlgili makaleler"
+  },
+  "phoneVerify": {
+    "title": "Telefon doğrulama",
+    "description": "Talepleriniz hakkında profesyonellerin size ulaşabilmesi için telefon numaranızı doğrulayın.",
+    "phoneLabel": "Telefon numarası",
+    "phonePlaceholder": "+382 69 868 069",
+    "sendCode": "Kod gönder",
+    "codeLabel": "{phone} numarasına gönderdiğimiz 6 haneli kodu girin",
+    "verify": "Doğrula",
+    "resend": "Kodu tekrar gönder",
+    "resendIn": "{seconds} sn sonra tekrar gönder",
+    "verified": "Telefon numaranız doğrulandı.",
+    "verifiedBadge": "Doğrulandı",
+    "errorInvalidPhone": "Lütfen geçerli bir telefon numarası girin.",
+    "errorRateLimited": "Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.",
+    "errorPhoneInUse": "Bu numara başka bir hesaba bağlı.",
+    "errorWrongCode": "Kod hatalı veya süresi dolmuş.",
+    "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "codeSentToast": "Doğrulama kodu gönderildi",
+    "verifiedToast": "Telefon numarası doğrulandı"
   }
 }

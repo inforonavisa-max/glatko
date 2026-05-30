@@ -1203,6 +1203,9 @@
     "newRequestMatch": {
       "title": "New request for you",
       "body": "A customer posted a request that matches your services"
+    },
+    "sms": {
+      "otp": "Your Glatko verification code: {otp}"
     }
   },
   "settings": {
@@ -2109,5 +2112,25 @@
   },
   "relatedArticles": {
     "title": "Related articles"
+  },
+  "phoneVerify": {
+    "title": "Phone verification",
+    "description": "Verify your phone number so professionals can reach you about your requests.",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+382 69 868 069",
+    "sendCode": "Send code",
+    "codeLabel": "Enter the 6-digit code we sent to {phone}",
+    "verify": "Verify",
+    "resend": "Resend code",
+    "resendIn": "Resend in {seconds}s",
+    "verified": "Your phone number is verified.",
+    "verifiedBadge": "Verified",
+    "errorInvalidPhone": "Please enter a valid phone number.",
+    "errorRateLimited": "Too many attempts. Please try again later.",
+    "errorPhoneInUse": "This number is already linked to another account.",
+    "errorWrongCode": "That code is incorrect or has expired.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "codeSentToast": "Verification code sent",
+    "verifiedToast": "Phone number verified"
   }
 }
