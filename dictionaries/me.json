@@ -1540,9 +1540,29 @@
     "saved": "Profil ažuriran"
   },
   "cookie": {
-    "message": "Ova stranica koristi kolačiće za poboljšanje vašeg iskustva.",
-    "accept": "Prihvati",
-    "learnMore": "Pročitajte našu politiku kolačića"
+    "message": "Koristimo kolačiće da bismo poboljšali vaše iskustvo, analizirali promet na sajtu i pružili personalizovani sadržaj. Klikom na „Prihvati sve\" pristajete na našu upotrebu kolačića. Svoje preferencije možete promijeniti u bilo kom trenutku.",
+    "acceptAll": "Prihvati sve",
+    "rejectAll": "Odbij sve",
+    "customize": "Prilagodi",
+    "savePreferences": "Sačuvaj preferencije",
+    "learnMore": "Saznaj više",
+    "preferencesTitle": "Preferencije kolačića",
+    "preferencesIntro": "Izaberite koje kategorije kolačića dozvoljavate. Neophodni kolačići su obavezni za funkcionisanje sajta i ne mogu se onemogućiti.",
+    "categories": {
+      "necessary": {
+        "label": "Neophodni kolačići",
+        "description": "Ovi kolačići su neophodni za funkcionisanje sajta i ne mogu se onemogućiti. Koriste se za bezbjednost, upravljanje mrežom i pristupačnost."
+      },
+      "analytics": {
+        "label": "Analitički kolačići",
+        "description": "Pomažu nam da razumijemo kako posjetioci koriste naš sajt. Prikupljeni podaci su anonimni i koriste se za poboljšanje naše usluge."
+      },
+      "marketing": {
+        "label": "Marketinški kolačići",
+        "description": "Koriste se za prikazivanje reklama u skladu sa vašim interesovanjima i mjerenje učinka kampanja. Ovi kolačići se mogu dijeliti sa našim partnerima za oglašavanje."
+      }
+    },
+    "settingsLink": "Podešavanja kolačića"
   },
   "landing": {
     "logoCloud": {

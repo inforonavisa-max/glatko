@@ -150,24 +150,37 @@ export default async function RootLayout({
           `}
         </Script>
         {/* Consent mount restore — sync localStorage check before GTM init,
-            BEFORE React hydration. Returning visitors (LS=accepted) get
-            consent flipped to granted within the wait_for_update window so
-            GA4 tracker's first page_view collect is sent with gcs=G111
-            instead of denied. See G-ADS-2.1. */}
+            BEFORE React hydration. Returning visitors with a stored choice get
+            their per-category consent applied within the wait_for_update window
+            so GA4's first page_view collect carries the correct gcs signal
+            (granted analytics → gcs=G111) instead of denied. Backward-compat:
+            the legacy "accepted" string maps to a full grant. Granular format
+            mirrors lib/analytics/consent.ts. See G-ADS-2.1 + G-ADS-5. */}
         <Script id="gtm-consent-mount-restore" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
             try {
-              if (typeof localStorage !== 'undefined' &&
-                  localStorage.getItem('glatko-cookie-consent') === 'accepted') {
+              var raw = (typeof localStorage !== 'undefined')
+                ? localStorage.getItem('glatko-cookie-consent')
+                : null;
+              if (raw) {
+                var analytics, marketing;
+                if (raw === 'accepted') {
+                  // Backward-compat: pre-G-ADS-5 "accepted" = full grant.
+                  analytics = true; marketing = true;
+                } else {
+                  var p = JSON.parse(raw);
+                  analytics = !!p.analytics; marketing = !!p.marketing;
+                }
                 gtag('consent', 'update', {
-                  'ad_storage': 'granted',
-                  'ad_user_data': 'granted',
-                  'ad_personalization': 'granted',
-                  'analytics_storage': 'granted',
-                  'functionality_storage': 'granted',
-                  'personalization_storage': 'granted'
+                  'security_storage': 'granted',
+                  'analytics_storage': analytics ? 'granted' : 'denied',
+                  'functionality_storage': analytics ? 'granted' : 'denied',
+                  'personalization_storage': analytics ? 'granted' : 'denied',
+                  'ad_storage': marketing ? 'granted' : 'denied',
+                  'ad_user_data': marketing ? 'granted' : 'denied',
+                  'ad_personalization': marketing ? 'granted' : 'denied'
                 });
               }
             } catch(e) {}

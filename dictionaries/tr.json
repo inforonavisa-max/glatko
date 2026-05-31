@@ -1540,9 +1540,29 @@
     "saved": "Profil güncellendi"
   },
   "cookie": {
-    "message": "Bu site deneyiminizi iyileştirmek için çerezleri kullanır.",
-    "accept": "Kabul Et",
-    "learnMore": "Çerez Politikamızı Okuyun"
+    "message": "Deneyiminizi iyileştirmek, site trafiğini analiz etmek ve kişiselleştirilmiş içerik sunmak için çerezler kullanıyoruz. \"Tümünü Kabul Et\" seçeneğine tıklayarak çerez kullanımımıza onay vermiş olursunuz. Tercihlerinizi istediğiniz zaman değiştirebilirsiniz.",
+    "acceptAll": "Tümünü Kabul Et",
+    "rejectAll": "Tümünü Reddet",
+    "customize": "Özelleştir",
+    "savePreferences": "Tercihleri Kaydet",
+    "learnMore": "Daha Fazla Bilgi",
+    "preferencesTitle": "Çerez Tercihleri",
+    "preferencesIntro": "Hangi çerez kategorilerine izin vereceğinizi seçin. Gerekli çerezler sitenin çalışması için zorunludur ve devre dışı bırakılamaz.",
+    "categories": {
+      "necessary": {
+        "label": "Gerekli Çerezler",
+        "description": "Bu çerezler sitenin temel işlevleri için zorunludur ve devre dışı bırakılamaz. Güvenlik, ağ yönetimi ve erişilebilirlik için kullanılır."
+      },
+      "analytics": {
+        "label": "Analiz Çerezleri",
+        "description": "Ziyaretçilerin siteyi nasıl kullandığını anlamamıza yardımcı olur. Toplanan veriler anonimdir ve hizmetimizi geliştirmek için kullanılır."
+      },
+      "marketing": {
+        "label": "Pazarlama Çerezleri",
+        "description": "İlgi alanlarınıza uygun reklamlar göstermek ve kampanya performansını ölçmek için kullanılır. Bu çerezler reklam ortaklarımızla paylaşılabilir."
+      }
+    },
+    "settingsLink": "Çerez Ayarları"
   },
   "landing": {
     "logoCloud": {

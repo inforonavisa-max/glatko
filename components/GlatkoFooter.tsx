@@ -45,6 +45,7 @@ export function GlatkoFooter() {
         { label: t("footer.privacy"), href: "/privacy" },
         { label: t("footer.cookies"), href: "/cookies" },
         { label: t("footer.gdpr"), href: "/gdpr" },
+        { label: t("cookie.settingsLink"), action: "cookie-preferences" as const },
       ],
     },
   ];
@@ -72,7 +73,19 @@ export function GlatkoFooter() {
               <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {"external" in link && link.external ? (
+                    {"action" in link ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          window.dispatchEvent(
+                            new Event("open-cookie-preferences"),
+                          )
+                        }
+                        className="text-left text-sm text-gray-600 transition-colors hover:text-teal-600 dark:text-white/60 dark:hover:text-teal-400"
+                      >
+                        {link.label}
+                      </button>
+                    ) : "external" in link && link.external ? (
                       <a
                         href={link.href}
                         target="_blank"
