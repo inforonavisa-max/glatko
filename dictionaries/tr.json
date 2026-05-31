@@ -415,8 +415,10 @@
       "s2": "Ziyaretçilerin platformumuzla nasıl etkileşimde bulunduğunu anlamak için Vercel Analytics kullanıyoruz. Bu çerezler hizmeti iyileştirmemize yardımcı olmak için anonim kullanım verileri toplar.",
       "s3Title": "3. Tercih Çerezleri",
       "s3": "Bu çerezler tema tercihi (aydınlık/karanlık mod) ve çerez onay durumu gibi seçimlerinizi hatırlar.",
-      "s4Title": "4. Çerez Yönetimi",
-      "s4": "Çerezleri tarayıcı ayarlarınızdan yönetebilir veya silebilirsiniz. Zorunlu çerezleri devre dışı bırakmanın platform işlevselliğini etkileyebileceğini unutmayın."
+      "s4Title": "4. Pazarlama ve Reklam Çerezleri",
+      "s4": "Sitemizde, ilgi alanlarınıza uygun reklamlar sunmak ve reklam kampanyalarımızın etkinliğini ölçmek amacıyla üçüncü taraf pazarlama çerezleri kullanıyoruz. Bu çerezler, ziyaretlerinizi ve etkileşimlerinizi takip ederek size daha alakalı içerik göstermemize yardımcı olur. Kullandığımız başlıca pazarlama hizmetleri: Meta (Facebook) Pixel — Facebook ve Instagram üzerinden gösterilen reklamların performansını ölçmek ve ilgili kitlelere ulaşmak için kullanılır; Google Ads — Google arama ağı ve görüntülü reklam ağında kampanya performansını izlemek ve dönüşümleri ölçmek için kullanılır. Bu çerezler yalnızca \"Pazarlama\" kategorisine onay vermeniz halinde etkinleşir. Çerez tercihlerinizi istediğiniz zaman sayfanın altındaki \"Çerez Ayarları\" bağlantısından değiştirebilirsiniz. Pazarlama çerezlerini reddetmeniz, sitemizi kullanımınızı etkilemez; yalnızca gördüğünüz reklamların kişiselleştirilme düzeyini değiştirir.",
+      "s5Title": "5. Çerez Yönetimi",
+      "s5": "Çerezleri tarayıcı ayarlarınızdan yönetebilir veya silebilirsiniz. Zorunlu çerezleri devre dışı bırakmanın platform işlevselliğini etkileyebileceğini unutmayın."
     },
     "gdprContent": {
       "intro": "Glatko kullanıcısı olarak, Genel Veri Koruma Yönetmeliği (GDPR) kapsamında aşağıdaki haklara sahipsiniz:",

@@ -415,8 +415,10 @@
       "s2": "We use Vercel Analytics to understand how visitors interact with our platform. These cookies collect anonymous usage data to help us improve the service.",
       "s3Title": "3. Preference Cookies",
       "s3": "These cookies remember your choices such as theme preference (light/dark mode) and cookie consent status.",
-      "s4Title": "4. Managing Cookies",
-      "s4": "You can manage or delete cookies through your browser settings. Note that disabling essential cookies may affect platform functionality."
+      "s4Title": "4. Marketing and Advertising Cookies",
+      "s4": "We use third-party marketing cookies on our site to deliver advertisements relevant to your interests and to measure the effectiveness of our advertising campaigns. These cookies track your visits and interactions to help us show you more relevant content. The main marketing services we use: Meta (Facebook) Pixel — used to measure the performance of ads shown across Facebook and Instagram and to reach relevant audiences; Google Ads — used to track campaign performance and measure conversions across the Google Search and Display networks. These cookies are only activated if you consent to the \"Marketing\" category. You can change your cookie preferences at any time via the \"Cookie Settings\" link at the bottom of the page. Declining marketing cookies does not affect your use of our site; it only changes how personalized the ads you see are.",
+      "s5Title": "5. Managing Cookies",
+      "s5": "You can manage or delete cookies through your browser settings. Note that disabling essential cookies may affect platform functionality."
     },
     "gdprContent": {
       "intro": "As a user of Glatko, you have the following rights under the General Data Protection Regulation (GDPR):",

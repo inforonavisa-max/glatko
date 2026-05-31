@@ -12,7 +12,7 @@ type Props = {
   params: Promise<{ locale: string }> | { locale: string };
 };
 
-const ALL_SECTIONS = ["s1", "s2", "s3", "s4"] as const;
+const ALL_SECTIONS = ["s1", "s2", "s3", "s4", "s5"] as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await Promise.resolve(params);

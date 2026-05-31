@@ -349,7 +349,7 @@
     "about": "About Us",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
-    "cookies": "Cookie Policy",
+    "cookies": "Politika kolačića",
     "gdpr": "GDPR",
     "contact": "Contact",
     "lastUpdated": "Last updated",
@@ -408,15 +408,17 @@
       "s8": "Za pitanja privatnosti ili ostvarivanje prava kontaktirajte DPO na contact@glatko.app. Odgovor u roku od 30 dana."
     },
     "cookiesContent": {
-      "intro": "This Cookie Policy explains how Glatko uses cookies.",
-      "s1Title": "1. Essential Cookies",
-      "s1": "Required for platform functionality: session, authentication, locale.",
-      "s2Title": "2. Analytics Cookies",
-      "s2": "Vercel Analytics for anonymous usage data.",
-      "s3Title": "3. Managing Cookies",
-      "s3": "Manage cookies through your browser settings.",
-      "s4Title": "4. Upravljanje kolačićima",
-      "s4": "Možete upravljati ili brisati kolačiće u postavkama pregledača. Onemogućavanje neophodnih kolačića može uticati na funkcionalnost platforme."
+      "intro": "Ova Politika kolačića objašnjava kako Glatko koristi kolačiće i slične tehnologije kada posjetite našu platformu.",
+      "s1Title": "1. Neophodni kolačići",
+      "s1": "Ovi kolačići su neophodni za funkcionisanje platforme. Obuhvataju upravljanje sesijama, tokene za autentifikaciju i jezičke postavke. Ne mogu se onemogućiti.",
+      "s2Title": "2. Analitički kolačići",
+      "s2": "Koristimo Vercel Analytics da bismo razumjeli kako posjetioci komuniciraju sa našom platformom. Ovi kolačići prikupljaju anonimne podatke o korišćenju kako bi nam pomogli da poboljšamo uslugu.",
+      "s3Title": "3. Kolačići za preferencije",
+      "s3": "Ovi kolačići pamte vaše izbore, kao što su tema (svijetli/tamni režim) i status saglasnosti za kolačiće.",
+      "s4Title": "4. Marketinški i reklamni kolačići",
+      "s4": "Na našem sajtu koristimo marketinške kolačiće trećih strana kako bismo prikazivali reklame u skladu sa vašim interesovanjima i mjerili učinkovitost naših reklamnih kampanja. Ovi kolačići prate vaše posjete i interakcije kako bi nam pomogli da vam prikažemo relevantniji sadržaj. Glavne marketinške usluge koje koristimo: Meta (Facebook) Pixel — koristi se za mjerenje učinka reklama prikazanih na platformama Facebook i Instagram i za dosezanje relevantne publike; Google Ads — koristi se za praćenje učinka kampanja i mjerenje konverzija na Google pretraživačkoj i displej mreži. Ovi kolačići se aktiviraju samo ako date saglasnost za kategoriju „Marketing\". Svoje preferencije za kolačiće možete promijeniti u bilo kom trenutku putem veze „Podešavanja kolačića\" na dnu stranice. Odbijanje marketinških kolačića ne utiče na vaše korišćenje sajta; mijenja samo nivo personalizacije reklama koje vidite.",
+      "s5Title": "5. Upravljanje kolačićima",
+      "s5": "Možete upravljati ili brisati kolačiće u postavkama pregledača. Onemogućavanje neophodnih kolačića može uticati na funkcionalnost platforme."
     },
     "gdprContent": {
       "intro": "As a Glatko user, you have the following GDPR rights:",

@@ -349,7 +349,7 @@
     "about": "About Us",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
-    "cookies": "Cookie Policy",
+    "cookies": "Cookie-Richtlinie",
     "gdpr": "GDPR",
     "contact": "Contact",
     "lastUpdated": "Last updated",
@@ -408,15 +408,17 @@
       "s8": "Für datenschutzbezogene Anfragen oder zur Ausübung Ihrer Rechte wenden Sie sich an unseren Datenschutzbeauftragten unter contact@glatko.app. Wir antworten in der Regel innerhalb von 30 Tagen."
     },
     "cookiesContent": {
-      "intro": "This Cookie Policy explains how Glatko uses cookies.",
-      "s1Title": "1. Essential Cookies",
-      "s1": "Required for platform functionality: session, authentication, locale.",
-      "s2Title": "2. Analytics Cookies",
-      "s2": "Vercel Analytics for anonymous usage data.",
-      "s3Title": "3. Managing Cookies",
-      "s3": "Manage cookies through your browser settings.",
-      "s4Title": "4. Cookies verwalten",
-      "s4": "Sie können Cookies in Ihren Browser-Einstellungen verwalten oder löschen. Das Deaktivieren essenzieller Cookies kann die Funktionalität der Plattform beeinträchtigen."
+      "intro": "Diese Cookie-Richtlinie erläutert, wie Glatko Cookies und ähnliche Technologien verwendet, wenn Sie unsere Plattform besuchen.",
+      "s1Title": "1. Notwendige Cookies",
+      "s1": "Diese Cookies sind für den Betrieb der Plattform erforderlich. Dazu gehören Sitzungsverwaltung, Authentifizierungs-Token und Spracheinstellungen. Sie können nicht deaktiviert werden.",
+      "s2Title": "2. Analyse-Cookies",
+      "s2": "Wir verwenden Vercel Analytics, um zu verstehen, wie Besucher mit unserer Plattform interagieren. Diese Cookies erfassen anonyme Nutzungsdaten, um uns zu helfen, den Dienst zu verbessern.",
+      "s3Title": "3. Präferenz-Cookies",
+      "s3": "Diese Cookies speichern Ihre Auswahl, wie z. B. die Themenpräferenz (heller/dunkler Modus) und den Status Ihrer Cookie-Einwilligung.",
+      "s4Title": "4. Marketing- und Werbe-Cookies",
+      "s4": "Auf unserer Website verwenden wir Marketing-Cookies von Drittanbietern, um Ihnen für Ihre Interessen relevante Werbung anzuzeigen und die Wirksamkeit unserer Werbekampagnen zu messen. Diese Cookies erfassen Ihre Besuche und Interaktionen, um uns zu helfen, Ihnen relevantere Inhalte anzuzeigen. Die wichtigsten von uns genutzten Marketingdienste: Meta (Facebook) Pixel — dient dazu, die Leistung der auf Facebook und Instagram ausgespielten Anzeigen zu messen und relevante Zielgruppen zu erreichen; Google Ads — dient dazu, die Kampagnenleistung zu verfolgen und Conversions im Google Such- und Displaynetzwerk zu messen. Diese Cookies werden nur aktiviert, wenn Sie der Kategorie „Marketing\" zustimmen. Sie können Ihre Cookie-Einstellungen jederzeit über den Link „Cookie-Einstellungen\" am Seitenende ändern. Die Ablehnung von Marketing-Cookies beeinträchtigt Ihre Nutzung unserer Website nicht; sie ändert lediglich, wie personalisiert die Ihnen angezeigte Werbung ist.",
+      "s5Title": "5. Cookies verwalten",
+      "s5": "Sie können Cookies in Ihren Browser-Einstellungen verwalten oder löschen. Das Deaktivieren essenzieller Cookies kann die Funktionalität der Plattform beeinträchtigen."
     },
     "gdprContent": {
       "intro": "As a Glatko user, you have the following GDPR rights:",
