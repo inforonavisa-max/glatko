@@ -29,7 +29,7 @@ import {
 import { createClient } from "@/supabase/browser";
 import { submitServiceRequest } from "@/app/[locale]/request-service/actions";
 import { cn } from "@/lib/utils";
-import { trackEvent } from "@/lib/analytics/track";
+import { trackEventWithMeta } from "@/lib/analytics/track";
 import { urgencyToStep3Key } from "@/lib/utils/urgencyI18n";
 import { useFormPersistence } from "@/lib/hooks/useFormPersistence";
 import { StepCategory } from "./StepCategory";
@@ -366,7 +366,7 @@ function RequestServiceWizardInner({ categories, userId }: Props) {
       if (result.success) {
         // G-ADS-3: primary customer conversion event — job posted.
         // Fired only on server-confirmed success, before UI state flips.
-        trackEvent("customer_job_posted", {
+        trackEventWithMeta("customer_job_posted", {
           job_id: result.requestId,
           job_category: result.categoryLabel ?? undefined,
         });

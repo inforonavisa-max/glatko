@@ -17,7 +17,7 @@ import {
 import { acceptBidAction } from "@/app/[locale]/dashboard/requests/[id]/actions";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { trackEvent } from "@/lib/analytics/track";
+import { trackEventWithMeta } from "@/lib/analytics/track";
 
 interface BidData {
   id: string;
@@ -62,7 +62,7 @@ export function BidComparison({ bids, requestId, requestStatus, locale }: Props)
           // G-ADS-3: secondary customer conversion event — bid accepted.
           // Fired before redirect/state flip; provider_id pulled from bid row.
           const acceptedBid = bids.find((b) => b.id === bidId);
-          trackEvent("customer_bid_accepted", {
+          trackEventWithMeta("customer_bid_accepted", {
             bid_id: bidId,
             job_id: requestId,
             provider_id: acceptedBid?.professional?.id,
