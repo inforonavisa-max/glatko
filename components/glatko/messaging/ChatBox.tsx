@@ -17,7 +17,7 @@ import {
   confirmQuoteCompletion,
 } from "@/app/[locale]/messages/actions";
 import { ReviewModal } from "@/components/glatko/customer/ReviewModal";
-import { trackEvent } from "@/lib/analytics/track";
+import { trackEventWithMeta } from "@/lib/analytics/track";
 
 interface ThreadMessage {
   id: string;
@@ -207,7 +207,7 @@ export function ChatBox({
         // For provider mesage sends we intentionally skip; provider-side
         // event tracking is out of G-ADS-3 scope.
         if (isCustomerUser) {
-          trackEvent("customer_message_sent", {
+          trackEventWithMeta("customer_message_sent", {
             thread_id: threadId,
             provider_id: counterpartId ?? undefined,
           });

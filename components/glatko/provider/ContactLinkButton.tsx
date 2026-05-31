@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { trackEvent, type GlatkoContactChannel } from "@/lib/analytics/track";
+import { trackEventWithMeta, type GlatkoContactChannel } from "@/lib/analytics/track";
 
 interface ContactLinkButtonProps {
   href: string; // tel:, https://wa.me/..., viber://..., mailto:
@@ -29,7 +29,7 @@ export function ContactLinkButton({
   children,
 }: ContactLinkButtonProps) {
   const handleClick = () => {
-    trackEvent("customer_contact_clicked", {
+    trackEventWithMeta("customer_contact_clicked", {
       provider_id: providerId,
       provider_slug: providerSlug,
       contact_channel: channel,

@@ -10,7 +10,7 @@ import { sendMessageAction } from "@/app/[locale]/inbox/[conversationId]/actions
 import { ChatHeader } from "./ChatHeader";
 import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
-import { trackEvent } from "@/lib/analytics/track";
+import { trackEventWithMeta } from "@/lib/analytics/track";
 
 interface Message {
   id: string;
@@ -157,7 +157,7 @@ export function ChatRoom({
       // G-ADS-3: customer_message_sent — only for customer-side senders.
       // Provider-side events are out of G-ADS-3 scope.
       if (isCustomer) {
-        trackEvent("customer_message_sent", {
+        trackEventWithMeta("customer_message_sent", {
           conversation_id: conversationId,
           provider_id: otherUser.id,
         });
