@@ -1540,9 +1540,29 @@
     "saved": "Profil aktualisiert"
   },
   "cookie": {
-    "message": "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern.",
-    "accept": "Akzeptieren",
-    "learnMore": "Cookie-Richtlinie lesen"
+    "message": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern, den Website-Verkehr zu analysieren und personalisierte Inhalte bereitzustellen. Indem Sie auf „Alle akzeptieren\" klicken, stimmen Sie unserer Verwendung von Cookies zu. Sie können Ihre Einstellungen jederzeit ändern.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Alle ablehnen",
+    "customize": "Anpassen",
+    "savePreferences": "Einstellungen speichern",
+    "learnMore": "Mehr erfahren",
+    "preferencesTitle": "Cookie-Einstellungen",
+    "preferencesIntro": "Wählen Sie, welche Cookie-Kategorien Sie zulassen. Notwendige Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.",
+    "categories": {
+      "necessary": {
+        "label": "Notwendige Cookies",
+        "description": "Diese Cookies sind für den Betrieb der Website unerlässlich und können nicht deaktiviert werden. Sie werden für Sicherheit, Netzwerkverwaltung und Barrierefreiheit verwendet."
+      },
+      "analytics": {
+        "label": "Analyse-Cookies",
+        "description": "Sie helfen uns zu verstehen, wie Besucher unsere Website nutzen. Die erhobenen Daten sind anonym und werden zur Verbesserung unseres Dienstes verwendet."
+      },
+      "marketing": {
+        "label": "Marketing-Cookies",
+        "description": "Werden verwendet, um Ihnen für Ihre Interessen relevante Werbung anzuzeigen und die Kampagnenleistung zu messen. Diese Cookies können mit unseren Werbepartnern geteilt werden."
+      }
+    },
+    "settingsLink": "Cookie-Einstellungen"
   },
   "landing": {
     "logoCloud": {

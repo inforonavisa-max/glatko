@@ -41,10 +41,21 @@ export function MetaPixel({ pixelId }: MetaPixelProps) {
           // Consent default: revoked (denied equivalent)
           fbq('consent', 'revoke');
 
-          // Mount-restore: if user already accepted, grant immediately
+          // Mount-restore: Meta consent is binary, so grant only when the
+          // marketing category is allowed (G-ADS-5). Backward-compat: the
+          // legacy "accepted" string = full grant. Mirrors the marketing→fbq
+          // mapping in lib/analytics/consent.ts.
           try {
-            if (typeof localStorage !== 'undefined' &&
-                localStorage.getItem('glatko-cookie-consent') === 'accepted') {
+            var raw = (typeof localStorage !== 'undefined')
+              ? localStorage.getItem('glatko-cookie-consent')
+              : null;
+            var marketing = false;
+            if (raw === 'accepted') {
+              marketing = true;
+            } else if (raw) {
+              marketing = !!JSON.parse(raw).marketing;
+            }
+            if (marketing) {
               fbq('consent', 'grant');
             }
           } catch(e) {}
