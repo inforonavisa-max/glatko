@@ -55,9 +55,17 @@ const cormorant = Cormorant_Garamond({
 //     is optional). Keeping it here as a backup verification method.
 //   - YANDEX_VERIFICATION: yandex-verification meta from Yandex Webmaster.
 //   - BING_SITE_VERIFICATION: msvalidate.01 meta from Bing Webmaster Tools.
+//   - FACEBOOK_DOMAIN_VERIFICATION: facebook-domain-verification meta from Meta
+//     Business (Brand Safety > Domains); required for iOS 14.5+ aggregated event
+//     measurement on the Meta Pixel / Conversions API. Public token (visible in
+//     HTML), env-gated only so previews/local builds stay clean.
 const verificationOther: Record<string, string> = {};
 if (process.env.BING_SITE_VERIFICATION) {
   verificationOther["msvalidate.01"] = process.env.BING_SITE_VERIFICATION;
+}
+if (process.env.FACEBOOK_DOMAIN_VERIFICATION) {
+  verificationOther["facebook-domain-verification"] =
+    process.env.FACEBOOK_DOMAIN_VERIFICATION;
 }
 
 export const metadata: Metadata = {
