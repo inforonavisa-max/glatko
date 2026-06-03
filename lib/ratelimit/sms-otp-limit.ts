@@ -119,3 +119,85 @@ export async function checkSmsOtpLimit(
 
   return { allowed: true };
 }
+
+// ── Phone-LOGIN send limits (passwordless signInWithOtp) ────────────────────
+// Distinct buckets from the verification limiters above. The Send SMS hook
+// still enforces its own per-phone hourly cap (scope "phone"); keeping the
+// login windows on separate prefixes means a login OTP is never double-counted
+// against that hook bucket, while still giving the login action a fast,
+// pre-dispatch rejection plus a daily ceiling. Keyed only on the normalized
+// E.164 number (no user id exists yet at login time).
+
+const PER_PHONE_LOGIN_PER_HOUR = 3;
+const PER_PHONE_LOGIN_PER_DAY = 10;
+
+let loginHourLimiter: Ratelimit | null | undefined;
+let loginDayLimiter: Ratelimit | null | undefined;
+
+function getLoginHourLimiter(): Ratelimit | null {
+  if (loginHourLimiter !== undefined) return loginHourLimiter;
+  const redis = getRedis();
+  loginHourLimiter = redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(PER_PHONE_LOGIN_PER_HOUR, "1 h"),
+        analytics: false,
+        prefix: `${PREFIX}:login-hour`,
+      })
+    : null;
+  return loginHourLimiter;
+}
+
+function getLoginDayLimiter(): Ratelimit | null {
+  if (loginDayLimiter !== undefined) return loginDayLimiter;
+  const redis = getRedis();
+  loginDayLimiter = redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(PER_PHONE_LOGIN_PER_DAY, "1 d"),
+        analytics: false,
+        prefix: `${PREFIX}:login-day`,
+      })
+    : null;
+  return loginDayLimiter;
+}
+
+export type PhoneLoginLimitResult =
+  | { allowed: true }
+  | { allowed: false; reason: "login_hourly" | "login_daily" };
+
+/**
+ * Per-phone rate limit for the phone-LOGIN OTP send path (signInWithOtp).
+ * Fail-open on any Redis error / missing config, mirroring checkSmsOtpLimit.
+ */
+export async function checkPhoneLoginLimit(
+  e164Phone: string,
+): Promise<PhoneLoginLimitResult> {
+  const hour = getLoginHourLimiter();
+  if (hour) {
+    try {
+      const { success } = await hour.limit(hashKey(`lh:${e164Phone}`));
+      if (!success) return { allowed: false, reason: "login_hourly" };
+    } catch (err) {
+      console.warn(
+        "[GLATKO:sms-otp] login per-hour limiter failed; allowing (fail-open)",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  const day = getLoginDayLimiter();
+  if (day) {
+    try {
+      const { success } = await day.limit(hashKey(`ld:${e164Phone}`));
+      if (!success) return { allowed: false, reason: "login_daily" };
+    } catch (err) {
+      console.warn(
+        "[GLATKO:sms-otp] login per-day limiter failed; allowing (fail-open)",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  return { allowed: true };
+}
