@@ -36,6 +36,7 @@ export const routing = defineRouting({
   localePrefix: "always",
   pathnames: {
     "/": "/",
+    "/onboarding": "/onboarding",
 
     // Blog — slug comes from Sanity localeSlug; URL prefix stays as /blog
     "/blog": "/blog",

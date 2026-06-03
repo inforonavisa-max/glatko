@@ -114,6 +114,15 @@ export type SendEmailOptions = {
 export async function sendEmail(
   options: SendEmailOptions,
 ): Promise<SendEmailResult> {
+  // Phone-only accounts have no email (profiles.email / auth email is NULL).
+  // Bail before Resend so we never send to a blank/whitespace recipient or a
+  // synthetic placeholder address. Central guard: callers already check, this
+  // protects every future caller (e.g. the phone-OTP signup path) too.
+  const recipient = options.to?.trim();
+  if (!recipient) {
+    return { success: false, error: "No recipient email", skipped: true };
+  }
+
   const client = getResendClient();
   if (!client) {
     console.warn("[GLATKO:email] skip send: Resend client unavailable");

@@ -11,6 +11,7 @@ import { AuthBrandPanel } from "@/components/glatko/auth/AuthBrandPanel";
 import { AccountLinkAlert } from "@/components/auth/AccountLinkAlert";
 import { lookupAuthMethods } from "@/lib/actions/auth-methods";
 import { cn } from "@/lib/utils";
+import { PhoneLoginPanel } from "@/components/auth/PhoneLoginPanel";
 
 const inputCls = cn(
   "block w-full rounded-xl border border-gray-200 dark:border-white/10",
@@ -27,6 +28,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [oauthOnlyProviders, setOauthOnlyProviders] = useState<string[]>([]);
+  const [mode, setMode] = useState<"email" | "phone">("email");
 
   function isInvalidCredentialsError(err: { code?: string; message?: string }) {
     if (err.code === "invalid_credentials") return true;
@@ -120,6 +122,46 @@ export default function LoginPage() {
               </div>
             </div>
 
+            <div className="mb-6 grid grid-cols-2 gap-1 rounded-xl bg-gray-100 p-1 dark:bg-white/5">
+              <button
+                type="button"
+                onClick={() => {
+                  setMode("email");
+                  setError("");
+                  setOauthOnlyProviders([]);
+                }}
+                aria-pressed={mode === "email"}
+                className={cn(
+                  "rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                  mode === "email"
+                    ? "bg-white text-gray-900 shadow-sm dark:bg-white/10 dark:text-white"
+                    : "text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                )}
+              >
+                {t("auth.email")}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMode("phone");
+                  setError("");
+                  setOauthOnlyProviders([]);
+                }}
+                aria-pressed={mode === "phone"}
+                className={cn(
+                  "rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                  mode === "phone"
+                    ? "bg-white text-gray-900 shadow-sm dark:bg-white/10 dark:text-white"
+                    : "text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                )}
+              >
+                {t("auth.phoneLogin.tabPhone")}
+              </button>
+            </div>
+
+            {mode === "phone" ? (
+              <PhoneLoginPanel />
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-neutral-400">
@@ -183,6 +225,7 @@ export default function LoginPage() {
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : t("auth.login")}
               </motion.button>
             </form>
+            )}
 
             <p className="mt-8 text-center text-sm text-gray-500 dark:text-neutral-400">
               {t("auth.noAccount")}{" "}
