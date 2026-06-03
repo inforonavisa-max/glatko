@@ -7,7 +7,7 @@ import { Loader2, User, Briefcase, Check } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { localeNames, locales, type Locale } from "@/i18n/routing";
-import { GLATKO_CITIES } from "@/lib/glatko/cities";
+import { GLATKO_CITIES, OTHER_CITY_VALUE } from "@/lib/glatko/cities";
 import { completeOnboarding } from "@/lib/actions/onboarding";
 
 const inputCls = cn(
@@ -25,11 +25,13 @@ export function OnboardingForm({
   currentLocale: string;
 }) {
   const t = useTranslations("auth.onboarding");
+  const tCities = useTranslations("cities");
   const router = useRouter();
 
   const [fullName, setFullName] = useState("");
   const [role, setRole] = useState<Role>("customer");
-  const [city, setCity] = useState("");
+  const [citySelect, setCitySelect] = useState("");
+  const [cityOther, setCityOther] = useState("");
   const [locale, setLocale] = useState<string>(
     locales.includes(currentLocale as Locale) ? currentLocale : "tr",
   );
@@ -39,6 +41,8 @@ export function OnboardingForm({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    const city =
+      citySelect === OTHER_CITY_VALUE ? cityOther.trim() : citySelect;
     if (!fullName.trim()) {
       setError(t("errNameRequired"));
       return;
@@ -121,8 +125,8 @@ export function OnboardingForm({
         </label>
         <select
           id="ob-city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+          value={citySelect}
+          onChange={(e) => setCitySelect(e.target.value)}
           required
           className={inputCls}
         >
@@ -130,11 +134,24 @@ export function OnboardingForm({
             {t("cityPlaceholder")}
           </option>
           {GLATKO_CITIES.map((c) => (
-            <option key={c} value={c}>
-              {c}
+            <option key={c.key} value={c.name}>
+              {tCities(c.key as never)}
             </option>
           ))}
+          <option value={OTHER_CITY_VALUE}>{tCities("other" as never)}</option>
         </select>
+        {citySelect === OTHER_CITY_VALUE && (
+          <input
+            type="text"
+            value={cityOther}
+            onChange={(e) => setCityOther(e.target.value)}
+            required
+            maxLength={80}
+            placeholder={tCities("other" as never)}
+            aria-label={tCities("other" as never)}
+            className={cn(inputCls, "mt-2")}
+          />
+        )}
       </div>
 
       <div>

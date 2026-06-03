@@ -14,6 +14,7 @@ import {
 } from "@/lib/validations/profile";
 import type { UserProfileRow } from "@/lib/actions/profile";
 import { updateProfile } from "@/lib/actions/profile";
+import { GLATKO_CITIES } from "@/lib/glatko/cities";
 import { AvatarUpload } from "@/components/settings/AvatarUpload";
 import { LanguageSelector } from "@/components/settings/LanguageSelector";
 import { Link } from "@/i18n/navigation";
@@ -21,16 +22,12 @@ import { PasswordChangeModal } from "@/components/settings/PasswordChangeModal";
 import { DeactivateModal } from "@/components/settings/DeactivateModal";
 import { DeleteAccountModal } from "@/components/settings/DeleteAccountModal";
 
+// Sourced from the single source of truth (lib/glatko/cities.ts) so this list
+// stays in sync everywhere. Shape kept as { value, cityKey } so the render and
+// cityFieldToSelect below are unchanged; the free-text "other" sentinel is
+// preserved as the final option.
 const CITY_VALUES: { value: string; cityKey: string }[] = [
-  { value: "Budva", cityKey: "budva" },
-  { value: "Kotor", cityKey: "kotor" },
-  { value: "Tivat", cityKey: "tivat" },
-  { value: "Podgorica", cityKey: "podgorica" },
-  { value: "Herceg Novi", cityKey: "hercegNovi" },
-  { value: "Bar", cityKey: "bar" },
-  { value: "Nikšić", cityKey: "niksic" },
-  { value: "Cetinje", cityKey: "cetinje" },
-  { value: "Ulcinj", cityKey: "ulcinj" },
+  ...GLATKO_CITIES.map((c) => ({ value: c.name, cityKey: c.key })),
   { value: "__other__", cityKey: "other" },
 ];
 

@@ -4,7 +4,6 @@ import { z } from "zod";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/supabase/server";
-import { GLATKO_CITIES } from "@/lib/glatko/cities";
 import { glatkoCaptureException } from "@/lib/sentry/glatko-capture";
 
 /**
@@ -30,9 +29,9 @@ export type CompleteOnboardingResult =
 const schema = z.object({
   full_name: z.string().trim().min(1).max(60),
   role: z.enum(["customer", "pro"]),
-  city: z
-    .string()
-    .refine((c) => (GLATKO_CITIES as readonly string[]).includes(c)),
+  // Free text (1–80): a known municipality name OR a custom "other" settlement.
+  // The city column is free text, so we don't restrict to the known list.
+  city: z.string().trim().min(1).max(80),
   locale: z
     .string()
     .refine((c) => (VALID_LOCALES as readonly string[]).includes(c)),

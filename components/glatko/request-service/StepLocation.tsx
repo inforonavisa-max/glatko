@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, CalendarDays, Clock, CalendarSearch } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CITY_KEYS } from "@/lib/glatko/cities";
 
 interface Props {
   municipality: string;
@@ -28,15 +29,10 @@ const inputCls = cn(
   "focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 focus:outline-none transition-all"
 );
 
-const CITY_SLUGS = [
-  "budva",
-  "kotor",
-  "tivat",
-  "podgorica",
-  "hercegNovi",
-  "bar",
-  "ulcinj",
-] as const;
+// i18n keys from the single source of truth (lib/glatko/cities.ts). The stored
+// municipality value stays the city key (unchanged behaviour), now covering all
+// 25 municipalities. MARINA_OPTIONS below is unrelated and left untouched.
+const CITY_SLUGS = CITY_KEYS;
 
 const MARINA_OPTIONS = [
   "Porto Montenegro",

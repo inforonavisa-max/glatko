@@ -18,22 +18,13 @@
  */
 
 import { SEO_BASE, SEO_LOCALES, localizedUrl, type Href } from "@/lib/seo";
+import { GLATKO_CITIES } from "@/lib/glatko/cities";
 
 const ORG_NAME = "Glatko" as const;
 
-/**
- * Six default Karadağ cities used as fallback when no verified pros yet
- * advertise a `location_city` for a given category. Lat/long stay tight
- * (~4 decimals) — enough for Google's "near me" matching but not GPS-precise.
- */
-const MONTENEGRO_CITIES = [
-  { name: "Budva", latitude: 42.2911, longitude: 18.84 },
-  { name: "Kotor", latitude: 42.4247, longitude: 18.7712 },
-  { name: "Tivat", latitude: 42.4347, longitude: 18.6961 },
-  { name: "Bar", latitude: 42.0931, longitude: 19.1006 },
-  { name: "Herceg Novi", latitude: 42.4531, longitude: 18.5375 },
-  { name: "Podgorica", latitude: 42.4304, longitude: 19.2594 },
-] as const;
+// areaServed cities come from the single source of truth
+// (lib/glatko/cities.ts) — all 25 Montenegro municipalities with municipal-seat
+// coordinates (~4 decimals; enough for Google "near me", not GPS-precise).
 
 /**
  * Locale-localized one-line org descriptions; safe to render in JSON-LD
@@ -88,13 +79,13 @@ export function generateOrganizationSchema(locale: string) {
       "@type": "PostalAddress",
       addressCountry: "ME",
     },
-    areaServed: MONTENEGRO_CITIES.map((c) => ({
+    areaServed: GLATKO_CITIES.map((c) => ({
       "@type": "City",
       name: c.name,
       geo: {
         "@type": "GeoCoordinates",
-        latitude: c.latitude,
-        longitude: c.longitude,
+        latitude: c.lat,
+        longitude: c.lng,
       },
     })),
   };
@@ -135,7 +126,7 @@ export function generateServiceSchema(
   const allCities = Array.from(
     new Set([
       ...citiesFromPros.filter((c) => c && c.trim().length > 0),
-      ...MONTENEGRO_CITIES.map((c) => c.name),
+      ...GLATKO_CITIES.map((c) => c.name),
     ]),
   );
 
@@ -174,7 +165,7 @@ export function generateCategoryLocalBusinessSchema(
   const allCities = Array.from(
     new Set([
       ...citiesFromPros.filter((c) => c && c.trim().length > 0),
-      ...MONTENEGRO_CITIES.map((c) => c.name),
+      ...GLATKO_CITIES.map((c) => c.name),
     ]),
   );
 

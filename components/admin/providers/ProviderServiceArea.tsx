@@ -1,5 +1,7 @@
 "use client";
 
+import { GLATKO_CITIES } from "@/lib/glatko/cities";
+
 interface Props {
   cityDisplay: string;
   onCityDisplayChange: (v: string) => void;
@@ -10,16 +12,13 @@ interface Props {
   disabled?: boolean;
 }
 
-const COMMON_CITIES = [
-  { display: "Podgorica", slug: "podgorica" },
-  { display: "Budva", slug: "budva" },
-  { display: "Kotor", slug: "kotor" },
-  { display: "Bar", slug: "bar" },
-  { display: "Herceg Novi", slug: "herceg-novi" },
-  { display: "Tivat", slug: "tivat" },
-  { display: "Cetinje", slug: "cetinje" },
-  { display: "Nikšić", slug: "niksic" },
-];
+// Single source of truth (lib/glatko/cities.ts) — all 25 municipalities, as
+// quick-select shortcuts. The free-text city-display + slug inputs below stay,
+// so admins can still enter any settlement not in the list.
+const COMMON_CITIES = GLATKO_CITIES.map((c) => ({
+  display: c.name,
+  slug: c.slug,
+}));
 
 export function ProviderServiceArea({
   cityDisplay,
