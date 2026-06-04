@@ -121,7 +121,7 @@ export function NotificationSettingsClient({
 
   return (
     <PageBackground>
-      <div className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
         <SectionTitle>{t("title")}</SectionTitle>
         <p className="mt-2 text-sm text-gray-500 dark:text-white/45">
           {t("subtitle")}

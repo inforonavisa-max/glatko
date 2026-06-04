@@ -138,7 +138,7 @@ export function ProfileForm({ initialProfile, email }: ProfileFormProps) {
   const citySelect = cityFieldToSelect(watchedCity);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-8 px-4 pb-24 pt-28 sm:px-6">
+    <div className="mx-auto max-w-2xl space-y-8 px-4 pb-24 pt-8 sm:px-6">
       <div className={glassCard}>
         <h1 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white">
           {t("title")}
