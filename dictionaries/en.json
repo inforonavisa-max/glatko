@@ -286,6 +286,8 @@
       "errNetwork": "Network error. Check your connection and try again."
     },
     "onboarding": {
+      "channelLabel": "Notification channel (optional)",
+      "channelDesc": "Choose how we notify you. You can change this anytime in Settings.",
       "title": "Complete your profile",
       "subtitle": "Just a few details to get you started.",
       "displayNameLabel": "Display name",
@@ -1291,6 +1293,11 @@
   "settings": {
     "title": "Settings",
     "notifications": {
+      "channelSection": "Notification channel",
+      "channelDesc": "Where you'd like to receive instant notifications. Requires a phone number.",
+      "channelNeedsPhone": "Add a phone number to choose a notification channel.",
+      "channelAddPhoneCta": "Add phone",
+      "channelSaved": "Notification channel updated",
       "title": "Notification Preferences",
       "inApp": "In-App Notifications",
       "email": "Email Notifications",

@@ -286,6 +286,8 @@
       "errNetwork": "Netzwerkfehler. Bitte Verbindung prüfen und erneut versuchen."
     },
     "onboarding": {
+      "channelLabel": "Benachrichtigungskanal (optional)",
+      "channelDesc": "Wählen Sie, wie wir Sie benachrichtigen. Sie können dies jederzeit in den Einstellungen ändern.",
       "title": "Profil vervollständigen",
       "subtitle": "Nur ein paar Angaben für den Start.",
       "displayNameLabel": "Anzeigename",
@@ -1291,6 +1293,11 @@
   "settings": {
     "title": "Einstellungen",
     "notifications": {
+      "channelSection": "Benachrichtigungskanal",
+      "channelDesc": "Wo Sie sofortige Benachrichtigungen erhalten möchten. Erfordert eine Telefonnummer.",
+      "channelNeedsPhone": "Fügen Sie eine Telefonnummer hinzu, um einen Benachrichtigungskanal zu wählen.",
+      "channelAddPhoneCta": "Telefon hinzufügen",
+      "channelSaved": "Benachrichtigungskanal aktualisiert",
       "title": "Benachrichtigungseinstellungen",
       "inApp": "In-App-Benachrichtigungen",
       "email": "E-Mail-Benachrichtigungen",

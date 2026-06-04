@@ -286,6 +286,8 @@
       "errNetwork": "Ağ hatası. Bağlantınızı kontrol edip tekrar deneyin."
     },
     "onboarding": {
+      "channelLabel": "Bildirim kanalı (isteğe bağlı)",
+      "channelDesc": "Sizi nasıl bilgilendirelim? Bunu istediğiniz zaman Ayarlar'dan değiştirebilirsiniz.",
       "title": "Profilini tamamla",
       "subtitle": "Başlamak için birkaç bilgi.",
       "displayNameLabel": "Görünen ad",
@@ -1291,6 +1293,11 @@
   "settings": {
     "title": "Ayarlar",
     "notifications": {
+      "channelSection": "Bildirim kanalı",
+      "channelDesc": "Anlık bildirimleri nereden almak istersiniz. Telefon numarası gerektirir.",
+      "channelNeedsPhone": "Bildirim kanalı seçmek için önce bir telefon numarası ekleyin.",
+      "channelAddPhoneCta": "Telefon ekle",
+      "channelSaved": "Bildirim kanalı güncellendi",
       "title": "Bildirim Tercihleri",
       "inApp": "Uygulama İçi Bildirimler",
       "email": "E-posta Bildirimleri",

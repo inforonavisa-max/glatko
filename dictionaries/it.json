@@ -286,6 +286,8 @@
       "errNetwork": "Errore di rete. Controlla la connessione e riprova."
     },
     "onboarding": {
+      "channelLabel": "Canale di notifica (facoltativo)",
+      "channelDesc": "Scegli come notificarti. Puoi modificarlo in qualsiasi momento nelle Impostazioni.",
       "title": "Completa il tuo profilo",
       "subtitle": "Solo qualche dettaglio per iniziare.",
       "displayNameLabel": "Nome visualizzato",
@@ -1291,6 +1293,11 @@
   "settings": {
     "title": "Impostazioni",
     "notifications": {
+      "channelSection": "Canale di notifica",
+      "channelDesc": "Dove vuoi ricevere le notifiche istantanee. Richiede un numero di telefono.",
+      "channelNeedsPhone": "Aggiungi un numero di telefono per scegliere un canale di notifica.",
+      "channelAddPhoneCta": "Aggiungi telefono",
+      "channelSaved": "Canale di notifica aggiornato",
       "title": "Preferenze notifiche",
       "inApp": "Notifiche in-app",
       "email": "Notifiche email",

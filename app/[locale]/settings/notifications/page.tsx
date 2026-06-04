@@ -33,6 +33,8 @@ export default async function NotificationSettingsPage({
     <NotificationSettingsClient
       initialPrefs={settings.profile.notification_prefs}
       isPro={!!proRow}
+      hasPhone={settings.hasPhone}
+      initialChannel={settings.profile.notification_channel}
     />
   );
 }

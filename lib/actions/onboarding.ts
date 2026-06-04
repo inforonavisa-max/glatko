@@ -35,6 +35,9 @@ const schema = z.object({
   locale: z
     .string()
     .refine((c) => (VALID_LOCALES as readonly string[]).includes(c)),
+  // Faz 1-B: optional notification channel (CHECK whatsapp|viber on the column).
+  // Omitted → column stays NULL (Faz 2 failover).
+  notification_channel: z.enum(["whatsapp", "viber"]).optional(),
 });
 
 export async function completeOnboarding(input: {
@@ -42,6 +45,7 @@ export async function completeOnboarding(input: {
   role: string;
   city: string;
   locale: string;
+  notification_channel?: "whatsapp" | "viber";
 }): Promise<CompleteOnboardingResult> {
   const supabase = createClient();
   const {
@@ -51,10 +55,11 @@ export async function completeOnboarding(input: {
 
   const parsed = schema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "invalid_input" };
-  const { full_name, role, city, locale } = parsed.data;
+  const { full_name, role, city, locale, notification_channel } = parsed.data;
 
   // Partial UPDATE only — never upsert (the row already exists via the signup
-  // trigger, and upsert would risk omitting other columns).
+  // trigger, and upsert would risk omitting other columns). notification_channel
+  // is written only when chosen; otherwise the column stays NULL (Faz 2 failover).
   const { error } = await supabase
     .from("profiles")
     .update({
@@ -63,6 +68,7 @@ export async function completeOnboarding(input: {
       preferred_locale: locale,
       onboarding_completed: true,
       updated_at: new Date().toISOString(),
+      ...(notification_channel ? { notification_channel } : {}),
     })
     .eq("id", user.id);
 

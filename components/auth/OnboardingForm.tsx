@@ -35,6 +35,7 @@ export function OnboardingForm({
   const [locale, setLocale] = useState<string>(
     locales.includes(currentLocale as Locale) ? currentLocale : "tr",
   );
+  const [channel, setChannel] = useState<"whatsapp" | "viber" | "">("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -58,6 +59,7 @@ export function OnboardingForm({
         role,
         city,
         locale,
+        notification_channel: channel || undefined,
       });
       if (!res.ok) {
         setError(t("errGeneric"));
@@ -174,6 +176,37 @@ export function OnboardingForm({
           ))}
         </select>
       </div>
+
+      <fieldset>
+        <legend className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-neutral-400">
+          {t("channelLabel")}
+        </legend>
+        <p className="mb-2 text-xs text-gray-400 dark:text-white/30">
+          {t("channelDesc")}
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          {(["whatsapp", "viber"] as const).map((c) => {
+            const active = channel === c;
+            return (
+              <button
+                key={c}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                onClick={() => setChannel((prev) => (prev === c ? "" : c))}
+                className={cn(
+                  "rounded-xl border px-4 py-3 text-sm font-medium transition-all",
+                  active
+                    ? "border-teal-500 bg-teal-50/60 text-teal-700 ring-2 ring-teal-500/20 dark:border-teal-400 dark:bg-teal-500/10 dark:text-teal-300"
+                    : "border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/20",
+                )}
+              >
+                {c === "whatsapp" ? "WhatsApp" : "Viber"}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
 
       {error && (
         <motion.p

@@ -286,6 +286,8 @@
       "errNetwork": "Greška mreže. Provjerite vezu i pokušajte ponovo."
     },
     "onboarding": {
+      "channelLabel": "Kanal obavještenja (opciono)",
+      "channelDesc": "Izaberite kako da vas obavještavamo. Možete to promijeniti bilo kada u podešavanjima.",
       "title": "Dovršite svoj profil",
       "subtitle": "Samo nekoliko podataka za početak.",
       "displayNameLabel": "Prikazano ime",
@@ -1291,6 +1293,11 @@
   "settings": {
     "title": "Podešavanja",
     "notifications": {
+      "channelSection": "Kanal obavještenja",
+      "channelDesc": "Gdje želite da primate trenutna obavještenja. Potreban je broj telefona.",
+      "channelNeedsPhone": "Dodajte broj telefona da biste izabrali kanal obavještenja.",
+      "channelAddPhoneCta": "Dodaj telefon",
+      "channelSaved": "Kanal obavještenja je ažuriran",
       "title": "Podešavanja obavještenja",
       "inApp": "Obavještenja u aplikaciji",
       "email": "Email obavještenja",
