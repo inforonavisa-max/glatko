@@ -1248,6 +1248,10 @@
       "title": "Bid Rejected",
       "body": "Your bid was rejected"
     },
+    "newQuote": {
+      "title": "New Quote",
+      "body": "You received a new quote on your request"
+    },
     "newMessage": {
       "title": "New Message",
       "body": "You received a new message"

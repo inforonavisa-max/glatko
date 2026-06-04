@@ -45,6 +45,8 @@ const typeConfig: Record<string, { icon: typeof Bell; bgColor: string; iconColor
   verification_approved: { icon: ShieldCheck, bgColor: "bg-teal-500/10", iconColor: "text-teal-600 dark:text-teal-400" },
   verification_rejected: { icon: ShieldX, bgColor: "bg-red-500/10", iconColor: "text-red-500 dark:text-red-400" },
   new_request_match: { icon: Bell, bgColor: "bg-teal-500/10", iconColor: "text-teal-600 dark:text-teal-400" },
+  new_quote: { icon: DollarSign, bgColor: "bg-teal-500/10", iconColor: "text-teal-600 dark:text-teal-400" },
+  thread_message: { icon: MessageSquare, bgColor: "bg-blue-500/10", iconColor: "text-blue-600 dark:text-blue-400" },
 };
 
 const defaultConfig = { icon: Bell, bgColor: "bg-gray-500/10", iconColor: "text-gray-500 dark:text-gray-400" };
@@ -54,8 +56,8 @@ type FilterType = "all" | "unread" | "bids" | "messages" | "status" | "reviews";
 const filterToTypes: Record<FilterType, string[] | null> = {
   all: null,
   unread: null,
-  bids: ["new_bid", "bid_accepted", "bid_rejected", "new_request_match"],
-  messages: ["message"],
+  bids: ["new_bid", "bid_accepted", "bid_rejected", "new_request_match", "new_quote"],
+  messages: ["message", "thread_message"],
   status: ["status_change", "verification_approved", "verification_rejected"],
   reviews: ["review"],
 };
@@ -71,6 +73,8 @@ function getLocalizedTitle(type: string, t: ReturnType<typeof useTranslations>):
     verification_approved: t("notifications.verificationApproved.title"),
     verification_rejected: t("notifications.verificationRejected.title"),
     new_request_match: t("notifications.newRequestMatch.title"),
+    new_quote: t("notifications.newQuote.title"),
+    thread_message: t("notifications.newMessage.title"),
   };
   return map[type] || type;
 }

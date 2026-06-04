@@ -1248,6 +1248,10 @@
       "title": "Ponuda odbijena",
       "body": "Vaša ponuda je odbijena"
     },
+    "newQuote": {
+      "title": "Nova ponuda",
+      "body": "Primili ste novu ponudu"
+    },
     "newMessage": {
       "title": "Nova poruka",
       "body": "Primili ste novu poruku"

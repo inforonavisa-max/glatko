@@ -1248,6 +1248,10 @@
       "title": "Offerta rifiutata",
       "body": "La tua offerta è stata rifiutata"
     },
+    "newQuote": {
+      "title": "Nuova offerta",
+      "body": "Hai ricevuto una nuova offerta"
+    },
     "newMessage": {
       "title": "Nuovo messaggio",
       "body": "Hai ricevuto un nuovo messaggio"

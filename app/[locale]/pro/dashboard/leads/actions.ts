@@ -1,7 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/supabase/server";
+import { getTranslations } from "next-intl/server";
+import { createClient, createAdminClient } from "@/supabase/server";
+import { createNotification } from "@/lib/supabase/glatko.server";
+import { locales, defaultLocale } from "@/i18n/routing";
 
 type PricingModel = "hourly" | "fixed" | "per_unit" | "estimate";
 
@@ -17,6 +20,12 @@ interface ActionResult {
   success: boolean;
   error?: string;
   quote_id?: string;
+}
+
+function coerceLocale(value: string | null | undefined): string {
+  return value && (locales as readonly string[]).includes(value)
+    ? value
+    : defaultLocale;
 }
 
 export async function submitQuote(
@@ -86,6 +95,44 @@ export async function submitQuote(
     return { success: false, error: error.message };
   }
 
+  const quoteId = data.id as string;
+
+  // Faz 0-B: notify the customer in-app that a new quote arrived. Best-effort —
+  // never blocks/fails the submission. Anonymous requests (no customer_id) have
+  // no in-app recipient, so they are skipped. Stored text uses the recipient's
+  // locale; the bell/list also re-localize the title by type at render time.
+  try {
+    const admin = createAdminClient();
+    const { data: req } = await admin
+      .from("glatko_service_requests")
+      .select("customer_id, title")
+      .eq("id", input.request_id)
+      .maybeSingle();
+    const customerId = (req?.customer_id as string | null) ?? null;
+    if (customerId) {
+      const { data: prof } = await admin
+        .from("profiles")
+        .select("preferred_locale")
+        .eq("id", customerId)
+        .maybeSingle();
+      const locale = coerceLocale(prof?.preferred_locale as string | null);
+      const t = await getTranslations({ locale, namespace: "notifications" });
+      await createNotification({
+        user_id: customerId,
+        type: "new_quote",
+        title: t("newQuote.title"),
+        body: t("newQuote.body"),
+        data: {
+          requestId: input.request_id,
+          quoteId,
+          requestTitle: (req?.title as string | null) ?? "",
+        },
+      });
+    }
+  } catch (err) {
+    console.error("[GLATKO:quote] new_quote in-app notification failed", err);
+  }
+
   revalidatePath(`/[locale]/pro/dashboard/leads`, "page");
-  return { success: true, quote_id: data.id as string };
+  return { success: true, quote_id: quoteId };
 }

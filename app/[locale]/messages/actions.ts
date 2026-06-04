@@ -1,13 +1,22 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/supabase/server";
+import { getTranslations } from "next-intl/server";
+import { createClient, createAdminClient } from "@/supabase/server";
 import { getSiteUrl } from "@/lib/email/resend";
+import { createNotification } from "@/lib/supabase/glatko.server";
+import { locales, defaultLocale } from "@/i18n/routing";
 
 interface ActionResult<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
+}
+
+function coerceLocale(value: string | null | undefined): string {
+  return value && (locales as readonly string[]).includes(value)
+    ? value
+    : defaultLocale;
 }
 
 export async function openOrCreateThread(input: {
@@ -91,6 +100,39 @@ export async function sendMessage(input: {
     }).catch((err) => {
       console.error("[GLATKO:translate] background dispatch failed", err);
     });
+  }
+
+  // Faz 0-B: notify the other thread participant in-app. Best-effort; mirrors
+  // the notifyNewMessages cron (type thread_message + data.threadId) so the
+  // 5-min in-app dedup catches action + cron together. body = message preview.
+  try {
+    const admin = createAdminClient();
+    const { data: th } = await admin
+      .from("glatko_message_threads")
+      .select("customer_id, professional_id")
+      .eq("id", input.thread_id)
+      .maybeSingle();
+    const customerId = (th?.customer_id as string | null) ?? null;
+    const professionalId = (th?.professional_id as string | null) ?? null;
+    const recipientId = user.id === customerId ? professionalId : customerId;
+    if (recipientId) {
+      const { data: prof } = await admin
+        .from("profiles")
+        .select("preferred_locale")
+        .eq("id", recipientId)
+        .maybeSingle();
+      const locale = coerceLocale(prof?.preferred_locale as string | null);
+      const t = await getTranslations({ locale, namespace: "notifications" });
+      await createNotification({
+        user_id: recipientId,
+        type: "thread_message",
+        title: t("newMessage.title"),
+        body: trimmed.slice(0, 140),
+        data: { threadId: input.thread_id },
+      });
+    }
+  } catch (err) {
+    console.error("[GLATKO:thread] thread_message in-app notification failed", err);
   }
 
   revalidatePath(`/[locale]/messages/${input.thread_id}`, "page");

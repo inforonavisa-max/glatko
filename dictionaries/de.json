@@ -1248,6 +1248,10 @@
       "title": "Angebot abgelehnt",
       "body": "Ihr Angebot wurde abgelehnt"
     },
+    "newQuote": {
+      "title": "Neues Angebot",
+      "body": "Sie haben ein neues Angebot erhalten"
+    },
     "newMessage": {
       "title": "Neue Nachricht",
       "body": "Sie haben eine neue Nachricht erhalten"

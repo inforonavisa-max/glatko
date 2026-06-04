@@ -1248,6 +1248,10 @@
       "title": "Teklif Reddedildi",
       "body": "Teklifiniz reddedildi"
     },
+    "newQuote": {
+      "title": "Yeni Teklif",
+      "body": "Talebinize yeni bir teklif geldi"
+    },
     "newMessage": {
       "title": "Yeni Mesaj",
       "body": "Size yeni bir mesaj gönderildi"

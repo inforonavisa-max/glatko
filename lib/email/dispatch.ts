@@ -316,6 +316,15 @@ export async function dispatchNotificationEmail(params: {
   body?: string;
 }): Promise<void> {
   try {
+    // Faz 0-B kill-switch: notification emails are OFF unless explicitly enabled.
+    // In-app notifications are unaffected (createNotification inserts the row
+    // BEFORE this runs). Auth emails (email-hook) and transactional emails
+    // (request/pro/founding/profile wrappers) call sendEmail directly and never
+    // pass through here, so they keep sending. Faz 2 keeps this off permanently
+    // (WhatsApp/Viber replace notification email).
+    if (process.env.NOTIFICATION_EMAILS_ENABLED !== "true") {
+      return;
+    }
     const type = params.type as DispatchNotificationType;
     const allowed: readonly string[] = [
       "new_request_match",
