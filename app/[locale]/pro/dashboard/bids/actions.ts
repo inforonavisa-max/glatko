@@ -43,6 +43,7 @@ export async function startJobAction(
         data: {
           requestId,
           requestTitle: request.title ?? "",
+          statusCode: "started",
         },
       }).catch(() => {});
     }
@@ -83,6 +84,7 @@ export async function completeJobAction(
         data: {
           requestId,
           requestTitle: request.title ?? "",
+          statusCode: "completed",
         },
       }).catch(() => {});
     }

@@ -23,6 +23,25 @@ export function externalCooldownElapsed(
   );
 }
 
+/**
+ * Faz 3-A — sender display name by direction (exported for tests). When the pro
+ * sent the last message (recipient = customer) the label is the thread's pro
+ * business_name; when the customer sent it (recipient = pro) the label is the
+ * customer's full_name. "Someone" when the relevant name is missing.
+ */
+export function resolveThreadSenderName(args: {
+  lastMessageSenderId: string | null;
+  customerId: string | null;
+  proBusinessName: string | null | undefined;
+  customerFullName: string | null | undefined;
+}): string {
+  const senderIsCustomer =
+    args.customerId != null && args.lastMessageSenderId === args.customerId;
+  return senderIsCustomer
+    ? args.customerFullName?.trim() || "Someone"
+    : args.proBusinessName?.trim() || "Someone";
+}
+
 interface ThreadRow {
   id: string;
   customer_id: string | null;
@@ -80,6 +99,35 @@ export async function notifyNewMessages(
   const rows = (threads as unknown as ThreadRow[]) ?? [];
   let notified = 0;
 
+  // Faz 3-A: thread_message sender-name direction fix. The thread's pro
+  // business_name is the correct sender label ONLY when the pro sent the last
+  // message. When the CUSTOMER sent it (recipient = pro), the sender is the
+  // customer, so the label must be the customer's profiles.full_name — not the
+  // thread's pro name. Batch-fetch full_name for customers who are the last
+  // sender (mirrors the messages/page.tsx counterpart-name pattern).
+  const customerSenderIds = Array.from(
+    new Set(
+      rows
+        .filter(
+          (t) =>
+            t.customer_id != null &&
+            t.last_message_sender_id === t.customer_id,
+        )
+        .map((t) => t.customer_id as string),
+    ),
+  );
+  const customerNameById: Record<string, string> = {};
+  if (customerSenderIds.length > 0) {
+    const { data: custProfiles } = await admin
+      .from("profiles")
+      .select("id, full_name")
+      .in("id", customerSenderIds);
+    for (const p of custProfiles ?? []) {
+      const name = (p.full_name as string | null)?.trim();
+      if (name) customerNameById[p.id as string] = name;
+    }
+  }
+
   for (const t of rows) {
     if (!t.last_message_sender_id || !t.last_message_at) continue;
 
@@ -97,9 +145,15 @@ export async function notifyNewMessages(
         : (t.pro_unread_count ?? 0) > 0;
     if (!recipientHasUnread) continue;
 
-    const senderName =
-      t.glatko_professional_profiles?.business_name?.trim() ||
-      "Someone";
+    // Faz 3-A: pick the ACTUAL sender's name by direction (batch above + helper).
+    const senderName = resolveThreadSenderName({
+      lastMessageSenderId: t.last_message_sender_id,
+      customerId: t.customer_id,
+      proBusinessName: t.glatko_professional_profiles?.business_name,
+      customerFullName: t.customer_id
+        ? customerNameById[t.customer_id]
+        : undefined,
+    });
     const preview = t.last_message_preview ?? "";
     const requestTitle = t.glatko_service_requests?.title ?? "";
 

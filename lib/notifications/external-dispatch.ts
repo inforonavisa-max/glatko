@@ -166,10 +166,28 @@ export async function shouldSendExternal(params: {
   return { send: true, phone, order: channelOrder(pref), critical };
 }
 
-/** SMS body is cost-sensitive (Unicode → ~70 chars/segment); keep it short. */
-function composeSmsText(title: string, body?: string): string {
-  const parts = [title.trim(), (body ?? "").trim()].filter(Boolean);
-  return parts.join(": ").slice(0, 160);
+/**
+ * SMS body builder. Unicode (Turkish/Cyrillic/Arabic …) → ~70 chars/segment, so
+ * keep it short. Faz 3-A: optional `link` is appended at the END and is NEVER
+ * truncated — only the title/body part is trimmed to make room (the old blind
+ * `.slice(0,160)` would have chopped a trailing URL). Backward compatible: with
+ * no `link` (the current Faz 2-A call) it behaves exactly like the original.
+ */
+const SMS_TARGET_LEN = 160;
+/** Exported for unit tests (Faz 3-A). */
+export function composeSmsText(title: string, body?: string, link?: string): string {
+  const message = [title.trim(), (body ?? "").trim()].filter(Boolean).join(": ");
+  const url = (link ?? "").trim();
+  if (!url) {
+    // Faz 2-A path (no link): nothing to protect — keep the original cap.
+    return message.slice(0, SMS_TARGET_LEN);
+  }
+  // Link present: keep the URL whole; trim ONLY the message to fit the target.
+  const room = SMS_TARGET_LEN - url.length - 1; // -1 for the separating space
+  if (room <= 0) return url; // URL alone already fills the target — never cut it.
+  const trimmedMessage =
+    message.length > room ? message.slice(0, room).trimEnd() : message;
+  return trimmedMessage ? `${trimmedMessage} ${url}` : url;
 }
 
 /**

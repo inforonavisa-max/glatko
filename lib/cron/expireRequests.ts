@@ -26,6 +26,7 @@ export async function expireOldRequests() {
       data: {
         requestId: row.id,
         requestTitle: row.title ?? "",
+        statusCode: "expired",
       },
     }).catch(() => {});
   }

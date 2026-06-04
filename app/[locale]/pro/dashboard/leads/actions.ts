@@ -117,6 +117,26 @@ export async function submitQuote(
         .maybeSingle();
       const locale = coerceLocale(prof?.preferred_locale as string | null);
       const t = await getTranslations({ locale, namespace: "notifications" });
+
+      // Faz 3-A: carry the professional's name so external (WhatsApp/Viber/SMS)
+      // templates can fill {{1}} = pro name. Mirrors the new_bid call site
+      // (requests/[id]/actions.ts): business_name → full_name → fallback.
+      const { data: proRow } = await admin
+        .from("glatko_professional_profiles")
+        .select("business_name")
+        .eq("id", user.id)
+        .maybeSingle();
+      let professionalName = (proRow?.business_name as string | null)?.trim() ?? "";
+      if (!professionalName) {
+        const { data: proProfile } = await admin
+          .from("profiles")
+          .select("full_name")
+          .eq("id", user.id)
+          .maybeSingle();
+        professionalName =
+          (proProfile?.full_name as string | null)?.trim() || "A professional";
+      }
+
       await createNotification({
         user_id: customerId,
         type: "new_quote",
@@ -126,6 +146,7 @@ export async function submitQuote(
           requestId: input.request_id,
           quoteId,
           requestTitle: (req?.title as string | null) ?? "",
+          professionalName,
         },
       });
     }
