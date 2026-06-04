@@ -24,6 +24,12 @@ import {
 export type AuthHookUser = {
   id: string;
   email: string;
+  /**
+   * Pending new email during an email_change. GoTrue serializes the EmailChange
+   * field here (mirrors new_phone on the SMS hook). Present when a phone-only
+   * account adds its first email; the confirmation goes to this address.
+   */
+  new_email?: string;
   user_metadata?: {
     preferred_locale?: string;
     first_name?: string;
@@ -81,8 +87,9 @@ function getFirstName(user: AuthHookUser): string {
   if (fullName.trim()) {
     return fullName.trim().split(/\s+/)[0];
   }
-  // Fallback: local part of email, trimmed of dots/numbers.
-  const localPart = user.email.split("@")[0] ?? "";
+  // Fallback: local part of the email — or the new email for a first-time
+  // email_change on a phone-only account (current email is empty) — trimmed.
+  const localPart = (user.email || user.new_email || "").split("@")[0] ?? "";
   return localPart.split(/[._\-+]/)[0] || "";
 }
 
