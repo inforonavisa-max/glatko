@@ -247,6 +247,24 @@
     "viberSupport": "Viber Support"
   },
   "auth": {
+    "addEmail": {
+      "title": "Backup-E-Mail hinzufügen",
+      "description": "Füge eine E-Mail und ein Passwort als alternative Anmeldung hinzu. Die Anmeldung per SMS-Code bleibt möglich.",
+      "emailLabel": "E-Mail",
+      "emailPlaceholder": "name@beispiel.com",
+      "addButton": "E-Mail hinzufügen",
+      "sentToast": "Bestätigungslink gesendet",
+      "sentDescription": "Wir haben einen Bestätigungslink an {email} gesendet. Klicke darauf, um deine E-Mail hinzuzufügen.",
+      "changeEmail": "Andere E-Mail verwenden",
+      "errInvalidEmail": "Bitte eine gültige E-Mail-Adresse eingeben",
+      "errInUse": "Diese E-Mail wird bereits verwendet.",
+      "errRateLimited": "Zu viele Versuche. Bitte später erneut versuchen.",
+      "errAlreadyHasEmail": "Dein Konto hat bereits eine E-Mail.",
+      "errGeneric": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+      "errNetwork": "Netzwerkfehler. Bitte Verbindung prüfen und erneut versuchen.",
+      "profileNoEmail": "Noch keine E-Mail.",
+      "profileLink": "Backup-E-Mail hinzufügen"
+    },
     "phoneLogin": {
       "tabPhone": "Telefon",
       "phoneLabel": "Telefonnummer",

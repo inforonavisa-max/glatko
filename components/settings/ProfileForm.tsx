@@ -60,6 +60,7 @@ export function ProfileForm({ initialProfile, email }: ProfileFormProps) {
   const tp = useTranslations("settings.profile.personal");
   const tCities = useTranslations("cities");
   const tVal = useTranslations("validation");
+  const tEmail = useTranslations("auth.addEmail");
   const router = useRouter();
   const [pwdOpen, setPwdOpen] = useState(false);
   const [deactivateOpen, setDeactivateOpen] = useState(false);
@@ -188,8 +189,22 @@ export function ProfileForm({ initialProfile, email }: ProfileFormProps) {
           <label className="mb-1.5 block text-xs font-medium text-gray-600 dark:text-white/50">
             {tp("email")}
           </label>
-          <input className={cn(inputCls, "cursor-not-allowed opacity-60")} value={email} disabled readOnly />
-          <p className="mt-1 text-xs text-gray-500 dark:text-white/40">{tp("emailHint")}</p>
+          {email ? (
+            <>
+              <input className={cn(inputCls, "cursor-not-allowed opacity-60")} value={email} disabled readOnly />
+              <p className="mt-1 text-xs text-gray-500 dark:text-white/40">{tp("emailHint")}</p>
+            </>
+          ) : (
+            <>
+              <input className={cn(inputCls, "cursor-not-allowed opacity-60")} value="—" disabled readOnly />
+              <p className="mt-1 text-xs text-gray-500 dark:text-white/40">
+                {tEmail("profileNoEmail")}{" "}
+                <Link href="/settings/security" className="font-medium text-teal-600 hover:text-teal-500 dark:text-teal-400">
+                  {tEmail("profileLink")}
+                </Link>
+              </p>
+            </>
+          )}
         </div>
 
         <div>

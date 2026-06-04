@@ -94,7 +94,17 @@ export async function POST(request: NextRequest) {
     return jsonError("Invalid webhook signature", 401);
   }
 
-  if (!payload?.user?.email || !payload?.email_data?.email_action_type) {
+  const actionType = payload?.email_data?.email_action_type;
+  // Recipient = the account's CURRENT email. A phone-only account adding its
+  // first email (email_change) has no current email, so fall back to the new
+  // address — mirrors the SMS hook's user.new_phone handling. Email-having
+  // flows (signup / recovery / magiclink / normal email change) keep recipient
+  // = user.email EXACTLY as before, so their behaviour is unchanged.
+  const recipientEmail =
+    payload?.user?.email ||
+    (actionType === "email_change" ? payload?.user?.new_email : undefined);
+
+  if (!recipientEmail || !actionType) {
     return jsonError("Malformed hook payload", 400);
   }
 
@@ -117,7 +127,7 @@ export async function POST(request: NextRequest) {
   }
 
   const result = await sendEmail({
-    to: payload.user.email,
+    to: recipientEmail,
     subject: built.subject,
     react: built.react,
     text: built.text,

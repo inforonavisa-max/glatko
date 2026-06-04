@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { PasswordChangeModal } from "./PasswordChangeModal";
 import { SetPasswordModal } from "./SetPasswordModal";
 import { PhoneVerification } from "./PhoneVerification";
+import { EmailAddCard } from "./EmailAddCard";
 import { signOutEverywhere } from "@/lib/actions/profile";
 
 const PROVIDER_LABEL: Record<string, string> = {
@@ -20,6 +21,7 @@ const PROVIDER_LABEL: Record<string, string> = {
 
 type Props = {
   email: string;
+  hasEmail: boolean;
   hasPassword: boolean;
   oauthProviders: string[];
   phone: string | null;
@@ -28,6 +30,7 @@ type Props = {
 
 export function SecuritySection({
   email,
+  hasEmail,
   hasPassword,
   oauthProviders,
   phone,
@@ -67,6 +70,7 @@ export function SecuritySection({
       </header>
 
       <div className="space-y-6">
+        {hasEmail ? (
         <section className="rounded-2xl border border-gray-200/70 bg-white/80 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
           <div className="flex items-start gap-4">
             <div className="rounded-xl bg-teal-50 p-2.5 dark:bg-teal-500/10">
@@ -96,6 +100,9 @@ export function SecuritySection({
             </div>
           </div>
         </section>
+        ) : (
+          <EmailAddCard />
+        )}
 
         <PhoneVerification
           initialPhone={phone}

@@ -247,6 +247,24 @@
     "viberSupport": "Viber Support"
   },
   "auth": {
+    "addEmail": {
+      "title": "Dodaj rezervni email",
+      "description": "Dodaj email i lozinku kao rezervni način prijave. I dalje možeš da se prijaviš SMS kodom.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "ime@primer.com",
+      "addButton": "Dodaj email",
+      "sentToast": "Link za potvrdu poslat",
+      "sentDescription": "Poslali smo link za potvrdu na {email}. Klikni na njega da završiš dodavanje emaila.",
+      "changeEmail": "Koristi drugi email",
+      "errInvalidEmail": "Unesite važeću email adresu",
+      "errInUse": "Ovaj email je već u upotrebi.",
+      "errRateLimited": "Previše pokušaja. Pokušajte ponovo kasnije.",
+      "errAlreadyHasEmail": "Vaš nalog već ima email.",
+      "errGeneric": "Nešto je pošlo po zlu. Pokušajte ponovo.",
+      "errNetwork": "Greška mreže. Proverite vezu i pokušajte ponovo.",
+      "profileNoEmail": "Još nema emaila.",
+      "profileLink": "Dodaj rezervni email"
+    },
     "phoneLogin": {
       "tabPhone": "Telefon",
       "phoneLabel": "Broj telefona",

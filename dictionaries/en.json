@@ -247,6 +247,24 @@
     "viberSupport": "Viber Support"
   },
   "auth": {
+    "addEmail": {
+      "title": "Add a backup email",
+      "description": "Add an email and password as a backup way to sign in. You can still log in with a phone code.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "addButton": "Add email",
+      "sentToast": "Confirmation link sent",
+      "sentDescription": "We sent a confirmation link to {email}. Click it to finish adding your email.",
+      "changeEmail": "Use a different email",
+      "errInvalidEmail": "Enter a valid email address",
+      "errInUse": "This email is already in use.",
+      "errRateLimited": "Too many attempts. Please try again later.",
+      "errAlreadyHasEmail": "Your account already has an email.",
+      "errGeneric": "Something went wrong. Please try again.",
+      "errNetwork": "Network error. Check your connection and try again.",
+      "profileNoEmail": "No email yet.",
+      "profileLink": "Add a backup email"
+    },
     "phoneLogin": {
       "tabPhone": "Phone",
       "phoneLabel": "Phone number",

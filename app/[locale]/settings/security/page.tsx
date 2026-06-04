@@ -29,32 +29,52 @@ export default async function SecuritySettingsPage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user?.email) {
+  if (!user) {
     redirect(`/${locale}/login?redirect=/settings/security`);
   }
 
-  // Detect whether the user has a password set vs. is OAuth-only.
-  // Drives "Set password" vs. "Change password" CTA + linked-providers list.
-  const { data: methods } = await supabase
-    .rpc("get_auth_methods", { p_email: user.email })
-    .maybeSingle<{ has_password: boolean; oauth_providers: string[] | null }>();
+  const hasEmail = Boolean(user.email);
 
-  const hasPassword = Boolean(methods?.has_password);
-  const oauthProviders = Array.isArray(methods?.oauth_providers)
-    ? methods.oauth_providers
-    : [];
+  // Auth methods (password vs OAuth) are keyed on email. Phone-only accounts
+  // have no email yet, so skip the lookup (it would return no rows anyway).
+  let hasPassword = false;
+  let oauthProviders: string[] = [];
+  if (user.email) {
+    const { data: methods } = await supabase
+      .rpc("get_auth_methods", { p_email: user.email })
+      .maybeSingle<{ has_password: boolean; oauth_providers: string[] | null }>();
+    hasPassword = Boolean(methods?.has_password);
+    oauthProviders = Array.isArray(methods?.oauth_providers)
+      ? methods.oauth_providers
+      : [];
+  }
 
-  // Phone-verification state (Sprint A) for the verification card.
+  // Phone-verification state (Sprint A) + email mirror for the reconcile below.
   const { data: profile } = await supabase
     .from("profiles")
-    .select("phone, phone_verified")
+    .select("phone, phone_verified, email")
     .eq("id", user.id)
-    .maybeSingle<{ phone: string | null; phone_verified: boolean | null }>();
+    .maybeSingle<{
+      phone: string | null;
+      phone_verified: boolean | null;
+      email: string | null;
+    }>();
+
+  // Self-heal: once a phone-only user confirms an added email, auth.users.email
+  // is set but the profiles mirror (INSERT-only backfill trigger) is not. Sync
+  // it here on this authenticated, dynamic page.
+  if (user.email && profile && profile.email !== user.email) {
+    await supabase
+      .from("profiles")
+      .update({ email: user.email, updated_at: new Date().toISOString() })
+      .eq("id", user.id);
+  }
 
   return (
     <PageBackground opacity={0.08}>
       <SecuritySection
-        email={user.email}
+        email={user.email ?? ""}
+        hasEmail={hasEmail}
         hasPassword={hasPassword}
         oauthProviders={oauthProviders}
         phone={profile?.phone ?? null}

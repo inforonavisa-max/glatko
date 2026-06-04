@@ -247,6 +247,24 @@
     "viberSupport": "Viber Destek"
   },
   "auth": {
+    "addEmail": {
+      "title": "Yedek e-posta ekle",
+      "description": "Yedek giriş yolu olarak e-posta ve şifre ekle. Telefon koduyla girişe devam edebilirsin.",
+      "emailLabel": "E-posta",
+      "emailPlaceholder": "ornek@email.com",
+      "addButton": "E-posta ekle",
+      "sentToast": "Onay bağlantısı gönderildi",
+      "sentDescription": "{email} adresine bir onay bağlantısı gönderdik. E-postanı eklemeyi tamamlamak için bağlantıya tıkla.",
+      "changeEmail": "Farklı bir e-posta kullan",
+      "errInvalidEmail": "Geçerli bir e-posta adresi girin",
+      "errInUse": "Bu e-posta zaten kullanımda.",
+      "errRateLimited": "Çok fazla deneme. Lütfen daha sonra tekrar deneyin.",
+      "errAlreadyHasEmail": "Hesabınızda zaten bir e-posta var.",
+      "errGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "errNetwork": "Ağ hatası. Bağlantınızı kontrol edip tekrar deneyin.",
+      "profileNoEmail": "Henüz e-posta yok.",
+      "profileLink": "Yedek e-posta ekle"
+    },
     "phoneLogin": {
       "tabPhone": "Telefon",
       "phoneLabel": "Telefon numarası",

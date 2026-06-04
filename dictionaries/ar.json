@@ -247,6 +247,24 @@
     "viberSupport": "Viber Support"
   },
   "auth": {
+    "addEmail": {
+      "title": "إضافة بريد احتياطي",
+      "description": "أضف بريدًا إلكترونيًا وكلمة مرور كطريقة احتياطية لتسجيل الدخول. لا يزال بإمكانك الدخول برمز الرسائل القصيرة.",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "name@example.com",
+      "addButton": "إضافة بريد",
+      "sentToast": "تم إرسال رابط التأكيد",
+      "sentDescription": "أرسلنا رابط تأكيد إلى {email}. انقر عليه لإكمال إضافة بريدك.",
+      "changeEmail": "استخدام بريد آخر",
+      "errInvalidEmail": "أدخل عنوان بريد إلكتروني صالحًا",
+      "errInUse": "هذا البريد مستخدم بالفعل.",
+      "errRateLimited": "محاولات كثيرة جدًا. حاول مرة أخرى لاحقًا.",
+      "errAlreadyHasEmail": "حسابك يحتوي على بريد بالفعل.",
+      "errGeneric": "حدث خطأ ما. حاول مرة أخرى.",
+      "errNetwork": "خطأ في الشبكة. تحقّق من اتصالك وحاول مرة أخرى.",
+      "profileNoEmail": "لا يوجد بريد بعد.",
+      "profileLink": "إضافة بريد احتياطي"
+    },
     "phoneLogin": {
       "tabPhone": "الهاتف",
       "phoneLabel": "رقم الهاتف",
