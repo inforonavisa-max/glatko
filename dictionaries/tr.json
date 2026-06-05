@@ -244,6 +244,7 @@
     "social": "Sosyal Medya",
     "copyright": "© 2026 Glatko. Tüm hakları saklıdır.",
     "madeIn": "Karadağ'da sevgiyle yapıldı",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, Karadağ",
     "viberSupport": "Viber Destek"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "Villa temizliği ve tadilatdan tekne bakımı ve kaptan kiralamaya kadar geniş yelpazede profesyonel hizmetleri kapsar.",
       "howItWorks": "Platformumuz şeffaf teklif sistemiyle çalışır: ihtiyacınızı tanımlarsınız, doğrulanmış profesyoneller teklif verir, siz en uygununu seçersiniz.",
       "languages": "Glatko 9 dilde kullanılabilir: Türkçe, İngilizce, Rusça, Almanca, İtalyanca, Ukraynaca, Sırpça, Karadağca ve Arapça.",
+      "operator": "Glatko, Karadağ'da kayıtlı RONA LEGAL DOO tarafından işletilmektedir (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "Sorularınız için bize ulaşın"
     },
     "termsContent": {
-      "intro": "Bu Kullanım Koşulları, Karadağ'da kayıtlı Glatko DOO şirketi tarafından işletilen Glatko platformunu kullanımınızı düzenler.",
+      "intro": "Bu Kullanım Koşulları, Karadağ'da kayıtlı RONA LEGAL DOO şirketi tarafından işletilen Glatko platformunu kullanımınızı düzenler.",
       "s1Title": "1. Hizmet Tanımı",
       "s1": "Glatko, hizmet talep edenleri (\"Müşteriler\") hizmet sağlayıcılarla (\"Profesyoneller\") buluşturan çevrimiçi bir pazaryeri işletir. Glatko bir hizmet sağlayıcısı değildir ve platformda listelenen hizmetlerin hiçbirini doğrudan sunmaz.",
       "s2Title": "2. Kullanıcı Hesapları",
@@ -437,7 +439,7 @@
       "s5Title": "5. Ödemeler",
       "s5": "Tüm ödemeler doğrudan Müşteriler ve Profesyoneller arasında yapılır. Glatko şu anda ödeme işlemi yapmaz veya komisyon almaz. Ödeme koşulları taraflar arasında belirlenir.",
       "s6Title": "6. Fikri Mülkiyet",
-      "s6": "Glatko adı, logosu ve platform tasarımı Glatko DOO'nun mülküdür. Kullanıcılar tarafından yüklenen içerik kendi mülkiyetinde kalır, ancak kullanıcılar Glatko'ya platformda görüntüleme lisansı verir.",
+      "s6": "Glatko adı, logosu ve platform tasarımı RONA LEGAL DOO'nun mülküdür. Kullanıcılar tarafından yüklenen içerik kendi mülkiyetinde kalır, ancak kullanıcılar Glatko'ya platformda görüntüleme lisansı verir.",
       "s7Title": "7. Sorumluluk Sınırlandırması",
       "s7": "Glatko yalnızca aracı olarak hareket eder. Profesyoneller tarafından sağlanan hizmetlerin kalitesini, güvenliğini veya yasallığını garanti etmez. Glatko'nun sorumluluğu Karadağ hukukunun izin verdiği azami ölçüde sınırlıdır.",
       "s8Title": "8. Uyuşmazlık Çözümü",
@@ -448,7 +450,7 @@
       "s10": "Bu koşulları zaman zaman güncelleyebiliriz. Değişikliklerden sonra platformu kullanmaya devam etmeniz, güncellenen koşulları kabul ettiğiniz anlamına gelir."
     },
     "privacyContent": {
-      "intro": "Bu Gizlilik Politikası, Glatko DOO'nun kişisel verilerinizi Genel Veri Koruma Yönetmeliği (GDPR) uyarınca nasıl topladığını, kullandığını ve koruduğunu açıklar.",
+      "intro": "Bu Gizlilik Politikası, RONA LEGAL DOO'nun kişisel verilerinizi Genel Veri Koruma Yönetmeliği (GDPR) uyarınca nasıl topladığını, kullandığını ve koruduğunu açıklar. Veri sorumlusu RONA LEGAL DOO'dur — Lazi Božović Lamela B Broj 24, Budva 85310, Karadağ (PIB 04390768).",
       "s1Title": "1. Topladığımız Veriler",
       "s1": "Şu kişisel verileri topluyoruz: ad soyad, e-posta adresi, telefon numarası, konum (şehir), profil fotoğrafları, portfolio görselleri, hizmet talebi detayları ve fotoğrafları, kullanıcılar arası iletişim verileri.",
       "s2Title": "2. Verilerinizi Nasıl Kullanıyoruz",
@@ -502,7 +504,9 @@
       "emailLabel": "E-posta",
       "email": "contact@glatko.app",
       "addressLabel": "Adres",
-      "address": "Budva, Karadağ",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, Karadağ",
+      "companyLabel": "Şirket",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Çalışma Saatleri",
       "hours": "Pazartesi — Cuma, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",

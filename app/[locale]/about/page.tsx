@@ -50,6 +50,7 @@ export default async function AboutPage({ params }: Props) {
             <p>{c("services")}</p>
             <p>{c("howItWorks")}</p>
             <p>{c("languages")}</p>
+            <p>{c("operator")}</p>
             <p className="pt-4 text-gray-500 dark:text-white/40">
               {c("contactLine")}: <a href={`mailto:${c("contactEmail")}`} className="font-medium text-teal-600 hover:underline dark:text-teal-400">{c("contactEmail")}</a>
             </p>

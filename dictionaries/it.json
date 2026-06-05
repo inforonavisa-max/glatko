@@ -244,6 +244,7 @@
     "social": "Social Media",
     "copyright": "© 2026 Glatko. Tutti i diritti riservati.",
     "madeIn": "Fatto con amore in Montenegro",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, Montenegro",
     "viberSupport": "Viber Support"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "From villa cleaning and renovation to boat maintenance and captain hire, Glatko covers a wide range of professional services.",
       "howItWorks": "Our platform uses a transparent bidding system: you describe what you need, verified professionals submit quotes, and you choose the best fit.",
       "languages": "Glatko is available in 9 languages: Turkish, English, Russian, German, Italian, Ukrainian, Serbian, Montenegrin, and Arabic.",
+      "operator": "Glatko è gestita da RONA LEGAL DOO, una società registrata in Montenegro (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "For inquiries, reach us at"
     },
     "termsContent": {
-      "intro": "I presenti Termini di Servizio disciplinano l'utilizzo della piattaforma Glatko gestita da Glatko DOO, una società registrata in Montenegro.",
+      "intro": "I presenti Termini di Servizio disciplinano l'utilizzo della piattaforma Glatko gestita da RONA LEGAL DOO, una società registrata in Montenegro.",
       "s1Title": "1. Descrizione del servizio",
       "s1": "Glatko gestisce un marketplace online che mette in contatto i richiedenti di servizi («Clienti») con i fornitori di servizi («Professionisti»). Glatko non è un fornitore di servizi e non esegue alcuno dei servizi elencati sulla piattaforma.",
       "s2Title": "2. Account utente",
@@ -437,7 +439,7 @@
       "s5Title": "5. Pagamenti",
       "s5": "Tutti i pagamenti vengono effettuati direttamente tra Clienti e Professionisti. Al momento Glatko non elabora pagamenti né riscuote commissioni. Le condizioni di pagamento sono concordate tra le parti.",
       "s6Title": "6. Proprietà intellettuale",
-      "s6": "Il nome, il logo e il design della piattaforma Glatko sono di proprietà di Glatko DOO. I contenuti caricati dagli utenti restano di loro proprietà, ma gli utenti concedono a Glatko una licenza non esclusiva per visualizzarli sulla piattaforma.",
+      "s6": "Il nome, il logo e il design della piattaforma Glatko sono di proprietà di RONA LEGAL DOO. I contenuti caricati dagli utenti restano di loro proprietà, ma gli utenti concedono a Glatko una licenza non esclusiva per visualizzarli sulla piattaforma.",
       "s7Title": "7. Limitazione di responsabilità",
       "s7": "Glatko agisce esclusivamente come intermediario. Non garantiamo la qualità, la sicurezza o la legalità dei servizi forniti dai Professionisti. La responsabilità di Glatko è limitata nella misura massima consentita dalla legge montenegrina.",
       "s8Title": "8. Risoluzione delle controversie",
@@ -448,7 +450,7 @@
       "s10": "Potremmo aggiornare periodicamente i presenti termini. L'uso continuato della piattaforma dopo le modifiche costituisce accettazione dei termini rivisti."
     },
     "privacyContent": {
-      "intro": "La presente Informativa sulla Privacy descrive come Glatko DOO raccoglie, utilizza e protegge i tuoi dati personali in conformità al Regolamento generale sulla protezione dei dati (GDPR).",
+      "intro": "La presente Informativa sulla Privacy descrive come RONA LEGAL DOO raccoglie, utilizza e protegge i tuoi dati personali in conformità al Regolamento generale sulla protezione dei dati (GDPR). Il titolare del trattamento è RONA LEGAL DOO, Lazi Božović Lamela B Broj 24, Budva 85310, Montenegro (PIB 04390768).",
       "s1Title": "1. Dati che raccogliamo",
       "s1": "Raccogliamo i seguenti dati personali: nome completo, indirizzo e-mail, numero di telefono, posizione (città), foto del profilo, immagini del portfolio, dettagli e foto delle richieste di servizio e dati di comunicazione tra gli utenti.",
       "s2Title": "2. Come utilizziamo i tuoi dati",
@@ -502,7 +504,9 @@
       "emailLabel": "Email",
       "email": "contact@glatko.app",
       "addressLabel": "Address",
-      "address": "Budva, Montenegro",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, Montenegro",
+      "companyLabel": "Azienda",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Business Hours",
       "hours": "Monday — Friday, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",

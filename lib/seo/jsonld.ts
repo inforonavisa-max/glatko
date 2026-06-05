@@ -72,11 +72,16 @@ export function generateOrganizationSchema(locale: string) {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: ORG_NAME,
+    legalName: "RONA LEGAL DOO",
     url: localizedUrl(locale, "/"),
     logo: `${SEO_BASE}/logo.png`,
     description: ORG_DESCRIPTIONS[locale] || ORG_DESCRIPTIONS.en,
+    taxID: "04390768",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Lazi Božović Lamela B Broj 24",
+      addressLocality: "Budva",
+      postalCode: "85310",
       addressCountry: "ME",
     },
     areaServed: GLATKO_CITIES.map((c) => ({

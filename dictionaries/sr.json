@@ -244,6 +244,7 @@
     "social": "Društvene mreže",
     "copyright": "© 2026 Glatko. Sva prava zadržana.",
     "madeIn": "Napravljeno s ljubavlju u Crnoj Gori",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, Црна Гора",
     "viberSupport": "Viber Support"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "From villa cleaning and renovation to boat maintenance and captain hire, Glatko covers a wide range of professional services.",
       "howItWorks": "Our platform uses a transparent bidding system: you describe what you need, verified professionals submit quotes, and you choose the best fit.",
       "languages": "Glatko is available in 9 languages: Turkish, English, Russian, German, Italian, Ukrainian, Serbian, Montenegrin, and Arabic.",
+      "operator": "Glatko платформом управља RONA LEGAL DOO, друштво регистровано у Црној Гори (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "For inquiries, reach us at"
     },
     "termsContent": {
-      "intro": "Ови Услови коришћења уређују ваше коришћење Glatko платформе којом управља Glatko DOO, друштво регистровано у Црној Гори.",
+      "intro": "Ови Услови коришћења уређују ваше коришћење Glatko платформе којом управља RONA LEGAL DOO, друштво регистровано у Црној Гори.",
       "s1Title": "1. Опис услуге",
       "s1": "Glatko управља онлајн тржиштем које повезује оне који траже услуге („Клијенти\") са пружаоцима услуга („Професионалци\"). Glatko није пружалац услуга и не обавља ниједну од услуга наведених на платформи.",
       "s2Title": "2. Кориснички налози",
@@ -437,7 +439,7 @@
       "s5Title": "5. Плаћања",
       "s5": "Сва плаћања се врше директно између Клијената и Професионалаца. Glatko тренутно не обрађује плаћања нити наплаћује провизију. Услови плаћања се договарају између страна.",
       "s6Title": "6. Интелектуална својина",
-      "s6": "Назив, лого и дизајн Glatko платформе власништво су Glatko DOO. Садржај који корисници отпремају остаје њихово власништво, али корисници дају Glatku неискључиву лиценцу за његово приказивање на платформи.",
+      "s6": "Назив, лого и дизајн Glatko платформе власништво су RONA LEGAL DOO. Садржај који корисници отпремају остаје њихово власништво, али корисници дају Glatku неискључиву лиценцу за његово приказивање на платформи.",
       "s7Title": "7. Ограничење одговорности",
       "s7": "Glatko делује искључиво као посредник. Не гарантујемо квалитет, безбедност или законитост услуга које пружају Професионалци. Одговорност Glatka ограничена је у највећој мери дозвољеној црногорским законом.",
       "s8Title": "8. Решавање спорова",
@@ -448,7 +450,7 @@
       "s10": "Можемо повремено ажурирати ове услове. Наставак коришћења платформе након измена представља прихватање измењених услова."
     },
     "privacyContent": {
-      "intro": "Ова Политика приватности описује како Glatko DOO прикупља, користи и штити ваше личне податке у складу са Општом уредбом о заштити података (GDPR).",
+      "intro": "Ова Политика приватности описује како RONA LEGAL DOO прикупља, користи и штити ваше личне податке у складу са Општом уредбом о заштити података (GDPR). Руковалац података је RONA LEGAL DOO, Lazi Božović Lamela B Broj 24, Budva 85310, Црна Гора (PIB 04390768).",
       "s1Title": "1. Подаци које прикупљамо",
       "s1": "Прикупљамо следеће личне податке: пуно име, адресу е-поште, број телефона, локацију (град), профилне фотографије, слике портфолија, детаље и фотографије захтева за услугу и податке о комуникацији између корисника.",
       "s2Title": "2. Како користимо ваше податке",
@@ -502,7 +504,9 @@
       "emailLabel": "Email",
       "email": "contact@glatko.app",
       "addressLabel": "Address",
-      "address": "Budva, Montenegro",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, Црна Гора",
+      "companyLabel": "Компанија",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Business Hours",
       "hours": "Monday — Friday, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",

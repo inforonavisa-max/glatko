@@ -244,6 +244,7 @@
     "social": "وسائل التواصل الاجتماعي",
     "copyright": "© 2026 Glatko. جميع الحقوق محفوظة.",
     "madeIn": "صُنع بحب في الجبل الأسود",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, الجبل الأسود",
     "viberSupport": "Viber Support"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "From villa cleaning and renovation to boat maintenance and captain hire, Glatko covers a wide range of professional services.",
       "howItWorks": "Our platform uses a transparent bidding system: you describe what you need, verified professionals submit quotes, and you choose the best fit.",
       "languages": "Glatko is available in 9 languages: Turkish, English, Russian, German, Italian, Ukrainian, Serbian, Montenegrin, and Arabic.",
+      "operator": "تُشغّل منصة Glatko شركة RONA LEGAL DOO، وهي شركة مسجّلة في الجبل الأسود (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "For inquiries, reach us at"
     },
     "termsContent": {
-      "intro": "تحكم شروط الاستخدام هذه استخدامك لمنصة Glatko التي تُشغّلها Glatko DOO، وهي شركة مسجّلة في الجبل الأسود.",
+      "intro": "تحكم شروط الاستخدام هذه استخدامك لمنصة Glatko التي تُشغّلها RONA LEGAL DOO، وهي شركة مسجّلة في الجبل الأسود.",
       "s1Title": "1. وصف الخدمة",
       "s1": "تُشغّل Glatko سوقًا إلكترونية تربط طالبي الخدمات («العملاء») بمقدّمي الخدمات («المحترفين»). Glatko ليست مقدّم خدمات ولا تؤدّي أيًّا من الخدمات المدرجة على المنصة.",
       "s2Title": "2. حسابات المستخدمين",
@@ -437,7 +439,7 @@
       "s5Title": "5. المدفوعات",
       "s5": "تتم جميع المدفوعات مباشرةً بين العملاء والمحترفين. لا تعالج Glatko المدفوعات ولا تتقاضى عمولات في الوقت الحالي. ويُتفق على شروط الدفع بين الطرفين.",
       "s6Title": "6. الملكية الفكرية",
-      "s6": "اسم Glatko وشعارها وتصميم المنصة هي ملك لـ Glatko DOO. يبقى المحتوى الذي يرفعه المستخدمون ملكًا لهم، لكن يمنح المستخدمون Glatko ترخيصًا غير حصري لعرضه على المنصة.",
+      "s6": "اسم Glatko وشعارها وتصميم المنصة هي ملك لـ RONA LEGAL DOO. يبقى المحتوى الذي يرفعه المستخدمون ملكًا لهم، لكن يمنح المستخدمون Glatko ترخيصًا غير حصري لعرضه على المنصة.",
       "s7Title": "7. تحديد المسؤولية",
       "s7": "تعمل Glatko كوسيط فقط. نحن لا نضمن جودة الخدمات التي يقدّمها المحترفون أو سلامتها أو قانونيّتها. تقتصر مسؤولية Glatko إلى أقصى حد يسمح به قانون الجبل الأسود.",
       "s8Title": "8. تسوية النزاعات",
@@ -448,7 +450,7 @@
       "s10": "قد نُحدّث هذه الشروط من وقت لآخر. يشكّل استمرارك في استخدام المنصة بعد التغييرات قبولًا للشروط المعدّلة."
     },
     "privacyContent": {
-      "intro": "توضح سياسة الخصوصية هذه كيف يقوم Glatko DOO بجمع بياناتك الشخصية واستخدامها وحمايتها وفقًا للائحة العامة لحماية البيانات (GDPR).",
+      "intro": "توضح سياسة الخصوصية هذه كيف يقوم RONA LEGAL DOO بجمع بياناتك الشخصية واستخدامها وحمايتها وفقًا للائحة العامة لحماية البيانات (GDPR). المتحكم في البيانات هو RONA LEGAL DOO، Lazi Božović Lamela B Broj 24, Budva 85310، الجبل الأسود (PIB 04390768).",
       "s1Title": "1. البيانات التي نجمعها",
       "s1": "نجمع البيانات الشخصية التالية: الاسم الكامل، وعنوان البريد الإلكتروني، ورقم الهاتف، والموقع (المدينة)، وصور الملف الشخصي، وصور معرض الأعمال، وتفاصيل وصور طلبات الخدمة، وبيانات التواصل بين المستخدمين.",
       "s2Title": "2. كيف نستخدم بياناتك",
@@ -502,7 +504,9 @@
       "emailLabel": "Email",
       "email": "contact@glatko.app",
       "addressLabel": "Address",
-      "address": "Budva, Montenegro",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, الجبل الأسود",
+      "companyLabel": "الشركة",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Business Hours",
       "hours": "Monday — Friday, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",

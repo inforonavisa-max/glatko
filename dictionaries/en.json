@@ -244,6 +244,7 @@
     "social": "Social Media",
     "copyright": "© 2026 Glatko. All rights reserved.",
     "madeIn": "Made with love in Montenegro",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, Montenegro",
     "viberSupport": "Viber Support"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "From villa cleaning and renovation to boat maintenance and captain hire, Glatko covers a wide range of professional services.",
       "howItWorks": "Our platform uses a transparent bidding system: you describe what you need, verified professionals submit quotes, and you choose the best fit.",
       "languages": "Glatko is available in 9 languages: Turkish, English, Russian, German, Italian, Ukrainian, Serbian, Montenegrin, and Arabic.",
+      "operator": "Glatko is operated by RONA LEGAL DOO, a company registered in Montenegro (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "For inquiries, reach us at"
     },
     "termsContent": {
-      "intro": "These Terms of Service govern your use of the Glatko platform operated by Glatko DOO, a company registered in Montenegro.",
+      "intro": "These Terms of Service govern your use of the Glatko platform operated by RONA LEGAL DOO, a company registered in Montenegro.",
       "s1Title": "1. Service Description",
       "s1": "Glatko operates an online marketplace connecting service requesters (\"Customers\") with service providers (\"Professionals\"). Glatko is not a service provider and does not perform any of the services listed on the platform.",
       "s2Title": "2. User Accounts",
@@ -437,7 +439,7 @@
       "s5Title": "5. Payments",
       "s5": "All payments are made directly between Customers and Professionals. Glatko does not process payments or collect commissions at this time. Payment terms are agreed between parties.",
       "s6Title": "6. Intellectual Property",
-      "s6": "The Glatko name, logo, and platform design are the property of Glatko DOO. Content uploaded by users remains their property, but users grant Glatko a non-exclusive license to display it on the platform.",
+      "s6": "The Glatko name, logo, and platform design are the property of RONA LEGAL DOO. Content uploaded by users remains their property, but users grant Glatko a non-exclusive license to display it on the platform.",
       "s7Title": "7. Limitation of Liability",
       "s7": "Glatko acts solely as an intermediary. We do not guarantee the quality, safety, or legality of services provided by Professionals. Glatko's liability is limited to the maximum extent permitted by Montenegrin law.",
       "s8Title": "8. Dispute Resolution",
@@ -448,7 +450,7 @@
       "s10": "We may update these terms from time to time. Continued use of the platform after changes constitutes acceptance of the revised terms."
     },
     "privacyContent": {
-      "intro": "This Privacy Policy describes how Glatko DOO collects, uses, and protects your personal data in accordance with the General Data Protection Regulation (GDPR).",
+      "intro": "This Privacy Policy describes how RONA LEGAL DOO collects, uses, and protects your personal data in accordance with the General Data Protection Regulation (GDPR). The data controller is RONA LEGAL DOO, Lazi Božović Lamela B Broj 24, Budva 85310, Montenegro (PIB 04390768).",
       "s1Title": "1. Data We Collect",
       "s1": "We collect the following personal data: full name, email address, phone number, location (city), profile photos, portfolio images, service request details and photos, and communication data between users.",
       "s2Title": "2. How We Use Your Data",
@@ -502,7 +504,9 @@
       "emailLabel": "Email",
       "email": "contact@glatko.app",
       "addressLabel": "Address",
-      "address": "Budva, Montenegro",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, Montenegro",
+      "companyLabel": "Company",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Business Hours",
       "hours": "Monday — Friday, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",

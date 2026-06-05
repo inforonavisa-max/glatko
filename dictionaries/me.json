@@ -244,6 +244,7 @@
     "social": "Društvene mreže",
     "copyright": "© 2026 Glatko. Sva prava zadržana.",
     "madeIn": "Napravljeno s ljubavlju u Crnoj Gori",
+    "legalEntity": "RONA LEGAL DOO · PIB 04390768 · Budva, Crna Gora",
     "viberSupport": "Viber Support"
   },
   "auth": {
@@ -421,11 +422,12 @@
       "services": "From villa cleaning and renovation to boat maintenance and captain hire, Glatko covers a wide range of professional services.",
       "howItWorks": "Our platform uses a transparent bidding system: you describe what you need, verified professionals submit quotes, and you choose the best fit.",
       "languages": "Glatko is available in 9 languages: Turkish, English, Russian, German, Italian, Ukrainian, Serbian, Montenegrin, and Arabic.",
+      "operator": "Glatkom upravlja RONA LEGAL DOO, društvo registrovano u Crnoj Gori (PIB 04390768).",
       "contactEmail": "contact@glatko.app",
       "contactLine": "For inquiries, reach us at"
     },
     "termsContent": {
-      "intro": "Ovi Uslovi korišćenja uređuju vaše korišćenje Glatko platforme kojom upravlja Glatko DOO, društvo registrovano u Crnoj Gori.",
+      "intro": "Ovi Uslovi korišćenja uređuju vaše korišćenje Glatko platforme kojom upravlja RONA LEGAL DOO, društvo registrovano u Crnoj Gori.",
       "s1Title": "1. Opis usluge",
       "s1": "Glatko upravlja onlajn tržištem koje povezuje one koji traže usluge („Klijenti\") sa pružaocima usluga („Profesionalci\"). Glatko nije pružalac usluga i ne obavlja nijednu od usluga navedenih na platformi.",
       "s2Title": "2. Korisnički nalozi",
@@ -437,7 +439,7 @@
       "s5Title": "5. Plaćanja",
       "s5": "Sva plaćanja se vrše direktno između Klijenata i Profesionalaca. Glatko trenutno ne obrađuje plaćanja niti naplaćuje proviziju. Uslovi plaćanja se dogovaraju između strana.",
       "s6Title": "6. Intelektualna svojina",
-      "s6": "Naziv, logo i dizajn Glatko platforme vlasništvo su Glatko DOO. Sadržaj koji korisnici otpremaju ostaje njihovo vlasništvo, ali korisnici daju Glatku neisključivu licencu za njegovo prikazivanje na platformi.",
+      "s6": "Naziv, logo i dizajn Glatko platforme vlasništvo su RONA LEGAL DOO. Sadržaj koji korisnici otpremaju ostaje njihovo vlasništvo, ali korisnici daju Glatku neisključivu licencu za njegovo prikazivanje na platformi.",
       "s7Title": "7. Ograničenje odgovornosti",
       "s7": "Glatko djeluje isključivo kao posrednik. Ne garantujemo kvalitet, bezbjednost ili zakonitost usluga koje pružaju Profesionalci. Odgovornost Glatka ograničena je u najvećoj mjeri dozvoljenoj crnogorskim zakonom.",
       "s8Title": "8. Rješavanje sporova",
@@ -448,7 +450,7 @@
       "s10": "Možemo povremeno ažurirati ove uslove. Nastavak korišćenja platforme nakon izmjena predstavlja prihvatanje izmijenjenih uslova."
     },
     "privacyContent": {
-      "intro": "Ova Politika privatnosti opisuje kako Glatko DOO prikuplja, koristi i štiti vaše lične podatke u skladu sa Opštom uredbom o zaštiti podataka (GDPR).",
+      "intro": "Ova Politika privatnosti opisuje kako RONA LEGAL DOO prikuplja, koristi i štiti vaše lične podatke u skladu sa Opštom uredbom o zaštiti podataka (GDPR). Rukovalac podataka je RONA LEGAL DOO, Lazi Božović Lamela B Broj 24, Budva 85310, Crna Gora (PIB 04390768).",
       "s1Title": "1. Podaci koje prikupljamo",
       "s1": "Prikupljamo sljedeće lične podatke: puno ime, adresu e-pošte, broj telefona, lokaciju (grad), profilne fotografije, slike portfolija, detalje i fotografije zahtjeva za uslugu i podatke o komunikaciji između korisnika.",
       "s2Title": "2. Kako koristimo vaše podatke",
@@ -502,7 +504,9 @@
       "emailLabel": "Email",
       "email": "contact@glatko.app",
       "addressLabel": "Address",
-      "address": "Budva, Montenegro",
+      "address": "Lazi Božović Lamela B Broj 24, Budva 85310, Crna Gora",
+      "companyLabel": "Kompanija",
+      "company": "RONA LEGAL DOO · PIB 04390768 · Reg. 5-0136818/001",
       "hoursLabel": "Business Hours",
       "hours": "Monday — Friday, 09:00 — 18:00 CET",
       "whatsappLabel": "WhatsApp",
