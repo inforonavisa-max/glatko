@@ -14,7 +14,9 @@ const CITY_SLUGS = [
   "ulcinj",
 ] as const;
 
-const LANGUAGES = ["TR", "EN", "DE", "IT", "RU", "UK", "SR", "ME", "AR"];
+// Canonical lowercase codes (DB stores these); the UI uppercases them for
+// display via CSS (text-transform), never by storing upper-cased values.
+const LANGUAGES = ["tr", "en", "de", "it", "ru", "uk", "sr", "me", "ar"];
 
 const inputCls = cn(
   "w-full rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5",
@@ -164,7 +166,7 @@ export function StepPersonalInfo({
               type="button"
               onClick={() => toggleLanguage(lang)}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
+                "rounded-lg px-3 py-1.5 text-xs font-medium uppercase transition-all",
                 languages.includes(lang)
                   ? "bg-teal-500 text-white"
                   : "border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/50 hover:border-teal-500/50"

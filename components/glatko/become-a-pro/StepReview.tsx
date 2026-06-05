@@ -95,7 +95,7 @@ export function StepReview({
               label: t("becomePro.review.languages"),
               value:
                 languages.length > 0
-                  ? languages.join(", ")
+                  ? languages.map((l) => l.toUpperCase()).join(", ")
                   : t("becomePro.review.notSet"),
             },
           ]}

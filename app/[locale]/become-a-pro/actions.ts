@@ -126,7 +126,12 @@ export async function submitProfessionalApplication(
     };
   }
 
-  const languages = formData.getAll("languages") as string[];
+  // Coerce to canonical lowercase at the write site: this is the path that
+  // historically stored uppercase codes, and it bypasses the Zod schema
+  // (languages is read raw from FormData, not from parsed.data).
+  const languages = (formData.getAll("languages") as string[]).map((l) =>
+    l.toLowerCase(),
+  );
   const categoryIds = formData.getAll("categoryIds") as string[];
   const primaryCategoryId = String(
     formData.get("primaryCategoryId") ?? "",

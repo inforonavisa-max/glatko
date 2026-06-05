@@ -159,7 +159,9 @@ function makeInitial(props: Props): FormState {
       hourly_rate_max: d.hourly_rate_max != null ? String(d.hourly_rate_max) : "",
       years_experience: d.years_experience != null ? String(d.years_experience) : "",
       service_radius_km: d.service_radius_km ?? 25,
-      languages: (d.languages ?? ["me", "sr"]) as SupportedLocale[],
+      // Defensive lowercase: DB is normalized, but coerce on load so a stray
+      // upper-cased legacy row still pre-selects correctly in the picker.
+      languages: (d.languages ?? ["me", "sr"]).map((l) => l.toLowerCase()) as SupportedLocale[],
       is_verified: true,
       verification_status: "approved",
       verification_tier: d.verification_tier ?? "basic",

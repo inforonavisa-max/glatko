@@ -33,6 +33,17 @@ export const SUPPORTED_LOCALES = [
 ] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
+/**
+ * Language codes are canonical lowercase. `languages` is a Postgres `text[]`
+ * with no DB-level enum — Zod is the only validation gate — and a historical
+ * write path (the public become-a-pro wizard) stored uppercase codes. This
+ * preprocessor lowercases every element BEFORE the enum check, so any
+ * legacy/loosely-cased input coerces to canonical form on save instead of
+ * being rejected.
+ */
+const lowercaseLocales = (v: unknown): unknown =>
+  Array.isArray(v) ? v.map((s: unknown) => String(s).toLowerCase()) : v;
+
 const sharedFieldsShape = {
   // ── Profile-side ────────────────────────────────────────────────
   full_name: z.string().min(2).max(120),
@@ -58,7 +69,10 @@ const sharedFieldsShape = {
   hourly_rate_max: z.coerce.number().min(0).max(10000).optional(),
   years_experience: z.coerce.number().int().min(0).max(60).optional(),
   service_radius_km: z.coerce.number().int().min(5).max(500).default(25),
-  languages: z.array(z.enum(SUPPORTED_LOCALES)).min(1, "Pick at least one language"),
+  languages: z.preprocess(
+    lowercaseLocales,
+    z.array(z.enum(SUPPORTED_LOCALES)).min(1, "Pick at least one language"),
+  ),
 
   is_verified: z.coerce.boolean().default(true),
   verification_status: z
@@ -152,7 +166,12 @@ const editableFieldsShape = {
   hourly_rate_max: z.coerce.number().min(0).max(10000).nullable().optional(),
   years_experience: z.coerce.number().int().min(0).max(60).nullable().optional(),
   service_radius_km: z.coerce.number().int().min(5).max(500).optional(),
-  languages: z.array(z.enum(SUPPORTED_LOCALES)).min(1, "Pick at least one language").optional(),
+  languages: z
+    .preprocess(
+      lowercaseLocales,
+      z.array(z.enum(SUPPORTED_LOCALES)).min(1, "Pick at least one language"),
+    )
+    .optional(),
   verification_tier: z.enum(["basic", "business", "professional"]).optional(),
   is_active: z.boolean().optional(),
   portfolio_images: z.array(z.string().url()).max(10).optional(),
