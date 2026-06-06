@@ -293,11 +293,21 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
         <div className="relative mb-8 rounded-3xl border border-gray-200/60 bg-white/80 p-6 shadow-xl backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03] sm:p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
             {profile.profile?.avatar_url ? (
+              // priority: this avatar is the mobile LCP element. It sits above
+              // the fold (top ~145px) and, once the bio is pushed below the
+              // fold by the stacked mobile layout, it's the largest contentful
+              // element in the viewport. Default next/image lazy-loading made
+              // it paint only after the main thread cleared (~8-9s in the
+              // audit, vs 1.2s FCP). `priority` drops the lazy attr, adds
+              // fetchpriority=high + a preload so it loads in the first wave.
+              // (Desktop LCP is the bio text and already paints at FCP — this
+              // change targets the mobile regression specifically.) G-CWV-FIX-1B
               <Image
                 src={profile.profile.avatar_url}
                 alt=""
                 width={112}
                 height={112}
+                priority
                 className="h-28 w-28 shrink-0 rounded-full border-4 border-white object-cover shadow-2xl dark:border-[#0b1f23]"
               />
             ) : (
