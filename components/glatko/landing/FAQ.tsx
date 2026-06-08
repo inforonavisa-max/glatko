@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
-
-const faqKeys = ["1", "2", "3", "4", "5"] as const;
+import { HOME_FAQ_KEYS } from "@/lib/glatko/home-faq";
 
 export function FAQ() {
   const t = useTranslations();
@@ -30,7 +29,7 @@ export function FAQ() {
         </motion.div>
 
         <div className="space-y-3">
-          {faqKeys.map((key, index) => (
+          {HOME_FAQ_KEYS.map((key, index) => (
             <motion.div
               key={key}
               initial={reduced ? {} : { opacity: 0, y: 10 }}
@@ -42,6 +41,7 @@ export function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                aria-expanded={openIndex === index}
                 className="flex w-full items-center gap-3 px-6 py-5 text-left"
               >
                 <motion.div
@@ -57,35 +57,33 @@ export function FAQ() {
                 </span>
               </button>
 
-              <AnimatePresence mode="sync">
-                {openIndex === index && (
-                  <motion.div
-                    key={`content-${key}`}
-                    initial="collapsed"
-                    animate="open"
-                    exit="collapsed"
-                    variants={{
-                      open: {
-                        height: "auto",
-                        opacity: 1,
-                        transition: { type: "spring", stiffness: 400, damping: 40, mass: 1 },
-                      },
-                      collapsed: {
-                        height: 0,
-                        opacity: 0,
-                        transition: { type: "spring", stiffness: 400, damping: 40, mass: 1 },
-                      },
-                    }}
-                    className="overflow-hidden px-6"
-                  >
-                    <div className="pb-5 pl-8">
-                      <p className="text-sm leading-relaxed text-gray-500 dark:text-neutral-400">
-                        {t(`landing.faq.a${key}`)}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Answer stays mounted (height-collapsed when closed) so the
+                  text is in the SSR HTML for crawlers — required for FAQPage
+                  rich-result eligibility and to match the page's FAQPage
+                  JSON-LD (app/[locale]/page.tsx). */}
+              <motion.div
+                initial={false}
+                animate={
+                  reduced
+                    ? { height: openIndex === index ? "auto" : 0 }
+                    : {
+                        height: openIndex === index ? "auto" : 0,
+                        opacity: openIndex === index ? 1 : 0,
+                      }
+                }
+                transition={
+                  reduced
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 400, damping: 40, mass: 1 }
+                }
+                className="overflow-hidden px-6"
+              >
+                <div className="pb-5 pl-8">
+                  <p className="text-sm leading-relaxed text-gray-500 dark:text-neutral-400">
+                    {t(`landing.faq.a${key}`)}
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

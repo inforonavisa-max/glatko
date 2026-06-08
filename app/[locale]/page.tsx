@@ -9,7 +9,13 @@ import LandingPageClient, {
   type RootCategoryLink,
 } from "./landing-page-client";
 import { LatestBlogPosts } from "@/components/glatko/landing/LatestBlogPosts";
-import { generateWebSiteSchema, jsonLdScriptProps } from "@/lib/seo/jsonld";
+import {
+  generateWebSiteSchema,
+  generateFAQPageSchema,
+  jsonLdScriptProps,
+  type LocalizedFAQ,
+} from "@/lib/seo/jsonld";
+import { HOME_FAQ_KEYS } from "@/lib/glatko/home-faq";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -69,9 +75,23 @@ export default async function LocaleHomePage({ params }: Props) {
     name: r.name as RootCategoryLink["name"],
   }));
 
+  // Homepage FAQPage JSON-LD — built from the same landing.faq.* dictionary
+  // entries the visible <FAQ/> accordion renders (single source → the
+  // structured data and on-page content always match, which Google's FAQ
+  // rich-result policy requires). Skips gracefully if any entry is missing.
+  const t = await getTranslations({ locale });
+  const homeFaqs: LocalizedFAQ[] = HOME_FAQ_KEYS.flatMap((n) => {
+    const qKey = `landing.faq.q${n}` as const;
+    const aKey = `landing.faq.a${n}` as const;
+    if (!t.has(qKey) || !t.has(aKey)) return [];
+    return [{ q: { [locale]: t(qKey) }, a: { [locale]: t(aKey) } }];
+  });
+  const faqSchema = generateFAQPageSchema(homeFaqs, locale);
+
   return (
     <>
       <script {...jsonLdScriptProps(generateWebSiteSchema(locale))} />
+      {faqSchema ? <script {...jsonLdScriptProps(faqSchema)} /> : null}
       <LandingPageClient
         featuredCategories={featuredCategories}
         totalCategoryCount={totalCategoryCount ?? 0}
