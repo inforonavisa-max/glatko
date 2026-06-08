@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Получайте мгновенные уведомления от Glatko в {channel}, когда поступает предложение, ваша работа принята и у вас есть новые сообщения. Я согласен.",
+    "legalNote": "Glatko управляется RONA LEGAL DOO.",
+    "channelBoth": "WhatsApp и Viber",
+    "channelOff": "Только эл. почта (WhatsApp/Viber выкл.)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "Премиум-платформа услуг Черногории",

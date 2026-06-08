@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Ricevi notifiche istantanee da Glatko su {channel} quando arriva un'offerta, il tuo lavoro viene accettato e hai nuovi messaggi. Accetto.",
+    "legalNote": "Glatko è gestito da RONA LEGAL DOO.",
+    "channelBoth": "WhatsApp e Viber",
+    "channelOff": "Solo email (WhatsApp/Viber disattivati)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "La piattaforma premium di servizi del Montenegro",

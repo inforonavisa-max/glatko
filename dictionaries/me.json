@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Neka vas Glatko odmah obavijesti putem {channel} kada stigne ponuda, kada je vaš posao prihvaćen i kada imate nove poruke. Prihvatam.",
+    "legalNote": "Glatko vodi RONA LEGAL DOO.",
+    "channelBoth": "WhatsApp i Viber",
+    "channelOff": "Samo imejl (WhatsApp/Viber isključeni)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "Premium platforma usluga Crne Gore",

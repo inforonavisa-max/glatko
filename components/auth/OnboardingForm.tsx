@@ -26,6 +26,7 @@ export function OnboardingForm({
 }) {
   const t = useTranslations("auth.onboarding");
   const tCities = useTranslations("cities");
+  const tOptIn = useTranslations("messagingOptIn");
   const router = useRouter();
 
   const [fullName, setFullName] = useState("");
@@ -36,6 +37,7 @@ export function OnboardingForm({
     locales.includes(currentLocale as Locale) ? currentLocale : "tr",
   );
   const [channel, setChannel] = useState<"whatsapp" | "viber" | "">("");
+  const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -52,6 +54,11 @@ export function OnboardingForm({
       setError(t("errCityRequired"));
       return;
     }
+    const wantsMessaging = channel === "whatsapp" || channel === "viber";
+    if (wantsMessaging && !consent) {
+      // The submit button is disabled in this state; guard is defense-in-depth.
+      return;
+    }
     setLoading(true);
     try {
       const res = await completeOnboarding({
@@ -60,6 +67,7 @@ export function OnboardingForm({
         city,
         locale,
         notification_channel: channel || undefined,
+        messaging_opt_in: wantsMessaging && consent,
       });
       if (!res.ok) {
         setError(t("errGeneric"));
@@ -193,7 +201,10 @@ export function OnboardingForm({
                 type="button"
                 role="radio"
                 aria-checked={active}
-                onClick={() => setChannel((prev) => (prev === c ? "" : c))}
+                onClick={() => {
+                  setChannel((prev) => (prev === c ? "" : c));
+                  setConsent(false);
+                }}
                 className={cn(
                   "rounded-xl border px-4 py-3 text-sm font-medium transition-all",
                   active
@@ -207,6 +218,31 @@ export function OnboardingForm({
           })}
         </div>
       </fieldset>
+
+      {(channel === "whatsapp" || channel === "viber") && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-xl border border-teal-200/70 bg-teal-50/50 px-4 py-3 dark:border-teal-500/20 dark:bg-teal-500/10"
+        >
+          <label className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+            />
+            <span className="text-sm text-gray-700 dark:text-white/80">
+              {tOptIn("consentMain", {
+                channel: channel === "whatsapp" ? "WhatsApp" : "Viber",
+              })}
+            </span>
+          </label>
+          <p className="mt-2 ps-7 text-xs text-gray-400 dark:text-white/40">
+            {tOptIn("legalNote")}
+          </p>
+        </motion.div>
+      )}
 
       {error && (
         <motion.p
@@ -223,7 +259,10 @@ export function OnboardingForm({
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
         type="submit"
-        disabled={loading}
+        disabled={
+          loading ||
+          ((channel === "whatsapp" || channel === "viber") && !consent)
+        }
         className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition-all hover:shadow-teal-500/40 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : t("continue")}

@@ -54,49 +54,22 @@ export function NotificationSettingsClient({
   isPro,
   hasPhone,
   initialChannel,
+  initialOptIn,
 }: {
   initialPrefs: NormalizedNotificationPrefs;
   isPro: boolean;
   hasPhone: boolean;
   initialChannel: "whatsapp" | "viber" | null;
+  initialOptIn: boolean;
 }) {
   const t = useTranslations("settings.notifications");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [prefs, setPrefs] = useState<NormalizedNotificationPrefs>(initialPrefs);
-  const [channel, setChannel] = useState<"whatsapp" | "viber" | null>(
-    initialChannel,
-  );
-  const [channelPending, startChannelTransition] = useTransition();
 
   useEffect(() => {
     setPrefs(initialPrefs);
   }, [initialPrefs]);
-
-  useEffect(() => {
-    setChannel(initialChannel);
-  }, [initialChannel]);
-
-  const selectChannel = useCallback(
-    (next: "whatsapp" | "viber") => {
-      if (next === channel) return;
-      const previous = channel;
-      setChannel(next);
-      startChannelTransition(async () => {
-        const res = await updateNotificationChannel(next);
-        if ("error" in res) {
-          setChannel(previous);
-          toast.error(
-            res.error === "no_phone" ? t("channelNeedsPhone") : t("saveError"),
-          );
-          return;
-        }
-        toast.success(t("channelSaved"));
-        router.refresh();
-      });
-    },
-    [channel, router, t],
-  );
 
   const persist = useCallback(
     (key: NotificationEmailPrefKey, enabled: boolean) => {
@@ -129,10 +102,9 @@ export function NotificationSettingsClient({
 
         <div className="mt-8 space-y-8">
           <ChannelSection
-            channel={channel}
+            initialChannel={initialChannel}
+            initialOptIn={initialOptIn}
             hasPhone={hasPhone}
-            onSelect={selectChannel}
-            disabled={channelPending}
             t={t}
           />
 
@@ -162,22 +134,127 @@ export function NotificationSettingsClient({
 }
 
 function ChannelSection({
-  channel,
+  initialChannel,
+  initialOptIn,
   hasPhone,
-  onSelect,
-  disabled,
   t,
 }: {
-  channel: "whatsapp" | "viber" | null;
+  initialChannel: "whatsapp" | "viber" | null;
+  initialOptIn: boolean;
   hasPhone: boolean;
-  onSelect: (next: "whatsapp" | "viber") => void;
-  disabled: boolean;
   t: (key: string, values?: Record<string, string>) => string;
 }) {
-  const options = [
+  const tOptIn = useTranslations("messagingOptIn");
+  const router = useRouter();
+  const [channel, setChannel] = useState<"whatsapp" | "viber" | null>(
+    initialChannel,
+  );
+  const [optIn, setOptIn] = useState(initialOptIn);
+  // A messaging channel the user picked that still needs the consent tick before
+  // it persists. null = nothing pending.
+  const [pendingChannel, setPendingChannel] = useState<
+    "whatsapp" | "viber" | null
+  >(null);
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [saving, startSaving] = useTransition();
+
+  useEffect(() => {
+    setChannel(initialChannel);
+  }, [initialChannel]);
+  useEffect(() => {
+    setOptIn(initialOptIn);
+  }, [initialOptIn]);
+
+  const enable = useCallback(
+    (ch: "whatsapp" | "viber") => {
+      startSaving(async () => {
+        const res = await updateNotificationChannel(ch, true);
+        if ("error" in res) {
+          setPendingChannel(null);
+          setConsentChecked(false);
+          toast.error(
+            res.error === "no_phone" ? t("channelNeedsPhone") : t("saveError"),
+          );
+          return;
+        }
+        setChannel(ch);
+        setOptIn(true);
+        setPendingChannel(null);
+        toast.success(t("channelSaved"));
+        router.refresh();
+      });
+    },
+    [router, t],
+  );
+
+  const revoke = useCallback(() => {
+    startSaving(async () => {
+      const res = await updateNotificationChannel(null);
+      if ("error" in res) {
+        toast.error(t("saveError"));
+        return;
+      }
+      setChannel(null);
+      setOptIn(false);
+      setPendingChannel(null);
+      setConsentChecked(false);
+      toast.success(t("channelSaved"));
+      router.refresh();
+    });
+  }, [router, t]);
+
+  const onSelect = useCallback(
+    (value: "whatsapp" | "viber" | "off") => {
+      if (value === "off") {
+        setPendingChannel(null);
+        setConsentChecked(false);
+        if (!optIn) return; // already off
+        revoke();
+        return;
+      }
+      if (optIn && channel === value) {
+        setPendingChannel(null); // already enabled on this channel
+        return;
+      }
+      // Enabling (or switching to) a messaging channel: reveal consent, require tick.
+      setPendingChannel(value);
+      setConsentChecked(false);
+    },
+    [optIn, channel, revoke],
+  );
+
+  const onConsentToggle = useCallback(
+    (checked: boolean) => {
+      setConsentChecked(checked);
+      if (checked && pendingChannel) {
+        enable(pendingChannel);
+      }
+    },
+    [pendingChannel, enable],
+  );
+
+  const selectedRadio: "whatsapp" | "viber" | "off" =
+    pendingChannel ?? (optIn && channel ? channel : "off");
+  const showConsent = selectedRadio === "whatsapp" || selectedRadio === "viber";
+  const consentChannel = pendingChannel ?? channel;
+  const channelLabel =
+    consentChannel === "whatsapp"
+      ? "WhatsApp"
+      : consentChannel === "viber"
+        ? "Viber"
+        : tOptIn("channelBoth");
+  // Pending → user-controlled checkbox; otherwise reflect the persisted opt-in
+  // (checked + read-only; revoke happens via the "email only" option).
+  const boxChecked = pendingChannel ? consentChecked : optIn;
+  const boxInteractive = pendingChannel !== null;
+
+  const messagingOptions = [
     { value: "whatsapp" as const, label: "WhatsApp" },
     { value: "viber" as const, label: "Viber" },
   ];
+
+  const offActive = selectedRadio === "off";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -198,38 +275,82 @@ function ChannelSection({
           </p>
 
           {hasPhone ? (
-            <div
-              role="radiogroup"
-              aria-label={t("channelSection")}
-              className="mt-4 grid grid-cols-2 gap-3"
-            >
-              {options.map((opt) => {
-                const active = channel === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    role="radio"
-                    aria-checked={active}
-                    disabled={disabled}
-                    onClick={() => onSelect(opt.value)}
-                    className={cn(
-                      "relative flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60",
-                      active
-                        ? "border-teal-500 bg-teal-50/60 text-teal-700 ring-2 ring-teal-500/20 dark:border-teal-400 dark:bg-teal-500/10 dark:text-teal-300"
-                        : "border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/20",
-                    )}
-                  >
-                    {active && (
-                      <span className="absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-teal-500 text-white">
-                        <Check className="h-2.5 w-2.5" />
-                      </span>
-                    )}
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
+            <>
+              <div
+                role="radiogroup"
+                aria-label={t("channelSection")}
+                className="mt-4 space-y-3"
+              >
+                <div className="grid grid-cols-2 gap-3">
+                  {messagingOptions.map((opt) => {
+                    const active = selectedRadio === opt.value;
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        disabled={saving}
+                        onClick={() => onSelect(opt.value)}
+                        className={cn(
+                          "relative flex items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60",
+                          active
+                            ? "border-teal-500 bg-teal-50/60 text-teal-700 ring-2 ring-teal-500/20 dark:border-teal-400 dark:bg-teal-500/10 dark:text-teal-300"
+                            : "border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/20",
+                        )}
+                      >
+                        {active && (
+                          <span className="absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-teal-500 text-white">
+                            <Check className="h-2.5 w-2.5" />
+                          </span>
+                        )}
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={offActive}
+                  disabled={saving}
+                  onClick={() => onSelect("off")}
+                  className={cn(
+                    "relative flex w-full items-center justify-center rounded-xl border px-4 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60",
+                    offActive
+                      ? "border-teal-500 bg-teal-50/60 text-teal-700 ring-2 ring-teal-500/20 dark:border-teal-400 dark:bg-teal-500/10 dark:text-teal-300"
+                      : "border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/20",
+                  )}
+                >
+                  {offActive && (
+                    <span className="absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-teal-500 text-white">
+                      <Check className="h-2.5 w-2.5" />
+                    </span>
+                  )}
+                  {tOptIn("channelOff")}
+                </button>
+              </div>
+
+              {showConsent && (
+                <div className="mt-4 rounded-xl border border-teal-200/70 bg-teal-50/50 px-4 py-3 dark:border-teal-500/20 dark:bg-teal-500/10">
+                  <label className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      checked={boxChecked}
+                      disabled={!boxInteractive || saving}
+                      onChange={(e) => onConsentToggle(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+                    />
+                    <span className="text-sm text-gray-700 dark:text-white/80">
+                      {tOptIn("consentMain", { channel: channelLabel })}
+                    </span>
+                  </label>
+                  <p className="mt-2 ps-7 text-xs text-gray-400 dark:text-white/40">
+                    {tOptIn("legalNote")}
+                  </p>
+                </div>
+              )}
+            </>
           ) : (
             <div className="mt-4 flex flex-col items-start gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 px-4 py-3 dark:border-amber-500/20 dark:bg-amber-500/10">
               <p className="flex items-center gap-2 text-sm text-amber-700 dark:text-amber-300">

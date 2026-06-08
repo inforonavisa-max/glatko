@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "دع Glatko يُعلِمك فورًا عبر {channel} عند وصول عرض، وعند قبول عملك، وعند وجود رسائل جديدة. أوافق.",
+    "legalNote": "تُدار Glatko بواسطة RONA LEGAL DOO.",
+    "channelBoth": "WhatsApp وViber",
+    "channelOff": "البريد الإلكتروني فقط (WhatsApp/Viber معطّل)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "منصة الخدمات المتميزة في الجبل الأسود",

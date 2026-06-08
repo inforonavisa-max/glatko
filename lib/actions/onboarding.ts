@@ -38,6 +38,9 @@ const schema = z.object({
   // Faz 1-B: optional notification channel (CHECK whatsapp|viber on the column).
   // Omitted → column stays NULL (Faz 2 failover).
   notification_channel: z.enum(["whatsapp", "viber"]).optional(),
+  // Messaging opt-in consent (covers WhatsApp+Viber). Only honored alongside a
+  // selected channel; the UI enforces the tick before allowing submit.
+  messaging_opt_in: z.boolean().optional(),
 });
 
 export async function completeOnboarding(input: {
@@ -46,6 +49,7 @@ export async function completeOnboarding(input: {
   city: string;
   locale: string;
   notification_channel?: "whatsapp" | "viber";
+  messaging_opt_in?: boolean;
 }): Promise<CompleteOnboardingResult> {
   const supabase = createClient();
   const {
@@ -55,7 +59,13 @@ export async function completeOnboarding(input: {
 
   const parsed = schema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "invalid_input" };
-  const { full_name, role, city, locale, notification_channel } = parsed.data;
+  const { full_name, role, city, locale, notification_channel, messaging_opt_in } =
+    parsed.data;
+
+  // Opt-in is only valid alongside a selected messaging channel (the UI enforces
+  // the tick). When opted in, stamp the consent time + source atomically.
+  const optedIn = messaging_opt_in === true && Boolean(notification_channel);
+  const nowIso = new Date().toISOString();
 
   // Partial UPDATE only — never upsert (the row already exists via the signup
   // trigger, and upsert would risk omitting other columns). notification_channel
@@ -67,8 +77,15 @@ export async function completeOnboarding(input: {
       city,
       preferred_locale: locale,
       onboarding_completed: true,
-      updated_at: new Date().toISOString(),
+      updated_at: nowIso,
       ...(notification_channel ? { notification_channel } : {}),
+      ...(optedIn
+        ? {
+            messaging_opt_in: true,
+            messaging_opt_in_at: nowIso,
+            opt_in_source: "signup",
+          }
+        : {}),
     })
     .eq("id", user.id);
 

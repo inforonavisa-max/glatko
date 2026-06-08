@@ -35,6 +35,7 @@ export type UserProfileRow = {
   is_active: boolean | null;
   notification_prefs: ReturnType<typeof normalizeNotificationPrefs>;
   notification_channel: "whatsapp" | "viber" | null;
+  messaging_opt_in: boolean;
   is_deleted: boolean | null;
 };
 
@@ -54,7 +55,7 @@ export async function getProfileSettings(): Promise<
   const { data: profile, error } = await supabase
     .from("profiles")
     .select(
-      "id, full_name, avatar_url, phone, city, bio, preferred_locale, is_active, notification_prefs, notification_channel, is_deleted"
+      "id, full_name, avatar_url, phone, city, bio, preferred_locale, is_active, notification_prefs, notification_channel, messaging_opt_in, is_deleted"
     )
     .eq("id", user.id)
     .maybeSingle();
@@ -75,6 +76,7 @@ export async function getProfileSettings(): Promise<
     notification_prefs: normalizeNotificationPrefs(profile?.notification_prefs),
     notification_channel:
       (profile?.notification_channel as "whatsapp" | "viber" | null) ?? null,
+    messaging_opt_in: profile?.messaging_opt_in ?? false,
     is_deleted: profile?.is_deleted ?? false,
   };
 
@@ -338,17 +340,23 @@ export async function updateNotificationPreference(
 }
 
 /**
- * Faz 1-A: set the user's preferred notification channel. Faz 2's dispatcher
- * reads profiles.notification_channel to pick the primary channel; NULL means
- * "not chosen" → it runs the Viber→WhatsApp→SMS failover instead.
+ * Set / revoke the user's preferred messaging channel + opt-in consent.
+ * Faz 2's dispatcher reads profiles.notification_channel to pick the primary
+ * channel; NULL means "not chosen / opted out" → Viber→WhatsApp→SMS failover.
  *
- * Phone gate: WhatsApp/Viber/SMS all deliver to the phone number, which lives on
- * auth.users.phone — NOT profiles.phone (phone-OTP signups never populate the
- * profiles column). Without a phone there is no address to message, so the
- * channel cannot be set; the Faz 1-B UI must route the user to add a phone first.
+ * - channel = "whatsapp" | "viber": ENABLE messaging. Requires a phone (gate) AND
+ *   explicit consent (consent === true) per WhatsApp policy. Stamps
+ *   messaging_opt_in=true + messaging_opt_in_at + opt_in_source='settings'.
+ * - channel = null: REVOKE (opt-out). Always allowed, no phone/consent gate.
+ *   Clears notification_channel and sets messaging_opt_in=false. Email
+ *   notifications are a separate system (NOTIFICATION_EMAILS_ENABLED) and stay on.
+ *
+ * Phone gate: WhatsApp/Viber/SMS all deliver to the phone on auth.users.phone —
+ * NOT profiles.phone (phone-OTP signups never populate the profiles column).
  */
 export async function updateNotificationChannel(
-  channel: "whatsapp" | "viber",
+  channel: "whatsapp" | "viber" | null,
+  consent?: boolean,
 ): Promise<{ success: true } | { error: string }> {
   const supabase = createClient();
   const {
@@ -356,6 +364,27 @@ export async function updateNotificationChannel(
   } = await supabase.auth.getUser();
   if (!user) {
     return { error: "unauthorized" };
+  }
+
+  const nowIso = new Date().toISOString();
+
+  // Revoke / "email only": clear the channel and the opt-in. No phone/consent gate.
+  if (channel === null) {
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        notification_channel: null,
+        messaging_opt_in: false,
+        messaging_opt_in_at: nowIso,
+        opt_in_source: "settings",
+        updated_at: nowIso,
+      })
+      .eq("id", user.id);
+    if (error) {
+      return { error: error.message };
+    }
+    revalidateProfile();
+    return { success: true };
   }
 
   const validChannels: readonly string[] = ["whatsapp", "viber"];
@@ -369,11 +398,19 @@ export async function updateNotificationChannel(
     return { error: "no_phone" };
   }
 
+  // Enabling a messaging channel requires explicit opt-in consent (WhatsApp policy).
+  if (consent !== true) {
+    return { error: "consent_required" };
+  }
+
   const { error } = await supabase
     .from("profiles")
     .update({
       notification_channel: channel,
-      updated_at: new Date().toISOString(),
+      messaging_opt_in: true,
+      messaging_opt_in_at: nowIso,
+      opt_in_source: "settings",
+      updated_at: nowIso,
     })
     .eq("id", user.id);
 

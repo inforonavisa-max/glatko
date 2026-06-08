@@ -35,6 +35,7 @@ export default async function NotificationSettingsPage({
       isPro={!!proRow}
       hasPhone={settings.hasPhone}
       initialChannel={settings.profile.notification_channel}
+      initialOptIn={settings.profile.messaging_opt_in}
     />
   );
 }

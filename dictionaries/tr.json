@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Teklif geldiğinde, işiniz onaylandığında ve yeni mesajlarınız olduğunda Glatko sizi {channel} üzerinden anında bilgilendirsin. Kabul ediyorum.",
+    "legalNote": "Glatko, RONA LEGAL DOO tarafından işletilmektedir.",
+    "channelBoth": "WhatsApp ve Viber",
+    "channelOff": "E-posta ile (WhatsApp/Viber kapalı)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "Karadağ'ın Premium Hizmet Platformu",

@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Lassen Sie sich von Glatko sofort über {channel} benachrichtigen, wenn ein Angebot eingeht, Ihr Auftrag angenommen wird und Sie neue Nachrichten haben. Ich stimme zu.",
+    "legalNote": "Glatko wird von RONA LEGAL DOO betrieben.",
+    "channelBoth": "WhatsApp und Viber",
+    "channelOff": "Nur E-Mail (WhatsApp/Viber aus)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "Montenegros Premium-Dienstleistungsplattform",

@@ -1,4 +1,10 @@
 {
+  "messagingOptIn": {
+    "consentMain": "Let Glatko notify you instantly on {channel} when an offer arrives, your job is accepted, and you have new messages. I agree.",
+    "legalNote": "Glatko is operated by RONA LEGAL DOO.",
+    "channelBoth": "WhatsApp and Viber",
+    "channelOff": "Email only (WhatsApp/Viber off)"
+  },
   "brand": {
     "name": "Glatko",
     "tagline": "Montenegro's Premier Service Platform",
