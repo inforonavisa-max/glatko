@@ -1,6 +1,10 @@
 import { createAdminClient } from "@/supabase/server";
 import { glatkoCaptureException } from "@/lib/sentry/glatko-capture";
 import { sendSms } from "@/lib/sms/infobip";
+import { sendWhatsAppTemplate } from "@/lib/whatsapp/infobip";
+import { buildWhatsAppTemplateMessage } from "@/lib/notifications/whatsapp-templates";
+import { getDictionary, type LanguageCode } from "@/dictionaries";
+import { locales } from "@/i18n/routing";
 
 /**
  * Faz 2-A — external-channel (SMS / Viber / WhatsApp) notification dispatch.
@@ -23,10 +27,12 @@ import { sendSms } from "@/lib/sms/infobip";
  * ship live with ZERO real sends until we flip it (controlled rollout). When
  * EXTERNAL_NOTIFICATIONS_TEST_PHONES is set, ONLY those numbers receive.
  *
- * This sprint sends SMS only (Viber/WhatsApp need approved templates — Faz 3).
- * The failover `order` is computed + logged for forward-compat but delivery is
- * SMS. Chat messages (message/thread_message) are deferred to the unread-gated
- * cron (Faz 2-C), not sent instantly here.
+ * Faz 3-B: the WhatsApp template is tried FIRST for users who explicitly chose
+ * the WhatsApp channel AND consented (profiles.messaging_opt_in); ANY failure
+ * (not configured / rejected / missing data) falls through to the proven SMS
+ * path, unchanged. SMS is NOT gated by messaging_opt_in. Chat messages
+ * (message/thread_message) are deferred to the unread-gated cron (Faz 2-C),
+ * not sent instantly here.
  */
 
 const DEFAULT_USER_TIMEZONE = "Europe/Podgorica";
@@ -77,6 +83,15 @@ function normalizeE164(phone: string): string {
   return t.startsWith("+") ? t : `+${t}`;
 }
 
+/** Coerce a stored preferred_locale to a valid app locale. Fallback "en" — the
+ *  DB default and the language whose WhatsApp/email templates always exist. */
+const FALLBACK_LOCALE: LanguageCode = "en";
+function coerceLocale(raw: unknown): LanguageCode {
+  return typeof raw === "string" && (locales as readonly string[]).includes(raw)
+    ? (raw as LanguageCode)
+    : FALLBACK_LOCALE;
+}
+
 function testPhoneAllowlist(): string[] | null {
   const raw = process.env.EXTERNAL_NOTIFICATIONS_TEST_PHONES;
   if (!raw) return null;
@@ -88,7 +103,16 @@ function testPhoneAllowlist(): string[] | null {
 }
 
 export type ExternalDecision =
-  | { send: true; phone: string; order: FailoverChannel[]; critical: boolean }
+  | {
+      send: true;
+      phone: string;
+      order: FailoverChannel[];
+      critical: boolean;
+      /** Recipient UI locale (coerced) — drives template language + deep link. */
+      locale: LanguageCode;
+      /** WhatsApp allowed: pref === "whatsapp" AND messaging_opt_in === true. */
+      whatsappEligible: boolean;
+    }
   | { send: false; reason: string };
 
 /**
@@ -155,15 +179,27 @@ export async function shouldSendExternal(params: {
     }
   }
 
-  // 7) Channel preference → forward-compat failover order.
+  // 7) Channel preference + WhatsApp consent + recipient locale.
   const { data: profile } = await admin
     .from("profiles")
-    .select("notification_channel")
+    .select("notification_channel, messaging_opt_in, preferred_locale")
     .eq("id", params.user_id)
     .maybeSingle();
   const pref = (profile?.notification_channel as ChannelPref) ?? null;
+  const locale = coerceLocale(profile?.preferred_locale);
+  // WhatsApp only when the user explicitly chose it AND consented (phone is
+  // already verified by gate 3). SMS is unaffected by messaging_opt_in.
+  const whatsappEligible =
+    pref === "whatsapp" && profile?.messaging_opt_in === true;
 
-  return { send: true, phone, order: channelOrder(pref), critical };
+  return {
+    send: true,
+    phone,
+    order: channelOrder(pref),
+    critical,
+    locale,
+    whatsappEligible,
+  };
 }
 
 /**
@@ -190,6 +226,88 @@ export function composeSmsText(title: string, body?: string, link?: string): str
   return trimmedMessage ? `${trimmedMessage} ${url}` : url;
 }
 
+/** The notification fields the delivery cascade needs. */
+type ExternalMessage = {
+  type: string;
+  title: string;
+  body?: string;
+  data?: Record<string, unknown>;
+};
+
+type ApprovedDecision = Extract<ExternalDecision, { send: true }>;
+
+/** Injectable transports — defaults are the real ones; tests pass fakes. */
+export type ExternalSenders = {
+  sendWhatsAppTemplate: typeof sendWhatsAppTemplate;
+  sendSms: typeof sendSms;
+  loadStatusDict: (
+    locale: LanguageCode,
+  ) => Promise<Record<string, string> | undefined>;
+};
+
+const defaultSenders: ExternalSenders = {
+  sendWhatsAppTemplate,
+  sendSms,
+  loadStatusDict: async (locale) => {
+    const dict = await getDictionary(locale);
+    return (dict as { status?: Record<string, string> }).status;
+  },
+};
+
+/**
+ * WhatsApp-first → SMS cascade for an APPROVED decision. Dependency-injected
+ * (senders) so the cascade is unit-testable with no DB, network, or real sends.
+ * A WhatsApp attempt is made only when eligible AND a template+data can be
+ * built; ANY WhatsApp failure falls through to the proven SMS path (no link,
+ * exactly as Faz 2-A).
+ */
+export async function deliverExternal(
+  params: ExternalMessage,
+  decision: ApprovedDecision,
+  senders: ExternalSenders = defaultSenders,
+): Promise<{ sent: boolean; channel?: "whatsapp" | "sms" }> {
+  // 1) WhatsApp template (eligible + buildable).
+  if (decision.whatsappEligible) {
+    const statusDict = await senders.loadStatusDict(decision.locale);
+    const wa = buildWhatsAppTemplateMessage({
+      type: params.type,
+      data: params.data,
+      title: params.title,
+      locale: decision.locale,
+      statusDict,
+    });
+    if (wa) {
+      const waRes = await senders.sendWhatsAppTemplate({
+        to: decision.phone,
+        ...wa,
+      });
+      if (waRes.ok) {
+        console.log(
+          `[GLATKO:external] sent type=${params.type} order=${decision.order.join(">")} via=WhatsApp messageId=${waRes.messageId}`,
+        );
+        return { sent: true, channel: "whatsapp" };
+      }
+      console.error(
+        `[GLATKO:external] whatsapp failed type=${params.type} error=${waRes.error} — falling back to SMS`,
+      );
+    }
+  }
+
+  // 2) SMS (Faz 2-A, unchanged): the proven path, no link.
+  const text = composeSmsText(params.title, params.body);
+  const res = await senders.sendSms({ to: decision.phone, text });
+  if (res.ok) {
+    console.log(
+      `[GLATKO:external] sent type=${params.type} order=${decision.order.join(">")} via=SMS messageId=${res.messageId}`,
+    );
+    return { sent: true, channel: "sms" };
+  }
+  console.error(
+    `[GLATKO:external] send failed type=${params.type} error=${res.error}`,
+  );
+  return { sent: false };
+}
+
 /**
  * Fire-and-forget external dispatch. Never throws. Returns { sent } so the
  * Faz 2-C cron can set its per-thread cooldown marker ONLY on a real send; the
@@ -213,22 +331,16 @@ export async function dispatchExternalNotification(params: {
     if (!decision.send) {
       return { sent: false };
     }
-
-    // Faz 2-A: deliver via the proven SMS API (sendSms, POST /sms/3/messages —
-    // already live for OTP, the single Infobip SMS source). Viber/WhatsApp need
-    // approved templates (Faz 3). decision.order is logged for forward-compat.
-    const text = composeSmsText(params.title, params.body);
-    const res = await sendSms({ to: decision.phone, text });
-    if (res.ok) {
-      console.log(
-        `[GLATKO:external] sent type=${params.type} order=${decision.order.join(">")} via=SMS messageId=${res.messageId}`,
-      );
-      return { sent: true };
-    }
-    console.error(
-      `[GLATKO:external] send failed type=${params.type} error=${res.error}`,
+    const { sent } = await deliverExternal(
+      {
+        type: params.type,
+        title: params.title,
+        body: params.body,
+        data: params.data,
+      },
+      decision,
     );
-    return { sent: false };
+    return { sent };
   } catch (err) {
     glatkoCaptureException(err, {
       module: "external-dispatch",
