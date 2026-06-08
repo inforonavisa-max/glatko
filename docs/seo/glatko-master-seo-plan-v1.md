@@ -4,7 +4,7 @@
 **Hazırlayan:** Rohat Kahraman + Claude
 **Durum:** Living document — sprint kararlarıyla güncellenir
 **Repo path:** `docs/seo/glatko-master-seo-plan-v1.md`
-**Versiyon:** v1.0 (initial release)
+**Versiyon:** v1.1 (8 Haziran 2026 — Defer-7 + liquidity threshold realism)
 
 ---
 
@@ -249,9 +249,11 @@ Sebepler:
 
 **Liquidity gate (önemli kural):**
 
-- Service × city sayfası publish edilir **ANCAK** o kombinasyon için ≥ 3 provider VE ≥ 5 historical bid varsa
+- Service × city sayfası publish edilir **ANCAK** o kombinasyon için liquidity threshold geçerse:
+  - **M0-M2:** ≥ 3 provider (bid criteria henüz aktif değil)
+  - **M3+:** ≥ 3 provider VE ≥ 5 historical bid (master plan hedefi)
 - Yoksa sayfa "Coming soon" placeholder (noindex)
-- Bu kural launch sonrası 6-12 ay boyunca page count'u **gerçekçi** tutar
+- Aşamalı threshold gerçek launch + early demand reality'sine uyumlu
 
 **Aşamalı rollout (gerçekçileştirilmiş):**
 
@@ -844,6 +846,20 @@ Bu kararlar **şimdi yapılmaz, sonra yapılır.** Her birinin sebebi + revisit 
 - **Re-evaluation:** M3+ (50+ provider sonrası, manuel scale etmez)
 - **Karar kriteri:** Self-registration spam/quality issue'ları yönetilebilir hale geldiğinde
 
+#### Defer-7: Hard-404 for Invalid Route Combos
+
+- **Durum:** App-geneli soft-404 (HTTP 200 + noindex, nofollow not-found page)
+- **Sebep:** Next.js 14 `[locale]` streaming layout limit, `notFound()` hard-404 dönüştüremiyor
+- **Scope:** App-wide (mevcut `/services/[slug]` ve yeni `/services/[slug]/[city]` aynı pattern)
+- **SEO impact şu an:** SIFIR
+  - Invalid URL'ler sitemap'te yok
+  - Internal linking yok
+  - Crawler keşfetmiyor
+  - Keşfetse content noindex+nofollow (zaten zararsız)
+- **Çözüm:** Middleware-based hard-404 (app-wide)
+- **Re-evaluation:** M2+ (gerçek trafik gelince + hard-308 redirect middleware sprintiyle birlikte)
+- **İlgili:** Provider route 404 fix (PR #92) — soft redirect aynı pattern
+
 ### D3. Önceki Master Plan Varsayımları — Temizlendi
 
 Eski master plan'da olan, **yanlış olduğu kanıtlanan veya iptal edilen** kalemler:
@@ -864,6 +880,7 @@ Eski master plan'da olan, **yanlış olduğu kanıtlanan veya iptal edilen** kal
 | Türk diaspora ayrı vertical olabilir | 9 dil eşit, her millete hizmet (vertical yok) | Stratejik karar (8 Haziran) |
 | Boka Bay coverage öncelik | Demand-driven coverage, opportunistic | Stratejik karar (8 Haziran) |
 | Speed Insights varsayılan aktif | Bilinçli ertelendi, $10/ay karar pending | 7 Haziran field data analizi |
+| Liquidity gate threshold rigid (≥3 provider VE ≥5 bid) | M0-M2: ≥3 provider only, M3+: ≥5 bid aktif | Glatko realistik launch threshold (bid history yok henüz) |
 
 ### D4. Master Plan v1 Felsefesi (5 ilke)
 
@@ -1221,3 +1238,4 @@ Tüm sprint'lerde geçerli, asla esnetilmez:
 **Versiyon Geçmişi:**
 
 - **v1.0 (8 Haziran 2026):** İlk yazım — 5 stratejik karar (genel marketplace, 9 dil eşit, demand-driven, rolling launch, full self-canonical) ve 5 cephe stratejisi netleşti
+- **v1.1 (8 Haziran 2026):** Defer-7 (hard-404 invalid combos — app-wide soft-404, M2+ middleware) + liquidity gate aşamalı threshold (M0-M2: ≥3 provider; M3+: ≥5 bid) + Cephe 4 liquidity bölümü güncellendi — G-PSEO-FOUNDATION-FAZ1 (PR #96) sırasında doğrulandı
