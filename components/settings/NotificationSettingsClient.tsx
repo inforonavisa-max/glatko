@@ -345,7 +345,7 @@ function ChannelSection({
                       {tOptIn("consentMain", { channel: channelLabel })}
                     </span>
                   </label>
-                  <p className="mt-2 pl-7 text-xs text-gray-400 dark:text-white/40">
+                  <p className="mt-2 ps-7 text-xs text-gray-400 dark:text-white/40">
                     {tOptIn("legalNote")}
                   </p>
                 </div>
