@@ -2265,6 +2265,8 @@
     "metaDescription": "{service} — {city}، الجبل الأسود. قارن عروض المحترفين الموثوقين على Glatko.",
     "comingSoonTitle": "قريبًا",
     "comingSoonBody": "هذه الصفحة قيد الإعداد. في هذه الأثناء، يمكنك تصفح المحترفين وطلب عرض سعر.",
-    "browseCategory": "تصفّح جميع محترفي {service}"
+    "browseCategory": "تصفّح جميع محترفي {service}",
+    "proCountBadge": "محترفون موثوقون: {count}",
+    "ctaQuote": "احصل على عروض مجانية"
   }
 }

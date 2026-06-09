@@ -2268,6 +2268,8 @@
     "metaDescription": "{service} — {city}, Crna Gora. Uporedite ponude provjerenih stručnjaka na Glatku.",
     "comingSoonTitle": "Uskoro",
     "comingSoonBody": "Ova stranica je u pripremi. U međuvremenu možete pregledati stručnjake i zatražiti ponudu.",
-    "browseCategory": "Pogledaj sve stručnjake: {service}"
+    "browseCategory": "Pogledaj sve stručnjake: {service}",
+    "proCountBadge": "Provjereni stručnjaci: {count}",
+    "ctaQuote": "Zatraži besplatne ponude"
   }
 }

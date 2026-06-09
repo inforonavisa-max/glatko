@@ -2265,6 +2265,8 @@
     "metaDescription": "{service} — {city}, Montenegro. Vergleichen Sie Angebote geprüfter Fachleute auf Glatko.",
     "comingSoonTitle": "Demnächst",
     "comingSoonBody": "Diese Seite wird vorbereitet. In der Zwischenzeit können Sie Fachleute durchsehen und ein Angebot anfordern.",
-    "browseCategory": "Alle Fachleute für {service} ansehen"
+    "browseCategory": "Alle Fachleute für {service} ansehen",
+    "proCountBadge": "Geprüfte Fachleute: {count}",
+    "ctaQuote": "Kostenlose Angebote erhalten"
   }
 }

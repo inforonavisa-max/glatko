@@ -14,6 +14,7 @@ import {
 } from "@/lib/seo";
 import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { getLiquidCombinations } from "@/lib/glatko/liquidity";
 
 // Force runtime evaluation. Our Supabase server client depends on `cookies()`,
 // which throws during build-time prerender; without this the DB-driven
@@ -103,19 +104,25 @@ const STATIC_PAGES = [
  * deduplicate locale variants.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, professionals, blogPostsByLocale, approvedCatIds] =
-    await Promise.all([
-      getAllActiveCategories(),
-      getProfessionalsForSitemap(),
-      // Sanity fetch — per locale, tolerating failure per locale so a single
-      // CMS hiccup never zeroes out the whole blog half of the sitemap.
-      Promise.all(
-        LOCALES.map((l) =>
-          getAllPostSlugsWithTranslations(l).catch(() => []),
-        ),
-      ),
-      getApprovedProviderCategoryIds(),
-    ]);
+  const [
+    categories,
+    professionals,
+    blogPostsByLocale,
+    approvedCatIds,
+    liquidCombos,
+  ] = await Promise.all([
+    getAllActiveCategories(),
+    getProfessionalsForSitemap(),
+    // Sanity fetch — per locale, tolerating failure per locale so a single
+    // CMS hiccup never zeroes out the whole blog half of the sitemap.
+    Promise.all(
+      LOCALES.map((l) => getAllPostSlugsWithTranslations(l).catch(() => [])),
+    ),
+    getApprovedProviderCategoryIds(),
+    // G-PSEO-FOUNDATION FAZ2: liquid service × city combinations (only those
+    // passing the liquidity gate are publishable). One bulk RPC call.
+    getLiquidCombinations(),
+  ]);
   const buildTime = new Date();
   const routes: MetadataRoute.Sitemap = [];
 
@@ -173,6 +180,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority,
         alternates: {
           languages: makeAlternatesForParams("/services/[slug]", params),
+        },
+      });
+    }
+  }
+
+  // G-PSEO-FOUNDATION FAZ2: liquid service × city pages. Only combinations that
+  // clear the liquidity gate are emitted; "coming soon" placeholders (the vast
+  // majority of the 14×8 grid right now) stay out of the sitemap until they
+  // become liquid. Self-canonical + 9 hreflang via the shared helpers.
+  for (const { category, city } of liquidCombos) {
+    const params = { slug: category, city };
+    for (const locale of LOCALES) {
+      routes.push({
+        url: `${SEO_BASE}${localizedWithParams(locale as LocaleTuple, "/services/[slug]/[city]", params)}`,
+        lastModified: buildTime,
+        changeFrequency: "weekly",
+        priority: 0.6,
+        alternates: {
+          languages: makeAlternatesForParams("/services/[slug]/[city]", params),
         },
       });
     }

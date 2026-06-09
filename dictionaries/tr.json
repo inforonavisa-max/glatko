@@ -2268,6 +2268,8 @@
     "metaDescription": "{service} — {city}, Karadağ. Doğrulanmış profesyonellerin tekliflerini Glatko üzerinden karşılaştırın.",
     "comingSoonTitle": "Çok yakında",
     "comingSoonBody": "Bu sayfa hazırlanıyor. Bu sırada profesyonelleri inceleyebilir ve teklif isteyebilirsiniz.",
-    "browseCategory": "Tüm {service} profesyonellerini gör"
+    "browseCategory": "Tüm {service} profesyonellerini gör",
+    "proCountBadge": "Doğrulanmış profesyoneller: {count}",
+    "ctaQuote": "Ücretsiz teklif al"
   }
 }
