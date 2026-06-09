@@ -4,7 +4,7 @@
 **Hazırlayan:** Rohat Kahraman + Claude
 **Durum:** Living document — sprint kararlarıyla güncellenir
 **Repo path:** `docs/seo/glatko-master-seo-plan-v1.md`
-**Versiyon:** v1.1 (8 Haziran 2026 — Defer-7 + liquidity threshold realism)
+**Versiyon:** v1.2 (9 Haziran 2026 — Defer-7 + liquidity threshold + YELLOW-4 close)
 
 ---
 
@@ -749,13 +749,11 @@ Bu **slavishly kopyalama değil** — kalite benchmark. Quick'n'dirty çözümle
 - **Scope:** 5-10 kategori için cost-guide table
 - **Rationale:** Featured snippet potential + LLM structured data
 
-**YELLOW-4: Meta description length**
+**YELLOW-4: Meta description length — ✅ KAPANDI (9 Haziran 2026, PR #101)**
 
-- **Mevcut:** Homepage 100-120 char, /services 60-76 char
-- **Hedef:** Sweet spot 150-160 char
-- **Plan:** G-META-DESCRIPTIONS sprint (1-2 saat)
-- **Cephe:** 1 (Technical SEO follow-up)
-- **Timing:** Hızlı sprint, AEO sprint'lerle paralel olabilir
+- **Çözüm:** G-META-DESCRIPTIONS — homepage 100-120 → ~155 char, /services 60-76 → ~155; 9 dil 145-165 sweet spot
+- **Bonus:** Master Plan İlke 1+3 drift meta'larda temizlendi (villa/boat vertical + Budva/Kotor/Tivat city bias kaldırıldı)
+- **Açık kalan (ayrı sprint):** Visible copy drift (hero.subtitle / hero.trustedBy / trust.localDesc / becomePro) → **G-CONTENT-DRIFT** sprint candidate
 
 **YELLOW-5: Homepage performance regression sinyali**
 
@@ -881,6 +879,7 @@ Eski master plan'da olan, **yanlış olduğu kanıtlanan veya iptal edilen** kal
 | Boka Bay coverage öncelik | Demand-driven coverage, opportunistic | Stratejik karar (8 Haziran) |
 | Speed Insights varsayılan aktif | Bilinçli ertelendi, $10/ay karar pending | 7 Haziran field data analizi |
 | Liquidity gate threshold rigid (≥3 provider VE ≥5 bid) | M0-M2: ≥3 provider only, M3+: ≥5 bid aktif | Glatko realistik launch threshold (bid history yok henüz) |
+| YELLOW-4 (Meta description length) açık | KAPANDI (PR #101, 9 Haziran 2026) | G-META-DESCRIPTIONS — length 145-165 + İlke 1/3 meta drift fix |
 
 ### D4. Master Plan v1 Felsefesi (5 ilke)
 
@@ -1239,3 +1238,4 @@ Tüm sprint'lerde geçerli, asla esnetilmez:
 
 - **v1.0 (8 Haziran 2026):** İlk yazım — 5 stratejik karar (genel marketplace, 9 dil eşit, demand-driven, rolling launch, full self-canonical) ve 5 cephe stratejisi netleşti
 - **v1.1 (8 Haziran 2026):** Defer-7 (hard-404 invalid combos — app-wide soft-404, M2+ middleware) + liquidity gate aşamalı threshold (M0-M2: ≥3 provider; M3+: ≥5 bid) + Cephe 4 liquidity bölümü güncellendi — G-PSEO-FOUNDATION-FAZ1 (PR #96) sırasında doğrulandı
+- **v1.2 (9 Haziran 2026):** D1 YELLOW-4 (meta description length) KAPANDI — G-META-DESCRIPTIONS (PR #101): 9 dil 145-165 char + İlke 1+3 meta drift fix (villa/boat + Budva/Kotor/Tivat temizlendi). Visible copy drift (hero/trust/becomePro) → G-CONTENT-DRIFT candidate işaretlendi. (v1.1 + v1.2 tek squash merge ile main'e girdi.)
