@@ -1551,7 +1551,7 @@
     "title": "Hizmetlerimiz",
     "subtitle": "İhtiyacınıza uygun kategoriyi seçin",
     "prosInCategory": "profesyonel bu kategoride",
-    "metaDescription": "Karadağ'da doğrulanmış {name} uzmanlarını bul. Glatko ile teklifleri karşılaştır ve hizmet al.",
+    "metaDescription": "Karadağ'da Glatko'da doğrulanmış {name} profesyonellerini bulun. Yerel uzmanlardan teklif karşılaştırın, hızlıca rezervasyon yapın — talep ücretsiz.",
     "viewAllPros": "Tüm Profesyonelleri Gör",
     "requestInCategory": "Bu Kategoride Hizmet Talep Et",
     "subcategories": "Alt Kategoriler",
@@ -1560,12 +1560,12 @@
   },
   "seo": {
     "providersTitle": "Profesyoneller — Glatko",
-    "providersDesc": "Karadağ'da güvenilir ve doğrulanmış profesyonelleri keşfedin. Glatko ile hizmet alın.",
+    "providersDesc": "Karadağ genelinde Glatko'daki doğrulanmış, güvenilir profesyonelleri keşfedin. Profilleri, puanları ve tamamlanan işleri inceleyip ücretsiz teklif isteyin.",
     "landingTitle": "Glatko — Karadağ'ın Premium Hizmet Platformu",
     "homeTitle": "Karadağ'ın Premium Hizmet Platformu",
-    "landingDesc": "Budva, Kotor ve Tivat'ta villa temizliğinden tekne bakımına doğrulanmış profesyonellerden ücretsiz teklif alın.",
+    "landingDesc": "Karadağ'da her türlü ev veya işyeri hizmeti için doğrulanmış profesyonelleri bulun. Glatko'da ücretsiz talep oluşturun, güvenilir yerel uzmanlardan teklif alın.",
     "servicesTitle": "Hizmetler",
-    "servicesDesc": "Ev temizliğinden tekne bakımına, Karadağ'da ihtiyacınız olan tüm hizmetler."
+    "servicesDesc": "Glatko'da Karadağ genelinde tüm hizmetlere göz atın: ev, tamir, güzellik, etkinlik, ders. Doğrulanmış yerel profesyonellerden ücretsiz teklif karşılaştırın."
   },
   "proAnalytics": {
     "title": "Dashboard",

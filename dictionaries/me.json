@@ -1551,7 +1551,7 @@
     "title": "Naše usluge",
     "subtitle": "Izaberite odgovarajuću kategoriju",
     "prosInCategory": "stručnjaka u ovoj kategoriji",
-    "metaDescription": "Pronađi provjerene {name} stručnjake u Crnoj Gori. Uporedi ponude i rezerviši na Glatku.",
+    "metaDescription": "Pronađite provjerene {name} stručnjake širom Crne Gore na Glatku. Uporedite ponude pouzdanih lokalnih profesionalaca i rezervišite brzo i besplatno.",
     "viewAllPros": "Svi stručnjaci",
     "requestInCategory": "Zatražite uslugu u ovoj kategoriji",
     "subcategories": "Potkategorije",
@@ -1560,12 +1560,12 @@
   },
   "seo": {
     "providersTitle": "Stručnjaci — Glatko",
-    "providersDesc": "Pronađite provjerene stručnjake u Crnoj Gori sa Glatko.",
+    "providersDesc": "Otkrijte provjerene i pouzdane stručnjake širom Crne Gore na Glatku. Pregledajte profile i ocjene, pa zatražite besplatne ponude za svoj projekat.",
     "landingTitle": "Glatko — Premium servisna platforma Crne Gore",
     "homeTitle": "Premium servisna platforma Crne Gore",
-    "landingDesc": "Pronađite verifikovane stručnjake za čišćenje vila, održavanje brodova i drugo u Budvi, Kotoru i Tivtu.",
+    "landingDesc": "Pronađite provjerene stručnjake širom Crne Gore za sve kućne i poslovne usluge. Besplatno pošaljite zahtjev i uporedite ponude lokalnih profesionalaca na Glatku.",
     "servicesTitle": "Usluge",
-    "servicesDesc": "Od čišćenja do održavanja plovila — sve usluge u Crnoj Gori."
+    "servicesDesc": "Pregledajte sve usluge na Glatku širom Crne Gore — od doma i popravki do ljepote i događaja. Uporedite ponude provjerenih lokalnih stručnjaka, besplatno."
   },
   "proAnalytics": {
     "title": "Kontrolna tabla",

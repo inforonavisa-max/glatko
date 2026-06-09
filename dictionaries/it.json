@@ -1551,7 +1551,7 @@
     "title": "I nostri servizi",
     "subtitle": "Scegli la categoria giusta per le tue esigenze",
     "prosInCategory": "professionisti in questa categoria",
-    "metaDescription": "Trova professionisti {name} verificati in Montenegro. Confronta i preventivi e prenota su Glatko.",
+    "metaDescription": "Trova professionisti {name} verificati in tutto il Montenegro su Glatko. Confronta i preventivi di esperti locali affidabili e prenota subito, gratis.",
     "viewAllPros": "Vedi tutti i professionisti",
     "requestInCategory": "Richiedi servizio in questa categoria",
     "subcategories": "Sottocategorie",
@@ -1560,12 +1560,12 @@
   },
   "seo": {
     "providersTitle": "Professionisti — Glatko",
-    "providersDesc": "Scopri professionisti affidabili e verificati in Montenegro.",
+    "providersDesc": "Scopri professionisti verificati e affidabili in tutto il Montenegro su Glatko. Sfoglia profili, recensioni e lavori, poi richiedi preventivi gratuiti.",
     "landingTitle": "Glatko — La piattaforma di servizi premium del Montenegro",
     "homeTitle": "La piattaforma di servizi premium del Montenegro",
-    "landingDesc": "Trova professionisti verificati per pulizia ville, manutenzione barche e altro a Budva, Kotor e Tivat.",
+    "landingDesc": "Trova professionisti verificati in tutto il Montenegro per qualsiasi servizio, casa o impresa. Pubblica gratis la richiesta e confronta i preventivi su Glatko.",
     "servicesTitle": "Servizi",
-    "servicesDesc": "Dalla pulizia alla manutenzione barche, tutti i servizi in Montenegro."
+    "servicesDesc": "Esplora tutti i servizi su Glatko in Montenegro: casa, riparazioni, bellezza, eventi e lezioni. Confronta gratis i preventivi di professionisti verificati."
   },
   "proAnalytics": {
     "title": "Dashboard",

@@ -1551,7 +1551,7 @@
     "title": "Our Services",
     "subtitle": "Choose the right category for your needs",
     "prosInCategory": "professionals in this category",
-    "metaDescription": "Find verified {name} professionals in Montenegro. Compare quotes and book on Glatko.",
+    "metaDescription": "Find verified {name} professionals across Montenegro on Glatko. Compare quotes from trusted local experts and book quickly — free to request.",
     "viewAllPros": "View All Professionals",
     "requestInCategory": "Request Service in This Category",
     "subcategories": "Subcategories",
@@ -1560,12 +1560,12 @@
   },
   "seo": {
     "providersTitle": "Professionals — Glatko",
-    "providersDesc": "Discover trusted and verified professionals in Montenegro. Get services with Glatko.",
+    "providersDesc": "Discover verified, trusted professionals across Montenegro on Glatko. Browse profiles, ratings and completed work, then request free quotes for your project.",
     "landingTitle": "Glatko — Montenegro's Premier Service Platform",
     "homeTitle": "Montenegro's Premier Service Platform",
-    "landingDesc": "Find verified professionals for villa cleaning, boat maintenance and more in Budva, Kotor and Tivat. Get free quotes.",
+    "landingDesc": "Find verified professionals across Montenegro for any home or business service. Post your request free and compare quotes from trusted local experts on Glatko.",
     "servicesTitle": "Services",
-    "servicesDesc": "From home cleaning to boat maintenance, all services you need in Montenegro."
+    "servicesDesc": "Browse every service on Glatko across Montenegro — from home repairs to beauty, events and tutoring. Compare quotes from verified local professionals, free."
   },
   "proAnalytics": {
     "title": "Dashboard",
