@@ -2300,6 +2300,109 @@
       "relatedCities": {
         "headline": "Bu hizmet diğer şehirlerde"
       }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Podgorica içinde bir evi veya iş yerini yenilemek, güvenilir profesyoneller ve net bir maliyet öngörüsü gerektirir. Glatko, sizi Podgorica ve çevresindeki doğrulanmış profesyonellerle buluşturur — komple daire tadilatından tekil onarımlara kadar. Teklifleri karşılaştırın, puanları inceleyin; bütçenize ve zaman planınıza uygun profesyoneli seçin.",
+          "included1": "Komple daire ve ev tadilatı",
+          "included2": "Banyo ve mutfak yenileme",
+          "included3": "Elektrik tesisatı",
+          "included4": "Su tesisatı işleri",
+          "included5": "Boya ve sıva işleri",
+          "included6": "Fayans ve zemin döşeme",
+          "costScenario": {
+            "fullApartment": "Komple daire tadilatı",
+            "bathroom": "Banyo yenileme",
+            "kitchen": "Mutfak yenileme",
+            "tiling": "Fayans döşeme",
+            "painting": "Boya işleri"
+          },
+          "faqQ1": "Podgorica genelinde daire tadilatı ne kadar tutar?",
+          "faqA1": "Fiyat; metrekareye, işin kapsamına ve malzeme seçiminize bağlıdır. Standart bir tadilat için yol gösterici aralık, metrekare başına yaklaşık 300–600 € düzeyindedir. En doğru tahmini, birden fazla profesyonelden ücretsiz teklif isteyerek alırsınız.",
+          "faqQ2": "Ortalama bir tadilat ne kadar sürer?",
+          "faqA2": "Küçük işler ve kozmetik düzeltmeler genellikle birkaç günde tamamlanır. Banyo yenileme yaklaşık bir ila iki hafta sürer; orta büyüklükteki bir dairenin komple tadilatı ise karmaşıklığa bağlı olarak dört ila sekiz hafta arasında değişir.",
+          "faqQ3": "Glatko üzerindeki profesyoneller doğrulanmış mı?",
+          "faqA3": "Evet. Profesyoneller, sonuçlarda görünmeden önce kontrolden geçer. Her profilde puanları, yorum sayısını ve önceki işleri görebilir, kararınızı güvenle verebilirsiniz.",
+          "faqQ4": "Çalışma öncesinde alanı nasıl hazırlamalıyım?",
+          "faqA4": "Değerli ve kırılgan eşyaları kaldırın, suya ve elektriğe erişim olduğundan emin olun; zaman planını ve atıkların taşınmasını profesyonelle önceden konuşun. İyi bir profesyonel, işe başlamadan önce size net bir iş planı ve süre tahmini verir."
+        }
+      },
+      "electrical": {
+        "podgorica": {
+          "intro": "Elektrik işleri, küçük onarımlardan komple tesisat yenilemeye kadar nitelikli ve güvenilir profesyoneller gerektirir. Glatko, her ölçekteki işin güvenle yapılması için sizi Podgorica ve çevresindeki doğrulanmış elektrik profesyonelleriyle buluşturur. Teklifleri karşılaştırın, puanları inceleyin; ihtiyaçlarınıza ve bütçenize uygun profesyoneli seçin.",
+          "included1": "Priz ve anahtar montajı",
+          "included2": "Elektrik panosu değişimi",
+          "included3": "Aydınlatma montajı",
+          "included4": "Komple elektrik tesisatı yenileme",
+          "included5": "Arıza tespiti ve onarım",
+          "included6": "Ev aletlerinin bağlanması",
+          "costScenario": {
+            "socketPoint": "Priz veya anahtar montajı (nokta başına)",
+            "panelReplacement": "Elektrik panosu değişimi",
+            "lightingFixture": "Aydınlatma armatürü montajı (armatür başına)",
+            "rewiring": "Komple tesisat yenileme"
+          },
+          "faqQ1": "Podgorica genelinde elektrikçi ücretleri ne kadar?",
+          "faqA1": "Küçük işler genellikle nokta başına veya saatlik ücretlendirilir — yol gösterici aralık saat başına 10–25 € düzeyindedir. Elektrik panosu değişimi veya komple tesisat yenileme gibi daha büyük işler ise proje bazında fiyatlandırılır. En doğru rakamı, birden fazla profesyonelin ücretsiz tekliflerini karşılaştırarak elde edersiniz.",
+          "faqQ2": "Bir dairenin elektrik tesisatını yenilemek ne kadar sürer?",
+          "faqA2": "Ortalama bir dairede komple tesisat yenileme, büyüklüğe ve duvarların durumuna bağlı olarak genellikle birkaç gün ile bir hafta arasında sürer. Priz veya armatür montajı gibi küçük müdahaleler ise çoğunlukla bir gün içinde tamamlanır.",
+          "faqQ3": "Elektrik işlerinde fiyatı ne etkiler?",
+          "faqA3": "Başlıca etkenler işin kapsamı (nokta sayısı), mevcut tesisata erişim kolaylığı, malzeme seçimi ve aciliyettir. Acil veya mesai saatleri dışındaki müdahaleler genellikle daha pahalıdır.",
+          "faqQ4": "Elektrikçinin gelişine nasıl hazırlanmalıyım?",
+          "faqA4": "Sorunu veya işin kapsamını olabildiğince net tarif edin, elektrik panosuna erişimin açık olduğundan emin olun ve çalışma sırasında kısa süreli elektrik kesintilerini hesaba katın. İyi bir profesyonel, işe başlamadan önce planı sizinle paylaşır."
+        }
+      },
+      "kitchen-bathroom": {
+        "podgorica": {
+          "intro": "Mutfağın veya banyonun komple yenilenmesi, bir evi iyileştirmenin en etkili yollarından biridir. Glatko, fayans döşeme ve su yalıtımından vitrifiye ve mobilya montajına kadar her işi üstlenen, Podgorica ve çevresindeki doğrulanmış profesyonellerle sizi buluşturur. Teklifleri karşılaştırın, puanları inceleyin; bütçenize ve zaman planınıza uygun profesyoneli seçin.",
+          "included1": "Komple banyo yenileme",
+          "included2": "Komple mutfak yenileme",
+          "included3": "Fayans döşeme ve su yalıtımı",
+          "included4": "Vitrifiye montajı",
+          "included5": "Mutfak mobilyası ve cihaz montajı",
+          "included6": "Su ve elektrik tesisatının uyarlanması",
+          "costScenario": {
+            "bathroomComplete": "Komple banyo yenileme",
+            "kitchenComplete": "Komple mutfak yenileme",
+            "tiling": "Fayans döşeme",
+            "sanitaryFixtures": "Vitrifiye montajı"
+          },
+          "faqQ1": "Podgorica genelinde banyo yenileme ne kadar tutar?",
+          "faqA1": "Yol gösterici aralık metrekare başına 300–700 € düzeyindedir; küçük bir banyonun komple yenilenmesi, malzemeye ve işin kapsamına bağlı olarak genellikle 1.500 ile 6.000 € arasında tutar. Kesin fiyatı, birden fazla profesyonelden ücretsiz teklif isteyerek öğrenirsiniz.",
+          "faqQ2": "Mutfak veya banyo yenileme ne kadar sürer?",
+          "faqA2": "Komple banyo yenileme genellikle bir ila iki hafta sürer. Mutfak yenileme ise mobilya ve malzemeler teslim edildikten sonra çoğunlukla birkaç gün ile bir hafta arasında tamamlanır. Profesyonel, teklifte size gerçekçi bir takvim sunar.",
+          "faqQ3": "Yenileme sırasında evden taşınmam gerekir mi?",
+          "faqA3": "Genellikle hayır. Çalışma tek bir odayla sınırlıdır; su veya elektrik kesintileri kısa sürer. Yakındaki mobilyaları toza karşı korumak ve çalışma saatlerini profesyonelle önceden netleştirmek işinizi kolaylaştırır.",
+          "faqQ4": "Fiyatı en çok ne etkiler?",
+          "faqA4": "Malzeme ve bitiş kalitesi seçimi (fayans, vitrifiye, mobilya), su ve elektrik tesisatındaki değişikliklerin kapsamı ve mevcut alanın durumu. Fiyat farkını çoğunlukla işçilik ve ince işler belirler — fayansın kendisi değil."
+        }
+      },
+      "plumbing-renov": {
+        "podgorica": {
+          "intro": "Damlayan bir musluktan komple boru değişimine kadar su tesisatı işleri hızlı ve güvenilir bir çözüm gerektirir. Glatko, sizi Podgorica ve çevresindeki doğrulanmış su tesisatı profesyonelleriyle buluşturur. Teklifleri karşılaştırın, puanları inceleyin; ihtiyaçlarınıza ve zaman planınıza uygun profesyoneli seçin.",
+          "included1": "Su kaçağı tespiti ve onarımı",
+          "included2": "Termosifon montajı ve değişimi",
+          "included3": "Musluk ve vana değişimi",
+          "included4": "Komple boru değişimi",
+          "included5": "Vitrifiye bağlantıları",
+          "included6": "Gider açma",
+          "costScenario": {
+            "boiler": "Termosifon montajı veya değişimi",
+            "leakRepair": "Su kaçağı onarımı",
+            "faucetValve": "Musluk veya vana değişimi",
+            "pipeReplacement": "Komple boru değişimi"
+          },
+          "faqQ1": "Podgorica genelinde su tesisatçısı ücretleri ne kadar?",
+          "faqA1": "Küçük müdahaleler genellikle saatlik ücretlendirilir — yol gösterici aralık saat başına 10–25 € düzeyindedir — veya musluk değişimi ya da termosifon montajı gibi işlerde iş başına sabit fiyat uygulanır. Komple boru değişimi gibi büyük işler ise proje bazında fiyatlandırılır. Kesin rakam için birden fazla profesyonelin ücretsiz tekliflerini karşılaştırın.",
+          "faqQ2": "Acil bir su kaçağında profesyonel ne kadar sürede gelebilir?",
+          "faqA2": "Birçok profesyonel acil çağrılara çoğu zaman aynı gün içinde yanıt verir. Talebi acil olarak işaretleyin ve sorunu net biçimde tarif edin. Mesai dışı ve hafta sonu müdahaleleri genellikle daha pahalıdır; mümkünse önce suyu ana vanadan kapatın.",
+          "faqQ3": "Borular ne zaman komple değiştirilmeli?",
+          "faqA3": "Komple değişim; eski tesisatlarda, sık tekrarlayan kaçaklarda, gözle görülür biçimde paslanmış borularda veya belirgin şekilde düşük su basıncında mantıklıdır. En uygun maliyetli zaman, duvarların zaten açık olduğu banyo veya mutfak yenilemesi sırasıdır.",
+          "faqQ4": "Su tesisatı işlerine nasıl hazırlanmalıyım?",
+          "faqA4": "Ana su vanasının yerini öğrenin, evye altındaki ve termosifon çevresindeki erişimi açın ve kısa süreli su kesintilerini hesaba katın. İyi bir profesyonel, işe başlamadan önce işin kapsamını ve tahmini süreyi size açıklar."
+        }
+      }
     }
   }
 }

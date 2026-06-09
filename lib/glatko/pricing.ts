@@ -86,6 +86,98 @@ export const PRICING_DATA: Record<string, ServiceCityPricing> = {
     ],
     lastUpdated: "2026-06-09",
   },
+  // FAZ-3B combos — ranges Rohat-approved 2026-06-09 (regional benchmarks:
+  // SR ~10-50 €/h wide band, HR 40-60 €/h upper anchor; ME sits below HR).
+  "electrical:podgorica": {
+    categorySlug: "electrical",
+    citySlug: "podgorica",
+    typical: {
+      min: 10,
+      max: 25,
+      currency: "EUR",
+      unit: "hour",
+      factors: ["complexity", "urgency", "materials"],
+    },
+    examples: [
+      {
+        scenarioKey: "socketPoint",
+        priceRange: { min: 10, max: 25, currency: "EUR", unit: "item" },
+      },
+      {
+        scenarioKey: "panelReplacement",
+        priceRange: { min: 150, max: 400, currency: "EUR", unit: "job" },
+      },
+      {
+        scenarioKey: "lightingFixture",
+        priceRange: { min: 15, max: 40, currency: "EUR", unit: "item" },
+      },
+      {
+        scenarioKey: "rewiring",
+        priceRange: { min: 15, max: 35, currency: "EUR", unit: "sqm" },
+      },
+    ],
+    lastUpdated: "2026-06-09",
+  },
+  "kitchen-bathroom:podgorica": {
+    categorySlug: "kitchen-bathroom",
+    citySlug: "podgorica",
+    typical: {
+      min: 300,
+      max: 700,
+      currency: "EUR",
+      unit: "sqm",
+      factors: ["materials", "finishLevel", "complexity"],
+    },
+    examples: [
+      {
+        scenarioKey: "bathroomComplete",
+        priceRange: { min: 1500, max: 6000, currency: "EUR", unit: "job" },
+      },
+      {
+        scenarioKey: "kitchenComplete",
+        priceRange: { min: 2500, max: 9000, currency: "EUR", unit: "job" },
+      },
+      {
+        scenarioKey: "tiling",
+        priceRange: { min: 15, max: 50, currency: "EUR", unit: "sqm" },
+      },
+      {
+        scenarioKey: "sanitaryFixtures",
+        priceRange: { min: 150, max: 500, currency: "EUR", unit: "job" },
+      },
+    ],
+    lastUpdated: "2026-06-09",
+  },
+  "plumbing-renov:podgorica": {
+    categorySlug: "plumbing-renov",
+    citySlug: "podgorica",
+    typical: {
+      min: 10,
+      max: 25,
+      currency: "EUR",
+      unit: "hour",
+      factors: ["urgency", "complexity", "materials"],
+    },
+    examples: [
+      {
+        scenarioKey: "boiler",
+        priceRange: { min: 50, max: 150, currency: "EUR", unit: "job" },
+      },
+      {
+        scenarioKey: "leakRepair",
+        priceRange: { min: 50, max: 150, currency: "EUR", unit: "job" },
+      },
+      {
+        scenarioKey: "faucetValve",
+        priceRange: { min: 20, max: 60, currency: "EUR", unit: "item" },
+      },
+      {
+        scenarioKey: "pipeReplacement",
+        priceRange: { min: 500, max: 1500, currency: "EUR", unit: "job" },
+      },
+    ],
+    lastUpdated: "2026-06-09",
+  },
 };
 
 export function getCostRange(

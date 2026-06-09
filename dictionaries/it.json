@@ -2297,6 +2297,109 @@
       "relatedCities": {
         "headline": "Questo servizio in altre città"
       }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Ristrutturare una casa o un locale commerciale a Podgorica richiede professionisti affidabili e un'idea chiara dei costi. Glatko ti mette in contatto con professionisti verificati a Podgorica e dintorni — dalla ristrutturazione completa di un appartamento alle singole riparazioni. Confronta i preventivi, controlla le valutazioni e scegli il professionista adatto al tuo budget e ai tuoi tempi.",
+          "included1": "Ristrutturazione completa di appartamenti e case",
+          "included2": "Ristrutturazione di bagni e cucine",
+          "included3": "Impianti elettrici",
+          "included4": "Lavori idraulici",
+          "included5": "Tinteggiatura e intonacatura",
+          "included6": "Posa di piastrelle e pavimenti",
+          "costScenario": {
+            "fullApartment": "Ristrutturazione completa dell'appartamento",
+            "bathroom": "Ristrutturazione del bagno",
+            "kitchen": "Ristrutturazione della cucina",
+            "tiling": "Posa di piastrelle",
+            "painting": "Lavori di tinteggiatura"
+          },
+          "faqQ1": "Quanto costa ristrutturare un appartamento a Podgorica?",
+          "faqA1": "Il prezzo dipende dalla metratura, dall'entità dei lavori e dai materiali scelti. Per una ristrutturazione standard il prezzo orientativo è di circa 300–600 € al metro quadro. La stima più precisa la ottieni richiedendo preventivi gratuiti a più professionisti.",
+          "faqQ2": "Quanto dura una ristrutturazione media?",
+          "faqA2": "I lavori più piccoli e i ritocchi estetici di solito si concludono in pochi giorni. La ristrutturazione di un bagno richiede circa una o due settimane, mentre la ristrutturazione completa di un appartamento di medie dimensioni dura dalle quattro alle otto settimane, a seconda della complessità.",
+          "faqQ3": "I professionisti su Glatko sono verificati?",
+          "faqA3": "Sì. I professionisti vengono controllati prima di comparire nei risultati. Su ogni profilo puoi vedere le valutazioni, il numero di recensioni e i lavori precedenti, così puoi scegliere in tutta tranquillità.",
+          "faqQ4": "Come preparo lo spazio per i lavori?",
+          "faqA4": "Rimuovi gli oggetti di valore e quelli fragili, assicurati che ci sia accesso ad acqua e corrente e concorda con il professionista i tempi e lo smaltimento dei rifiuti. Un buon professionista ti fornirà un piano di lavoro chiaro e una stima dei tempi prima di iniziare."
+        }
+      },
+      "electrical": {
+        "podgorica": {
+          "intro": "I lavori elettrici richiedono professionisti qualificati e affidabili — dalle piccole riparazioni agli impianti completi. Glatko ti mette in contatto con professionisti verificati per lavori elettrici a Podgorica e dintorni, per interventi sicuri di qualsiasi entità. Confronta i preventivi, controlla le valutazioni e scegli il professionista adatto alle tue esigenze e al tuo budget.",
+          "included1": "Installazione di prese e interruttori",
+          "included2": "Sostituzione del quadro elettrico",
+          "included3": "Installazione dell'illuminazione",
+          "included4": "Rifacimento completo dell'impianto elettrico",
+          "included5": "Ricerca guasti e riparazioni",
+          "included6": "Collegamento di elettrodomestici",
+          "costScenario": {
+            "socketPoint": "Installazione di presa o interruttore (a punto)",
+            "panelReplacement": "Sostituzione del quadro elettrico",
+            "lightingFixture": "Installazione di corpi illuminanti (al pezzo)",
+            "rewiring": "Rifacimento completo dell'impianto"
+          },
+          "faqQ1": "Quanto costa un elettricista a Podgorica?",
+          "faqA1": "I lavori più piccoli di solito si pagano a punto o a ore — il prezzo orientativo è di 10–25 € all'ora. I lavori più grandi, come la sostituzione del quadro elettrico o il rifacimento completo dell'impianto, si calcolano a progetto. La cifra più precisa la ottieni confrontando i preventivi gratuiti di più professionisti.",
+          "faqQ2": "Quanto dura il rifacimento dell'impianto elettrico in un appartamento?",
+          "faqA2": "Per un appartamento medio, il rifacimento completo dell'impianto richiede di solito da qualche giorno a una settimana, a seconda della metratura e dello stato dei muri. Gli interventi più piccoli, come l'installazione di prese o punti luce, in genere si concludono in giornata.",
+          "faqQ3": "Cosa influisce sul prezzo dei lavori elettrici?",
+          "faqA3": "I fattori principali sono l'entità del lavoro (numero di punti), l'accessibilità degli impianti esistenti, la scelta dei materiali e l'urgenza. Gli interventi urgenti o fuori orario di solito costano di più.",
+          "faqQ4": "Come mi preparo alla visita dell'elettricista?",
+          "faqA4": "Descrivi il problema o l'entità del lavoro nel modo più preciso possibile, assicurati che il quadro elettrico sia accessibile e metti in conto brevi interruzioni di corrente durante i lavori. Un buon professionista ti spiegherà il piano di lavoro prima di iniziare."
+        }
+      },
+      "kitchen-bathroom": {
+        "podgorica": {
+          "intro": "La ristrutturazione completa della cucina o del bagno è uno dei modi più efficaci per valorizzare la casa. Glatko ti mette in contatto con professionisti verificati a Podgorica e dintorni che si occupano di tutto — dalla posa di piastrelle e impermeabilizzazione al montaggio di sanitari e mobili. Confronta i preventivi, controlla le valutazioni e scegli il professionista adatto al tuo budget e ai tuoi tempi.",
+          "included1": "Ristrutturazione completa del bagno",
+          "included2": "Ristrutturazione completa della cucina",
+          "included3": "Posa di piastrelle e impermeabilizzazione",
+          "included4": "Montaggio dei sanitari",
+          "included5": "Montaggio di mobili da cucina ed elettrodomestici",
+          "included6": "Adattamento degli impianti idraulici ed elettrici",
+          "costScenario": {
+            "bathroomComplete": "Ristrutturazione completa del bagno",
+            "kitchenComplete": "Ristrutturazione completa della cucina",
+            "tiling": "Posa di piastrelle",
+            "sanitaryFixtures": "Montaggio dei sanitari"
+          },
+          "faqQ1": "Quanto costa ristrutturare un bagno a Podgorica?",
+          "faqA1": "Il prezzo orientativo è di 300–700 € al metro quadro, quindi la ristrutturazione completa di un bagno piccolo costa in genere tra 1.500 e 6.000 €, a seconda dei materiali e dell'entità dei lavori. Il prezzo esatto lo ottieni richiedendo preventivi gratuiti a più professionisti.",
+          "faqQ2": "Quanto dura la ristrutturazione di una cucina o di un bagno?",
+          "faqA2": "La ristrutturazione completa di un bagno richiede di solito una o due settimane. Quella della cucina in genere va da qualche giorno a una settimana dal momento in cui arrivano mobili e materiali. Il professionista ti indicherà tempi realistici nel preventivo.",
+          "faqQ3": "Devo trasferirmi durante la ristrutturazione?",
+          "faqA3": "Di solito no. I lavori restano limitati a una stanza e le interruzioni di acqua o corrente sono brevi. È utile proteggere dalla polvere i mobili vicini e concordare in anticipo gli orari di lavoro con il professionista.",
+          "faqQ4": "Cosa influisce di più sul prezzo?",
+          "faqA4": "La scelta dei materiali e il livello delle finiture (piastrelle, sanitari, mobili), l'entità degli interventi sugli impianti idraulici ed elettrici e lo stato dello spazio esistente. Le differenze di prezzo maggiori dipendono di solito dalla manodopera e dalle finiture — non dalle piastrelle in sé."
+        }
+      },
+      "plumbing-renov": {
+        "podgorica": {
+          "intro": "Da un rubinetto che gocciola alla sostituzione completa delle tubature — i lavori idraulici richiedono una risposta rapida e affidabile. Glatko ti mette in contatto con professionisti verificati per lavori idraulici a Podgorica e dintorni. Confronta i preventivi, controlla le valutazioni e scegli il professionista adatto alle tue esigenze e ai tuoi tempi.",
+          "included1": "Individuazione e riparazione di perdite",
+          "included2": "Installazione e sostituzione dello scaldabagno",
+          "included3": "Sostituzione di rubinetti e valvole",
+          "included4": "Sostituzione completa delle tubature",
+          "included5": "Collegamento dei sanitari",
+          "included6": "Disostruzione degli scarichi",
+          "costScenario": {
+            "boiler": "Installazione o sostituzione dello scaldabagno",
+            "leakRepair": "Riparazione di perdite",
+            "faucetValve": "Sostituzione di rubinetto o valvola",
+            "pipeReplacement": "Sostituzione completa delle tubature"
+          },
+          "faqQ1": "Quanto costa un idraulico a Podgorica?",
+          "faqA1": "Gli interventi più piccoli di solito si pagano a ore — il prezzo orientativo è di 10–25 € all'ora — oppure a prezzo fisso per il singolo lavoro, come la sostituzione di un rubinetto o l'installazione dello scaldabagno. I lavori più grandi, come la sostituzione completa delle tubature, si calcolano a progetto. Per una cifra esatta confronta i preventivi gratuiti di più professionisti.",
+          "faqQ2": "Quanto in fretta può arrivare un professionista per una perdita urgente?",
+          "faqA2": "Molti professionisti gestiscono interventi urgenti, spesso in giornata. Segna la richiesta come urgente e descrivi il problema con precisione. Gli interventi fuori orario e nel fine settimana di solito costano di più, quindi se puoi chiudi prima l'acqua dalla valvola principale.",
+          "faqQ3": "Quando conviene sostituire completamente le tubature?",
+          "faqA3": "La sostituzione completa ha senso in caso di impianti datati, perdite frequenti, tubi visibilmente corrosi o pressione dell'acqua sensibilmente bassa. Il momento più conveniente è durante la ristrutturazione del bagno o della cucina, quando i muri sono già aperti.",
+          "faqQ4": "Come mi preparo ai lavori idraulici?",
+          "faqA4": "Scopri dove si trova la valvola principale dell'acqua, libera l'accesso sotto i lavelli e intorno allo scaldabagno e metti in conto brevi interruzioni dell'acqua. Un buon professionista ti spiegherà l'entità del lavoro e la durata prevista prima di iniziare."
+        }
+      }
     }
   }
 }

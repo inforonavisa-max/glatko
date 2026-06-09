@@ -2300,6 +2300,109 @@
       "relatedCities": {
         "headline": "Ova usluga u drugim gradovima"
       }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Renoviranje doma ili poslovnog prostora u Podgorici zahteva pouzdane stručnjake i jasnu procenu troškova. Preko Glatka se povezujete sa proverenim stručnjacima iz Podgorice i okoline — od kompletnog renoviranja stana do pojedinačnih popravki. Uporedite ponude, pogledajte ocene i izaberite stručnjaka koji odgovara vašem budžetu i rokovima.",
+          "included1": "Kompletno renoviranje stanova i kuća",
+          "included2": "Renoviranje kupatila i kuhinja",
+          "included3": "Električne instalacije",
+          "included4": "Vodoinstalaterski radovi",
+          "included5": "Molerski radovi i gletovanje",
+          "included6": "Postavljanje pločica i podova",
+          "costScenario": {
+            "fullApartment": "Kompletno renoviranje stana",
+            "bathroom": "Renoviranje kupatila",
+            "kitchen": "Renoviranje kuhinje",
+            "tiling": "Postavljanje pločica",
+            "painting": "Molersko-farbarski radovi"
+          },
+          "faqQ1": "Koliko košta renoviranje stana u Podgorici?",
+          "faqA1": "Cena zavisi od kvadrature, obima radova i izbora materijala. Za standardno renoviranje orijentaciona cena je oko 300–600 € po kvadratnom metru. Najtačniju procenu dobićete kada zatražite besplatne ponude od više stručnjaka.",
+          "faqQ2": "Koliko traje prosečno renoviranje?",
+          "faqA2": "Manji radovi i kozmetičke prepravke obično se završe za nekoliko dana. Renoviranje kupatila traje oko jedne do dve nedelje, a kompletna adaptacija stana srednje veličine između četiri i osam nedelja, u zavisnosti od složenosti.",
+          "faqQ3": "Da li su stručnjaci na Glatku provereni?",
+          "faqA3": "Da. Stručnjaci prolaze proveru pre nego što se pojave u rezultatima. Na svakom profilu možete videti ocene, broj recenzija i prethodne radove kako biste odlučili sa poverenjem.",
+          "faqQ4": "Kako da pripremim prostor za radove?",
+          "faqA4": "Uklonite vredne i lomljive predmete, obezbedite pristup vodi i struji i dogovorite sa stručnjakom termine i način odvoženja otpada. Dobar stručnjak će vam pre početka dati jasan plan radova i procenu trajanja."
+        }
+      },
+      "electrical": {
+        "podgorica": {
+          "intro": "Elektro radovi zahtevaju kvalifikovane i pouzdane stručnjake — od manjih popravki do kompletnih instalacija. Glatko vas povezuje sa proverenim stručnjacima za elektriku iz Podgorice i okoline, za bezbedne radove svakog obima. Uporedite ponude, pogledajte ocene i izaberite stručnjaka koji odgovara vašim potrebama i budžetu.",
+          "included1": "Ugradnja utičnica i prekidača",
+          "included2": "Zamena razvodne table",
+          "included3": "Montaža rasvete",
+          "included4": "Kompletna zamena elektroinstalacija",
+          "included5": "Otkrivanje kvarova i popravke",
+          "included6": "Povezivanje kućnih aparata",
+          "costScenario": {
+            "socketPoint": "Ugradnja utičnice ili prekidača (po tački)",
+            "panelReplacement": "Zamena razvodne table",
+            "lightingFixture": "Montaža rasvetnog tela (po komadu)",
+            "rewiring": "Kompletna zamena instalacija"
+          },
+          "faqQ1": "Koliko košta električar u Podgorici?",
+          "faqA1": "Manji radovi se obično naplaćuju po tački ili po satu — orijentaciono 10–25 € po satu. Veći poslovi, poput zamene razvodne table ili kompletne zamene instalacija, naplaćuju se po projektu. Najtačniju cenu dobićete poređenjem besplatnih ponuda više stručnjaka.",
+          "faqQ2": "Koliko traje zamena elektroinstalacija u stanu?",
+          "faqA2": "Za prosečan stan kompletna zamena instalacija obično traje od nekoliko dana do nedelju dana, u zavisnosti od kvadrature i stanja zidova. Manje intervencije, poput ugradnje utičnica ili rasvete, najčešće se završe u toku jednog dana.",
+          "faqQ3": "Šta utiče na cenu elektro radova?",
+          "faqA3": "Glavni faktori su obim posla (broj tačaka), pristupačnost postojećih instalacija, izbor materijala i hitnost. Hitne intervencije i radovi van radnog vremena obično koštaju više.",
+          "faqQ4": "Kako da se pripremim za dolazak električara?",
+          "faqA4": "Opišite problem ili obim posla što preciznije, obezbedite pristup razvodnoj tabli i računajte na kraće prekide struje tokom radova. Dobar stručnjak će vam pre početka objasniti plan rada."
+        }
+      },
+      "kitchen-bathroom": {
+        "podgorica": {
+          "intro": "Kompletno renoviranje kuhinje ili kupatila jedan je od najefikasnijih načina da unapredite dom. Glatko vas povezuje sa proverenim stručnjacima iz Podgorice i okoline koji rade sve — od pločica i hidroizolacije do montaže sanitarija i nameštaja. Uporedite ponude, pogledajte ocene i izaberite stručnjaka koji odgovara vašem budžetu i rokovima.",
+          "included1": "Kompletno renoviranje kupatila",
+          "included2": "Kompletno renoviranje kuhinje",
+          "included3": "Postavljanje pločica i hidroizolacija",
+          "included4": "Montaža sanitarija",
+          "included5": "Montaža kuhinjskih elemenata i aparata",
+          "included6": "Prilagođavanje vodovodnih i električnih instalacija",
+          "costScenario": {
+            "bathroomComplete": "Kompletno renoviranje kupatila",
+            "kitchenComplete": "Kompletno renoviranje kuhinje",
+            "tiling": "Postavljanje pločica",
+            "sanitaryFixtures": "Montaža sanitarija"
+          },
+          "faqQ1": "Koliko košta renoviranje kupatila u Podgorici?",
+          "faqA1": "Orijentaciona cena je 300–700 € po kvadratnom metru, pa kompletno renoviranje manjeg kupatila obično iznosi između 1.500 i 6.000 €, u zavisnosti od materijala i obima radova. Tačnu cenu dobićete kada zatražite besplatne ponude od više stručnjaka.",
+          "faqQ2": "Koliko traje renoviranje kuhinje ili kupatila?",
+          "faqA2": "Kompletno renoviranje kupatila obično traje jednu do dve nedelje. Renoviranje kuhinje najčešće traje od nekoliko dana do nedelju dana od trenutka kada stignu nameštaj i materijali. Stručnjak će vam u ponudi dati realan rok.",
+          "faqQ3": "Da li moram da se iselim tokom renoviranja?",
+          "faqA3": "Obično ne. Radovi su ograničeni na jednu prostoriju, a prekidi vode ili struje su kratki. Pomaže da okolni nameštaj zaštitite od prašine i da unapred dogovorite radno vreme sa stručnjakom.",
+          "faqQ4": "Šta najviše utiče na cenu?",
+          "faqA4": "Izbor materijala i nivo završne obrade (pločice, sanitarije, nameštaj), obim vodovodnih i električnih prepravki i stanje postojećeg prostora. Najveće razlike u ceni obično prave rad i završna obrada — ne same pločice."
+        }
+      },
+      "plumbing-renov": {
+        "podgorica": {
+          "intro": "Od slavine koja kaplje do kompletne zamene cevi — vodoinstalaterski radovi traže brz i pouzdan odgovor. Glatko vas povezuje sa proverenim stručnjacima za vodoinstalaterske radove iz Podgorice i okoline. Uporedite ponude, pogledajte ocene i izaberite stručnjaka koji odgovara vašim potrebama i rokovima.",
+          "included1": "Otkrivanje i popravka curenja",
+          "included2": "Montaža i zamena bojlera",
+          "included3": "Zamena slavina i ventila",
+          "included4": "Kompletna zamena cevi",
+          "included5": "Povezivanje sanitarija",
+          "included6": "Odgušenje odvoda",
+          "costScenario": {
+            "boiler": "Montaža ili zamena bojlera",
+            "leakRepair": "Popravka curenja",
+            "faucetValve": "Zamena slavine ili ventila",
+            "pipeReplacement": "Kompletna zamena cevi"
+          },
+          "faqQ1": "Koliko košta vodoinstalater u Podgorici?",
+          "faqA1": "Manje intervencije se obično naplaćuju po satu — orijentaciono 10–25 € po satu — ili po fiksnoj ceni za posao, poput zamene slavine ili montaže bojlera. Veći poslovi, poput kompletne zamene cevi, naplaćuju se po projektu. Za tačnu cenu uporedite besplatne ponude više stručnjaka.",
+          "faqQ2": "Koliko brzo stručnjak može doći zbog hitnog curenja?",
+          "faqA2": "Mnogi stručnjaci rade hitne intervencije, često istog dana. Označite zahtev kao hitan i precizno opišite problem. Intervencije van radnog vremena i vikendom obično koštaju više, pa ako možete, prvo zatvorite vodu na glavnom ventilu.",
+          "faqQ3": "Kada treba kompletno zameniti cevi?",
+          "faqA3": "Kompletna zamena ima smisla kod starijih instalacija, čestih curenja, vidljivo korodiranih cevi ili primetno slabog pritiska vode. Najisplativiji trenutak je tokom renoviranja kupatila ili kuhinje, dok su zidovi ionako otvoreni.",
+          "faqQ4": "Kako da se pripremim za vodoinstalaterske radove?",
+          "faqA4": "Saznajte gde je glavni ventil za vodu, oslobodite pristup ispod sudopere i oko bojlera i računajte na kraće prekide vode. Dobar stručnjak će vam pre početka objasniti obim posla i očekivano trajanje."
+        }
+      }
     }
   }
 }

@@ -2324,6 +2324,81 @@
           "faqQ4": "How do I prepare the space for the work?",
           "faqA4": "Remove valuable and fragile items, make sure there's access to water and power, and agree on scheduling and waste removal with the professional. A good professional will give you a clear plan of work and a time estimate before starting."
         }
+      },
+      "electrical": {
+        "podgorica": {
+          "intro": "Electrical work calls for qualified and reliable professionals — from small repairs to complete installations. Glatko connects you with verified electrical professionals in Podgorica and the surrounding area for safe work of any size. Compare quotes, check ratings, and choose the professional that fits your needs and budget.",
+          "included1": "Socket and switch installation",
+          "included2": "Distribution panel replacement",
+          "included3": "Lighting installation",
+          "included4": "Complete rewiring",
+          "included5": "Fault finding and repairs",
+          "included6": "Connecting household appliances",
+          "costScenario": {
+            "socketPoint": "Socket or switch installation (per point)",
+            "panelReplacement": "Distribution panel replacement",
+            "lightingFixture": "Light fixture installation (per fixture)",
+            "rewiring": "Complete rewiring"
+          },
+          "faqQ1": "How much does an electrician cost in Podgorica?",
+          "faqA1": "Smaller jobs are usually charged per point or per hour — a typical guide is €10–25 per hour. Bigger jobs, like a distribution panel replacement or complete rewiring, are priced per project. You'll get the most accurate figure by comparing free quotes from several professionals.",
+          "faqQ2": "How long does rewiring an apartment take?",
+          "faqA2": "For an average apartment, complete rewiring usually takes from a few days up to a week, depending on the size and the condition of the walls. Smaller interventions, like installing sockets or light fixtures, are typically done within a day.",
+          "faqQ3": "What affects the price of electrical work?",
+          "faqA3": "The main factors are the scope of work (number of points), how accessible the existing installations are, the choice of materials, and urgency. Emergency or out-of-hours interventions usually cost more.",
+          "faqQ4": "How do I prepare for the electrician's visit?",
+          "faqA4": "Describe the problem or the scope of work as precisely as you can, make sure the distribution panel is accessible, and plan for short power interruptions during the work. A good professional will walk you through the plan before starting."
+        }
+      },
+      "kitchen-bathroom": {
+        "podgorica": {
+          "intro": "A complete kitchen or bathroom renovation is one of the most effective ways to upgrade a home. Glatko connects you with verified professionals in Podgorica and the surrounding area who handle everything from tiling and waterproofing to installing fixtures and furniture. Compare quotes, check ratings, and choose the professional that fits your budget and timeline.",
+          "included1": "Complete bathroom renovation",
+          "included2": "Complete kitchen renovation",
+          "included3": "Tiling and waterproofing",
+          "included4": "Sanitary fixture installation",
+          "included5": "Kitchen furniture and appliance installation",
+          "included6": "Adapting plumbing and electrical installations",
+          "costScenario": {
+            "bathroomComplete": "Complete bathroom renovation",
+            "kitchenComplete": "Complete kitchen renovation",
+            "tiling": "Tiling",
+            "sanitaryFixtures": "Sanitary fixtures installation"
+          },
+          "faqQ1": "How much does a bathroom renovation cost in Podgorica?",
+          "faqA1": "A typical guide is €300–700 per square metre, so a complete renovation of a smaller bathroom usually lands between €1,500 and €6,000, depending on the materials and the scope of work. You'll get the exact price by requesting free quotes from several professionals.",
+          "faqQ2": "How long does a kitchen or bathroom renovation take?",
+          "faqA2": "A complete bathroom renovation usually takes one to two weeks. A kitchen renovation typically takes several days to a week once the furniture and materials have been delivered. The professional will give you a realistic timeline in the quote.",
+          "faqQ3": "Do I need to move out during the renovation?",
+          "faqA3": "Usually not. The work is contained to one room, and water or power interruptions are short. It helps to protect nearby furniture from dust and agree on working hours with the professional in advance.",
+          "faqQ4": "What affects the price the most?",
+          "faqA4": "The choice of materials and finish level (tiles, fixtures, furniture), the amount of plumbing and electrical rework, and the condition of the existing space. Labour and finishing usually drive the biggest differences in price — not the tiles themselves."
+        }
+      },
+      "plumbing-renov": {
+        "podgorica": {
+          "intro": "From a dripping faucet to a complete pipe replacement, plumbing work needs a fast and reliable response. Glatko connects you with verified plumbing professionals in Podgorica and the surrounding area. Compare quotes, check ratings, and choose the professional that fits your needs and timeline.",
+          "included1": "Leak detection and repair",
+          "included2": "Boiler installation and replacement",
+          "included3": "Faucet and valve replacement",
+          "included4": "Complete pipe replacement",
+          "included5": "Connecting sanitary fixtures",
+          "included6": "Drain unblocking",
+          "costScenario": {
+            "boiler": "Boiler installation or replacement",
+            "leakRepair": "Leak repair",
+            "faucetValve": "Faucet or valve replacement",
+            "pipeReplacement": "Complete pipe replacement"
+          },
+          "faqQ1": "How much does a plumber cost in Podgorica?",
+          "faqA1": "Smaller interventions are usually charged per hour — a typical guide is €10–25 per hour — or as a fixed price per job, like a faucet replacement or boiler installation. Bigger jobs, such as a complete pipe replacement, are priced per project. Compare free quotes from several professionals for an exact figure.",
+          "faqQ2": "How quickly can a professional come out for an urgent leak?",
+          "faqA2": "Many professionals handle urgent call-outs, often the same day. Mark the request as urgent and describe the problem precisely. Out-of-hours and weekend interventions usually cost more, so shut off the water at the main valve first if you can.",
+          "faqQ3": "When should pipes be completely replaced?",
+          "faqA3": "Complete replacement makes sense for older installations, with frequent leaks, visibly corroded pipes, or noticeably low water pressure. The most cost-effective moment is during a bathroom or kitchen renovation, while the walls are already open.",
+          "faqQ4": "How do I prepare for plumbing work?",
+          "faqA4": "Find out where your main shutoff valve is, clear access under sinks and around the boiler, and plan for short water interruptions. A good professional will explain the scope of work and the expected duration before starting."
+        }
       }
     }
   }

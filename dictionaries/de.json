@@ -2297,6 +2297,109 @@
       "relatedCities": {
         "headline": "Dieser Service in anderen Städten"
       }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Die Renovierung einer Wohnung oder eines Geschäftsraums in Podgorica erfordert zuverlässige Fachleute und eine klare Kosteneinschätzung. Glatko verbindet Sie mit geprüften Fachleuten in Podgorica und Umgebung — von der Komplettrenovierung einer Wohnung bis zu einzelnen Reparaturen. Vergleichen Sie Angebote, prüfen Sie Bewertungen und wählen Sie die Fachkraft, die zu Ihrem Budget und Zeitplan passt.",
+          "included1": "Komplettrenovierung von Wohnungen und Häusern",
+          "included2": "Renovierung von Bad und Küche",
+          "included3": "Elektroinstallationen",
+          "included4": "Sanitärarbeiten",
+          "included5": "Maler- und Verputzarbeiten",
+          "included6": "Fliesen- und Bodenarbeiten",
+          "costScenario": {
+            "fullApartment": "Komplettrenovierung einer Wohnung",
+            "bathroom": "Badrenovierung",
+            "kitchen": "Küchenrenovierung",
+            "tiling": "Fliesenarbeiten",
+            "painting": "Malerarbeiten"
+          },
+          "faqQ1": "Was kostet eine Wohnungsrenovierung in Podgorica?",
+          "faqA1": "Der Preis hängt von der Fläche, dem Umfang der Arbeiten und der Materialwahl ab. Für eine Standardrenovierung liegt der Richtwert bei etwa 300–600 € pro Quadratmeter. Die genaueste Einschätzung erhalten Sie, wenn Sie kostenlose Angebote von mehreren Fachleuten anfordern.",
+          "faqQ2": "Wie lange dauert eine typische Renovierung?",
+          "faqA2": "Kleinere Arbeiten und kosmetische Ausbesserungen sind meist in wenigen Tagen erledigt. Eine Badrenovierung dauert etwa ein bis zwei Wochen, die Komplettrenovierung einer mittelgroßen Wohnung je nach Komplexität vier bis acht Wochen.",
+          "faqQ3": "Sind die Fachleute auf Glatko geprüft?",
+          "faqA3": "Ja. Fachleute werden geprüft, bevor sie in den Ergebnissen erscheinen. Auf jedem Profil sehen Sie Bewertungen, die Anzahl der Rezensionen und frühere Arbeiten, damit Sie sich mit gutem Gefühl entscheiden können.",
+          "faqQ4": "Wie bereite ich die Räume auf die Arbeiten vor?",
+          "faqA4": "Entfernen Sie wertvolle und zerbrechliche Gegenstände, stellen Sie den Zugang zu Wasser und Strom sicher und klären Sie Termine und Schuttentsorgung mit der Fachkraft. Eine gute Fachkraft gibt Ihnen vor Beginn einen klaren Arbeitsplan und eine Zeiteinschätzung."
+        }
+      },
+      "electrical": {
+        "podgorica": {
+          "intro": "Elektroarbeiten erfordern qualifizierte und zuverlässige Fachleute — von kleinen Reparaturen bis zu kompletten Installationen. Glatko verbindet Sie mit geprüften Fachleuten für Elektroarbeiten in Podgorica und Umgebung — für sichere Arbeiten jeder Größenordnung. Vergleichen Sie Angebote, prüfen Sie Bewertungen und wählen Sie die Fachkraft, die zu Ihren Anforderungen und Ihrem Budget passt.",
+          "included1": "Montage von Steckdosen und Schaltern",
+          "included2": "Austausch des Verteilerkastens",
+          "included3": "Montage von Beleuchtung",
+          "included4": "Komplette Erneuerung der Elektroinstallation",
+          "included5": "Fehlersuche und Reparaturen",
+          "included6": "Anschluss von Haushaltsgeräten",
+          "costScenario": {
+            "socketPoint": "Montage von Steckdose oder Schalter (pro Punkt)",
+            "panelReplacement": "Austausch des Verteilerkastens",
+            "lightingFixture": "Montage einer Leuchte (pro Stück)",
+            "rewiring": "Komplette Erneuerung der Elektroinstallation"
+          },
+          "faqQ1": "Was kostet ein Elektriker in Podgorica?",
+          "faqA1": "Kleinere Arbeiten werden meist pro Punkt oder pro Stunde abgerechnet — der Richtwert liegt bei 10–25 € pro Stunde. Größere Vorhaben, etwa der Austausch des Verteilerkastens oder eine komplette Erneuerung der Elektroinstallation, werden pro Projekt kalkuliert. Den genauesten Preis erhalten Sie, wenn Sie kostenlose Angebote mehrerer Fachleute vergleichen.",
+          "faqQ2": "Wie lange dauert die Erneuerung der Elektroinstallation in einer Wohnung?",
+          "faqA2": "Bei einer durchschnittlichen Wohnung dauert die komplette Erneuerung meist einige Tage bis zu einer Woche, je nach Größe und Zustand der Wände. Kleinere Eingriffe, etwa die Montage von Steckdosen oder Leuchten, sind in der Regel an einem Tag erledigt.",
+          "faqQ3": "Was beeinflusst den Preis von Elektroarbeiten?",
+          "faqA3": "Die wichtigsten Faktoren sind der Umfang der Arbeiten (Anzahl der Punkte), die Zugänglichkeit der bestehenden Installationen, die Materialwahl und die Dringlichkeit. Notfalleinsätze und Arbeiten außerhalb der üblichen Arbeitszeiten kosten in der Regel mehr.",
+          "faqQ4": "Wie bereite ich mich auf den Besuch des Elektrikers vor?",
+          "faqA4": "Beschreiben Sie das Problem oder den Umfang der Arbeiten so genau wie möglich, sorgen Sie für freien Zugang zum Verteilerkasten und rechnen Sie während der Arbeiten mit kurzen Stromunterbrechungen. Eine gute Fachkraft erklärt Ihnen vor Beginn den Arbeitsplan."
+        }
+      },
+      "kitchen-bathroom": {
+        "podgorica": {
+          "intro": "Eine komplette Küchen- oder Badrenovierung ist eine der wirkungsvollsten Möglichkeiten, ein Zuhause aufzuwerten. Glatko verbindet Sie mit geprüften Fachleuten in Podgorica und Umgebung, die alles übernehmen — von Fliesenarbeiten und Abdichtung bis zur Montage von Sanitärobjekten und Möbeln. Vergleichen Sie Angebote, prüfen Sie Bewertungen und wählen Sie die Fachkraft, die zu Ihrem Budget und Zeitplan passt.",
+          "included1": "Komplette Badrenovierung",
+          "included2": "Komplette Küchenrenovierung",
+          "included3": "Fliesenarbeiten und Abdichtung",
+          "included4": "Montage von Sanitärobjekten",
+          "included5": "Montage von Küchenmöbeln und Geräten",
+          "included6": "Anpassung von Wasser- und Elektroinstallationen",
+          "costScenario": {
+            "bathroomComplete": "Komplette Badrenovierung",
+            "kitchenComplete": "Komplette Küchenrenovierung",
+            "tiling": "Fliesenarbeiten",
+            "sanitaryFixtures": "Montage von Sanitärobjekten"
+          },
+          "faqQ1": "Was kostet eine Badrenovierung in Podgorica?",
+          "faqA1": "Der Richtwert liegt bei 300–700 € pro Quadratmeter; die Komplettrenovierung eines kleineren Bads kostet damit meist zwischen 1.500 und 6.000 €, je nach Material und Umfang der Arbeiten. Den genauen Preis erhalten Sie, wenn Sie kostenlose Angebote von mehreren Fachleuten anfordern.",
+          "faqQ2": "Wie lange dauert eine Küchen- oder Badrenovierung?",
+          "faqA2": "Eine komplette Badrenovierung dauert in der Regel ein bis zwei Wochen. Eine Küchenrenovierung dauert meist einige Tage bis zu einer Woche, sobald Möbel und Materialien geliefert sind. Die Fachkraft nennt Ihnen im Angebot einen realistischen Zeitrahmen.",
+          "faqQ3": "Muss ich während der Renovierung ausziehen?",
+          "faqA3": "In der Regel nicht. Die Arbeiten beschränken sich auf einen Raum, und Wasser- oder Stromunterbrechungen sind kurz. Es hilft, Möbel in der Nähe vor Staub zu schützen und die Arbeitszeiten vorab mit der Fachkraft abzustimmen.",
+          "faqQ4": "Was beeinflusst den Preis am stärksten?",
+          "faqA4": "Die Wahl der Materialien und der Ausstattungsstandard (Fliesen, Sanitärobjekte, Möbel), der Umfang der Wasser- und Elektroarbeiten sowie der Zustand der vorhandenen Räume. Die größten Preisunterschiede entstehen meist durch Arbeitskosten und die Qualität der Ausführung — nicht durch die Fliesen selbst."
+        }
+      },
+      "plumbing-renov": {
+        "podgorica": {
+          "intro": "Vom tropfenden Wasserhahn bis zum kompletten Rohraustausch — Sanitärarbeiten erfordern eine schnelle und zuverlässige Lösung. Glatko verbindet Sie mit geprüften Fachleuten für Sanitärarbeiten in Podgorica und Umgebung. Vergleichen Sie Angebote, prüfen Sie Bewertungen und wählen Sie die Fachkraft, die zu Ihren Anforderungen und Ihrem Zeitplan passt.",
+          "included1": "Ortung und Reparatur von Lecks",
+          "included2": "Montage und Austausch von Boilern",
+          "included3": "Austausch von Wasserhähnen und Ventilen",
+          "included4": "Kompletter Rohraustausch",
+          "included5": "Anschluss von Sanitärobjekten",
+          "included6": "Reinigung verstopfter Abflüsse",
+          "costScenario": {
+            "boiler": "Montage oder Austausch eines Boilers",
+            "leakRepair": "Reparatur eines Lecks",
+            "faucetValve": "Austausch von Wasserhahn oder Ventil",
+            "pipeReplacement": "Kompletter Rohraustausch"
+          },
+          "faqQ1": "Was kostet ein Installateur in Podgorica?",
+          "faqA1": "Kleinere Einsätze werden meist pro Stunde abgerechnet — der Richtwert liegt bei 10–25 € pro Stunde — oder zum Festpreis pro Auftrag, etwa für den Austausch eines Wasserhahns oder die Montage eines Boilers. Größere Vorhaben wie ein kompletter Rohraustausch werden pro Projekt kalkuliert. Für einen genauen Preis vergleichen Sie kostenlose Angebote mehrerer Fachleute.",
+          "faqQ2": "Wie schnell kann eine Fachkraft bei einem dringenden Leck kommen?",
+          "faqA2": "Viele Fachleute übernehmen dringende Einsätze, oft noch am selben Tag. Markieren Sie die Anfrage als dringend und beschreiben Sie das Problem genau. Einsätze außerhalb der üblichen Arbeitszeiten und am Wochenende kosten in der Regel mehr — drehen Sie daher, wenn möglich, zuerst das Wasser am Hauptventil ab.",
+          "faqQ3": "Wann sollten Rohre komplett ausgetauscht werden?",
+          "faqA3": "Ein kompletter Austausch ist sinnvoll bei älteren Installationen, häufigen Lecks, sichtbar korrodierten Rohren oder spürbar niedrigem Wasserdruck. Am wirtschaftlichsten ist der Zeitpunkt während einer Bad- oder Küchenrenovierung, wenn die Wände ohnehin offen sind.",
+          "faqQ4": "Wie bereite ich mich auf Sanitärarbeiten vor?",
+          "faqA4": "Finden Sie heraus, wo sich Ihr Hauptabsperrventil befindet, schaffen Sie freien Zugang unter Spüle und Waschbecken sowie rund um den Boiler und rechnen Sie mit kurzen Wasserunterbrechungen. Eine gute Fachkraft erklärt Ihnen vor Beginn den Umfang der Arbeiten und die voraussichtliche Dauer."
+        }
+      }
     }
   }
 }
