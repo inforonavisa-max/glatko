@@ -2267,6 +2267,36 @@
     "comingSoonBody": "Diese Seite wird vorbereitet. In der Zwischenzeit können Sie Fachleute durchsehen und ein Angebot anfordern.",
     "browseCategory": "Alle Fachleute für {service} ansehen",
     "proCountBadge": "Geprüfte Fachleute: {count}",
-    "ctaQuote": "Kostenlose Angebote erhalten"
+    "ctaQuote": "Kostenlose Angebote erhalten",
+    "template": {
+      "whatsIncluded": {
+        "headline": "Was enthalten ist"
+      },
+      "howItWorks": {
+        "headline": "So funktioniert es",
+        "step1Title": "Beschreiben Sie Ihr Projekt",
+        "step1Body": "Sagen Sie uns, was Sie wo brauchen — kostenlos und in einer Minute.",
+        "step2Title": "Angebote vergleichen",
+        "step2Body": "Geprüfte Fachleute senden Ihnen Angebote mit Preisen und Terminen.",
+        "step3Title": "Auswählen und starten",
+        "step3Body": "Bewertungen und Rezensionen prüfen und die passende Fachkraft wählen."
+      },
+      "costGuide": {
+        "headline": "Preisübersicht",
+        "colScenario": "Leistung",
+        "colRange": "Geschätzter Preis",
+        "typicalLabel": "Typische Spanne",
+        "disclaimer": "Die Preise sind Richtwerte und hängen von Umfang, Material und Komplexität ab. Den genauen Preis erhalten Sie in den Angeboten der Fachleute."
+      },
+      "faq": {
+        "headline": "Häufig gestellte Fragen"
+      },
+      "relatedServices": {
+        "headline": "Ähnliche Leistungen"
+      },
+      "relatedCities": {
+        "headline": "Dieser Service in anderen Städten"
+      }
+    }
   }
 }

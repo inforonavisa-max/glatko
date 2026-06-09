@@ -2270,6 +2270,64 @@
     "comingSoonBody": "Ova stranica je u pripremi. U međuvremenu možete pregledati stručnjake i zatražiti ponudu.",
     "browseCategory": "Pogledaj sve stručnjake: {service}",
     "proCountBadge": "Provjereni stručnjaci: {count}",
-    "ctaQuote": "Zatraži besplatne ponude"
+    "ctaQuote": "Zatraži besplatne ponude",
+    "template": {
+      "whatsIncluded": {
+        "headline": "Šta je obuhvaćeno"
+      },
+      "howItWorks": {
+        "headline": "Kako funkcioniše",
+        "step1Title": "Opišite posao",
+        "step1Body": "Recite nam šta vam treba i gdje — besplatno je i traje minut.",
+        "step2Title": "Uporedite ponude",
+        "step2Body": "Provjereni stručnjaci šalju vam ponude sa cijenama i rokovima.",
+        "step3Title": "Izaberite i počnite",
+        "step3Body": "Pogledajte ocjene i recenzije, pa izaberite stručnjaka koji vam odgovara."
+      },
+      "costGuide": {
+        "headline": "Okvirne cijene",
+        "colScenario": "Usluga",
+        "colRange": "Okvirna cijena",
+        "typicalLabel": "Tipičan raspon",
+        "disclaimer": "Cijene su orijentacione i zavise od obima posla, materijala i složenosti. Tačnu cijenu dobićete u ponudama stručnjaka."
+      },
+      "faq": {
+        "headline": "Česta pitanja"
+      },
+      "relatedServices": {
+        "headline": "Povezane usluge"
+      },
+      "relatedCities": {
+        "headline": "Ova usluga u drugim gradovima"
+      }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Renoviranje doma ili poslovnog prostora u Podgorici zahtijeva pouzdane stručnjake i jasnu procjenu troškova. Preko Glatka se povezujete sa provjerenim stručnjacima iz Podgorice i okoline — od kompletnog renoviranja stana do pojedinačnih popravki. Uporedite ponude, pogledajte ocjene i izaberite stručnjaka koji odgovara vašem budžetu i rokovima.",
+          "included1": "Kompletno renoviranje stanova i kuća",
+          "included2": "Renoviranje kupatila i kuhinja",
+          "included3": "Električne instalacije",
+          "included4": "Vodoinstalaterski radovi",
+          "included5": "Molerski i gipsarski radovi",
+          "included6": "Postavljanje pločica i podova",
+          "costScenario": {
+            "fullApartment": "Kompletno renoviranje stana",
+            "bathroom": "Renoviranje kupatila",
+            "kitchen": "Renoviranje kuhinje",
+            "tiling": "Postavljanje pločica",
+            "painting": "Molersko-farbarski radovi"
+          },
+          "faqQ1": "Koliko košta renoviranje stana u Podgorici?",
+          "faqA1": "Cijena zavisi od kvadrature, obima radova i izbora materijala. Za standardno renoviranje orijentaciona cijena je oko 300–600 € po kvadratnom metru. Najtačniju procjenu dobićete kada zatražite besplatne ponude od više stručnjaka.",
+          "faqQ2": "Koliko traje prosječno renoviranje?",
+          "faqA2": "Manji radovi i kozmetičke prepravke obično se završe za nekoliko dana. Renoviranje kupatila traje oko jedne do dvije sedmice, a kompletna adaptacija stana srednje veličine između četiri i osam sedmica, u zavisnosti od složenosti.",
+          "faqQ3": "Da li su stručnjaci na Glatku provjereni?",
+          "faqA3": "Da. Stručnjaci prolaze provjeru prije nego što se pojave u rezultatima. Na svakom profilu možete vidjeti ocjene, broj recenzija i prethodne radove kako biste odlučili sa povjerenjem.",
+          "faqQ4": "Kako da pripremim prostor za radove?",
+          "faqA4": "Uklonite vrijedne i lomljive predmete, obezbijedite pristup vodi i struji i dogovorite sa stručnjakom termine i način odvoženja otpada. Dobar stručnjak će vam prije početka dati jasan plan radova i procjenu trajanja."
+        }
+      }
+    }
   }
 }

@@ -2270,6 +2270,36 @@
     "comingSoonBody": "Bu sayfa hazırlanıyor. Bu sırada profesyonelleri inceleyebilir ve teklif isteyebilirsiniz.",
     "browseCategory": "Tüm {service} profesyonellerini gör",
     "proCountBadge": "Doğrulanmış profesyoneller: {count}",
-    "ctaQuote": "Ücretsiz teklif al"
+    "ctaQuote": "Ücretsiz teklif al",
+    "template": {
+      "whatsIncluded": {
+        "headline": "Neler dahil"
+      },
+      "howItWorks": {
+        "headline": "Nasıl çalışır",
+        "step1Title": "İşinizi anlatın",
+        "step1Body": "Neye, nerede ihtiyacınız olduğunu söyleyin — ücretsiz ve bir dakika sürer.",
+        "step2Title": "Teklifleri karşılaştırın",
+        "step2Body": "Doğrulanmış profesyoneller size fiyat ve süre içeren teklifler gönderir.",
+        "step3Title": "Seçin ve başlayın",
+        "step3Body": "Puanları ve yorumları inceleyin, size uygun profesyoneli seçin."
+      },
+      "costGuide": {
+        "headline": "Fiyat rehberi",
+        "colScenario": "Hizmet",
+        "colRange": "Tahmini fiyat",
+        "typicalLabel": "Tipik aralık",
+        "disclaimer": "Fiyatlar yaklaşıktır; işin kapsamına, malzemeye ve karmaşıklığa göre değişir. Kesin fiyatı profesyonellerin tekliflerinde alırsınız."
+      },
+      "faq": {
+        "headline": "Sıkça sorulan sorular"
+      },
+      "relatedServices": {
+        "headline": "İlgili hizmetler"
+      },
+      "relatedCities": {
+        "headline": "Bu hizmet diğer şehirlerde"
+      }
+    }
   }
 }

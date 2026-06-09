@@ -2267,6 +2267,36 @@
     "comingSoonBody": "Questa pagina è in preparazione. Nel frattempo puoi consultare i professionisti e richiedere un preventivo.",
     "browseCategory": "Vedi tutti i professionisti di {service}",
     "proCountBadge": "Professionisti verificati: {count}",
-    "ctaQuote": "Richiedi preventivi gratuiti"
+    "ctaQuote": "Richiedi preventivi gratuiti",
+    "template": {
+      "whatsIncluded": {
+        "headline": "Cosa è incluso"
+      },
+      "howItWorks": {
+        "headline": "Come funziona",
+        "step1Title": "Descrivi il lavoro",
+        "step1Body": "Dicci cosa ti serve e dove — è gratis e richiede un minuto.",
+        "step2Title": "Confronta i preventivi",
+        "step2Body": "Professionisti verificati ti inviano preventivi con prezzi e tempi.",
+        "step3Title": "Scegli e inizia",
+        "step3Body": "Controlla valutazioni e recensioni, poi scegli il professionista adatto."
+      },
+      "costGuide": {
+        "headline": "Guida ai prezzi",
+        "colScenario": "Servizio",
+        "colRange": "Prezzo stimato",
+        "typicalLabel": "Fascia tipica",
+        "disclaimer": "I prezzi sono indicativi e dipendono da ambito, materiali e complessità. Il prezzo esatto lo riceverai nei preventivi dei professionisti."
+      },
+      "faq": {
+        "headline": "Domande frequenti"
+      },
+      "relatedServices": {
+        "headline": "Servizi correlati"
+      },
+      "relatedCities": {
+        "headline": "Questo servizio in altre città"
+      }
+    }
   }
 }

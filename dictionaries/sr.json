@@ -2270,6 +2270,36 @@
     "comingSoonBody": "Ova stranica je u pripremi. U međuvremenu možete pregledati stručnjake i zatražiti ponudu.",
     "browseCategory": "Pogledaj sve stručnjake: {service}",
     "proCountBadge": "Provereni stručnjaci: {count}",
-    "ctaQuote": "Zatraži besplatne ponude"
+    "ctaQuote": "Zatraži besplatne ponude",
+    "template": {
+      "whatsIncluded": {
+        "headline": "Šta je uključeno"
+      },
+      "howItWorks": {
+        "headline": "Kako funkcioniše",
+        "step1Title": "Opišite posao",
+        "step1Body": "Recite nam šta vam treba i gde — besplatno je i traje minut.",
+        "step2Title": "Uporedite ponude",
+        "step2Body": "Provereni stručnjaci vam šalju ponude sa cenama i rokovima.",
+        "step3Title": "Izaberite i počnite",
+        "step3Body": "Pogledajte ocene i recenzije, pa izaberite stručnjaka koji vam odgovara."
+      },
+      "costGuide": {
+        "headline": "Okvirne cene",
+        "colScenario": "Usluga",
+        "colRange": "Okvirna cena",
+        "typicalLabel": "Tipičan raspon",
+        "disclaimer": "Cene su orijentacione i zavise od obima posla, materijala i složenosti. Tačnu cenu dobićete u ponudama stručnjaka."
+      },
+      "faq": {
+        "headline": "Česta pitanja"
+      },
+      "relatedServices": {
+        "headline": "Povezane usluge"
+      },
+      "relatedCities": {
+        "headline": "Ova usluga u drugim gradovima"
+      }
+    }
   }
 }

@@ -12,17 +12,39 @@ import { Breadcrumb, type BreadcrumbCrumb } from "@/components/seo/Breadcrumb";
 import { FoundingProviderBadge } from "@/components/glatko/founding/FoundingProviderBadge";
 import {
   getCategoryBySlug,
+  getSubCategories,
+  getCitiesServingCategory,
   searchProfessionals,
 } from "@/lib/supabase/glatko.server";
 import { buildAlternates, localizedUrl } from "@/lib/seo";
-import { GLATKO_CITIES } from "@/lib/glatko/cities";
+import { GLATKO_CITIES, getCityByName } from "@/lib/glatko/cities";
 import { getLiquidityStatus } from "@/lib/glatko/liquidity";
+import { getCostRange, formatPriceRange } from "@/lib/glatko/pricing";
 import {
   generateServiceCitySchema,
   generateLocalBusinessCitySchema,
   generateBreadcrumbSchema,
+  generateFAQPageSchema,
   jsonLdScriptProps,
 } from "@/lib/seo/jsonld";
+import { Intro } from "@/components/glatko/service-city/Intro";
+import { WhatsIncluded } from "@/components/glatko/service-city/WhatsIncluded";
+import {
+  HowItWorks,
+  type HowItWorksStep,
+} from "@/components/glatko/service-city/HowItWorks";
+import {
+  CostGuideTable,
+  type CostGuideRow,
+} from "@/components/glatko/service-city/CostGuideTable";
+import {
+  PageFAQ,
+  type PageFAQItem,
+} from "@/components/glatko/service-city/PageFAQ";
+import {
+  RelatedLinks,
+  type RelatedLinkGroup,
+} from "@/components/glatko/service-city/RelatedLinks";
 
 /**
  * Service × city page — G-PSEO-FOUNDATION.
@@ -138,6 +160,103 @@ export default async function ServiceCityPage({ params }: Props) {
       ).professionals as ProRow[])
     : [];
 
+  // --- FAZ 3 content layer (liquid pages only) ---------------------------
+  // Generic template keys exist in all 9 locales; per-page content
+  // (servicesCity.content.<slug>.<city>.*) is authored per locale and gated
+  // with t.has() so locales without it (FAZ-3B backlog) degrade gracefully
+  // instead of rendering raw keys or "[FAZ-3B]" placeholders.
+  const contentBase = `servicesCity.content.${slug}.${citySlug}`;
+  let introText: string | null = null;
+  const includedItems: string[] = [];
+  let howItWorksSteps: HowItWorksStep[] = [];
+  let costRows: CostGuideRow[] = [];
+  let typicalRange: string | null = null;
+  const pageFaqs: PageFAQItem[] = [];
+  let relatedGroups: RelatedLinkGroup[] = [];
+
+  if (liquidity.isLiquid) {
+    introText = t.has(`${contentBase}.intro`) ? t(`${contentBase}.intro`) : null;
+
+    for (let i = 1; i <= 8; i++) {
+      const k = `${contentBase}.included${i}`;
+      if (t.has(k)) includedItems.push(t(k));
+    }
+
+    howItWorksSteps = [1, 2, 3]
+      .map((n) => {
+        const titleKey = `servicesCity.template.howItWorks.step${n}Title`;
+        const bodyKey = `servicesCity.template.howItWorks.step${n}Body`;
+        if (!t.has(titleKey) || !t.has(bodyKey)) return null;
+        return { title: t(titleKey), body: t(bodyKey) };
+      })
+      .filter((s): s is HowItWorksStep => s !== null);
+
+    const pricing = getCostRange(slug, citySlug);
+    if (pricing) {
+      typicalRange = formatPriceRange(pricing.typical, locale);
+      costRows = pricing.examples
+        .map((ex) => {
+          const labelKey = `${contentBase}.costScenario.${ex.scenarioKey}`;
+          if (!t.has(labelKey)) return null;
+          return {
+            label: t(labelKey),
+            range: formatPriceRange(ex.priceRange, locale),
+          };
+        })
+        .filter((r): r is CostGuideRow => r !== null);
+    }
+
+    for (let i = 1; i <= 8; i++) {
+      const qKey = `${contentBase}.faqQ${i}`;
+      const aKey = `${contentBase}.faqA${i}`;
+      if (t.has(qKey) && t.has(aKey)) {
+        pageFaqs.push({ question: t(qKey), answer: t(aKey) });
+      }
+    }
+
+    // Internal links: related services (same city) + this service in other
+    // cities. Other-cities list is demand-driven (cities that actually serve
+    // this category) — İlke 3 (no city priority).
+    const subCats = await getSubCategories(category.id);
+    const relatedServiceLinks = subCats.slice(0, 8).map((c) => ({
+      label: pickLocalized(c.name as Record<string, string>, locale, c.slug),
+      href: {
+        pathname: "/services/[slug]/[city]" as const,
+        params: { slug: c.slug, city: citySlug },
+      },
+    }));
+
+    const servingCities = await getCitiesServingCategory(category.id);
+    const relatedCityLinks = Array.from(
+      new Map(
+        servingCities
+          .map((name) => getCityByName(name))
+          .filter((c) => c !== undefined && c.slug !== citySlug)
+          .map((c) => [c!.slug, c!] as const),
+      ).values(),
+    )
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, 8)
+      .map((c) => ({
+        label: c.name,
+        href: {
+          pathname: "/services/[slug]/[city]" as const,
+          params: { slug, city: c.slug },
+        },
+      }));
+
+    relatedGroups = [
+      {
+        heading: t("servicesCity.template.relatedServices.headline"),
+        links: relatedServiceLinks,
+      },
+      {
+        heading: t("servicesCity.template.relatedCities.headline"),
+        links: relatedCityLinks,
+      },
+    ];
+  }
+
   const crumbs: BreadcrumbCrumb[] = [
     { name: "Glatko", href: "/" },
     { name: t("nav.services"), href: "/services" },
@@ -186,6 +305,19 @@ export default async function ServiceCityPage({ params }: Props) {
           },
           { name: city.name, url: pageUrl },
         ]),
+        // FAQPage from this page's own FAQ (single source — same data the
+        // visible PageFAQ renders). Only when the locale has authored FAQs.
+        ...(pageFaqs.length > 0
+          ? [
+              generateFAQPageSchema(
+                pageFaqs.map((f) => ({
+                  q: { [locale]: f.question },
+                  a: { [locale]: f.answer },
+                })),
+                locale,
+              ),
+            ].filter((s): s is NonNullable<typeof s> => s !== null)
+          : []),
       ]
     : [];
 
@@ -214,6 +346,13 @@ export default async function ServiceCityPage({ params }: Props) {
       <div className="mx-auto max-w-5xl px-4 pb-24 pt-12 sm:px-6 lg:px-8">
         {liquidity.isLiquid ? (
           <>
+            {introText && <Intro text={introText} />}
+            {includedItems.length > 0 && (
+              <WhatsIncluded
+                heading={t("servicesCity.template.whatsIncluded.headline")}
+                items={includedItems}
+              />
+            )}
             {pros.length > 0 && (
               <div className="mb-10">
                 <h2 className="mb-6 font-serif text-xl font-semibold text-gray-900 dark:text-white">
@@ -283,6 +422,34 @@ export default async function ServiceCityPage({ params }: Props) {
                 </div>
               </div>
             )}
+
+            {howItWorksSteps.length > 0 && (
+              <HowItWorks
+                heading={t("servicesCity.template.howItWorks.headline")}
+                steps={howItWorksSteps}
+              />
+            )}
+            {costRows.length > 0 && (
+              <CostGuideTable
+                heading={t("servicesCity.template.costGuide.headline")}
+                caption={`${t("servicesCity.template.costGuide.headline")} — ${service}, ${city.name}`}
+                columns={{
+                  scenario: t("servicesCity.template.costGuide.colScenario"),
+                  range: t("servicesCity.template.costGuide.colRange"),
+                }}
+                typicalLabel={t("servicesCity.template.costGuide.typicalLabel")}
+                typicalRange={typicalRange ?? ""}
+                rows={costRows}
+                disclaimer={t("servicesCity.template.costGuide.disclaimer")}
+              />
+            )}
+            {pageFaqs.length > 0 && (
+              <PageFAQ
+                heading={t("servicesCity.template.faq.headline")}
+                faqs={pageFaqs}
+              />
+            )}
+            <RelatedLinks groups={relatedGroups} />
 
             <Link
               href="/request-service"

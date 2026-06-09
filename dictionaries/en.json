@@ -2267,6 +2267,64 @@
     "comingSoonBody": "This page is being prepared. In the meantime, you can browse professionals and request a quote.",
     "browseCategory": "Browse all {service} professionals",
     "proCountBadge": "Verified professionals: {count}",
-    "ctaQuote": "Get free quotes"
+    "ctaQuote": "Get free quotes",
+    "template": {
+      "whatsIncluded": {
+        "headline": "What's included"
+      },
+      "howItWorks": {
+        "headline": "How it works",
+        "step1Title": "Describe your job",
+        "step1Body": "Tell us what you need and where — it's free and takes a minute.",
+        "step2Title": "Compare quotes",
+        "step2Body": "Verified professionals send you quotes with prices and timelines.",
+        "step3Title": "Choose and start",
+        "step3Body": "Check ratings and reviews, then pick the professional that fits."
+      },
+      "costGuide": {
+        "headline": "Cost guide",
+        "colScenario": "Service",
+        "colRange": "Estimated price",
+        "typicalLabel": "Typical range",
+        "disclaimer": "Prices are indicative and depend on scope, materials, and complexity. You'll get exact pricing in the professionals' quotes."
+      },
+      "faq": {
+        "headline": "Frequently asked questions"
+      },
+      "relatedServices": {
+        "headline": "Related services"
+      },
+      "relatedCities": {
+        "headline": "This service in other cities"
+      }
+    },
+    "content": {
+      "renovation-construction": {
+        "podgorica": {
+          "intro": "Renovating a home or business space in Podgorica calls for reliable professionals and a clear sense of cost. Glatko connects you with verified professionals across Podgorica and the surrounding area — from a full apartment renovation to individual repairs. Compare quotes, check ratings, and choose the professional that fits your budget and timeline.",
+          "included1": "Full apartment and house renovation",
+          "included2": "Bathroom and kitchen renovation",
+          "included3": "Electrical installations",
+          "included4": "Plumbing work",
+          "included5": "Painting and plastering",
+          "included6": "Tiling and flooring",
+          "costScenario": {
+            "fullApartment": "Full apartment renovation",
+            "bathroom": "Bathroom renovation",
+            "kitchen": "Kitchen renovation",
+            "tiling": "Tiling",
+            "painting": "Painting work"
+          },
+          "faqQ1": "How much does apartment renovation cost in Podgorica?",
+          "faqA1": "The price depends on the area, the scope of work, and your choice of materials. For a standard renovation, a typical guide is around €300–600 per square metre. You'll get the most accurate estimate by requesting free quotes from several professionals.",
+          "faqQ2": "How long does a typical renovation take?",
+          "faqA2": "Minor jobs and cosmetic touch-ups are usually done in a few days. A bathroom renovation takes about one to two weeks, and a full renovation of a mid-sized apartment between four and eight weeks, depending on complexity.",
+          "faqQ3": "Are the professionals on Glatko verified?",
+          "faqA3": "Yes. Professionals are checked before they appear in results. On each profile you can see ratings, the number of reviews, and previous work so you can decide with confidence.",
+          "faqQ4": "How do I prepare the space for the work?",
+          "faqA4": "Remove valuable and fragile items, make sure there's access to water and power, and agree on scheduling and waste removal with the professional. A good professional will give you a clear plan of work and a time estimate before starting."
+        }
+      }
+    }
   }
 }
