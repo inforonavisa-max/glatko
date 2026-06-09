@@ -199,6 +199,76 @@ export function generateCategoryLocalBusinessSchema(
   };
 }
 
+// 3b/4b. Service × city page (G-PSEO-FOUNDATION) — city-scoped variants of the
+// category Service/LocalBusiness above. Unlike #3/#4 (category-wide, all cities,
+// coarse centroid), these scope `areaServed` to the SINGLE city, carry the
+// precise city geo + locality, and point at the city page's own URL. Emitted
+// only on LIQUID (indexable) pages; non-liquid placeholders stay noindex with
+// just the layout Organization. Callers pass already-localized strings.
+export function generateServiceCitySchema(params: {
+  serviceName: string;
+  serviceDescription: string;
+  serviceTypeEn: string;
+  cityName: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: params.serviceName,
+    description: params.serviceDescription,
+    url: params.url,
+    serviceType: params.serviceTypeEn,
+    provider: {
+      "@type": "Organization",
+      name: ORG_NAME,
+      url: SEO_BASE,
+    },
+    areaServed: {
+      "@type": "City",
+      name: params.cityName,
+      addressCountry: "ME",
+    },
+    availableLanguage: SEO_LOCALES,
+    currenciesAccepted: "EUR",
+    paymentAccepted: "Cash, Credit Card, Bank Transfer",
+  };
+}
+
+export function generateLocalBusinessCitySchema(params: {
+  serviceName: string;
+  serviceDescription: string;
+  cityName: string;
+  cityGeo: { latitude: number; longitude: number };
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: `${ORG_NAME} — ${params.serviceName}, ${params.cityName}`,
+    description: params.serviceDescription,
+    url: params.url,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: params.cityName,
+      addressCountry: "ME",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: params.cityGeo.latitude,
+      longitude: params.cityGeo.longitude,
+    },
+    areaServed: {
+      "@type": "City",
+      name: params.cityName,
+      addressCountry: "ME",
+    },
+    priceRange: "€€",
+    currenciesAccepted: "EUR",
+    paymentAccepted: "Cash, Credit Card, Bank Transfer",
+  };
+}
+
 // 5. ItemList — sub-categories or P0 root grid.
 export function generateItemListSchema(
   items: SubCategorySchemaInput[],
