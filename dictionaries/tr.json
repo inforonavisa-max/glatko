@@ -8,7 +8,7 @@
   "brand": {
     "name": "Glatko",
     "tagline": "Karadağ'ın Premium Hizmet Platformu",
-    "description": "Eviniz, tekneniz ve yaşamınız için güvenilir profesyoneller"
+    "description": "Eviniz ve işiniz için güvenilir profesyoneller"
   },
   "nav": {
     "home": "Ana Sayfa",
@@ -33,10 +33,10 @@
   },
   "hero": {
     "title": "Karadağ'da Güvenilir Profesyoneller",
-    "subtitle": "Villa temizliğinden tekne bakımına, eviniz ve tekneniz için uzman hizmet",
+    "subtitle": "Ev tamiratından iş hizmetlerine — Karadağ genelinde güvenilir profesyoneller",
     "cta": "Ücretsiz Teklif Al",
     "ctaSecondary": "Profesyonelleri Keşfet",
-    "trustedBy": "Budva, Kotor ve Tivat'ta güvenilen platform",
+    "trustedBy": "Karadağ genelinde güveniliyor",
     "stats": {
       "professionals": "Profesyonel",
       "jobsCompleted": "Tamamlanan İş",
@@ -214,7 +214,7 @@
     "multilingual": "Çok Dilli Destek",
     "multilingualDesc": "9 dilde hizmet — Türkçe, İngilizce, Rusça ve daha fazlası",
     "local": "Yerel Uzmanlık",
-    "localDesc": "Budva'dan Kotor'a, Karadağ'ın her köşesinde profesyoneller",
+    "localDesc": "Nerede olursanız olun, Karadağ genelinde profesyoneller",
     "free": "Ücretsiz Teklif",
     "freeDesc": "Teklif almak tamamen ücretsiz — ödeme sadece iş yapıldığında",
     "topPro": "Top Profesyonel",
@@ -359,7 +359,7 @@
       "bullet1": "100+ Doğrulanmış Profesyonel",
       "bullet2": "Güvenli ve Şeffaf Teklif Sistemi",
       "bullet3": "9 Dil Desteği",
-      "quote": "Harika bir platform — villa temizliğinden tekne bakımına her şeyi buldum.",
+      "quote": "Harika bir platform — ihtiyacım olan her şey için güvenilir profesyoneller buldum.",
       "quoteAuthor": "Mehmet Y.",
       "quoteCity": "Budva"
     },
@@ -1697,12 +1697,12 @@
       "r1": {
         "name": "Mehmet Y.",
         "city": "Budva",
-        "text": "Villa temizliği için 3 teklif aldım, en uygununu seçtim. Harika deneyim!"
+        "text": "Projem için 3 teklif aldım, en iyisini seçtim. Harika bir deneyimdi!"
       },
       "r2": {
         "name": "Anna K.",
         "city": "Kotor",
-        "text": "Tekne bakımı için güvenilir bir profesyonel bulmak çok kolay oldu."
+        "text": "Ev tamiratım için güvenilir bir profesyonel bulmak çok kolaydı."
       },
       "r3": {
         "name": "Stefan M.",
@@ -1751,7 +1751,7 @@
     "whyJoin": {
       "title": "Neden Glatko'ya katılmalı?",
       "card1": "Müşteri havuzu",
-      "card1Desc": "Budva, Kotor ve Tivat'taki müşterilere ulaş",
+      "card1Desc": "Karadağ genelinde müşterilere ulaşın",
       "card2": "Esnek çalışma",
       "card2Desc": "Kendi takvimini sen belirle",
       "card3": "Güvenilir platform",

@@ -8,7 +8,7 @@
   "brand": {
     "name": "Glatko",
     "tagline": "Premium platforma usluga Crne Gore",
-    "description": "Pouzdani profesionalci za vaš dom, plovilo i životni stil"
+    "description": "Pouzdani stručnjaci za vaš dom i posao"
   },
   "nav": {
     "home": "Početna",
@@ -33,10 +33,10 @@
   },
   "hero": {
     "title": "Pouzdani profesionalci u Crnoj Gori",
-    "subtitle": "Od čišćenja vila do održavanja plovila — stručne usluge za vaš dom i brod",
+    "subtitle": "Od kućnih popravki do poslovnih usluga — provjereni stručnjaci širom Crne Gore",
     "cta": "Zatražite besplatnu ponudu",
     "ctaSecondary": "Pregledajte profesionalce",
-    "trustedBy": "Platforma od povjerenja u Budvi, Kotoru i Tivtu",
+    "trustedBy": "Platforma od povjerenja širom Crne Gore",
     "stats": {
       "professionals": "profesionalaca",
       "jobsCompleted": "završenih poslova",
@@ -214,7 +214,7 @@
     "multilingual": "Višejezička podrška",
     "multilingualDesc": "Dostupno na 9 jezika — turski, engleski, ruski i drugi",
     "local": "Lokalna stručnost",
-    "localDesc": "Profesionalci širom Crne Gore, od Budve do Kotora",
+    "localDesc": "Stručnjaci širom Crne Gore, gdje god da ste",
     "free": "Besplatne ponude",
     "freeDesc": "Zahtijevanje ponude je potpuno besplatno — plaćate samo kad je posao završen",
     "topPro": "Top profesionalac",
@@ -359,7 +359,7 @@
       "bullet1": "100+ verifikovanih stručnjaka",
       "bullet2": "Bezbedan i transparentan sistem ponuda",
       "bullet3": "Podrška za 9 jezika",
-      "quote": "Odlična platforma — pronašao sve od čišćenja vile do održavanja broda.",
+      "quote": "Odlična platforma — pronašao sam stručnjake za sve što mi je trebalo.",
       "quoteAuthor": "Mehmet J.",
       "quoteCity": "Budva"
     },
@@ -1697,12 +1697,12 @@
       "r1": {
         "name": "Mehmet J.",
         "city": "Budva",
-        "text": "Dobio 3 ponude za čišćenje vile, izabrao najbolju. Odlično iskustvo!"
+        "text": "Dobio 3 ponude za svoj projekat, izabrao najbolju. Odlično iskustvo!"
       },
       "r2": {
         "name": "Ana K.",
         "city": "Kotor",
-        "text": "Pronalaženje pouzdanog stručnjaka za održavanje broda bilo je vrlo lako."
+        "text": "Pronalaženje pouzdanog stručnjaka za popravku doma bilo je vrlo lako."
       },
       "r3": {
         "name": "Stefan M.",
@@ -1751,7 +1751,7 @@
     "whyJoin": {
       "title": "Zašto Glatko?",
       "card1": "Baza klijenata",
-      "card1Desc": "Dosegnite klijente u Budvi, Kotoru i Tivtu",
+      "card1Desc": "Dosegnite klijente širom Crne Gore",
       "card2": "Fleksibilan rad",
       "card2Desc": "Sami postavljate raspored",
       "card3": "Pouzdana platforma",

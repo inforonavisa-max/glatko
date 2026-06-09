@@ -8,7 +8,7 @@
   "brand": {
     "name": "Glatko",
     "tagline": "Montenegro's Premier Service Platform",
-    "description": "Trusted professionals for your home, boat, and lifestyle"
+    "description": "Trusted professionals for your home and business"
   },
   "nav": {
     "home": "Home",
@@ -33,10 +33,10 @@
   },
   "hero": {
     "title": "Trusted Professionals in Montenegro",
-    "subtitle": "From villa cleaning to boat maintenance — expert services for your home and vessel",
+    "subtitle": "From home repairs to business services — trusted professionals across Montenegro",
     "cta": "Get a Free Quote",
     "ctaSecondary": "Browse Professionals",
-    "trustedBy": "Trusted across Budva, Kotor, and Tivat",
+    "trustedBy": "Trusted across Montenegro",
     "stats": {
       "professionals": "Professionals",
       "jobsCompleted": "Jobs Completed",
@@ -214,7 +214,7 @@
     "multilingual": "Multilingual Support",
     "multilingualDesc": "Available in 9 languages — Turkish, English, Russian, and more",
     "local": "Local Expertise",
-    "localDesc": "Professionals across Montenegro, from Budva to Kotor",
+    "localDesc": "Professionals across Montenegro, wherever you are",
     "free": "Free Quotes",
     "freeDesc": "Requesting quotes is completely free — pay only when work is done",
     "topPro": "Top Professional",
@@ -359,7 +359,7 @@
       "bullet1": "100+ Verified Professionals",
       "bullet2": "Secure & Transparent Bidding System",
       "bullet3": "9 Language Support",
-      "quote": "Amazing platform — found everything from villa cleaning to boat maintenance.",
+      "quote": "Amazing platform — found trusted professionals for everything I needed.",
       "quoteAuthor": "Mehmet Y.",
       "quoteCity": "Budva"
     },
@@ -1697,12 +1697,12 @@
       "r1": {
         "name": "Mehmet Y.",
         "city": "Budva",
-        "text": "Got 3 quotes for villa cleaning, picked the best one. Great experience!"
+        "text": "Got 3 quotes for my project, picked the best one. Great experience!"
       },
       "r2": {
         "name": "Anna K.",
         "city": "Kotor",
-        "text": "Finding a reliable professional for boat maintenance was so easy."
+        "text": "Finding a reliable professional for my home repair was so easy."
       },
       "r3": {
         "name": "Stefan M.",
@@ -1751,7 +1751,7 @@
     "whyJoin": {
       "title": "Why join Glatko?",
       "card1": "Customer pool",
-      "card1Desc": "Reach clients in Budva, Kotor, and Tivat",
+      "card1Desc": "Reach clients across Montenegro",
       "card2": "Flexible work",
       "card2Desc": "Set your own schedule",
       "card3": "Trusted platform",

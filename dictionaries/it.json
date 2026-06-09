@@ -8,7 +8,7 @@
   "brand": {
     "name": "Glatko",
     "tagline": "La piattaforma premium di servizi del Montenegro",
-    "description": "Professionisti affidabili per la tua casa, la tua barca e il tuo stile di vita"
+    "description": "Professionisti affidabili per la casa e l'azienda"
   },
   "nav": {
     "home": "Home",
@@ -33,10 +33,10 @@
   },
   "hero": {
     "title": "Professionisti affidabili in Montenegro",
-    "subtitle": "Dalla pulizia di ville alla manutenzione nautica — servizi esperti per la tua casa e la tua imbarcazione",
+    "subtitle": "Dalle riparazioni domestiche ai servizi per le aziende — professionisti affidabili in tutto il Montenegro",
     "cta": "Richiedi un Preventivo Gratuito",
     "ctaSecondary": "Scopri i Professionisti",
-    "trustedBy": "Piattaforma di fiducia a Budva, Kotor e Tivat",
+    "trustedBy": "Affidabili in tutto il Montenegro",
     "stats": {
       "professionals": "Professionisti",
       "jobsCompleted": "Lavori Completati",
@@ -214,7 +214,7 @@
     "multilingual": "Supporto Multilingue",
     "multilingualDesc": "Disponibile in 9 lingue — turco, inglese, russo e altre",
     "local": "Competenza Locale",
-    "localDesc": "Professionisti in tutto il Montenegro, da Budva a Kotor",
+    "localDesc": "Professionisti in tutto il Montenegro, ovunque tu sia",
     "free": "Preventivi Gratuiti",
     "freeDesc": "Richiedere preventivi è completamente gratuito — paghi solo a lavoro eseguito",
     "topPro": "Top Professionista",
@@ -359,7 +359,7 @@
       "bullet1": "100+ professionisti verificati",
       "bullet2": "Sistema di offerte sicuro e trasparente",
       "bullet3": "Supporto 9 lingue",
-      "quote": "Piattaforma fantastica — trovato tutto dalla pulizia villa alla manutenzione barca.",
+      "quote": "Piattaforma fantastica — ho trovato professionisti affidabili per tutto ciò che mi serviva.",
       "quoteAuthor": "Mehmet Y.",
       "quoteCity": "Budva"
     },
@@ -1697,12 +1697,12 @@
       "r1": {
         "name": "Mehmet Y.",
         "city": "Budva",
-        "text": "Ho ricevuto 3 preventivi per la pulizia della villa, ho scelto il migliore. Ottima esperienza!"
+        "text": "Ho ricevuto 3 preventivi per il mio progetto e ho scelto il migliore. Ottima esperienza!"
       },
       "r2": {
         "name": "Anna K.",
         "city": "Kotor",
-        "text": "Trovare un professionista affidabile per la manutenzione della barca è stato facilissimo."
+        "text": "Trovare un professionista affidabile per la riparazione di casa è stato semplicissimo."
       },
       "r3": {
         "name": "Stefan M.",
@@ -1751,7 +1751,7 @@
     "whyJoin": {
       "title": "Perché unirsi a Glatko?",
       "card1": "Pool di clienti",
-      "card1Desc": "Raggiungi clienti a Budva, Cattaro e Teodo",
+      "card1Desc": "Raggiungi clienti in tutto il Montenegro",
       "card2": "Lavoro flessibile",
       "card2Desc": "Imposta i tuoi orari",
       "card3": "Piattaforma affidabile",
