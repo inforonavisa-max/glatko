@@ -4,7 +4,7 @@
 **Hazırlayan:** Rohat Kahraman + Claude
 **Durum:** Living document — sprint kararlarıyla güncellenir
 **Repo path:** `docs/seo/glatko-master-seo-plan-v1.md`
-**Versiyon:** v1.2 (9 Haziran 2026 — Defer-7 + liquidity threshold + YELLOW-4 close)
+**Versiyon:** v1.3 (9 Haziran 2026 — Defer-8 G-FOUNDING-RESTRATEGIZE)
 
 ---
 
@@ -858,6 +858,24 @@ Bu kararlar **şimdi yapılmaz, sonra yapılır.** Her birinin sebebi + revisit 
 - **Re-evaluation:** M2+ (gerçek trafik gelince + hard-308 redirect middleware sprintiyle birlikte)
 - **İlgili:** Provider route 404 fix (PR #92) — soft redirect aynı pattern
 
+#### Defer-8: G-FOUNDING-RESTRATEGIZE — Founding Pro Program Strateji Revize
+
+- **Durum:** Canlı kod (`/become-a-pro/founding`, eligibility kuralı, about page) hâlâ Boka Bay-specific strateji anlatıyor
+- **Gerçek:** 19 founding pro Montenegro çapında, çoğu Boka dışında (Podgorica ağırlıklı)
+- **De facto ≠ de jure:** Mevcut founding havuzu country-wide ama yazılı kural Boka diyor
+- **Master Plan İlke ihlali:** İlke 3 (no city priority) + İlke 4 (rolling launch) + kısmen İlke 1 (about page "boat/villa" framing)
+- **Scope (genişletilmiş, 9 Haziran 2026 keşfi):**
+  1. Founding-funnel Boka cluster (~10+ key): "first 50 in Boka", "soft launch", eligibility "Operating in Budva/Kotor/Tivat"
+  2. About-page positioning (~3 key, `legal.aboutContent.*`): "boat owners", "villa cleaning/boat maintenance/captain hire", "Based in Budva, active across Budva/Kotor/Tivat"
+- **Stratejik karar gerektirir:**
+  1. Country-wide founding (eligibility "any Montenegro city")
+  2. Boka batch + country-wide batch (iki segment)
+  3. Founding programı kapatıp normal "verified pro" yap
+- **Mevcut founding pro'lara communication plan**
+- **Effort:** ~3-4 saat (translate→adversarial-verify pattern)
+- **Re-evaluation:** Helena outreach + brand messaging strategy review
+- **İlgili:** PR #102 G-CONTENT-DRIFT (Group A fix); Group B intentionally deferred
+
 ### D3. Önceki Master Plan Varsayımları — Temizlendi
 
 Eski master plan'da olan, **yanlış olduğu kanıtlanan veya iptal edilen** kalemler:
@@ -1239,3 +1257,4 @@ Tüm sprint'lerde geçerli, asla esnetilmez:
 - **v1.0 (8 Haziran 2026):** İlk yazım — 5 stratejik karar (genel marketplace, 9 dil eşit, demand-driven, rolling launch, full self-canonical) ve 5 cephe stratejisi netleşti
 - **v1.1 (8 Haziran 2026):** Defer-7 (hard-404 invalid combos — app-wide soft-404, M2+ middleware) + liquidity gate aşamalı threshold (M0-M2: ≥3 provider; M3+: ≥5 bid) + Cephe 4 liquidity bölümü güncellendi — G-PSEO-FOUNDATION-FAZ1 (PR #96) sırasında doğrulandı
 - **v1.2 (9 Haziran 2026):** D1 YELLOW-4 (meta description length) KAPANDI — G-META-DESCRIPTIONS (PR #101): 9 dil 145-165 char + İlke 1+3 meta drift fix (villa/boat + Budva/Kotor/Tivat temizlendi). Visible copy drift (hero/trust/becomePro) → G-CONTENT-DRIFT candidate işaretlendi. (v1.1 + v1.2 tek squash merge ile main'e girdi.)
+- **v1.3 (9 Haziran 2026):** D2 Defer-8 eklendi (G-FOUNDING-RESTRATEGIZE) — founding-funnel Boka cluster (~10 key) + about-page positioning (~3 key, `legal.aboutContent.*`); stratejik karar bekliyor (country-wide vs Boka). G-CONTENT-DRIFT (PR #102, Group A fixed) deferred Group B'de keşfedildi.
