@@ -14,9 +14,15 @@ import {
   getCategoryBySlug,
   searchProfessionals,
 } from "@/lib/supabase/glatko.server";
-import { buildAlternates } from "@/lib/seo";
+import { buildAlternates, localizedUrl } from "@/lib/seo";
 import { GLATKO_CITIES } from "@/lib/glatko/cities";
 import { getLiquidityStatus } from "@/lib/glatko/liquidity";
+import {
+  generateServiceCitySchema,
+  generateLocalBusinessCitySchema,
+  generateBreadcrumbSchema,
+  jsonLdScriptProps,
+} from "@/lib/seo/jsonld";
 
 /**
  * Service × city page — G-PSEO-FOUNDATION.
@@ -145,8 +151,49 @@ export default async function ServiceCityPage({ params }: Props) {
     },
   ];
 
+  // Page-specific JSON-LD for LIQUID (indexable) pages: Service + LocalBusiness
+  // (city-scoped, for Google local rich results) + BreadcrumbList. Non-liquid
+  // pages stay minimal (only the layout Organization). Reuses
+  // generateBreadcrumbSchema + the localized servicesCity.metaDescription, so no
+  // new i18n keys. The layout's Organization schema is left untouched.
+  const pageUrl = localizedUrl(locale, "/services/[slug]/[city]", {
+    slug,
+    city: citySlug,
+  });
+  const serviceDescription = t("servicesCity.metaDescription", vars);
+  const citySchemas = liquidity.isLiquid
+    ? [
+        generateServiceCitySchema({
+          serviceName: service,
+          serviceDescription,
+          serviceTypeEn: pickLocalized(category.name, "en", slug),
+          cityName: city.name,
+          url: pageUrl,
+        }),
+        generateLocalBusinessCitySchema({
+          serviceName: service,
+          serviceDescription,
+          cityName: city.name,
+          cityGeo: { latitude: city.lat, longitude: city.lng },
+          url: pageUrl,
+        }),
+        generateBreadcrumbSchema([
+          { name: "Glatko", url: localizedUrl(locale, "/") },
+          { name: t("nav.services"), url: localizedUrl(locale, "/services") },
+          {
+            name: service,
+            url: localizedUrl(locale, "/services/[slug]", { slug }),
+          },
+          { name: city.name, url: pageUrl },
+        ]),
+      ]
+    : [];
+
   return (
     <PageBackground opacity={0.1}>
+      {citySchemas.map((schema, i) => (
+        <script key={i} {...jsonLdScriptProps(schema)} />
+      ))}
       <Breadcrumb items={crumbs} />
 
       <div className="bg-gradient-to-b from-teal-600/[0.12] via-teal-500/[0.05] to-transparent py-16 md:py-20">
