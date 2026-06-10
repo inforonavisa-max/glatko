@@ -4,7 +4,7 @@
 **Hazırlayan:** Rohat Kahraman + Claude
 **Durum:** Living document — sprint kararlarıyla güncellenir
 **Repo path:** `docs/seo/glatko-master-seo-plan-v1.md`
-**Versiyon:** v1.3 (9 Haziran 2026 — Defer-8 G-FOUNDING-RESTRATEGIZE)
+**Versiyon:** v1.4 (10 Haziran 2026 — Cephe 4 FAZ 1-3 COMPLETE + Cephe 3 revize)
 
 ---
 
@@ -199,35 +199,57 @@ Sebepler:
 
 ### Cephe 3: AEO Content (FAQPage + Question-H2s + Cost Tables)
 
-**Durum:** ⏳ **Başlanmadı, hazır**
+**Durum:** ✅ **Büyük ölçüde tamam** (v1.4 — FAQ + meta tamamlandı; cost-tables FAZ-3'te teslim; H2-rewrite düşük öncelik)
 
 **Audit'ten gelen açık kalemler:**
 
-- 🟡 Homepage FAQPage eksik (BrziMajstor'da var)
-- 🟡 Question-format H2s eksik ("Boat Cleaning Kotor" → "How much does boat cleaning cost in Kotor?")
-- 🟡 Cost-guide table markup yok (`<table>` + `<caption>` semantic HTML)
-- 🟡 Meta description length (homepage 100-120 char, sweet spot 150-160)
+- ✅ Homepage FAQPage eksik → KAPANDI (G-AEO-FAQ-HOMEPAGE, PR #94)
+- 🟡 Question-format H2s — kısmen adreslendi (service × city sayfa FAQ'ları question-format + FAQPage schema, FAZ-3); kalan: section H2'leri (düşük öncelik)
+- ✅ Cost-guide table markup yok → KAPANDI (FAZ-3, PR #104/#105: semantic `<table>` + `<caption>` + disclaimer, 4 combo × 9 dil)
+- ✅ Meta description length → KAPANDI (G-META-DESCRIPTIONS, PR #101)
 
-**Sprint planlanan:**
+**Sprint durumu:**
 
-- **G-AEO-FAQ-HOMEPAGE** (4-6 saat) — Homepage'e FAQPage schema + 8-10 strategic Q&A
-- **G-AEO-H2-REWRITE** (3-4 saat) — Top 20 service × city page'inde question-format H2
-- **G-AEO-COST-TABLES** (2-3 saat) — 5-10 kategori için cost-guide table markup
-- **G-META-DESCRIPTIONS** (1-2 saat) — YELLOW madde fix
-
-**Toplam:** ~10-15 saatlik content + markup sprint serisi
+- **G-AEO-FAQ-HOMEPAGE** — ✅ TAMAMLANDI (PR #94) — Homepage FAQPage schema + strategic Q&A
+- **G-META-DESCRIPTIONS** — ✅ TAMAMLANDI (PR #101) — 9 dil 145-165 char + İlke drift fix
+- **G-AEO-COST-TABLES** — KALDIRILDI — cost-guide table'lar (semantic `<table>` + `<caption>` + disclaimer) G-PSEO-FOUNDATION FAZ-3'te teslim edildi (PR #104/#105), ayrı sprint gereksizleşti
+- **G-AEO-H2-REWRITE** — SCOPE KÜÇÜLDÜ — service × city sayfalarının FAQ'ları zaten question-format (FAQPage schema'lı). Kalan değer: section H2'lerinin question-format'a çevrilmesi (düşük öncelik, liquid sayfa sayısı büyüyünce değerlendirilir)
 
 **Neden bu cephe önemli:**
 
 - LLM citation (ChatGPT, Perplexity, Claude.ai) için altın — soru formatı + cost data = citation magnet
-- BrziMajstor FAQPage'i var ama 9 dilde değil → Glatko 9 dilde yapınca avantaj
-- llms.txt + AI crawler allowlist zaten avantaj — bu cephede 1-1 berabere → 2-1 önde
+- BrziMajstor FAQPage'i var ama 9 dilde değil → Glatko 9 dilde yaptı (homepage PR #94 + liquid sayfalar FAZ-3) → avantaj
+- llms.txt + AI crawler allowlist zaten avantaj — FAQ + cost-tables canlı ile bu cephede 2-1 öne geçildi
 
 **Zafer kriteri:** Glatko 9 dilde FAQPage + question-H2 + cost-tables ile **LLM cevaplarında alıntılanan platform** olur. Karadağ "majstor nasıl bulurum" sorusunun **default cevabı.**
 
 ### Cephe 4: Content Volume (Programmatic SEO)
 
-**Durum:** ⏳ **Strateji oturuyor, başlanmadı**
+**Durum:** ✅ **FAZ 1-3 COMPLETE (content layer canlı, 9-10 Haziran 2026)**
+
+**Canlı durum (10 Haziran 2026):**
+
+- G-PSEO-FOUNDATION FAZ 1-3 tamamlandı (PR #96, #99, #100, #104, #105)
+- 4 liquid combo × 9 locale = 36 full-content indexable URL
+- Her sayfada 5 JSON-LD (Organization + Service + LocalBusiness + BreadcrumbList + FAQPage)
+- Liquidity gate canlı: M0-M2 threshold (≥3 provider), RPC migration 060
+- Pricing data Rohat onay kapısından geçti (pricing.ts, 4 combo)
+- Content: 9 dilde adversarial-verified, İlke 1/3/5 compliant
+
+**FAZ 4-5 yeniden çerçeveleme:**
+
+Ayrı sprint DEĞİL — tekrarlayan süreç. Liquidity gate yeni combo açtıkça (≥3 provider yoğunlaşması):
+
+1. Pricing research + Rohat onay kapısı (~15 dk)
+2. ME/EN master content author (~20 dk)
+3. 7-dil translate + adversarial verify workflow (~10 dk)
+4. PR + merge + IndexNow
+
+Toplam ~1 saat/combo. Tam otomasyon (gpt-4o pipeline) ancak combo sayısı ayda 5+'a çıkarsa değerlendirilir.
+
+**Operasyonel insight (Helena outreach):**
+
+4 liquid combo'nun hepsi Podgorica. Budva'da 8-9 provider var ama kategoriler dağınık (hiçbirinde ≥3 yoğunlaşma yok). Outreach'i şehir-bazlı kategori yoğunlaştırmaya yönlendirmek (örn. Budva cleaning: 2 mevcut + 1 yeni = 5. liquid combo) yeni sayfa setleri açar.
 
 **Hedef matriksi:**
 
@@ -261,17 +283,17 @@ Sebepler:
 |---|---|---|
 | M1 (launch ayı) | 25 publish | 8-10 kombinasyon liquid (founding pro coverage) |
 | M2 | 40 publish | İlk gerçek customer bid'leri ile genişleme |
-| M3 | 80 publish | G-PROVIDER-I18N sonrası 9-locale expansion başlar |
+| M3 | 80 publish | G-PROVIDER-I18N sonrası provider content de 9 dile; pSEO sayfaları zaten 9-locale (FAZ3-B) — kombinasyon sayısı ölçeklenir |
 | M6 | 300 publish | 33 kombinasyon × 9 locale |
 | M12 | 1000+ publish | 111+ kombinasyon × 9 locale |
 
 **Önceki master plan'da "M2'de 80 sayfa" diyordu — gerçekçi değildi. Yeni rollout 4× daha gerçekçi.**
 
-**Sprint planlanan:**
+**Sprint durumu:**
 
-- **G-PSEO-FOUNDATION** (1 hafta) — Service × city template + liquidity check + 9-locale generation
+- **G-PSEO-FOUNDATION** — ✅ TAMAMLANDI (FAZ 1-3; PR #96/#99/#100/#104/#105, 8-10 Haziran 2026)
 - **G-PROVIDER-I18N** (3 hafta, M3-M4) — Provider content 9 dile çeviri (gpt-4o, ~$200-400/yıl)
-- **G-PSEO-EXPANSION-X** (her ay) — Liquidity reach ettiğinde new combination publish
+- **G-PSEO-EXPANSION-X** (her ay) — Liquidity reach ettiğinde new combination publish (bkz. yukarıda "FAZ 4-5 yeniden çerçeveleme" — ~1 saat/combo süreç)
 
 **Şehir coverage gerçeği:**
 
@@ -336,17 +358,17 @@ Sebepler:
 
 | Cephe | Durum | Sonraki major sprint |
 |---|---|---|
-| 1. Canonical & Technical SEO | ✅ Tamam | G-PROVIDER-I18N (M3-M4) |
+| 1. Canonical & Technical SEO | ✅ Tamam (+ meta/visible drift fix) | G-PROVIDER-I18N (M3-M4) |
 | 2. CWV Performance | ⏳ Kısmi | G-CWV-FIX-1C (launch + 2-3 hafta) |
-| 3. AEO Content | ⏳ Hazır | G-AEO-FAQ-HOMEPAGE (next sprint candidate) |
-| 4. Content Volume | ⏳ Strateji | G-PSEO-FOUNDATION (M2-M3) |
-| 5. Brand & Reviews | ⏳ Aktif | Helena outreach + review pipeline |
+| 3. AEO Content | ✅ Büyük ölçüde tamam | G-AEO-H2-REWRITE (düşük öncelik, deferred) |
+| 4. Content Volume | ✅ FAZ 1-3 complete | Tekrarlayan combo süreci (liquidity-driven) |
+| 5. Brand & Reviews | ⏳ Aktif | Review pipeline + Helena Budva-clustering |
 
 **Önümüzdeki 3 sprint önerisi (sıralı):**
 
-1. **G-AEO-FAQ-HOMEPAGE** (4-6 saat) — En hızlı ROI, AEO için kritik
-2. **G-PSEO-FOUNDATION** (1 hafta) — Content volume cephesinde temel
-3. **G-CWV-FIX-1C** (launch sonrası) — Field data olunca
+1. **Helena Budva kategori yoğunlaştırma** (operasyonel) — 5. liquid combo'yu açar (örn. Budva cleaning)
+2. **Cephe 5 review pipeline** — Scott Newland → ilk review
+3. **G-CWV-FIX-1C** (launch + 2-3 hafta) — Field data ile
 
 ---
 
@@ -570,8 +592,8 @@ Sprint sequencing — her ayın hedefi:
 - ✅ G-CWV-FIX-1B merged
 - ✅ G-PROVIDER-ROUTE-CLEANUP merged
 - ✅ Indexing setup (GSC + Bing + Yandex)
-- ⏳ G-AEO-FAQ-HOMEPAGE (önümüzdeki sprint)
-- ⏳ G-META-DESCRIPTIONS (kısa sprint)
+- ✅ G-AEO-FAQ-HOMEPAGE (PR #94)
+- ✅ G-META-DESCRIPTIONS (PR #101)
 - ⏳ Provider operations (Radovan founding'e taşı, Hvala Puno onboard)
 
 **M0 Definition of Done:**
@@ -583,8 +605,8 @@ Sprint sequencing — her ayın hedefi:
 #### M1 (İlk launch wave)
 
 - ⏳ İlk milestone-based announcement wave
-- ⏳ G-AEO-H2-REWRITE (3-4 saat)
-- ⏳ G-AEO-COST-TABLES (2-3 saat)
+- ⏳ G-AEO-H2-REWRITE (düşük öncelik — scope küçüldü, v1.4)
+- ✅ G-AEO-COST-TABLES — FAZ-3'te teslim edildi (v1.4'te ayrı sprint kaldırıldı)
 - ⏳ Helena outreach demand-driven acceleration
 - ⏳ İlk gerçek review hedef: 3-5
 
@@ -592,12 +614,12 @@ Sprint sequencing — her ayın hedefi:
 
 - İlk announcement wave yapıldı
 - 25+ provider active
-- AEO content (FAQPage, Q-H2, cost tables) live tüm sayfalarda
+- AEO content (FAQPage + cost tables) live ✅; FAQ'lar question-format — section Q-H2 düşük öncelik (v1.4)
 - İlk 3 gerçek review havuzu
 
 #### M2 (M1 + 1 ay)
 
-- ⏳ G-PSEO-FOUNDATION (1 hafta)
+- ✅ G-PSEO-FOUNDATION FAZ 1-3 — TAMAMLANDI (erken teslim, M0'da; PR #96/#99/#100/#104/#105, 8-10 Haziran 2026) — M2 kalan: tekrarlayan combo süreci (liquidity-driven)
 - ⏳ CrUX baseline data toplanıyor (initial measurement)
 - ⏳ Speed Insights $10/ay kararı yeniden değerlendir
 - ⏳ G-CWV-FIX-1C scope yeniden değerlendir (field data ile)
@@ -605,7 +627,7 @@ Sprint sequencing — her ayın hedefi:
 **M2 DoD:**
 
 - 30+ provider active
-- pSEO foundation deployed (template + liquidity gate)
+- pSEO foundation deployed ✅ (template + liquidity gate + content layer, M0'da teslim) — M2 hedefi: kombinasyon sayısı büyümesi
 - 40-50 publish edilebilir kombinasyon (liquidity sağlamış)
 - 10+ gerçek review
 
@@ -722,32 +744,21 @@ Bu **slavishly kopyalama değil** — kalite benchmark. Quick'n'dirty çözümle
 
 #### 🟡 YELLOW — Important, scheduled
 
-**YELLOW-1: Homepage FAQPage eksik**
+**YELLOW-1: Homepage FAQPage eksik — ✅ KAPANDI (PR #94)**
 
-- **Mevcut:** Sadece category sayfalarında FAQPage schema var
-- **BrziMajstor:** Her sayfada FAQPage (AEO competitive advantage onlarda)
-- **Plan:** G-AEO-FAQ-HOMEPAGE sprint (4-6 saat)
+- **Çözüm:** G-AEO-FAQ-HOMEPAGE — homepage FAQPage schema + strategic Q&A (9 dil)
+- **Bonus (FAZ-3, v1.4):** service × city liquid sayfalarda da page-specific FAQPage canlı (PR #104/#105)
 - **Cephe:** 3 (AEO Content)
-- **Timing:** Önümüzdeki sprint candidate
-- **Hedef:** 8-10 strategic Q&A (cost, process, trust, geographic, language)
 
 **YELLOW-2: Question-format H2s eksik**
 
 - **Mevcut:** "Boat Cleaning Kotor" tarzı keyword H2
 - **Hedef:** "How much does boat cleaning cost in Kotor?" tarzı question H2
-- **Plan:** G-AEO-H2-REWRITE sprint (3-4 saat)
+- **Durum (v1.4):** Kısmen adreslendi — page FAQ'lar question-format + FAQPage schema (FAZ-3). Kalan: section H2'leri. Düşük öncelik.
+- **Plan:** G-AEO-H2-REWRITE sprint (düşük öncelik, liquid sayfa sayısı büyüyünce değerlendirilir)
 - **Cephe:** 3 (AEO Content)
-- **Scope:** Top 20 service × city page
+- **Scope:** Section H2'leri (FAQ'lar zaten question-format)
 - **Rationale:** LLM citation magnet (ChatGPT, Perplexity, Claude)
-
-**YELLOW-3: Cost-guide table markup eksik**
-
-- **Mevcut:** Cost data prose format
-- **Hedef:** Semantic `<table>` + `<caption>` markup
-- **Plan:** G-AEO-COST-TABLES sprint (2-3 saat)
-- **Cephe:** 3 (AEO Content)
-- **Scope:** 5-10 kategori için cost-guide table
-- **Rationale:** Featured snippet potential + LLM structured data
 
 **YELLOW-4: Meta description length — ✅ KAPANDI (9 Haziran 2026, PR #101)**
 
@@ -898,6 +909,7 @@ Eski master plan'da olan, **yanlış olduğu kanıtlanan veya iptal edilen** kal
 | Speed Insights varsayılan aktif | Bilinçli ertelendi, $10/ay karar pending | 7 Haziran field data analizi |
 | Liquidity gate threshold rigid (≥3 provider VE ≥5 bid) | M0-M2: ≥3 provider only, M3+: ≥5 bid aktif | Glatko realistik launch threshold (bid history yok henüz) |
 | YELLOW-4 (Meta description length) açık | KAPANDI (PR #101, 9 Haziran 2026) | G-META-DESCRIPTIONS — length 145-165 + İlke 1/3 meta drift fix |
+| YELLOW-3 (Cost-guide table markup) açık | KAPANDI (FAZ-3, PR #104/#105) | Semantic table + caption + disclaimer, 4 combo × 9 dil |
 
 ### D4. Master Plan v1 Felsefesi (5 ilke)
 
@@ -1010,7 +1022,7 @@ Karışıklığı önlemek için **net sınırlar**:
 |---|---|---|
 | "Glatko'nun Supabase proje ID'si nedir?" | `cjqappdfyxgytdyeytwv` | Memory |
 | "Glatko'nun SEO stratejisi nedir?" | 5 Cephe Stratejisi | Master Plan |
-| "Yarın hangi sprint yapacağım?" | G-AEO-FAQ-HOMEPAGE | Yapılanlar/Yapılacaklar |
+| "Yarın hangi sprint yapacağım?" | Helena Budva kategori yoğunlaştırma | Yapılanlar/Yapılacaklar |
 | "Force push yasak mı?" | Evet, her zaman | Memory + Master Plan C2 |
 | "Türk diaspora vertical mi?" | Hayır, 9 dil eşit prensibi | Master Plan B + D |
 | "Founding pro Hvala Puno var mı?" | Hayır, hiç onboard olmadı | Memory |
@@ -1258,3 +1270,4 @@ Tüm sprint'lerde geçerli, asla esnetilmez:
 - **v1.1 (8 Haziran 2026):** Defer-7 (hard-404 invalid combos — app-wide soft-404, M2+ middleware) + liquidity gate aşamalı threshold (M0-M2: ≥3 provider; M3+: ≥5 bid) + Cephe 4 liquidity bölümü güncellendi — G-PSEO-FOUNDATION-FAZ1 (PR #96) sırasında doğrulandı
 - **v1.2 (9 Haziran 2026):** D1 YELLOW-4 (meta description length) KAPANDI — G-META-DESCRIPTIONS (PR #101): 9 dil 145-165 char + İlke 1+3 meta drift fix (villa/boat + Budva/Kotor/Tivat temizlendi). Visible copy drift (hero/trust/becomePro) → G-CONTENT-DRIFT candidate işaretlendi. (v1.1 + v1.2 tek squash merge ile main'e girdi.)
 - **v1.3 (9 Haziran 2026):** D2 Defer-8 eklendi (G-FOUNDING-RESTRATEGIZE) — founding-funnel Boka cluster (~10 key) + about-page positioning (~3 key, `legal.aboutContent.*`); stratejik karar bekliyor (country-wide vs Boka). G-CONTENT-DRIFT (PR #102, Group A fixed) deferred Group B'de keşfedildi.
+- **v1.4 (10 Haziran 2026):** Cephe 4 FAZ 1-3 COMPLETE (36 full-content URL canlı; PR #96/#99/#100/#104/#105). FAZ 4-5 tekrarlayan sürece dönüştü (~1 saat/combo: pricing onay kapısı + ME/EN author + 7-dil workflow). Cephe 3 revize: FAQ (PR #94) + META (PR #101) tamamlandı, G-AEO-COST-TABLES kaldırıldı (FAZ-3'te teslim), G-AEO-H2-REWRITE scope küçüldü (düşük öncelik). YELLOW-3 kapandı (D1→D3) + YELLOW-1 kapandı (PR #94, adversarial-verify süpürmesinde yakalandı). C5 roadmap gerçekle hizalandı (M0/M1/M2'deki teslim edilmiş sprint'ler ✅). Helena Budva-clustering insight eklendi (Cephe 4 + sprint önerisi #1).
