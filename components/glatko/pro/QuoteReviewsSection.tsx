@@ -45,6 +45,15 @@ export function QuoteReviewsSection({ reviews, locale }: Props) {
         )}
       </div>
 
+      {reviews.length === 0 && (
+        <div className="py-12 text-center">
+          <Star className="mx-auto mb-4 h-12 w-12 text-gray-300 dark:text-neutral-600" />
+          <p className="text-sm text-gray-500 dark:text-neutral-400">
+            {t("ratings.noReviews")}
+          </p>
+        </div>
+      )}
+
       <div className="space-y-4">
         {reviews.map((review) => (
           <div

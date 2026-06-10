@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Gavel, Calendar, MapPin, DollarSign, Play, CheckCircle, MessageSquare, Star, Loader2 } from "lucide-react";
+import { Gavel, Calendar, MapPin, DollarSign, Play, CheckCircle, MessageSquare, Loader2 } from "lucide-react";
 import { withdrawBidAction, startJobAction, completeJobAction } from "@/app/[locale]/pro/dashboard/bids/actions";
 import { cn } from "@/lib/utils";
 
@@ -216,15 +216,6 @@ export function ProBidsList({ bids, locale }: Props) {
                         {isPending && actionId === req.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <CheckCircle className="h-3 w-3" />}
                         {t("jobStatus.completeJob")}
                       </button>
-                    )}
-                    {req.status === "completed" && (
-                      <Link
-                        href={`/${locale}/review/${req.id}`}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2 text-xs font-medium text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl"
-                      >
-                        <Star className="h-3 w-3" />
-                        {t("review.rateCustomer")}
-                      </Link>
                     )}
                   </div>
                 )}

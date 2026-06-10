@@ -16,7 +16,6 @@ import {
   Phone,
   MessageSquare,
   Image as ImageIcon,
-  Star,
   Layers,
   Check,
 } from "lucide-react";
@@ -280,29 +279,6 @@ export default async function RequestDetailPage({ params }: Props) {
             locale={locale}
           />
         </div>
-
-        {/* ── Review CTA ── */}
-        {(status === "completed" || status === "reviewed") && (
-          <div className="mb-8 flex flex-col items-center gap-4 rounded-2xl border border-gray-200/50 bg-white/70 p-6 text-center backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03] sm:flex-row sm:text-left">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400/20 to-amber-500/20">
-              <Star className="h-7 w-7 text-amber-400" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-white">
-                {t("review.jobCompleted")}
-              </h3>
-              <p className="mt-1 text-sm text-gray-500 dark:text-white/50">
-                {t("review.subtitle")}
-              </p>
-            </div>
-            <Link
-              href={{ pathname: "/review/[requestId]", params: { requestId: id } }}
-              className="shrink-0 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30"
-            >
-              {t("review.ratePro")}
-            </Link>
-          </div>
-        )}
 
         {/* ── Cancel button ── */}
         {isCancellable && (

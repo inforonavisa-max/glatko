@@ -21,7 +21,6 @@ import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import {
   getProfessionalProfileBySlug,
-  getPublishedReviews,
   calculateTrustBadges,
 } from "@/lib/supabase/glatko.server";
 import { TrustBadge } from "@/components/glatko/trust/TrustBadge";
@@ -32,28 +31,11 @@ import type {
   VerificationData,
   VerificationDoc,
 } from "@/components/glatko/verification/VerificationProofModal";
-import { ReviewSection } from "@/components/glatko/review/ReviewSection";
 import { QuoteReviewsSection } from "@/components/glatko/pro/QuoteReviewsSection";
 import { ProviderSchema } from "@/components/seo/ProviderSchema";
 import { buildAlternates, hreflangForLocale } from "@/lib/seo";
 import type { Metadata } from "next";
 import type { MultiLangText, ProService } from "@/types/glatko";
-
-type ReviewItem = {
-  id: string;
-  overall_rating: number;
-  quality_rating: number | null;
-  communication_rating: number | null;
-  punctuality_rating: number | null;
-  review_text: string | null;
-  photos: string[];
-  created_at: string;
-  reviewer: { full_name: string; avatar_url: string | null } | null;
-  service_request: {
-    title: string;
-    category: { name: Record<string, string>; icon: string } | null;
-  } | null;
-};
 
 function labelForCategory(
   category: ProService["category"] | undefined,
@@ -144,8 +126,6 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
   if (!profile) notFound();
   const id = profile.id;
 
-  const { reviews, total: totalReviews } = await getPublishedReviews(id);
-
   const { createClient: _createSupabase } = await import("@/supabase/server");
   const _supabase = _createSupabase();
   const { data: quoteReviewsRaw } = await _supabase
@@ -163,42 +143,6 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
     created_at: string;
   }>;
   const trustBadges = await calculateTrustBadges(id);
-
-  const qualityRated = reviews.filter(
-    (r: { quality_rating: number | null }) => r.quality_rating != null
-  );
-  const avgQuality =
-    qualityRated.length > 0
-      ? qualityRated.reduce(
-          (sum: number, r: { quality_rating: number | null }) =>
-            sum + (r.quality_rating ?? 0),
-          0
-        ) / qualityRated.length
-      : null;
-
-  const commRated = reviews.filter(
-    (r: { communication_rating: number | null }) => r.communication_rating != null
-  );
-  const avgCommunication =
-    commRated.length > 0
-      ? commRated.reduce(
-          (sum: number, r: { communication_rating: number | null }) =>
-            sum + (r.communication_rating ?? 0),
-          0
-        ) / commRated.length
-      : null;
-
-  const punctRated = reviews.filter(
-    (r: { punctuality_rating: number | null }) => r.punctuality_rating != null
-  );
-  const avgPunctuality =
-    punctRated.length > 0
-      ? punctRated.reduce(
-          (sum: number, r: { punctuality_rating: number | null }) =>
-            sum + (r.punctuality_rating ?? 0),
-          0
-        ) / punctRated.length
-      : null;
 
   const displayName =
     profile.business_name?.trim() ||
@@ -534,23 +478,8 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
         </div>
 
         <div className="mb-8 rounded-2xl border border-gray-200/50 bg-white/70 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
-          <ReviewSection
-            reviews={reviews as ReviewItem[]}
-            totalReviews={totalReviews}
-            avgRating={rating}
-            avgQuality={avgQuality}
-            avgCommunication={avgCommunication}
-            avgPunctuality={avgPunctuality}
-            professionalId={id}
-            locale={locale}
-          />
+          <QuoteReviewsSection reviews={quoteReviews} locale={locale} />
         </div>
-
-        {quoteReviews.length > 0 && (
-          <div className="mb-8 rounded-2xl border border-gray-200/50 bg-white/70 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
-            <QuoteReviewsSection reviews={quoteReviews} locale={locale} />
-          </div>
-        )}
 
         <div className="rounded-2xl border border-gray-200/50 bg-white/70 p-8 text-center backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
           <h3 className="font-serif text-xl font-semibold text-gray-900 dark:text-white">
