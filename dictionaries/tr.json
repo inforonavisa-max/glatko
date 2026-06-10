@@ -743,6 +743,7 @@
     },
     "step2": {
       "title": "Detayları belirtin",
+      "noQuestions": "Bu kategori için ek soru yok — bir sonraki adıma geçebilirsiniz.",
       "propertyType": "Mülk Tipi",
       "apartment": "Daire",
       "villa": "Villa",

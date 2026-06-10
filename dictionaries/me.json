@@ -743,6 +743,7 @@
     },
     "step2": {
       "title": "Navedite detalje",
+      "noQuestions": "Nema dodatnih pitanja za ovu kategoriju — možete nastaviti na sljedeći korak.",
       "propertyType": "Tip nekretnine",
       "apartment": "Stan",
       "villa": "Vila",

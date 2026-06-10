@@ -133,11 +133,13 @@ export default async function ServicesPage({ params }: Props) {
     bag.add(ps.professional_id);
   }
 
-  // First 3 subs per root (already ordered by sort_order ASC).
+  // All subs per root (already ordered by sort_order ASC). CategoryGrid
+  // slices the visible chips to 3 itself; capping here too would understate
+  // the aria-label sub count for roots with >3 children.
   const subsByRoot = new Map<string, SubRow[]>();
   for (const sub of subRows) {
     const arr = subsByRoot.get(sub.parent_id) ?? [];
-    if (arr.length < 3) arr.push(sub);
+    arr.push(sub);
     subsByRoot.set(sub.parent_id, arr);
   }
 

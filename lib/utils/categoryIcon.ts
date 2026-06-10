@@ -3,7 +3,8 @@
 // Adding a new DB icon now requires one line in both the import block and
 // the map below (~30s of dev work per new category), but trims ~150 KB of
 // First Load JS. Source list = `SELECT DISTINCT icon FROM
-// glatko_service_categories WHERE is_p0 = TRUE`.
+// glatko_service_categories WHERE is_active = TRUE` (child icons render too,
+// e.g. StepServiceAreas — don't filter on is_p0).
 import {
   Anchor,
   Baby,
@@ -35,11 +36,14 @@ import {
   HeartPulse,
   Home,
   KeyRound,
+  Landmark,
   Languages,
   Layers,
+  Map,
   MessageCircle,
   Monitor,
   Moon,
+  Mountain,
   Music,
   Package,
   Paintbrush,
@@ -54,6 +58,7 @@ import {
   Scissors,
   Settings,
   Shield,
+  Ship,
   Smile,
   Snowflake,
   Sofa,
@@ -103,11 +108,14 @@ const ICON_MAP: Record<string, LucideIcon> = {
   HeartPulse,
   Home,
   KeyRound,
+  Landmark,
   Languages,
   Layers,
+  Map,
   MessageCircle,
   Monitor,
   Moon,
+  Mountain,
   Music,
   Package,
   Paintbrush,
@@ -122,6 +130,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Scissors,
   Settings,
   Shield,
+  Ship,
   Smile,
   Snowflake,
   Sofa,

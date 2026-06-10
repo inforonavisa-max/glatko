@@ -743,6 +743,7 @@
     },
     "step2": {
       "title": "Details angeben",
+      "noQuestions": "Keine zusätzlichen Fragen für diese Kategorie — Sie können mit dem nächsten Schritt fortfahren.",
       "propertyType": "Immobilientyp",
       "apartment": "Wohnung",
       "villa": "Villa",

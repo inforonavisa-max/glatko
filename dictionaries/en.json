@@ -743,6 +743,7 @@
     },
     "step2": {
       "title": "Provide details",
+      "noQuestions": "No additional questions for this category — you can continue to the next step.",
       "propertyType": "Property Type",
       "apartment": "Apartment",
       "villa": "Villa",

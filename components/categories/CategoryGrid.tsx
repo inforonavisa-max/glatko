@@ -80,19 +80,23 @@ export function CategoryGrid({ cards }: { cards: P0CategoryCard[] }) {
             )}
           >
             <div className="relative w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-neutral-900 h-72 md:h-80">
-              <Image
-                src={card.src}
-                alt={card.title}
-                fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                className={cn(
-                  "object-cover will-change-transform",
-                  "transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
-                  "[@media(hover:hover)]:group-hover:scale-[1.05]",
-                  "motion-reduce:transition-none motion-reduce:[transform:none]",
-                )}
-                priority={index < 4}
-              />
+              {/* hero_image_url can be NULL in DB — empty src would render a
+                  broken <img>; the card bg + gradient overlay carry the layout */}
+              {card.src && (
+                <Image
+                  src={card.src}
+                  alt={card.title}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className={cn(
+                    "object-cover will-change-transform",
+                    "transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+                    "[@media(hover:hover)]:group-hover:scale-[1.05]",
+                    "motion-reduce:transition-none motion-reduce:[transform:none]",
+                  )}
+                  priority={index < 4}
+                />
+              )}
 
               {/* Bottom gradient + content overlay */}
               <div className="absolute inset-x-0 bottom-0 z-10 p-5 bg-gradient-to-t from-black/85 via-black/45 to-black/10">
