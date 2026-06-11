@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getUnreadMessageCountAction } from "@/app/[locale]/inbox/actions";
+import { getUnreadMessageCountAction } from "@/app/[locale]/messages/actions";
 
-export function InboxUnreadBadge() {
+/** Header unread badge for /messages — thread-only count (G-DEADCODE). */
+export function UnreadBadge() {
   const [count, setCount] = useState(0);
 
   const load = useCallback(async () => {

@@ -14,17 +14,6 @@ export function requestIdFromNotificationData(
   return "";
 }
 
-export function conversationIdFromNotificationData(
-  d: Record<string, unknown> | null | undefined,
-): string {
-  if (!d) return "";
-  const a = d.conversationId;
-  const b = d.conversation_id;
-  if (typeof a === "string" && a) return a;
-  if (typeof b === "string" && b) return b;
-  return "";
-}
-
 export function threadIdFromNotificationData(
   d: Record<string, unknown> | null | undefined,
 ): string {

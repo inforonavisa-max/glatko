@@ -11,7 +11,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
-import { InboxUnreadBadge } from "@/components/glatko/inbox/InboxUnreadBadge";
+import { UnreadBadge } from "@/components/glatko/messaging/UnreadBadge";
 import { SearchTrigger } from "@/components/glatko/search/SearchTrigger";
 import * as Sentry from "@sentry/nextjs";
 
@@ -195,7 +195,7 @@ export function GlatkoHeader({
                   {"hasAdminIcon" in l && <Settings className="h-3.5 w-3.5" />}
                   {"hasLeadsIcon" in l && <Target className="h-3.5 w-3.5" />}
                   {l.label}
-                  {userId && l.href === "/messages" ? <InboxUnreadBadge /> : null}
+                  {userId && l.href === "/messages" ? <UnreadBadge /> : null}
                 </Link>
               );
             })}
@@ -330,7 +330,7 @@ export function GlatkoHeader({
                   )}
                   {"hasLeadsIcon" in l && <Target className="h-5 w-5" />}
                   {l.label}
-                  {userId && l.href === "/messages" ? <InboxUnreadBadge /> : null}
+                  {userId && l.href === "/messages" ? <UnreadBadge /> : null}
                 </Link>
               ))}
 

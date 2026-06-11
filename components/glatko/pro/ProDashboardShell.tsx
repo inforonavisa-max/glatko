@@ -30,7 +30,7 @@ const NAV_ITEMS = [
   { key: "home", href: "/pro/dashboard", icon: Home, exact: true },
   { key: "requests", href: "/pro/dashboard/requests", icon: Search },
   { key: "bids", href: "/pro/dashboard/bids", icon: Gavel },
-  { key: "inbox", href: "/inbox", icon: MessageSquare },
+  { key: "inbox", href: "/messages", icon: MessageSquare },
   { key: "packages", href: "/pro/dashboard/packages", icon: Package },
   { key: "availability", href: "/pro/dashboard/availability", icon: CalendarDays },
   { key: "editProfile", href: "/pro/dashboard/profile", icon: UserCog },

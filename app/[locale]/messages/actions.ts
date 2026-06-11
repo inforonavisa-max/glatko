@@ -283,3 +283,30 @@ export async function submitReview(input: {
   revalidatePath(`/[locale]/messages`, "page");
   return { success: true, data: { review_id: data.id as string } };
 }
+
+/**
+ * G-DEADCODE: thread-only unread count for the header badge. Replaces the
+ * legacy inbox action that summed glatko_conversations unread on top —
+ * the legacy tables hold 0 rows and their UI surface is gone (/inbox → 308).
+ */
+export async function getUnreadMessageCountAction(): Promise<number> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return 0;
+
+  const { data, error } = await supabase
+    .from("glatko_message_threads")
+    .select("customer_id, customer_unread_count, pro_unread_count")
+    .or(`customer_id.eq.${user.id},professional_id.eq.${user.id}`)
+    .eq("status", "active");
+  if (error || !data) return 0;
+  return data.reduce((sum, thread) => {
+    const count =
+      thread.customer_id === user.id
+        ? (thread.customer_unread_count ?? 0)
+        : (thread.pro_unread_count ?? 0);
+    return sum + count;
+  }, 0);
+}

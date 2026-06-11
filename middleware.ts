@@ -67,6 +67,38 @@ export async function middleware(request: NextRequest) {
         });
     }
 
+    // ── G-DEADCODE: hard 308s for retired routes ──────────────────────────
+    // /inbox(+/<id>) → /messages, /my-requests (EXACT) → /dashboard/requests,
+    // /review/<id> → /dashboard/requests. Page-level redirects under the
+    // [locale] segment are SOFT (200 + streamed NEXT_REDIRECT payload, see
+    // the provider/[id] lesson, PR #92) — middleware is the only place a
+    // real HTTP 308 can be issued.
+    //
+    // ⚠️ The /inbox rule is LOAD-BEARING — do not remove it even though the
+    // route is gone: the approved WhatsApp template `bid_accepted_tr` has a
+    // dynamic URL button registered at Infobip with the FIXED prefix
+    // `https://glatko.app/tr/inbox/{{1}}` (re-approval required to change
+    // it; see lib/notifications/whatsapp-templates.ts). This redirect is the
+    // only thing keeping that button alive.
+    {
+        const segs = pathname.split('/').filter(Boolean);
+        if (segs.length >= 1 && isLocaleSegment(segs[0])) {
+            const locale = segs[0];
+            const rest = segs.slice(1);
+            let target: string | null = null;
+            if (rest[0] === 'inbox') {
+                target = `/${locale}/messages`;
+            } else if (rest.length === 1 && rest[0] === 'my-requests') {
+                target = `/${locale}/dashboard/requests`;
+            } else if (rest.length === 2 && rest[0] === 'review') {
+                target = `/${locale}/dashboard/requests`;
+            }
+            if (target) {
+                return NextResponse.redirect(new URL(target, request.url), 308);
+            }
+        }
+    }
+
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-pathname', pathname);
     const requestWithPath = new NextRequest(request.url, {

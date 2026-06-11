@@ -747,85 +747,6 @@ export async function withdrawBid(bidId: string, professionalId: string) {
 
 // ─── G4: Messaging ───
 
-export async function getUserConversations(userId: string) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("glatko_conversations")
-    .select(`
-      *,
-      service_request:glatko_service_requests!glatko_conversations_service_request_id_fkey(id, title, status,
-        category:glatko_service_categories(name, icon)),
-      customer:profiles!customer_id(id, full_name, avatar_url),
-      professional:profiles!professional_id(id, full_name, avatar_url),
-      last_message:glatko_messages(
-        content, content_type, sender_id, created_at, read_at
-      )
-    `)
-    .or(`customer_id.eq.${userId},professional_id.eq.${userId}`)
-    .order("updated_at", { ascending: false });
-
-  if (error) throw error;
-
-  const rows = data || [];
-  const proIds = Array.from(
-    new Set(rows.map((c) => c.professional_id as string)),
-  );
-  const businessByPro = new Map<string, string | null>();
-  if (proIds.length > 0) {
-    const { data: proRows } = await supabase
-      .from("glatko_professional_profiles")
-      .select("id, business_name")
-      .in("id", proIds);
-    for (const p of proRows ?? []) {
-      businessByPro.set(p.id as string, (p.business_name as string | null) ?? null);
-    }
-  }
-
-  return rows.map((conv) => ({
-    ...conv,
-    last_message: conv.last_message?.[0] || null,
-    professional_business_name:
-      businessByPro.get(conv.professional_id as string) ?? null,
-  }));
-}
-
-export async function getConversationMessages(
-  conversationId: string,
-  userId: string,
-  limit = 50,
-  before?: string
-) {
-  const supabase = createClient();
-
-  const { data: conv } = await supabase
-    .from("glatko_conversations")
-    .select("customer_id, professional_id")
-    .eq("id", conversationId)
-    .single();
-
-  if (
-    !conv ||
-    (conv.customer_id !== userId && conv.professional_id !== userId)
-  ) {
-    throw new Error("Unauthorized");
-  }
-
-  let query = supabase
-    .from("glatko_messages")
-    .select("*")
-    .eq("conversation_id", conversationId)
-    .order("created_at", { ascending: false })
-    .limit(limit);
-
-  if (before) {
-    query = query.lt("created_at", before);
-  }
-
-  const { data, error } = await query;
-  if (error) throw error;
-  return (data || []).reverse();
-}
-
 export async function sendMessage(data: {
   conversation_id: string;
   sender_id: string;
@@ -1020,21 +941,6 @@ export async function sendMessage(data: {
   return message;
 }
 
-export async function markMessagesAsRead(
-  conversationId: string,
-  userId: string
-) {
-  const supabase = createClient();
-  const { error } = await supabase
-    .from("glatko_messages")
-    .update({ read_at: new Date().toISOString() })
-    .eq("conversation_id", conversationId)
-    .neq("sender_id", userId)
-    .is("read_at", null);
-
-  if (error) throw error;
-}
-
 export async function getOrCreateConversation(data: {
   service_request_id: string;
   bid_id?: string;
@@ -1061,29 +967,6 @@ export async function getOrCreateConversation(data: {
 
   if (error) throw error;
   return conversation;
-}
-
-export async function getUnreadCount(userId: string): Promise<number> {
-  const supabase = createClient();
-
-  const { data: convs } = await supabase
-    .from("glatko_conversations")
-    .select("id")
-    .or(`customer_id.eq.${userId},professional_id.eq.${userId}`);
-
-  if (!convs || convs.length === 0) return 0;
-
-  const convIds = convs.map((c) => c.id);
-
-  const { count, error } = await supabase
-    .from("glatko_messages")
-    .select("id", { count: "exact", head: true })
-    .in("conversation_id", convIds)
-    .neq("sender_id", userId)
-    .is("read_at", null);
-
-  if (error) return 0;
-  return count || 0;
 }
 
 // ─── G5: Review + Trust ───
