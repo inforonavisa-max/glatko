@@ -7,6 +7,7 @@ import {
   ClipboardList,
   FolderTree,
   LayoutDashboard,
+  Star,
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,11 @@ export function AdminSidebar({ locale, adminEmail }: Props) {
       href: `/${locale}/admin/requests`,
       label: "Talepler",
       icon: ClipboardList,
+    },
+    {
+      href: `/${locale}/admin/reviews`,
+      label: "Değerlendirmeler",
+      icon: Star,
     },
     {
       href: `/${locale}/admin/categories`,

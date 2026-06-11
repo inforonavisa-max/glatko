@@ -1,7 +1,7 @@
 import { createClient } from "@/supabase/server";
 import { redirect, notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { getServiceRequest, getProfessionalProfile, getProfessionalBids } from "@/lib/supabase/glatko.server";
+import { getServiceRequest, getProfessionalProfile } from "@/lib/supabase/glatko.server";
 import { ProRequestDetail } from "@/components/glatko/pro/ProRequestDetail";
 
 type Props = {
@@ -16,10 +16,9 @@ export default async function ProRequestDetailPage({ params }: Props) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/login?redirect=/pro/dashboard/requests/${id}`);
 
-  const [request, profile, myBids] = await Promise.all([
+  const [request, profile] = await Promise.all([
     getServiceRequest(id),
     getProfessionalProfile(user.id),
-    getProfessionalBids(user.id),
   ]);
 
   if (!request) notFound();
@@ -27,15 +26,11 @@ export default async function ProRequestDetailPage({ params }: Props) {
     redirect(`/${locale}/pro/dashboard`);
   }
 
-  const alreadyBid = myBids.some((b) => b.service_request_id === id);
-  const maxBidsReached = (request.bid_count ?? 0) >= (request.max_bids ?? 4);
-
+  // G-REVIEW-R1 (K4): bid intake is closed — this page is view-only;
+  // quotes flow through /pro/dashboard/leads (match notifications).
   return (
     <ProRequestDetail
       request={JSON.parse(JSON.stringify(request))}
-      professionalId={user.id}
-      alreadyBid={alreadyBid}
-      maxBidsReached={maxBidsReached}
       locale={locale}
     />
   );

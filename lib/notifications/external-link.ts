@@ -72,7 +72,14 @@ export function resolveExternalLink(
     case "bid_rejected":
       // Template intent "new requests list" — aligned with the email route.
       return localizedUrl(locale, "/pro/dashboard/requests");
-    case "review":
+    case "review": {
+      const slug = firstString(d, "slug");
+      return localizedUrl(locale, slug ? `/pros/${slug}` : "/pro/dashboard");
+    }
+    case "review_request": {
+      const tId = firstString(d, "threadId", "thread_id");
+      return localizedUrl(locale, tId ? `/messages/${tId}` : "/messages");
+    }
     case "verification_approved":
       return localizedUrl(locale, "/pro/dashboard");
     case "verification_rejected":

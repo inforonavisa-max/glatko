@@ -639,7 +639,16 @@
     },
     "reviews": {
       "title": "Müşteri Yorumları",
-      "anonymous": "Anonim müşteri"
+      "anonymous": "Anonim müşteri",
+      "response": {
+        "label": "Profesyonelin yanıtı",
+        "cta": "Yanıtlayın",
+        "editCta": "Yanıtı düzenleyin",
+        "placeholder": "Bu değerlendirmeye herkese açık bir yanıt yazın…",
+        "submit": "Yanıtı yayınlayın",
+        "cancel": "İptal",
+        "error": "Yanıtınız kaydedilemedi. Lütfen tekrar deneyin."
+      }
     }
   },
   "admin": {
@@ -1063,6 +1072,9 @@
       "viewDetail": "Talep Detayı",
       "submitBid": "Teklif Ver",
       "ago": "önce"
+    },
+    "detail": {
+      "quotesViaLeads": "Teklifler artık bir taleple eşleştirildiğinizde İş Fırsatları üzerinden gönderilir. Bu sayfa yalnızca görüntüleme içindir."
     }
   },
   "bidForm": {
@@ -1284,7 +1296,7 @@
     },
     "reviewReceived": {
       "title": "Yeni Değerlendirme",
-      "body": "Hakkınızda yeni bir değerlendirme yazıldı"
+      "body": "{customerName}, profilinize {rating} yıldızlı bir değerlendirme bıraktı."
     },
     "verificationApproved": {
       "title": "Hesap Onaylandı",
@@ -1300,6 +1312,10 @@
     },
     "sms": {
       "otp": "Glatko doğrulama kodunuz: {otp}"
+    },
+    "reviewRequest": {
+      "title": "Değerlendirme bırakın",
+      "body": "{businessName} ile nasıl geçti? Deneyiminizi paylaşın."
     }
   },
   "settings": {

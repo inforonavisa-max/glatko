@@ -199,6 +199,51 @@ export async function confirmQuoteCompletion(input: {
   );
   if (error) return { success: false, error: error.message };
 
+  // G-REVIEW-R1 (K1): immediate in-app nudge to write a review. The
+  // single 3-day email reminder (cron) is the only follow-up after this.
+  if (input.confirmed && data) {
+    try {
+      const admin = createAdminClient();
+      const { data: quote } = await admin
+        .from("glatko_request_quotes")
+        .select(
+          "request_id, professional_id, glatko_professional_profiles ( business_name )",
+        )
+        .eq("id", input.quote_id)
+        .maybeSingle();
+      if (quote) {
+        const [{ data: thread }, { data: prof }] = await Promise.all([
+          admin
+            .from("glatko_message_threads")
+            .select("id")
+            .eq("request_id", quote.request_id)
+            .eq("professional_id", quote.professional_id)
+            .maybeSingle(),
+          admin
+            .from("profiles")
+            .select("preferred_locale")
+            .eq("id", user.id)
+            .maybeSingle(),
+        ]);
+        const locale = coerceLocale(prof?.preferred_locale as string | null);
+        const t = await getTranslations({ locale, namespace: "notifications" });
+        const businessName =
+          (quote.glatko_professional_profiles as unknown as {
+            business_name: string | null;
+          } | null)?.business_name ?? "";
+        await createNotification({
+          user_id: user.id,
+          type: "review_request",
+          title: t("reviewRequest.title"),
+          body: t("reviewRequest.body", { businessName }),
+          data: thread?.id ? { threadId: thread.id } : {},
+        });
+      }
+    } catch (err) {
+      console.error("[GLATKO:review] review_request notification failed", err);
+    }
+  }
+
   revalidatePath(`/[locale]/messages`, "page");
   return { success: true, data: { updated: Boolean(data) } };
 }
@@ -277,6 +322,38 @@ export async function submitReview(input: {
       };
     }
     return { success: false, error: error.message };
+  }
+
+  // G-REVIEW-R1: tell the pro a review landed — deep link to their own
+  // public profile, where the review (and the respond form, K3) lives.
+  try {
+    const admin = createAdminClient();
+    const [{ data: proProfile }, { data: proPrefs }] = await Promise.all([
+      admin
+        .from("glatko_professional_profiles")
+        .select("slug")
+        .eq("id", quote.professional_id as string)
+        .maybeSingle(),
+      admin
+        .from("profiles")
+        .select("preferred_locale")
+        .eq("id", quote.professional_id as string)
+        .maybeSingle(),
+    ]);
+    const locale = coerceLocale(proPrefs?.preferred_locale as string | null);
+    const t = await getTranslations({ locale, namespace: "notifications" });
+    await createNotification({
+      user_id: quote.professional_id as string,
+      type: "review",
+      title: t("reviewReceived.title"),
+      body: t("reviewReceived.body", {
+        customerName: displayName || t("reviewReceived.title"),
+        rating: input.rating,
+      }),
+      data: proProfile?.slug ? { slug: proProfile.slug } : {},
+    });
+  } catch (err) {
+    console.error("[GLATKO:review] review notification failed", err);
   }
 
   revalidatePath(`/[locale]/provider/${quote.professional_id}`, "page");

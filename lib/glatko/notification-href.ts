@@ -46,7 +46,8 @@ export type NotificationHref =
   | { pathname: "/dashboard/requests/[id]"; params: { id: string } }
   | { pathname: "/pro/dashboard/requests/[id]"; params: { id: string } }
   | { pathname: "/messages/[id]"; params: { id: string } }
-  | { pathname: "/my-requests/[id]"; params: { id: string } };
+  | { pathname: "/my-requests/[id]"; params: { id: string } }
+  | { pathname: "/pros/[slug]"; params: { slug: string } };
 
 /** Locale-prefixed paths for `useRouter` / `Link` from next-intl (no `/${locale}` prefix). */
 export function getNotificationHref(n: NotificationLike): NotificationHref {
@@ -64,8 +65,20 @@ export function getNotificationHref(n: NotificationLike): NotificationHref {
       return "/pro/dashboard/bids";
     case "message":
       return "/messages";
-    case "review":
-      return "/pro/dashboard";
+    case "review": {
+      // G-REVIEW-R1: land the pro directly where the review (and the
+      // respond form) lives — their own public profile.
+      const slug = typeof d?.slug === "string" ? d.slug : "";
+      return slug
+        ? { pathname: "/pros/[slug]", params: { slug } }
+        : "/pro/dashboard";
+    }
+    case "review_request": {
+      const thread = threadIdFromNotificationData(d);
+      return thread
+        ? { pathname: "/messages/[id]", params: { id: thread } }
+        : "/messages";
+    }
     case "verification_approved":
       return "/pro/dashboard";
     case "verification_rejected":

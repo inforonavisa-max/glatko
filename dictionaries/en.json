@@ -639,7 +639,16 @@
     },
     "reviews": {
       "title": "Customer Reviews",
-      "anonymous": "Anonymous customer"
+      "anonymous": "Anonymous customer",
+      "response": {
+        "label": "Response from the professional",
+        "cta": "Respond",
+        "editCta": "Edit response",
+        "placeholder": "Write a public response to this review…",
+        "submit": "Publish response",
+        "cancel": "Cancel",
+        "error": "Could not save your response. Please try again."
+      }
     }
   },
   "admin": {
@@ -1063,6 +1072,9 @@
       "viewDetail": "View Details",
       "submitBid": "Submit Bid",
       "ago": "ago"
+    },
+    "detail": {
+      "quotesViaLeads": "Quotes are now sent from Business Opportunities when you are matched with a request. This page is view-only."
     }
   },
   "bidForm": {
@@ -1283,8 +1295,8 @@
       "body": "Your service request has expired"
     },
     "reviewReceived": {
-      "title": "New Review",
-      "body": "You received a new review"
+      "title": "New review",
+      "body": "{customerName} left a {rating}-star review on your profile."
     },
     "verificationApproved": {
       "title": "Account Approved",
@@ -1300,6 +1312,10 @@
     },
     "sms": {
       "otp": "Your Glatko verification code: {otp}"
+    },
+    "reviewRequest": {
+      "title": "Leave a review",
+      "body": "How did it go with {businessName}? Share your experience."
     }
   },
   "settings": {

@@ -180,12 +180,6 @@ export function ProRequestsFeed({ requests, locale }: Props) {
                     >
                       {t("proRequests.card.viewDetail")}
                     </Link>
-                    <Link
-                      href={`/${locale}/pro/dashboard/requests/${req.id}#bid`}
-                      className="rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-2 text-xs font-medium text-white shadow-lg shadow-teal-500/25"
-                    >
-                      {t("proRequests.card.submitBid")}
-                    </Link>
                   </div>
                 </div>
               </motion.div>

@@ -2237,3 +2237,72 @@ export function getFoundingCustomerWelcomeCopy(
 ): FoundingCustomerWelcomeCopy {
   return foundingCustomerWelcome[locale] ?? foundingCustomerWelcome.en;
 }
+
+/* ─── G-REVIEW-R1: single 3-day review reminder ─── */
+export type ReviewReminderCopy = {
+  subject: string;
+  preview: string;
+  body: string;
+  cta: string;
+};
+
+const reviewReminder: Record<EmailLocale, ReviewReminderCopy> = {
+  en: {
+    subject: "How did it go with {businessName}?",
+    preview: "A quick review for {businessName}",
+    body: "Your job \"{requestTitle}\" with {businessName} was completed a few days ago. A short review helps other customers choose with confidence — and it takes less than a minute.\n\nYour review will be visible on {businessName}'s public profile.",
+    cta: "Leave a review",
+  },
+  tr: {
+    subject: "{businessName} ile nasıl geçti?",
+    preview: "{businessName} için kısa bir değerlendirme",
+    body: "\"{requestTitle}\" başlıklı işiniz {businessName} ile birkaç gün önce tamamlandı. Kısa bir değerlendirme, diğer müşterilerin güvenle seçim yapmasına yardımcı olur — üstelik bir dakikadan kısa sürer.\n\nDeğerlendirmeniz {businessName} işletmesinin herkese açık profilinde görünecektir.",
+    cta: "Değerlendirme bırakın",
+  },
+  de: {
+    subject: "Wie ist es mit {businessName} gelaufen?",
+    preview: "Eine kurze Bewertung für {businessName}",
+    body: "Ihr Auftrag „{requestTitle}“ mit {businessName} wurde vor einigen Tagen abgeschlossen. Eine kurze Bewertung hilft anderen Kunden, mit Vertrauen zu wählen — und dauert weniger als eine Minute.\n\nIhre Bewertung wird im öffentlichen Profil von {businessName} sichtbar sein.",
+    cta: "Bewertung abgeben",
+  },
+  ar: {
+    subject: "كيف سارت الأمور مع {businessName}؟",
+    preview: "تقييم سريع لـ {businessName}",
+    body: "اكتمل طلبك «{requestTitle}» مع {businessName} قبل بضعة أيام. تقييم قصير يساعد العملاء الآخرين على الاختيار بثقة — ولا يستغرق أكثر من دقيقة.\n\nسيظهر تقييمك على الملف الشخصي العام الخاص بـ {businessName}.",
+    cta: "اترك تقييماً",
+  },
+  it: {
+    subject: "Com'è andata con {businessName}?",
+    preview: "Una breve recensione per {businessName}",
+    body: "Il tuo lavoro \"{requestTitle}\" con {businessName} è stato completato qualche giorno fa. Una breve recensione aiuta gli altri clienti a scegliere con fiducia — e richiede meno di un minuto.\n\nLa tua recensione sarà visibile sul profilo pubblico di {businessName}.",
+    cta: "Lascia una recensione",
+  },
+  me: {
+    subject: "Kako je prošlo sa {businessName}?",
+    preview: "Kratka recenzija za {businessName}",
+    body: "Vaš posao „{requestTitle}\" sa {businessName} završen je prije nekoliko dana. Kratka recenzija pomaže drugim klijentima da izaberu s povjerenjem — a traje manje od minuta.\n\nVaša recenzija biće vidljiva na javnom profilu {businessName}.",
+    cta: "Ostavite recenziju",
+  },
+  ru: {
+    subject: "Как всё прошло с {businessName}?",
+    preview: "Короткий отзыв о {businessName}",
+    body: "Ваша работа «{requestTitle}» с {businessName} была завершена несколько дней назад. Короткий отзыв помогает другим клиентам выбирать с уверенностью — и занимает меньше минуты.\n\nВаш отзыв будет виден в публичном профиле {businessName}.",
+    cta: "Оставить отзыв",
+  },
+  sr: {
+    subject: "Kako je prošlo sa {businessName}?",
+    preview: "Kratka recenzija za {businessName}",
+    body: "Vaš posao „{requestTitle}“ sa {businessName} završen je pre nekoliko dana. Kratka recenzija pomaže drugim klijentima da izaberu s poverenjem — a traje manje od minuta.\n\nVaša recenzija biće vidljiva na javnom profilu {businessName}.",
+    cta: "Ostavite recenziju",
+  },
+  uk: {
+    subject: "Як усе пройшло з {businessName}?",
+    preview: "Короткий відгук про {businessName}",
+    body: "Ваша робота «{requestTitle}» з {businessName} була завершена кілька днів тому. Короткий відгук допомагає іншим клієнтам обирати з упевненістю — і займає менше хвилини.\n\nВаш відгук буде видно в публічному профілі {businessName}.",
+    cta: "Залишити відгук",
+  },
+};
+
+export function getReviewReminderCopy(locale: EmailLocale): ReviewReminderCopy {
+  return reviewReminder[locale] ?? reviewReminder.en;
+}

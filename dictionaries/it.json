@@ -639,7 +639,16 @@
     },
     "reviews": {
       "title": "Recensioni dei clienti",
-      "anonymous": "Cliente anonimo"
+      "anonymous": "Cliente anonimo",
+      "response": {
+        "label": "Risposta del professionista",
+        "cta": "Rispondi",
+        "editCta": "Modifica risposta",
+        "placeholder": "Scrivi una risposta pubblica a questa recensione…",
+        "submit": "Pubblica risposta",
+        "cancel": "Annulla",
+        "error": "Impossibile salvare la risposta. Riprova."
+      }
     }
   },
   "admin": {
@@ -1063,6 +1072,9 @@
       "viewDetail": "Vedi Dettagli",
       "submitBid": "Fai un'Offerta",
       "ago": "fa"
+    },
+    "detail": {
+      "quotesViaLeads": "I preventivi vengono ora inviati da Opportunità di lavoro quando vieni abbinato a una richiesta. Questa pagina è di sola visualizzazione."
     }
   },
   "bidForm": {
@@ -1284,7 +1296,7 @@
     },
     "reviewReceived": {
       "title": "Nuova recensione",
-      "body": "Hai ricevuto una nuova recensione"
+      "body": "{customerName} ha lasciato una recensione di {rating} stelle sul tuo profilo."
     },
     "verificationApproved": {
       "title": "Account approvato",
@@ -1300,6 +1312,10 @@
     },
     "sms": {
       "otp": "Il tuo codice di verifica Glatko: {otp}"
+    },
+    "reviewRequest": {
+      "title": "Lascia una recensione",
+      "body": "Com'è andata con {businessName}? Condividi la tua esperienza."
     }
   },
   "settings": {

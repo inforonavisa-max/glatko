@@ -128,20 +128,29 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
 
   const { createClient: _createSupabase } = await import("@/supabase/server");
   const _supabase = _createSupabase();
-  const { data: quoteReviewsRaw } = await _supabase
-    .from("glatko_quote_reviews")
-    .select("id, rating, comment, customer_display_name, created_at")
-    .eq("professional_id", id)
-    .eq("status", "published")
-    .order("created_at", { ascending: false })
-    .limit(10);
+  const [{ data: quoteReviewsRaw }, { data: authData }] = await Promise.all([
+    _supabase
+      .from("glatko_quote_reviews")
+      .select(
+        "id, rating, comment, customer_display_name, created_at, pro_response, pro_response_at",
+      )
+      .eq("professional_id", id)
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .limit(10),
+    _supabase.auth.getUser(),
+  ]);
   const quoteReviews = (quoteReviewsRaw ?? []) as Array<{
     id: string;
     rating: number;
     comment: string | null;
     customer_display_name: string | null;
     created_at: string;
+    pro_response: string | null;
+    pro_response_at: string | null;
   }>;
+  // G-REVIEW-R1 (K3): the profile's own pro sees the respond form inline.
+  const viewerIsOwner = authData?.user?.id === id;
   const trustBadges = await calculateTrustBadges(id);
 
   const displayName =
@@ -478,7 +487,11 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
         </div>
 
         <div className="mb-8 rounded-2xl border border-gray-200/50 bg-white/70 p-6 backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">
-          <QuoteReviewsSection reviews={quoteReviews} locale={locale} />
+          <QuoteReviewsSection
+            reviews={quoteReviews}
+            locale={locale}
+            viewerIsOwner={viewerIsOwner}
+          />
         </div>
 
         <div className="rounded-2xl border border-gray-200/50 bg-white/70 p-8 text-center backdrop-blur-sm dark:border-white/[0.08] dark:bg-white/[0.03]">

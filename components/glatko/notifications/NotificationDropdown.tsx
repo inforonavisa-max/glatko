@@ -67,6 +67,7 @@ function getLocalizedTitle(type: string, t: ReturnType<typeof useTranslations>):
     new_request_match: t("notifications.newRequestMatch.title"),
     new_quote: t("notifications.newQuote.title"),
     thread_message: t("notifications.newMessage.title"),
+    review_request: t("notifications.reviewRequest.title"),
   };
   return map[type] || type;
 }

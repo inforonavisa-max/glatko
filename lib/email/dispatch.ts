@@ -168,10 +168,9 @@ async function buildEmailForType(params: {
           customerName: String(data.customerName ?? ""),
           requestTitle: String(data.requestTitle ?? ""),
           price: String(data.price ?? ""),
-          conversationUrl: buildLocalizedPath(
-            locale,
-            `/inbox/${conversationId}`,
-          ),
+          // G-REVIEW-R1 (K4): legacy conversations have no UI surface —
+          // the messages list is the only live destination.
+          conversationUrl: buildLocalizedPath(locale, "/messages"),
           locale,
         }),
       };
@@ -227,14 +226,10 @@ async function buildEmailForType(params: {
       };
     }
     case "message": {
-      const conversationId = String(
-        data.conversationId ?? data.conversation_id ?? "",
-      );
       const m = getNewMessageEmailCopy(locale);
       const body = String(data.notificationBody ?? "").trim() || "—";
-      const ctaUrl = conversationId
-        ? buildLocalizedPath(locale, `/inbox/${conversationId}`)
-        : buildLocalizedPath(locale, "/inbox");
+      // G-REVIEW-R1 (K4): /inbox is retired — land on the messages list.
+      const ctaUrl = buildLocalizedPath(locale, "/messages");
       return {
         subject: m.subject,
         react: createElement(SimpleActionEmail, {

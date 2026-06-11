@@ -556,26 +556,6 @@ export async function getMatchingRequests(professionalId: string) {
   return (data || []).filter((r) => !biddedIds.has(r.id));
 }
 
-export async function createBid(data: {
-  service_request_id: string;
-  professional_id: string;
-  price: number;
-  price_type: "fixed" | "hourly" | "estimate";
-  message: string;
-  estimated_duration_hours?: number;
-  available_date?: string;
-}) {
-  const supabase = createClient();
-  const { data: bid, error } = await supabase
-    .from("glatko_bids")
-    .insert(data)
-    .select()
-    .single();
-
-  if (error) throw error;
-  return bid;
-}
-
 export async function getProfessionalBids(professionalId: string) {
   const supabase = createClient();
   const { data, error } = await supabase
