@@ -2421,5 +2421,58 @@
         }
       }
     }
+  },
+  "verticals": {
+    "ariaLabel": "Glatko sections",
+    "services": "Services",
+    "career": "Work & Career",
+    "health": "Health",
+    "soon": "Soon"
+  },
+  "healthVertical": {
+    "seoTitle": "Glatko Health — Coming Soon",
+    "landing": {
+      "title": "Find your doctor, book online",
+      "subtitle": "Verified health professionals across Montenegro. Free online booking.",
+      "searchSpecialty": "Specialty or doctor name",
+      "searchCity": "City",
+      "searchCta": "Search",
+      "popular": "Popular specialties",
+      "skeletonNotice": "This section is under construction — full directory coming soon."
+    },
+    "specialties": {
+      "dentist": "Dentist",
+      "gp": "General practitioner",
+      "psychologist": "Psychologist",
+      "physio": "Physiotherapist",
+      "other": "Other"
+    },
+    "comingSoon": {
+      "badge": "Coming soon",
+      "title": "Glatko Health is coming",
+      "subtitle": "The easiest way to book a doctor's appointment in Montenegro: verified professionals, real-time calendars, free online booking.",
+      "waitlistTitle": "Are you a doctor or dentist?",
+      "waitlistSubtitle": "Join the early-access list — have your profile ready at launch.",
+      "backHome": "Back to home"
+    },
+    "waitlist": {
+      "name": "Full name",
+      "specialty": "Specialty",
+      "city": "City",
+      "phone": "Phone",
+      "email": "Email (optional)",
+      "submit": "Join the list",
+      "submitting": "Sending…",
+      "success": "You're on the list! We'll let you know at launch.",
+      "errorGeneric": "Something went wrong. Please try again.",
+      "errorValidation": "Please fill in the required fields.",
+      "privacyNote": "Your details are used only to contact you about the Glatko Health launch."
+    }
+  },
+  "careerVertical": {
+    "seoTitle": "Work & Career — Coming Soon",
+    "title": "Work & Career is coming",
+    "subtitle": "We're building a trusted way to connect employers and workers in Montenegro. This section is coming soon.",
+    "backHome": "Back to home"
   }
 }

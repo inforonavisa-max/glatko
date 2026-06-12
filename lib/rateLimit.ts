@@ -109,7 +109,9 @@ function classifyRoute(pathname: string): RouteClass {
   if (
     pathname.startsWith("/_next") ||
     pathname === "/favicon.ico" ||
-    pathname.startsWith("/api/health")
+    // Exact match: only the uptime healthcheck is exempt. Health-vertical
+    // endpoints live under /api/health/* and MUST stay rate-limited.
+    pathname === "/api/health"
   ) {
     return "exception";
   }
@@ -121,6 +123,8 @@ function classifyRoute(pathname: string): RouteClass {
 
   if (pathname.startsWith("/api/search")) return "public-form";
   if (pathname.startsWith("/api/map-assets")) return "public-form";
+  // Health vertical public endpoints (H0 waitlist; later slots/holds/otp)
+  if (pathname.startsWith("/api/health/")) return "public-form";
 
   if (pathname.startsWith("/login") || pathname.startsWith("/auth") || pathname.startsWith("/api/auth")) {
     return "auth-sensitive";

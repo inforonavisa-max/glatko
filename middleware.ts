@@ -3,6 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/supabase/middleware';
 import { enforceRateLimit } from '@/lib/rateLimit';
 import { locales, routing } from '@/i18n/routing';
+import { isHealthVerticalEnabled } from '@/lib/health/flags';
+import {
+  HEALTH_FIRST_SEGMENTS,
+  HEALTH_COMING_SOON_BARE_PATHS,
+  HEALTH_PRO_FIRST_SEGMENTS,
+  CAREER_FIRST_SEGMENTS,
+} from '@/lib/verticals/slugs';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -39,6 +46,22 @@ function addHreflangHeaders(response: NextResponse, pathname: string) {
   if (
     PRIVATE_BARE_PREFIXES.some((p) => bare === p || bare.startsWith(`${p}/`))
   ) {
+    return;
+  }
+
+  // H0 SEO quarantine: health + career verticals are noindex until launch
+  // (MASTER_PLAN Demir Kural 8) — advertising hreflang alternates for
+  // noindex/404 surfaces would only feed GSC junk. DELETE (not just skip):
+  // the next-intl middleware emits its own alternate Link header, which our
+  // header normally overwrites — skipping alone would leak intl's version.
+  // H11 launch PR removes the health entries here with the noindex metadata.
+  const first = segments[1] ?? '';
+  if (
+    HEALTH_FIRST_SEGMENTS.has(first) ||
+    CAREER_FIRST_SEGMENTS.has(first) ||
+    HEALTH_PRO_FIRST_SEGMENTS.has(first)
+  ) {
+    response.headers.delete('Link');
     return;
   }
 
@@ -95,6 +118,31 @@ export async function middleware(request: NextRequest) {
             }
             if (target) {
                 return NextResponse.redirect(new URL(target, request.url), 308);
+            }
+        }
+    }
+
+    // ── H0: health vertical flag guard ────────────────────────────────────
+    // HEALTH_VERTICAL_ENABLED=false (Production) → every localized /saglik/*
+    // (+ future /saglik-pro/*) URL 404s, EXCEPT the coming-soon page (K2).
+    // Slug sets derive from i18n/routing.ts via lib/verticals/slugs.ts, so
+    // the guard cannot drift from the pathnames map. Defense-in-depth: the
+    // app/[locale]/health/(gated)/ layout also calls notFound().
+    if (!isHealthVerticalEnabled()) {
+        const segs = pathname.split('/').filter(Boolean);
+        if (segs.length >= 2 && isLocaleSegment(segs[0])) {
+            const bare = '/' + segs.slice(1).join('/');
+            const first = segs[1];
+            const blocked =
+                HEALTH_PRO_FIRST_SEGMENTS.has(first) ||
+                (HEALTH_FIRST_SEGMENTS.has(first) &&
+                    !HEALTH_COMING_SOON_BARE_PATHS.has(bare));
+            if (blocked) {
+                // Rewrite to a never-matching path → Next renders its 404
+                // page with a real 404 status (no redirect, no soft-200).
+                return NextResponse.rewrite(
+                    new URL(`/${segs[0]}/__health-disabled-404`, request.url),
+                );
             }
         }
     }

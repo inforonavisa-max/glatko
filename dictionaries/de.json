@@ -2421,5 +2421,58 @@
         }
       }
     }
+  },
+  "verticals": {
+    "ariaLabel": "Glatko-Bereiche",
+    "services": "Dienstleistungen",
+    "career": "Arbeit & Karriere",
+    "health": "Gesundheit",
+    "soon": "Bald"
+  },
+  "healthVertical": {
+    "seoTitle": "Glatko Gesundheit — Bald verfügbar",
+    "landing": {
+      "title": "Finden Sie Ihren Arzt, buchen Sie online",
+      "subtitle": "Verifizierte Gesundheitsexperten in ganz Montenegro. Kostenlose Online-Terminbuchung.",
+      "searchSpecialty": "Fachgebiet oder Arztname",
+      "searchCity": "Stadt",
+      "searchCta": "Suchen",
+      "popular": "Beliebte Fachgebiete",
+      "skeletonNotice": "Dieser Bereich befindet sich im Aufbau — das vollständige Verzeichnis folgt in Kürze."
+    },
+    "specialties": {
+      "dentist": "Zahnarzt",
+      "gp": "Allgemeinmediziner",
+      "psychologist": "Psychologe",
+      "physio": "Physiotherapeut",
+      "other": "Sonstiges"
+    },
+    "comingSoon": {
+      "badge": "Bald verfügbar",
+      "title": "Glatko Gesundheit kommt",
+      "subtitle": "Der einfachste Weg, in Montenegro einen Arzttermin zu buchen: verifizierte Experten, Echtzeit-Kalender, kostenlose Online-Buchung.",
+      "waitlistTitle": "Sind Sie Arzt oder Zahnarzt?",
+      "waitlistSubtitle": "Treten Sie der Early-Access-Liste bei — Ihr Profil ist zum Start bereit.",
+      "backHome": "Zur Startseite"
+    },
+    "waitlist": {
+      "name": "Vollständiger Name",
+      "specialty": "Fachgebiet",
+      "city": "Stadt",
+      "phone": "Telefon",
+      "email": "E-Mail (optional)",
+      "submit": "Auf die Liste",
+      "submitting": "Wird gesendet…",
+      "success": "Sie stehen auf der Liste! Wir melden uns zum Start.",
+      "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "errorValidation": "Bitte füllen Sie die Pflichtfelder aus.",
+      "privacyNote": "Ihre Daten werden ausschließlich verwendet, um Sie über den Start von Glatko Gesundheit zu informieren."
+    }
+  },
+  "careerVertical": {
+    "seoTitle": "Arbeit & Karriere — Bald verfügbar",
+    "title": "Arbeit & Karriere kommt",
+    "subtitle": "Wir bauen eine vertrauenswürdige Verbindung zwischen Arbeitgebern und Arbeitskräften in Montenegro auf. Dieser Bereich folgt in Kürze.",
+    "backHome": "Zur Startseite"
   }
 }

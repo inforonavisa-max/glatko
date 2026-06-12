@@ -2424,5 +2424,58 @@
         }
       }
     }
+  },
+  "verticals": {
+    "ariaLabel": "Glatko bölümleri",
+    "services": "Hizmetler",
+    "career": "İş & Kariyer",
+    "health": "Sağlık",
+    "soon": "Yakında"
+  },
+  "healthVertical": {
+    "seoTitle": "Glatko Sağlık — Yakında",
+    "landing": {
+      "title": "Doktorunu bul, online randevu al",
+      "subtitle": "Karadağ'ın doğrulanmış sağlık uzmanları. Ücretsiz online randevu.",
+      "searchSpecialty": "Uzmanlık veya doktor adı",
+      "searchCity": "Şehir",
+      "searchCta": "Ara",
+      "popular": "Popüler uzmanlıklar",
+      "skeletonNotice": "Bu bölüm yapım aşamasında — tam dizin çok yakında."
+    },
+    "specialties": {
+      "dentist": "Diş Hekimi",
+      "gp": "Pratisyen Hekim",
+      "psychologist": "Psikolog",
+      "physio": "Fizyoterapist",
+      "other": "Diğer"
+    },
+    "comingSoon": {
+      "badge": "Yakında",
+      "title": "Glatko Sağlık geliyor",
+      "subtitle": "Karadağ'da doktor randevusu almanın en kolay yolu: doğrulanmış uzmanlar, gerçek zamanlı takvimler, ücretsiz online randevu.",
+      "waitlistTitle": "Doktor veya diş hekimi misiniz?",
+      "waitlistSubtitle": "Erken erişim listesine katılın — lansmanda profiliniz hazır olsun.",
+      "backHome": "Ana sayfaya dön"
+    },
+    "waitlist": {
+      "name": "Ad Soyad",
+      "specialty": "Branş",
+      "city": "Şehir",
+      "phone": "Telefon",
+      "email": "E-posta (opsiyonel)",
+      "submit": "Listeye katıl",
+      "submitting": "Gönderiliyor…",
+      "success": "Listedesiniz! Lansmanda size haber vereceğiz.",
+      "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "errorValidation": "Lütfen zorunlu alanları doldurun.",
+      "privacyNote": "Bilgileriniz yalnızca Glatko Sağlık lansmanı hakkında sizinle iletişim için kullanılır."
+    }
+  },
+  "careerVertical": {
+    "seoTitle": "İş & Kariyer — Yakında",
+    "title": "İş & Kariyer geliyor",
+    "subtitle": "Karadağ'da işverenlerle güvenilir çalışanları buluşturacağız. Bu bölüm çok yakında.",
+    "backHome": "Ana sayfaya dön"
   }
 }

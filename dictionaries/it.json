@@ -2421,5 +2421,58 @@
         }
       }
     }
+  },
+  "verticals": {
+    "ariaLabel": "Sezioni di Glatko",
+    "services": "Servizi",
+    "career": "Lavoro & Carriera",
+    "health": "Salute",
+    "soon": "Presto"
+  },
+  "healthVertical": {
+    "seoTitle": "Glatko Salute — In arrivo",
+    "landing": {
+      "title": "Trova il tuo medico, prenota online",
+      "subtitle": "Professionisti sanitari verificati in tutto il Montenegro. Prenotazione online gratuita.",
+      "searchSpecialty": "Specialità o nome del medico",
+      "searchCity": "Città",
+      "searchCta": "Cerca",
+      "popular": "Specialità più richieste",
+      "skeletonNotice": "Questa sezione è in costruzione — l'elenco completo arriverà presto."
+    },
+    "specialties": {
+      "dentist": "Dentista",
+      "gp": "Medico di base",
+      "psychologist": "Psicologo",
+      "physio": "Fisioterapista",
+      "other": "Altro"
+    },
+    "comingSoon": {
+      "badge": "In arrivo",
+      "title": "Glatko Salute sta arrivando",
+      "subtitle": "Il modo più semplice per prenotare una visita medica in Montenegro: professionisti verificati, calendari in tempo reale, prenotazione online gratuita.",
+      "waitlistTitle": "Sei un medico o un dentista?",
+      "waitlistSubtitle": "Unisciti alla lista early-access — il tuo profilo sarà pronto al lancio.",
+      "backHome": "Torna alla home"
+    },
+    "waitlist": {
+      "name": "Nome e cognome",
+      "specialty": "Specialità",
+      "city": "Città",
+      "phone": "Telefono",
+      "email": "Email (facoltativa)",
+      "submit": "Iscriviti alla lista",
+      "submitting": "Invio in corso…",
+      "success": "Sei in lista! Ti avviseremo al lancio.",
+      "errorGeneric": "Qualcosa è andato storto. Riprova.",
+      "errorValidation": "Compila i campi obbligatori.",
+      "privacyNote": "I tuoi dati saranno usati solo per contattarti riguardo al lancio di Glatko Salute."
+    }
+  },
+  "careerVertical": {
+    "seoTitle": "Lavoro & Carriera — In arrivo",
+    "title": "Lavoro & Carriera sta arrivando",
+    "subtitle": "Stiamo costruendo un modo affidabile per mettere in contatto datori di lavoro e lavoratori in Montenegro. Questa sezione arriverà presto.",
+    "backHome": "Torna alla home"
   }
 }

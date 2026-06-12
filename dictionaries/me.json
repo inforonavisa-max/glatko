@@ -2424,5 +2424,58 @@
         }
       }
     }
+  },
+  "verticals": {
+    "ariaLabel": "Glatko sekcije",
+    "services": "Usluge",
+    "career": "Posao i karijera",
+    "health": "Zdravlje",
+    "soon": "Uskoro"
+  },
+  "healthVertical": {
+    "seoTitle": "Glatko Zdravlje — uskoro",
+    "landing": {
+      "title": "Pronađite svog ljekara, zakažite online",
+      "subtitle": "Verifikovani zdravstveni stručnjaci širom Crne Gore. Besplatno online zakazivanje.",
+      "searchSpecialty": "Specijalnost ili ime ljekara",
+      "searchCity": "Grad",
+      "searchCta": "Pretraži",
+      "popular": "Popularne specijalnosti",
+      "skeletonNotice": "Ova sekcija je u izradi — kompletan imenik stiže uskoro."
+    },
+    "specialties": {
+      "dentist": "Stomatolog",
+      "gp": "Ljekar opšte prakse",
+      "psychologist": "Psiholog",
+      "physio": "Fizioterapeut",
+      "other": "Ostalo"
+    },
+    "comingSoon": {
+      "badge": "Uskoro",
+      "title": "Glatko Zdravlje stiže",
+      "subtitle": "Najlakši način da zakažete pregled kod ljekara u Crnoj Gori: verifikovani stručnjaci, kalendari u realnom vremenu, besplatno online zakazivanje.",
+      "waitlistTitle": "Da li ste ljekar ili stomatolog?",
+      "waitlistSubtitle": "Pridružite se listi za rani pristup — neka vaš profil bude spreman za lansiranje.",
+      "backHome": "Nazad na početnu"
+    },
+    "waitlist": {
+      "name": "Ime i prezime",
+      "specialty": "Specijalnost",
+      "city": "Grad",
+      "phone": "Telefon",
+      "email": "Email (opciono)",
+      "submit": "Pridruži se listi",
+      "submitting": "Slanje…",
+      "success": "Na listi ste! Javićemo vam se pri lansiranju.",
+      "errorGeneric": "Nešto je pošlo po zlu. Pokušajte ponovo.",
+      "errorValidation": "Popunite obavezna polja.",
+      "privacyNote": "Vaši podaci se koriste isključivo da vas kontaktiramo povodom lansiranja Glatko Zdravlja."
+    }
+  },
+  "careerVertical": {
+    "seoTitle": "Posao i karijera — uskoro",
+    "title": "Posao i karijera stiže",
+    "subtitle": "Gradimo pouzdan način povezivanja poslodavaca i radnika u Crnoj Gori. Ova sekcija stiže uskoro.",
+    "backHome": "Nazad na početnu"
   }
 }

@@ -27,6 +27,22 @@ const config: Config = {
           950: "#333333",
           DEFAULT: "#333333",
         },
+        // Vertical accent tokens (MASTER_PLAN §1.5, K7-r2): wayfinding only —
+        // tab icons/active indicators, section tints (50), small factual
+        // badges. NEVER buttons/CTAs/links/focus rings (those stay teal).
+        // health = sky (medical blue); career = amber.
+        health: {
+          50: "#F0F9FF",
+          100: "#E0F2FE",
+          600: "#0284C7",
+          700: "#0369A1",
+        },
+        career: {
+          50: "#FFFBEB",
+          100: "#FEF3C7",
+          600: "#D97706",
+          700: "#B45309",
+        },
         teal: {
           50: "#F0FDFA",
           100: "#CCFBF1",
@@ -121,6 +137,12 @@ const config: Config = {
           transform: "translateZ(0)",
           "will-change": "transform",
           "backface-visibility": "hidden",
+        },
+        // Horizontally scrollable tab/chip rows without a visible scrollbar
+        ".scrollbar-none": {
+          "scrollbar-width": "none",
+          "-ms-overflow-style": "none",
+          "&::-webkit-scrollbar": { display: "none" },
         },
       });
     }),

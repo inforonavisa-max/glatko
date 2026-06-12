@@ -153,6 +153,46 @@ export const routing = defineRouting({
       ar: "/al-khadamat/[slug]/[city]",
     },
 
+    // Health vertical (H0 — docs/health/MASTER_PLAN.md). Folder lives at
+    // app/[locale]/health/*; per-locale slugs follow the services pattern.
+    // While HEALTH_VERTICAL_ENABLED is false, middleware 404s everything
+    // under these prefixes except the coming-soon page.
+    "/health": {
+      tr: "/saglik",
+      en: "/health",
+      de: "/gesundheit",
+      it: "/salute",
+      ru: "/zdorove",
+      uk: "/zdorovya",
+      sr: "/zdravlje",
+      me: "/zdravlje",
+      ar: "/al-sihha",
+    },
+    "/health/coming-soon": {
+      tr: "/saglik/yakinda",
+      en: "/health/coming-soon",
+      de: "/gesundheit/demnaechst",
+      it: "/salute/prossimamente",
+      ru: "/zdorove/skoro",
+      uk: "/zdorovya/nezabarom",
+      sr: "/zdravlje/uskoro",
+      me: "/zdravlje/uskoro",
+      ar: "/al-sihha/qariban",
+    },
+
+    // Work & career vertical placeholder (K1 — own coming-soon page)
+    "/career": {
+      tr: "/kariyer",
+      en: "/career",
+      de: "/karriere",
+      it: "/carriera",
+      ru: "/karera",
+      uk: "/kariera",
+      sr: "/karijera",
+      me: "/karijera",
+      ar: "/al-wazaif",
+    },
+
     // Static info pages
     "/how-it-works": {
       tr: "/nasil-calisir",
