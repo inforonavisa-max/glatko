@@ -155,12 +155,18 @@ export function VerticalsNav({ healthEnabled }: { healthEnabled: boolean }) {
                     transition={{ duration: reduced ? 0 : 0.2 }}
                     className="relative"
                   >
+                    {/* Tab icon always carries its vertical's accent (§1.5
+                        allows "sekme ikonu" unconditionally) so the three
+                        sub-brands stay visually distinct side-by-side —
+                        teal / amber / sky — persistent wayfinding. Active
+                        state is shown by the label weight + underline, not by
+                        re-coloring the icon. Inactive tabs dim via opacity so
+                        the active one still reads as primary. */}
                     <Icon
                       className={cn(
-                        "h-5 w-5 transition-colors duration-200",
-                        active
-                          ? tab.accentClasses.icon
-                          : "text-gray-400 dark:text-white/40",
+                        "h-5 w-5 transition-opacity duration-200",
+                        tab.accentClasses.icon,
+                        active ? "opacity-100" : "opacity-70",
                       )}
                       strokeWidth={1.5}
                     />
