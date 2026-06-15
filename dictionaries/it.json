@@ -2466,7 +2466,8 @@
       "success": "Sei in lista! Ti avviseremo al lancio.",
       "errorGeneric": "Qualcosa è andato storto. Riprova.",
       "errorValidation": "Compila i campi obbligatori.",
-      "privacyNote": "I tuoi dati saranno usati solo per contattarti riguardo al lancio di Glatko Salute."
+      "privacyNote": "Usiamo i tuoi dati (nome, telefono, email) solo per contattarti riguardo al lancio di Glatko Salute e non li condividiamo con terzi. Dettagli:",
+      "privacyLinkText": "Privacy"
     }
   },
   "careerVertical": {

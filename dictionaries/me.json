@@ -2469,7 +2469,8 @@
       "success": "Na listi ste! Javićemo vam se pri lansiranju.",
       "errorGeneric": "Nešto je pošlo po zlu. Pokušajte ponovo.",
       "errorValidation": "Popunite obavezna polja.",
-      "privacyNote": "Vaši podaci se koriste isključivo da vas kontaktiramo povodom lansiranja Glatko Zdravlja."
+      "privacyNote": "Vaše podatke (ime, telefon, e-mail) koristimo isključivo da vas kontaktiramo povodom lansiranja Glatko Zdravlja i ne dijelimo ih sa trećim stranama. Detalji:",
+      "privacyLinkText": "Politika privatnosti"
     }
   },
   "careerVertical": {

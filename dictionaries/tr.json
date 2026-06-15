@@ -2469,7 +2469,8 @@
       "success": "Listedesiniz! Lansmanda size haber vereceğiz.",
       "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
       "errorValidation": "Lütfen zorunlu alanları doldurun.",
-      "privacyNote": "Bilgileriniz yalnızca Glatko Sağlık lansmanı hakkında sizinle iletişim için kullanılır."
+      "privacyNote": "Bilgilerinizi (ad, telefon, e-posta) yalnızca Glatko Sağlık lansmanı için sizinle iletişimde kullanırız; üçüncü taraflarla paylaşmayız. Detaylar:",
+      "privacyLinkText": "Gizlilik Politikası"
     }
   },
   "careerVertical": {

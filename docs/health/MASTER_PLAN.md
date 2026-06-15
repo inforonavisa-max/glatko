@@ -1,4 +1,4 @@
-# GLATKO SAĞLIK (Health Vertical) — Master Uygulama Planı v1.3
+# GLATKO SAĞLIK (Health Vertical) — Master Uygulama Planı v1.4
 
 > Doktortakvimi.com mantığında, Glatko.app içinde ayrı bir bölüm olarak inşa edilecek
 > sağlık randevu sistemi. Bu doküman Claude Code'a sprint sprint verilecek tek kaynak plandır.
@@ -15,6 +15,13 @@
 > (eski `health-*`/`career-*` → yeniden adlandırıldı) + sky-600 metin-kontrast
 > notu. Carve-out checklist: `docs/health/EXTRACTION.md`. Tüm planda
 > **"İş & Kariyer" → "İş"** (switcher etiketi kısaldı, K1 hedefi değişmedi).
+> **v1.4 (15.06.2026):** Migration 065 prod'a uygulandı (glatko-prod, Rohat
+> onayı + 6 koşul). **Konvansiyon (bilinçli): DB şeması `health` KALIR, kod
+> namespace'i `saglik` (`lib/saglik/`, `components/glatko-saglik/`).** Yani
+> kod-tarafı Türkçe alt-marka adını, DB-tarafı nötr İngilizce şema adını kullanır;
+> ikisi kasıtlı ayrı — H1+ migration'larında şema adı `health` olarak devam eder.
+> Coming-soon waitlist formuna aydınlatma satırı + gizlilik linki eklendi
+> (prod'da gerçek PII).
 
 ---
 
@@ -107,6 +114,10 @@ app/api/health/
 
 ### 1.3 Veritabanı yapısı
 
+- **Adlandırma konvansiyonu (v1.4, bilinçli):** DB-tarafı şema adı **`health`**
+  (nötr İngilizce, H1+ tüm migration'larda sabit) — kod-tarafı namespace ise
+  **`saglik`** (`lib/saglik/`, `components/glatko-saglik/`, marka "Glatko Sağlık").
+  İkisi kasıtlı ayrı: şema adı uluslararası/teknik, kod adı yerel alt-marka.
 - Aynı Supabase projesi, ayrı **`health` şeması** (mevcut tablolarla karışmaz).
 - Extension'lar: `btree_gist` (overlap exclusion), `pgcrypto` (PII şifreleme),
   `pg_cron` (reminder dispatch), `earthdistance + cube` (geo arama — PostGIS yerine

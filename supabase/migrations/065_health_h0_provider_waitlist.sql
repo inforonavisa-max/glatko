@@ -13,10 +13,15 @@
 --     EXECUTE yalnız service_role (route handler: app/api/health/waitlist).
 --   * Aynı telefonla tekrar başvuru upsert olur (idempotent, hata sızdırmaz).
 --
--- Rollback:
+-- Rollback (tam geri alma — H1 öncesi şemayı tümden kaldırır):
+--   DROP SCHEMA IF EXISTS health CASCADE;   -- health.* tablo + index + RLS
+--   -- Fonksiyon public şemasında olduğu için CASCADE onu DÜŞÜRMEZ; ayrıca:
 --   DROP FUNCTION IF EXISTS public.health_waitlist_join(text,text,text,text,text,text);
---   DROP TABLE IF EXISTS health.provider_waitlist;
---   -- şemayı H1 öncesi tamamen geri almak gerekirse: DROP SCHEMA health;
+-- (Yalnız waitlist'i geri almak istersen: DROP TABLE health.provider_waitlist + DROP FUNCTION yukarıdaki.)
+--
+-- Uygulama (2026-06-15, glatko-prod cjqappdfyxgytdyeytwv, Rohat onayı + 6 koşul):
+--   additive-only (mevcut public tablolarda ALTER/DROP yok) · RPC search_path=''
+--   pinli · get_advisors sonrası temiz · DB şeması bilinçli `health` (kod=saglik).
 
 CREATE SCHEMA IF NOT EXISTS health;
 

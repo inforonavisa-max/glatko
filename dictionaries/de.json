@@ -2466,7 +2466,8 @@
       "success": "Sie stehen auf der Liste! Wir melden uns zum Start.",
       "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
       "errorValidation": "Bitte füllen Sie die Pflichtfelder aus.",
-      "privacyNote": "Ihre Daten werden ausschließlich verwendet, um Sie über den Start von Glatko Gesundheit zu informieren."
+      "privacyNote": "Wir verwenden Ihre Daten (Name, Telefon, E-Mail) ausschließlich für den Start von Glatko Gesundheit und geben sie nicht an Dritte weiter. Details:",
+      "privacyLinkText": "Datenschutz"
     }
   },
   "careerVertical": {

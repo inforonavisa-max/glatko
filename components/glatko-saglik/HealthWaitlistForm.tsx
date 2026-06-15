@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -135,7 +136,17 @@ export function HealthWaitlistForm({ locale }: { locale: Locale }) {
         {status === "submitting" ? t("waitlist.submitting") : t("waitlist.submit")}
       </button>
 
-      <p className="text-xs text-gray-400 dark:text-white/30">{t("waitlist.privacyNote")}</p>
+      {/* Disclosure line — real PII is collected once migration 065 is live;
+          links to the localized privacy policy (next-intl resolves the slug). */}
+      <p className="text-xs text-gray-400 dark:text-white/30">
+        {t("waitlist.privacyNote")}{" "}
+        <Link
+          href="/privacy"
+          className="underline transition-colors hover:text-gray-600 dark:hover:text-white/50"
+        >
+          {t("waitlist.privacyLinkText")}
+        </Link>
+      </p>
     </form>
   );
 }

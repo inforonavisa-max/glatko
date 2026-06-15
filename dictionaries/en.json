@@ -2466,7 +2466,8 @@
       "success": "You're on the list! We'll let you know at launch.",
       "errorGeneric": "Something went wrong. Please try again.",
       "errorValidation": "Please fill in the required fields.",
-      "privacyNote": "Your details are used only to contact you about the Glatko Health launch."
+      "privacyNote": "We use your details (name, phone, email) only to contact you about the Glatko Health launch and never share them with third parties. Details:",
+      "privacyLinkText": "Privacy Policy"
     }
   },
   "careerVertical": {
