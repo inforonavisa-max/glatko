@@ -179,6 +179,32 @@ export const routing = defineRouting({
       me: "/zdravlje/uskoro",
       ar: "/al-sihha/qariban",
     },
+    // Health directory (H2). [specialty] is the locale-neutral specialty slug
+    // (e.g. 'dis-hekimi'); only the path prefix is localized, mirroring
+    // "/services/[slug]". 'uzman' (specialist) stays constant — these routes are
+    // gated + noindex (SEO quarantine), so the URL segment isn't index-bound.
+    "/health/[specialty]": {
+      tr: "/saglik/[specialty]",
+      en: "/health/[specialty]",
+      de: "/gesundheit/[specialty]",
+      it: "/salute/[specialty]",
+      ru: "/zdorove/[specialty]",
+      uk: "/zdorovya/[specialty]",
+      sr: "/zdravlje/[specialty]",
+      me: "/zdravlje/[specialty]",
+      ar: "/al-sihha/[specialty]",
+    },
+    "/health/uzman/[slug]": {
+      tr: "/saglik/uzman/[slug]",
+      en: "/health/uzman/[slug]",
+      de: "/gesundheit/uzman/[slug]",
+      it: "/salute/uzman/[slug]",
+      ru: "/zdorove/uzman/[slug]",
+      uk: "/zdorovya/uzman/[slug]",
+      sr: "/zdravlje/uzman/[slug]",
+      me: "/zdravlje/uzman/[slug]",
+      ar: "/al-sihha/uzman/[slug]",
+    },
 
     // Work & career vertical placeholder (K1 — own coming-soon page)
     "/career": {

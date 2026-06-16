@@ -2471,6 +2471,31 @@
       "errorValidation": "Lütfen zorunlu alanları doldurun.",
       "privacyNote": "Bilgilerinizi (ad, telefon, e-posta) yalnızca Glatko Sağlık lansmanı için sizinle iletişimde kullanırız; üçüncü taraflarla paylaşmayız. Detaylar:",
       "privacyLinkText": "Gizlilik Politikası"
+    },
+    "directory": {
+      "verified": "Doğrulanmış",
+      "availabilitySoon": "Müsaitlik yakında",
+      "languagesLabel": "Diller",
+      "specialtiesLabel": "Uzmanlıklar",
+      "aboutLabel": "Hakkında",
+      "servicesLabel": "Hizmetler ve fiyatlar",
+      "addressLabel": "Adres",
+      "mapSoon": "Harita yakında",
+      "bookingSoon": "Randevu sistemi yakında",
+      "bookCta": "Randevu Al",
+      "allSpecialties": "Tüm uzmanlıklar",
+      "browseBySpecialty": "Uzmanlığa göre gör",
+      "searchSoonNote": "Arama yakında — şimdilik aşağıdan bir uzmanlık seçin.",
+      "specialtyIntro": "Karadağ’da doğrulanmış uzmanlar",
+      "emptyTitle": "Henüz uzman yok",
+      "emptyBody": "Bu uzmanlıkta doğrulanmış uzmanları ekliyoruz. Yakında tekrar bakın.",
+      "errorTitle": "Yüklenemedi",
+      "errorBody": "Bu sayfa yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.",
+      "minutesShort": "dk",
+      "modeInPerson": "Yüz yüze",
+      "modeVideo": "Video",
+      "modeHomeVisit": "Evde",
+      "retry": "Tekrar dene"
     }
   },
   "careerVertical": {

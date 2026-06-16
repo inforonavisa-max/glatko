@@ -33,6 +33,18 @@
 > service-role ile sunulacak (RLS policy'leri + authenticated grant'lar hazır). book_appointment
 > `health` şemasında; PostgREST rpc çağrılabilirliği H5'te (expose veya public wrapper).
 > Flag prod=false KALIR — kullanıcıya görünen değişiklik yok.
+> **v1.6 (16.06.2026, H2):** Uzman dizini + profil (3 sayfa: ana / `[specialty]` /
+> `uzman/[slug]`, hepsi gated+noindex, 9 locale). **Mimari karar (Rohat): health
+> şeması PostgREST'e EXPOSE EDİLMEZ** — H1'in "anon SELECT public-read" hücresi,
+> `public` şemasında 3 SECURITY DEFINER salt-okuma RPC ile sunulur
+> (`068_health_h2_read_rpcs.sql`: `health_list_specialties` / `health_providers_by_specialty`
+> / `health_get_provider`; search_path='' pinli, yayın filtresi RPC içinde → anon hiçbir
+> koşulda yayınlanmamış veri göremez). Server-only data-access: `lib/saglik/queries.ts`
+> (`'server-only'` + cookie-free `createAdminClient` → ISR uyumlu). Kanıt: 3 sayfa
+> tr/en/me desktop+mobil render, yayın filtresi (unpublished→liste 0+profil 404),
+> service-role key client bundle'da YOK, advisor 0 yeni ERROR (3 RPC search_path-mutable
+> DEĞİL; anon_security_definer WARN'ları kasıtlı = read-gateway). Saat-chip/booking
+> alanları H4/H5-hazır placeholder (sahte veri yok). Flag prod=false KALIR.
 
 ---
 

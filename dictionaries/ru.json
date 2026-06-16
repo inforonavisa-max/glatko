@@ -2468,6 +2468,31 @@
       "errorValidation": "Заполните обязательные поля.",
       "privacyNote": "Мы используем ваши данные (имя, телефон, e-mail) только для связи по поводу запуска Glatko Здоровье и не передаём их третьим лицам. Подробнее:",
       "privacyLinkText": "Политика конфиденциальности"
+    },
+    "directory": {
+      "verified": "Проверен",
+      "availabilitySoon": "Расписание скоро",
+      "languagesLabel": "Языки",
+      "specialtiesLabel": "Специальности",
+      "aboutLabel": "О специалисте",
+      "servicesLabel": "Услуги и цены",
+      "addressLabel": "Адрес",
+      "mapSoon": "Карта скоро",
+      "bookingSoon": "Онлайн-запись скоро",
+      "bookCta": "Записаться",
+      "allSpecialties": "Все специальности",
+      "browseBySpecialty": "По специальности",
+      "searchSoonNote": "Поиск скоро — а пока выберите специальность ниже.",
+      "specialtyIntro": "Проверенные специалисты в Черногории",
+      "emptyTitle": "Пока нет специалистов",
+      "emptyBody": "Мы добавляем проверенных специалистов в этой области. Загляните позже.",
+      "errorTitle": "Не удалось загрузить",
+      "errorBody": "При загрузке страницы произошла ошибка. Попробуйте ещё раз.",
+      "minutesShort": "мин",
+      "modeInPerson": "Очно",
+      "modeVideo": "Видео",
+      "modeHomeVisit": "На дому",
+      "retry": "Повторить"
     }
   },
   "careerVertical": {

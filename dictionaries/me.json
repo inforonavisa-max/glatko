@@ -2471,6 +2471,31 @@
       "errorValidation": "Popunite obavezna polja.",
       "privacyNote": "Vaše podatke (ime, telefon, e-mail) koristimo isključivo da vas kontaktiramo povodom lansiranja Glatko Zdravlja i ne dijelimo ih sa trećim stranama. Detalji:",
       "privacyLinkText": "Politika privatnosti"
+    },
+    "directory": {
+      "verified": "Verifikovan",
+      "availabilitySoon": "Termini uskoro",
+      "languagesLabel": "Jezici",
+      "specialtiesLabel": "Specijalnosti",
+      "aboutLabel": "O stručnjaku",
+      "servicesLabel": "Usluge i cijene",
+      "addressLabel": "Adresa",
+      "mapSoon": "Mapa uskoro",
+      "bookingSoon": "Online zakazivanje uskoro",
+      "bookCta": "Zakaži termin",
+      "allSpecialties": "Sve specijalnosti",
+      "browseBySpecialty": "Po specijalnosti",
+      "searchSoonNote": "Pretraga uskoro — za sada izaberite specijalnost ispod.",
+      "specialtyIntro": "Verifikovani stručnjaci u Crnoj Gori",
+      "emptyTitle": "Još nema stručnjaka",
+      "emptyBody": "Dodajemo verifikovane stručnjake u ovoj specijalnosti. Navratite uskoro.",
+      "errorTitle": "Učitavanje nije uspjelo",
+      "errorBody": "Došlo je do greške pri učitavanju. Pokušajte ponovo.",
+      "minutesShort": "min",
+      "modeInPerson": "Uživo",
+      "modeVideo": "Video",
+      "modeHomeVisit": "Kućna posjeta",
+      "retry": "Pokušaj ponovo"
     }
   },
   "careerVertical": {

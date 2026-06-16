@@ -2468,6 +2468,31 @@
       "errorValidation": "يرجى تعبئة الحقول المطلوبة.",
       "privacyNote": "نستخدم بياناتك (الاسم، الهاتف، البريد) فقط للتواصل معك بشأن إطلاق Glatko الصحة ولا نشاركها مع أطراف ثالثة. التفاصيل:",
       "privacyLinkText": "سياسة الخصوصية"
+    },
+    "directory": {
+      "verified": "موثّق",
+      "availabilitySoon": "المواعيد قريباً",
+      "languagesLabel": "اللغات",
+      "specialtiesLabel": "التخصصات",
+      "aboutLabel": "نبذة",
+      "servicesLabel": "الخدمات والأسعار",
+      "addressLabel": "العنوان",
+      "mapSoon": "الخريطة قريباً",
+      "bookingSoon": "الحجز الإلكتروني قريباً",
+      "bookCta": "احجز موعد",
+      "allSpecialties": "كل التخصصات",
+      "browseBySpecialty": "تصفّح حسب التخصص",
+      "searchSoonNote": "البحث قريباً — اختر تخصصاً من الأسفل الآن.",
+      "specialtyIntro": "مختصون موثّقون في الجبل الأسود",
+      "emptyTitle": "لا يوجد مختصون بعد",
+      "emptyBody": "نضيف مختصين موثّقين في هذا التخصص. عُد قريباً.",
+      "errorTitle": "تعذّر التحميل",
+      "errorBody": "حدث خطأ أثناء تحميل الصفحة. حاول مرة أخرى.",
+      "minutesShort": "د",
+      "modeInPerson": "حضوري",
+      "modeVideo": "فيديو",
+      "modeHomeVisit": "زيارة منزلية",
+      "retry": "أعد المحاولة"
     }
   },
   "careerVertical": {

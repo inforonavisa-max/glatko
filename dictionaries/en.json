@@ -2468,6 +2468,31 @@
       "errorValidation": "Please fill in the required fields.",
       "privacyNote": "We use your details (name, phone, email) only to contact you about the Glatko Health launch and never share them with third parties. Details:",
       "privacyLinkText": "Privacy Policy"
+    },
+    "directory": {
+      "verified": "Verified",
+      "availabilitySoon": "Availability coming soon",
+      "languagesLabel": "Languages",
+      "specialtiesLabel": "Specialties",
+      "aboutLabel": "About",
+      "servicesLabel": "Services & pricing",
+      "addressLabel": "Address",
+      "mapSoon": "Map coming soon",
+      "bookingSoon": "Online booking coming soon",
+      "bookCta": "Book appointment",
+      "allSpecialties": "All specialties",
+      "browseBySpecialty": "Browse by specialty",
+      "searchSoonNote": "Full search is coming soon — for now, pick a specialty below.",
+      "specialtyIntro": "Verified professionals in Montenegro",
+      "emptyTitle": "No professionals yet",
+      "emptyBody": "We’re onboarding verified professionals in this specialty. Please check back soon.",
+      "errorTitle": "Couldn’t load",
+      "errorBody": "Something went wrong loading this page. Please try again.",
+      "minutesShort": "min",
+      "modeInPerson": "In person",
+      "modeVideo": "Video",
+      "modeHomeVisit": "Home visit",
+      "retry": "Try again"
     }
   },
   "careerVertical": {

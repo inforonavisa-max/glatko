@@ -2468,6 +2468,31 @@
       "errorValidation": "Bitte füllen Sie die Pflichtfelder aus.",
       "privacyNote": "Wir verwenden Ihre Daten (Name, Telefon, E-Mail) ausschließlich für den Start von Glatko Gesundheit und geben sie nicht an Dritte weiter. Details:",
       "privacyLinkText": "Datenschutz"
+    },
+    "directory": {
+      "verified": "Verifiziert",
+      "availabilitySoon": "Verfügbarkeit folgt bald",
+      "languagesLabel": "Sprachen",
+      "specialtiesLabel": "Fachgebiete",
+      "aboutLabel": "Über",
+      "servicesLabel": "Leistungen & Preise",
+      "addressLabel": "Adresse",
+      "mapSoon": "Karte folgt bald",
+      "bookingSoon": "Online-Buchung folgt bald",
+      "bookCta": "Termin buchen",
+      "allSpecialties": "Alle Fachgebiete",
+      "browseBySpecialty": "Nach Fachgebiet",
+      "searchSoonNote": "Die Suche folgt bald — wählen Sie vorerst unten ein Fachgebiet.",
+      "specialtyIntro": "Verifizierte Fachkräfte in Montenegro",
+      "emptyTitle": "Noch keine Fachkräfte",
+      "emptyBody": "Wir nehmen verifizierte Fachkräfte in diesem Bereich auf. Bitte schauen Sie bald wieder vorbei.",
+      "errorTitle": "Laden fehlgeschlagen",
+      "errorBody": "Beim Laden dieser Seite ist ein Fehler aufgetreten. Bitte erneut versuchen.",
+      "minutesShort": "Min.",
+      "modeInPerson": "Vor Ort",
+      "modeVideo": "Video",
+      "modeHomeVisit": "Hausbesuch",
+      "retry": "Erneut versuchen"
     }
   },
   "careerVertical": {
