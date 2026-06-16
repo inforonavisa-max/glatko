@@ -14,10 +14,13 @@ type Props = {
     | { locale: string; token: string };
 };
 
-// Dynamic-on-demand: the uncached read-RPC fetch makes every request dynamic, so no
-// build-time static render (no DYNAMIC_SERVER_USAGE) and no caching of token data —
-// but NOT force-dynamic, so notFound() on an unknown token returns a real 404
-// (force-dynamic streams the response and commits a 200 before notFound() runs). noindex.
+// Dynamic-on-demand (uncached read-RPC → ƒ render per request, no build-time static
+// gen / DYNAMIC_SERVER_USAGE, always-fresh token data) + noindex.
+// NOTE: an unknown token calls notFound() and renders the not-found UI, but Next 14.2
+// keeps HTTP 200 for notFound() in a matched dynamic page (verified: force-dynamic and
+// revalidate=0 both 200; a co-located not-found.tsx doesn't change it — see PR #120 C2).
+// In production the flag-guard middleware 404s every gated route anyway; this is noindex,
+// so the cosmetic 200 has no SEO/UX impact (the user still sees a "not found" page).
 export const revalidate = 0;
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 

@@ -16,8 +16,11 @@ type Props = {
 };
 
 // Dynamic-on-demand (live appointment status via the uncached read-RPC) + noindex.
-// NOT force-dynamic, so notFound() on an unknown token returns a real 404 instead of
-// a streamed 200 (force-dynamic commits the status before notFound() runs).
+// NOTE: an unknown token calls notFound() and renders the not-found UI, but Next 14.2
+// keeps HTTP 200 for notFound() in a matched dynamic page (verified: force-dynamic and
+// revalidate=0 both 200; a co-located not-found.tsx doesn't change it — see PR #120 C2).
+// In production the flag-guard middleware 404s every gated route anyway; this is noindex,
+// so the cosmetic 200 has no SEO/UX impact (the user still sees a "not found" page).
 export const revalidate = 0;
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
