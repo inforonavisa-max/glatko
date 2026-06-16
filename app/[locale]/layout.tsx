@@ -149,21 +149,24 @@ export default async function LocaleLayout({ children, params }: Props) {
             >
               Skip to content
             </a>
-            <GlatkoHeader userId={userId} isPro={isPro} isAdmin={isAdmin} />
+            {/* Two-layer global header (combined into ONE sticky block at the
+                top of every page, so the layers never overlap and merge as the
+                3-tab bar collapses on scroll):
+                  KATMAN 1 — VerticalsNav (vertical switcher, always on top)
+                  KATMAN 2 — GlatkoHeader (per-vertical app header, below it)
+                The block is in-flow, so pages keep their existing top padding
+                (it now sits below the block instead of clearing a fixed header;
+                content lands at the same offset as before). */}
+            <div className="sticky top-0 z-50">
+              <VerticalsNav healthEnabled={isHealthVerticalEnabled()} />
+              <GlatkoHeader userId={userId} isPro={isPro} isAdmin={isAdmin} />
+            </div>
             {showOnboardingBanner ? (
-              <div className="mt-16 shrink-0">
+              <div className="shrink-0">
                 <OnboardingWelcomeBanner displayName={onboardingFirstName} />
               </div>
             ) : null}
-            <main id="main-content" className="flex-1">
-              {/* Persistent vertical switcher (Hizmetler · İş · Sağlık) —
-                  rendered here so it appears on EVERY page, not just the
-                  homepage. Direct child of <main> (NOT wrapped) so its
-                  position:sticky travels the full page height. Active tab is
-                  derived from the pathname inside the component. */}
-              <VerticalsNav healthEnabled={isHealthVerticalEnabled()} />
-              {children}
-            </main>
+            <main id="main-content" className="flex-1">{children}</main>
             <GlatkoFooter />
             <CookieConsent />
           </div>

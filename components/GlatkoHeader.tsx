@@ -10,6 +10,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
+import { useActiveVertical } from "@/lib/verticals/useActiveVertical";
 import { cn } from "@/lib/utils";
 import { UnreadBadge } from "@/components/glatko/messaging/UnreadBadge";
 import { SearchTrigger } from "@/components/glatko/search/SearchTrigger";
@@ -41,6 +42,10 @@ export function GlatkoHeader({
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
   const reduced = useReducedMotion();
+  // KATMAN 2 is vertical-aware: the active vertical is exposed as a data
+  // attribute so per-vertical header content can be added later without more
+  // plumbing. Content is unchanged this sprint (shared header everywhere).
+  const activeVertical = useActiveVertical();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [headerOpacity, setHeaderOpacity] = useState(0);
@@ -147,8 +152,13 @@ export function GlatkoHeader({
   return (
     <>
       <header
+        data-vertical={activeVertical}
         className={cn(
-          "fixed left-0 right-0 top-0 z-50 transition-[border-color] duration-300",
+          // KATMAN 2 (lower layer): in-flow inside the combined sticky header
+          // block (app/[locale]/layout.tsx) — no longer position:fixed; the
+          // wrapper owns the sticky-to-top behaviour. The scroll-driven
+          // background/border below is unchanged.
+          "relative w-full z-50 transition-[border-color] duration-300",
           scrolled
             ? "border-b border-black/5 backdrop-blur-md dark:border-white/5"
             : "border-b border-transparent"

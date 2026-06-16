@@ -4,14 +4,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, HeartPulse, Wrench, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { VERTICAL_TABS, type VerticalKey } from "@/lib/verticals/config";
-import {
-  HEALTH_FIRST_SEGMENTS,
-  CAREER_FIRST_SEGMENTS,
-} from "@/lib/verticals/slugs";
+import { useActiveVertical } from "@/lib/verticals/useActiveVertical";
 
 /**
  * H0: 3-tab vertical navigation (Hizmetler · İş · Sağlık) — Airbnb-style
@@ -65,7 +62,6 @@ const ACCENT_CLASSES: Record<
 
 export function VerticalsNav({ healthEnabled }: { healthEnabled: boolean }) {
   const t = useTranslations("verticals");
-  const pathname = usePathname();
   const reduced = useReducedMotion();
   const [compact, setCompact] = useState(false);
 
@@ -113,24 +109,18 @@ export function VerticalsNav({ healthEnabled }: { healthEnabled: boolean }) {
     };
   });
 
-  // Active vertical is derived from the first path segment, matched against the
-  // localized slug sets (HEALTH/CAREER_FIRST_SEGMENTS cover all 9 locales —
-  // /saglik, /health, /zdravlje, … — so this works whether usePathname returns
-  // the internal or the localized form). Anything else → services (default).
-  const firstSegment = (pathname ?? "/").split("/").filter(Boolean)[0] ?? "";
-  const activeKey: VerticalKey = HEALTH_FIRST_SEGMENTS.has(firstSegment)
-    ? "health"
-    : CAREER_FIRST_SEGMENTS.has(firstSegment)
-      ? "career"
-      : "services";
+  // Active vertical via the shared hook (single source — KATMAN 1 + KATMAN 2).
+  const activeKey: VerticalKey = useActiveVertical();
 
   return (
     <nav
       aria-label={t("ariaLabel")}
       className={cn(
-        // mt-16 clears the fixed h-16 header at rest; sticky top-16 docks the
-        // bar right under it once the page scrolls.
-        "sticky top-16 z-40 mt-16 w-full transition-[background-color,border-color,box-shadow] duration-300 ease-out",
+        // KATMAN 1 (top layer): in-flow inside the combined sticky header block
+        // (app/[locale]/layout.tsx) — NOT sticky/fixed itself, no header
+        // clearance needed (it sits ABOVE the header now). Its own scroll
+        // listener still drives the collapse.
+        "w-full transition-[background-color,border-color,box-shadow] duration-300 ease-out",
         compact
           ? "border-b border-black/5 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/5 dark:bg-neutral-900/95"
           : "border-b border-transparent bg-transparent",
