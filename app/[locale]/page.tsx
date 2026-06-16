@@ -16,8 +16,6 @@ import {
   type LocalizedFAQ,
 } from "@/lib/seo/jsonld";
 import { HOME_FAQ_KEYS } from "@/lib/glatko/home-faq";
-import { VerticalsNav } from "@/components/glatko/verticals/VerticalsNav";
-import { isHealthVerticalEnabled } from "@/lib/saglik/flags";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -94,12 +92,8 @@ export default async function LocaleHomePage({ params }: Props) {
     <>
       <script {...jsonLdScriptProps(generateWebSiteSchema(locale))} />
       {faqSchema ? <script {...jsonLdScriptProps(faqSchema)} /> : null}
-      {/* H0: 3-tab vertical navigation. healthEnabled decides whether the
-          health tab targets the real homepage or the coming-soon page (K2).
-          Rendered directly in <main> (NOT wrapped) so position:sticky can
-          travel the full page height — a wrapper div would cap the sticky
-          range at its own height and the bar would vanish on scroll. */}
-      <VerticalsNav healthEnabled={isHealthVerticalEnabled()} />
+      {/* VerticalsNav moved to app/[locale]/layout.tsx so the 3-tab switcher
+          is persistent on every page (was homepage-only — see feat/health-nav-fix). */}
       <LandingPageClient
         featuredCategories={featuredCategories}
         totalCategoryCount={totalCategoryCount ?? 0}
