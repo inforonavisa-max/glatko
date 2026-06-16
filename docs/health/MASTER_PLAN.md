@@ -22,6 +22,17 @@
 > ikisi kasıtlı ayrı — H1+ migration'larında şema adı `health` olarak devam eder.
 > Coming-soon waitlist formuna aydınlatma satırı + gizlilik linki eklendi
 > (prod'da gerçek PII).
+> **v1.5 (16.06.2026, H1):** §2 veri modeli TAM uygulandı — `066_health_h1_schema.sql`
+> (16 tablo + book_appointment + owns_provider + appointments kolon-kilidi trigger +
+> §2.2 RLS matrisi + pg_cron `health_cleanup_expired` + `health-licenses` bucket) ve
+> `067_health_h1_seed.sql` (20 uzmanlık 9/9 + 2 test provider) glatko-prod'a uygulandı
+> (additive; 065 dokunulmadı). Kanıt: concurrency (1 başarı + 1 SLOT_TAKEN + HOLD_EXPIRED
+> + slot_holds EXCLUDE), RLS (anon deny-all/C1-C4, provider-own), search_path="" pinli,
+> get_advisors 066'dan 0 ERROR (yalnız kasıtlı deny-all INFO'lar). Karar: **anon'a health
+> şemasında HİÇBİR grant yok** (DoD C4); §2.2 "anon SELECT" public-read H2'de server/
+> service-role ile sunulacak (RLS policy'leri + authenticated grant'lar hazır). book_appointment
+> `health` şemasında; PostgREST rpc çağrılabilirliği H5'te (expose veya public wrapper).
+> Flag prod=false KALIR — kullanıcıya görünen değişiklik yok.
 
 ---
 
