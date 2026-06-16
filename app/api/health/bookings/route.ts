@@ -19,6 +19,24 @@ function statusFor(code: BookErrorCode): number {
   return 503;
 }
 
+// The slot/hold is gone → this booking can never complete on a retry. SLOT_TAKEN and
+// HOLD_EXPIRED are terminal; retryable errors (ERROR/503, network) are not. (Finding #4)
+function isTerminalFailure(code: BookErrorCode): boolean {
+  return code === "SLOT_TAKEN" || code === "HOLD_EXPIRED";
+}
+
+// Drop the one-shot verified-patient binding (httpOnly, set at OTP-verify). Cleared on
+// success AND on terminal failures so a shared device can't reuse a stale credential.
+function clearPatientCookie(res: NextResponse): void {
+  res.cookies.set(PATIENT_COOKIE, "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 0,
+  });
+}
+
 /**
  * H5b booking. The patient+session are read from httpOnly cookies (set by the
  * OTP-verify step) — the client cannot supply an arbitrary patientId. The
@@ -70,7 +88,15 @@ export async function POST(request: Request) {
   }
 
   if (!result.ok) {
-    return NextResponse.json({ error: "book_failed", code: result.code }, { status: statusFor(result.code) });
+    const res = NextResponse.json(
+      { error: "book_failed", code: result.code },
+      { status: statusFor(result.code) },
+    );
+    // Terminal failure → the booking can never complete; drop the verified-patient
+    // binding (shared-device protection). Retryable errors keep it so the user can
+    // retry without re-verifying.
+    if (isTerminalFailure(result.code)) clearPatientCookie(res);
+    return res;
   }
 
   // Confirm SMS + email (immediate, best-effort, no PII logged). Awaited so the
@@ -79,6 +105,6 @@ export async function POST(request: Request) {
 
   const res = NextResponse.json({ ok: true, manageToken: result.manageToken });
   // The hold is consumed + the patient is booked; clear the one-shot patient binding.
-  res.cookies.set(PATIENT_COOKIE, "", { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 0 });
+  clearPatientCookie(res);
   return res;
 }
