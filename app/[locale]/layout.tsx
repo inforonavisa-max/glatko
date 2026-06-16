@@ -7,6 +7,8 @@ import { buildAlternates } from "@/lib/seo";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { GlatkoHeader } from "@/components/GlatkoHeader";
 import { GlatkoFooter } from "@/components/GlatkoFooter";
+import { VerticalsNav } from "@/components/glatko/verticals/VerticalsNav";
+import { isHealthVerticalEnabled } from "@/lib/saglik/flags";
 import { createClient } from "@/supabase/server";
 import { isAdminEmail } from "@/lib/admin";
 import { CookieConsent } from "@/components/glatko/CookieConsent";
@@ -153,7 +155,15 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <OnboardingWelcomeBanner displayName={onboardingFirstName} />
               </div>
             ) : null}
-            <main id="main-content" className="flex-1">{children}</main>
+            <main id="main-content" className="flex-1">
+              {/* Persistent vertical switcher (Hizmetler · İş · Sağlık) —
+                  rendered here so it appears on EVERY page, not just the
+                  homepage. Direct child of <main> (NOT wrapped) so its
+                  position:sticky travels the full page height. Active tab is
+                  derived from the pathname inside the component. */}
+              <VerticalsNav healthEnabled={isHealthVerticalEnabled()} />
+              {children}
+            </main>
             <GlatkoFooter />
             <CookieConsent />
           </div>

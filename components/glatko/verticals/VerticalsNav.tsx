@@ -8,6 +8,10 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { VERTICAL_TABS, type VerticalKey } from "@/lib/verticals/config";
+import {
+  HEALTH_FIRST_SEGMENTS,
+  CAREER_FIRST_SEGMENTS,
+} from "@/lib/verticals/slugs";
 
 /**
  * H0: 3-tab vertical navigation (Hizmetler · İş · Sağlık) — Airbnb-style
@@ -109,10 +113,16 @@ export function VerticalsNav({ healthEnabled }: { healthEnabled: boolean }) {
     };
   });
 
-  const isActive = (href: string) =>
-    href === "/"
-      ? pathname === "/"
-      : pathname?.startsWith(href.split("/").slice(0, 2).join("/"));
+  // Active vertical is derived from the first path segment, matched against the
+  // localized slug sets (HEALTH/CAREER_FIRST_SEGMENTS cover all 9 locales —
+  // /saglik, /health, /zdravlje, … — so this works whether usePathname returns
+  // the internal or the localized form). Anything else → services (default).
+  const firstSegment = (pathname ?? "/").split("/").filter(Boolean)[0] ?? "";
+  const activeKey: VerticalKey = HEALTH_FIRST_SEGMENTS.has(firstSegment)
+    ? "health"
+    : CAREER_FIRST_SEGMENTS.has(firstSegment)
+      ? "career"
+      : "services";
 
   return (
     <nav
@@ -134,7 +144,7 @@ export function VerticalsNav({ healthEnabled }: { healthEnabled: boolean }) {
         )}
       >
         {tabs.map((tab) => {
-          const active = isActive(tab.href);
+          const active = tab.key === activeKey;
           const Icon = ICONS[tab.key];
           return (
             <Link
