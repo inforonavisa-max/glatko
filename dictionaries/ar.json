@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "موثّق",
       "availabilitySoon": "المواعيد قريباً",
+      "noAvailability": "متاح قريباً",
       "languagesLabel": "اللغات",
       "specialtiesLabel": "التخصصات",
       "aboutLabel": "نبذة",
@@ -2495,6 +2496,22 @@
       "modeVideo": "فيديو",
       "modeHomeVisit": "زيارة منزلية",
       "retry": "أعد المحاولة"
+    },
+    "booking": {
+      "title": "احجز موعداً",
+      "serviceLabel": "الخدمة",
+      "locationLabel": "الموقع",
+      "loading": "جارٍ تحميل الأوقات المتاحة…",
+      "error": "تعذّر تحميل المواعيد المتاحة",
+      "retry": "أعد المحاولة",
+      "noSlotsDay": "لا توجد أوقات متاحة في هذا التاريخ",
+      "nextAvailableDay": "أقرب يوم متاح",
+      "noSlotsWeek": "لا توجد أوقات متاحة هذا الأسبوع",
+      "prevWeek": "الأسبوع السابق",
+      "nextWeek": "الأسبوع التالي",
+      "today": "اليوم",
+      "selectedLabel": "المُختار",
+      "bookSoon": "احجز موعد — قريباً"
     }
   },
   "careerVertical": {

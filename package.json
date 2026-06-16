@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "smoke": "bash scripts/smoke-test.sh",
     "i18n-check": "bash scripts/i18n-check.sh",
     "verify:seo": "bash scripts/verify-seo-canonical.sh",
@@ -80,7 +82,8 @@
     "supercluster": "^8.0.1",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.9"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -5,7 +5,11 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, SearchX } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { listSpecialties, providersBySpecialty } from "@/lib/saglik/queries";
+import {
+  getNextSlotsBySpecialty,
+  listSpecialties,
+  providersBySpecialty,
+} from "@/lib/saglik/queries";
 import { specialtyIcon } from "@/lib/saglik/specialty-icons";
 import { ProviderCard } from "@/components/glatko-saglik/ProviderCard";
 
@@ -46,6 +50,20 @@ export default async function SpecialtyListPage({ params }: Props) {
   if (!specialtyInfo) notFound();
 
   const providers = await providersBySpecialty(specialty, l);
+
+  // Teaser "next available" slots — one bulk RPC keyed by provider slug. Best
+  // effort: an availability outage must not take down the directory list, so we
+  // degrade to the neutral "soon" chip state instead of throwing the whole page.
+  let nextSlots: Record<
+    string,
+    Array<{ startUtc: string; endUtc: string; localTime: string; date: string }>
+  > = {};
+  try {
+    nextSlots = await getNextSlotsBySpecialty(specialty);
+  } catch {
+    nextSlots = {};
+  }
+
   const Icon = specialtyIcon(specialty);
 
   return (
@@ -90,7 +108,9 @@ export default async function SpecialtyListPage({ params }: Props) {
               <ProviderCard
                 key={p.slug}
                 provider={p}
-                labels={{ verified: d("verified"), availabilitySoon: d("availabilitySoon") }}
+                locale={l}
+                slots={nextSlots[p.slug] ?? []}
+                labels={{ verified: d("verified"), noAvailability: d("noAvailability") }}
               />
             ))}
           </div>

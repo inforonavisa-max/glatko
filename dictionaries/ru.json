@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "Проверен",
       "availabilitySoon": "Расписание скоро",
+      "noAvailability": "Скоро доступно",
       "languagesLabel": "Языки",
       "specialtiesLabel": "Специальности",
       "aboutLabel": "О специалисте",
@@ -2495,6 +2496,22 @@
       "modeVideo": "Видео",
       "modeHomeVisit": "На дому",
       "retry": "Повторить"
+    },
+    "booking": {
+      "title": "Записаться на приём",
+      "serviceLabel": "Услуга",
+      "locationLabel": "Место",
+      "loading": "Загрузка свободного времени…",
+      "error": "Не удалось загрузить расписание",
+      "retry": "Повторить",
+      "noSlotsDay": "На эту дату нет свободного времени",
+      "nextAvailableDay": "Ближайший свободный день",
+      "noSlotsWeek": "На этой неделе нет свободного времени",
+      "prevWeek": "Предыдущая неделя",
+      "nextWeek": "Следующая неделя",
+      "today": "Сегодня",
+      "selectedLabel": "Выбрано",
+      "bookSoon": "Записаться — скоро"
     }
   },
   "careerVertical": {

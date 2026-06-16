@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "Verified",
       "availabilitySoon": "Availability coming soon",
+      "noAvailability": "Available soon",
       "languagesLabel": "Languages",
       "specialtiesLabel": "Specialties",
       "aboutLabel": "About",
@@ -2495,6 +2496,22 @@
       "modeVideo": "Video",
       "modeHomeVisit": "Home visit",
       "retry": "Try again"
+    },
+    "booking": {
+      "title": "Book an appointment",
+      "serviceLabel": "Service",
+      "locationLabel": "Location",
+      "loading": "Loading available times…",
+      "error": "Couldn’t load availability",
+      "retry": "Try again",
+      "noSlotsDay": "No times available on this date",
+      "nextAvailableDay": "Next available day",
+      "noSlotsWeek": "No times available this week",
+      "prevWeek": "Previous week",
+      "nextWeek": "Next week",
+      "today": "Today",
+      "selectedLabel": "Selected",
+      "bookSoon": "Book appointment — coming soon"
     }
   },
   "careerVertical": {

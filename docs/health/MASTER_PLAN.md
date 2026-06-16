@@ -45,6 +45,23 @@
 > service-role key client bundle'da YOK, advisor 0 yeni ERROR (3 RPC search_path-mutable
 > DEĞİL; anon_security_definer WARN'ları kasıtlı = read-gateway). Saat-chip/booking
 > alanları H4/H5-hazır placeholder (sahte veri yok). Flag prod=false KALIR.
+> **v1.7 (16.06.2026, H4):** Availability engine. SAF + test-edilebilir slot motoru
+> `lib/saglik/availability.ts` (`'server-only'`; DB tutmaz, ham girdi alır) — schedules
+> + overrides (holiday/break/extra) + grid (duration+buffer) + confirmed appointment /
+> aktif hold çıkarma (buffer'la genişletilmiş tstzrange overlap) + min_notice/horizon/
+> daily_cap; UTC hesap → Europe/Podgorica çıktı. DST geçişleri `Intl` (IANA db) ile
+> doğru (ileri=kayıp saat atlanır, geri=tekrar eden saat tek sayılır). Vitest 18/18
+> yeşil (DST ileri/geri, gece yarısı, break/holiday/extra, appointment/hold/buffer,
+> notice/horizon/cap, weekday 0=Pzt, validity). DB: `069_health_h4_availability_rpcs.sql`
+> — 3 public SECURITY DEFINER salt-okuma RPC (`health_get_availability_inputs` /
+> `..._by_specialty` (liste N+1 yok) / `health_get_booking_options`); search_path=''
+> pinli, anon+authenticated+service_role EXECUTE, **PII döndürmez** (yalnız dolu/boş
+> zaman aralığı); glatko-prod'a uygulandı (additive; 066/067/068 dokunulmadı; advisor
+> 0 yeni ERROR). UI: profil sticky takvim widget'ı (`BookingWidget`, client — 7 gün
+> şerit + hizmet seçici + 3 state) + liste kartı gerçek saat chip'leri (bulk RPC) +
+> deep-link `?slot=`. Saat tıklama H4'te SEÇER (hold YOK → H5); CTA disabled "yakında".
+> `me`/`sr` Intl tarih formatı Latin Sırpça'ya maplenir (`lib/saglik/intl.ts`). Flag
+> prod=false KALIR.
 
 ---
 

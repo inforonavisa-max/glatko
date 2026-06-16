@@ -2476,6 +2476,7 @@
     "directory": {
       "verified": "Doğrulanmış",
       "availabilitySoon": "Müsaitlik yakında",
+      "noAvailability": "Yakında müsait",
       "languagesLabel": "Diller",
       "specialtiesLabel": "Uzmanlıklar",
       "aboutLabel": "Hakkında",
@@ -2498,6 +2499,22 @@
       "modeVideo": "Video",
       "modeHomeVisit": "Evde",
       "retry": "Tekrar dene"
+    },
+    "booking": {
+      "title": "Randevu al",
+      "serviceLabel": "Hizmet",
+      "locationLabel": "Konum",
+      "loading": "Müsait saatler yükleniyor…",
+      "error": "Müsaitlik yüklenemedi",
+      "retry": "Tekrar dene",
+      "noSlotsDay": "Bu tarihte müsait saat yok",
+      "nextAvailableDay": "Sonraki müsait gün",
+      "noSlotsWeek": "Bu hafta müsait saat yok",
+      "prevWeek": "Önceki hafta",
+      "nextWeek": "Sonraki hafta",
+      "today": "Bugün",
+      "selectedLabel": "Seçilen",
+      "bookSoon": "Randevu Al — yakında"
     }
   },
   "careerVertical": {

@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "Verifiziert",
       "availabilitySoon": "Verfügbarkeit folgt bald",
+      "noAvailability": "Bald verfügbar",
       "languagesLabel": "Sprachen",
       "specialtiesLabel": "Fachgebiete",
       "aboutLabel": "Über",
@@ -2495,6 +2496,22 @@
       "modeVideo": "Video",
       "modeHomeVisit": "Hausbesuch",
       "retry": "Erneut versuchen"
+    },
+    "booking": {
+      "title": "Termin buchen",
+      "serviceLabel": "Leistung",
+      "locationLabel": "Standort",
+      "loading": "Verfügbare Zeiten werden geladen…",
+      "error": "Verfügbarkeit konnte nicht geladen werden",
+      "retry": "Erneut versuchen",
+      "noSlotsDay": "An diesem Tag keine Termine verfügbar",
+      "nextAvailableDay": "Nächster verfügbarer Tag",
+      "noSlotsWeek": "Diese Woche keine Termine verfügbar",
+      "prevWeek": "Vorige Woche",
+      "nextWeek": "Nächste Woche",
+      "today": "Heute",
+      "selectedLabel": "Ausgewählt",
+      "bookSoon": "Termin buchen — bald verfügbar"
     }
   },
   "careerVertical": {

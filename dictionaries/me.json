@@ -2476,6 +2476,7 @@
     "directory": {
       "verified": "Verifikovan",
       "availabilitySoon": "Termini uskoro",
+      "noAvailability": "Uskoro dostupno",
       "languagesLabel": "Jezici",
       "specialtiesLabel": "Specijalnosti",
       "aboutLabel": "O stručnjaku",
@@ -2498,6 +2499,22 @@
       "modeVideo": "Video",
       "modeHomeVisit": "Kućna posjeta",
       "retry": "Pokušaj ponovo"
+    },
+    "booking": {
+      "title": "Zakaži termin",
+      "serviceLabel": "Usluga",
+      "locationLabel": "Lokacija",
+      "loading": "Učitavanje slobodnih termina…",
+      "error": "Učitavanje dostupnosti nije uspjelo",
+      "retry": "Pokušaj ponovo",
+      "noSlotsDay": "Nema slobodnih termina za ovaj datum",
+      "nextAvailableDay": "Sljedeći slobodan dan",
+      "noSlotsWeek": "Nema slobodnih termina ove sedmice",
+      "prevWeek": "Prethodna sedmica",
+      "nextWeek": "Sljedeća sedmica",
+      "today": "Danas",
+      "selectedLabel": "Izabrano",
+      "bookSoon": "Zakaži termin — uskoro"
     }
   },
   "careerVertical": {

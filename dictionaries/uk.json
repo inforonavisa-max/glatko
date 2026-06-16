@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "Перевірено",
       "availabilitySoon": "Розклад незабаром",
+      "noAvailability": "Незабаром доступно",
       "languagesLabel": "Мови",
       "specialtiesLabel": "Спеціальності",
       "aboutLabel": "Про спеціаліста",
@@ -2495,6 +2496,22 @@
       "modeVideo": "Відео",
       "modeHomeVisit": "Вдома",
       "retry": "Спробувати ще раз"
+    },
+    "booking": {
+      "title": "Записатися на прийом",
+      "serviceLabel": "Послуга",
+      "locationLabel": "Місце",
+      "loading": "Завантаження вільного часу…",
+      "error": "Не вдалося завантажити розклад",
+      "retry": "Спробувати ще раз",
+      "noSlotsDay": "На цю дату немає вільного часу",
+      "nextAvailableDay": "Найближчий вільний день",
+      "noSlotsWeek": "Цього тижня немає вільного часу",
+      "prevWeek": "Попередній тиждень",
+      "nextWeek": "Наступний тиждень",
+      "today": "Сьогодні",
+      "selectedLabel": "Обрано",
+      "bookSoon": "Записатися — незабаром"
     }
   },
   "careerVertical": {

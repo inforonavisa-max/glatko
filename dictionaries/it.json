@@ -2473,6 +2473,7 @@
     "directory": {
       "verified": "Verificato",
       "availabilitySoon": "Disponibilità in arrivo",
+      "noAvailability": "Disponibile a breve",
       "languagesLabel": "Lingue",
       "specialtiesLabel": "Specialità",
       "aboutLabel": "Informazioni",
@@ -2495,6 +2496,22 @@
       "modeVideo": "Video",
       "modeHomeVisit": "Visita a domicilio",
       "retry": "Riprova"
+    },
+    "booking": {
+      "title": "Prenota un appuntamento",
+      "serviceLabel": "Servizio",
+      "locationLabel": "Sede",
+      "loading": "Caricamento orari disponibili…",
+      "error": "Impossibile caricare la disponibilità",
+      "retry": "Riprova",
+      "noSlotsDay": "Nessun orario disponibile in questa data",
+      "nextAvailableDay": "Prossimo giorno disponibile",
+      "noSlotsWeek": "Nessun orario disponibile questa settimana",
+      "prevWeek": "Settimana precedente",
+      "nextWeek": "Settimana successiva",
+      "today": "Oggi",
+      "selectedLabel": "Selezionato",
+      "bookSoon": "Prenota — a breve"
     }
   },
   "careerVertical": {

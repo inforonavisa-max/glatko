@@ -5,7 +5,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import {
   BadgeCheck,
-  CalendarClock,
   ChevronLeft,
   Clock,
   Languages,
@@ -13,7 +12,12 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getProvider, type HealthProviderService } from "@/lib/saglik/queries";
+import {
+  getProvider,
+  getBookingOptions,
+  type HealthProviderService,
+} from "@/lib/saglik/queries";
+import { BookingWidget } from "@/components/glatko-saglik/BookingWidget";
 
 type Props = {
   params:
@@ -45,11 +49,12 @@ function modeLabel(mode: HealthProviderService["mode"]): string {
 
 /**
  * Provider profile (§1.4 rule 3): two columns. Left = facts (bio, services +
- * pricing, address/map placeholder, languages, specialties). Right = sticky
- * booking widget area — a reserved placeholder until H4/H5 wire real slots; on
- * mobile it collapses to a fixed bottom "Book" bar (disabled for now). Only
- * published+approved providers resolve; anything else → 404 (getProvider returns
- * null for unpublished/unknown). Read entirely server-side via the read-RPC.
+ * pricing, address/map placeholder, languages, specialties). Right = the H4
+ * BookingWidget (client) — sticky on lg, stacked below the facts on mobile;
+ * when the provider has no bookable services/locations a neutral fallback shows
+ * instead of a fake widget. Only published+approved providers resolve; anything
+ * else → 404 (getProvider returns null for unpublished/unknown). Provider facts
+ * + booking options are read entirely server-side via the read-RPCs.
  */
 export default async function ProviderProfilePage({ params }: Props) {
   const { locale, slug } = await Promise.resolve(params);
@@ -62,10 +67,19 @@ export default async function ProviderProfilePage({ params }: Props) {
   const provider = await getProvider(slug, l);
   if (!provider) notFound();
 
+  // Rezervasyon takvimi bootstrap'ı — yumuşak başarısızlık (booking RPC hatası
+  // profilin tamamını 404/500'e düşürmesin; widget yerine nötr fallback gösterilir).
+  let bookingOptions = null;
+  try {
+    bookingOptions = await getBookingOptions(slug, l);
+  } catch {
+    bookingOptions = null;
+  }
+
   const primaryLocation = provider.locations[0] ?? null;
 
   return (
-    <div className="bg-brandHealth-50/40 pb-28 dark:bg-transparent lg:pb-0">
+    <div className="bg-brandHealth-50/40 pb-12 dark:bg-transparent">
       <div className="mx-auto max-w-5xl px-4 pb-24 pt-28">
         <Link
           href="/health"
@@ -205,35 +219,28 @@ export default async function ProviderProfilePage({ params }: Props) {
             )}
           </div>
 
-          {/* RIGHT — sticky booking widget placeholder (desktop). H4/H5 fills it. */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 rounded-2xl border border-gray-200 bg-white p-5 shadow-premium-sm dark:border-white/10 dark:bg-white/5">
-              <div className="flex items-center gap-2 text-gray-900 dark:text-white">
-                <CalendarClock className="h-5 w-5 text-brandHealth" />
-                <span className="text-sm font-semibold">{d("bookingSoon")}</span>
+          {/* RIGHT — booking widget. On lg it sticks; on mobile it stacks below
+              the facts (§1.4 rule 3 — the widget itself owns the sticky behavior).
+              Never a fake widget: when there are no bookable services/locations a
+              neutral fallback is shown instead. */}
+          <aside>
+            {bookingOptions &&
+            bookingOptions.services.length > 0 &&
+            bookingOptions.locations.length > 0 ? (
+              <BookingWidget
+                slug={provider.slug}
+                providerId={bookingOptions.providerId}
+                services={bookingOptions.services}
+                locations={bookingOptions.locations}
+                locale={l}
+              />
+            ) : (
+              <div className="lg:sticky lg:top-24 rounded-2xl border border-gray-200 bg-white p-5 text-sm text-gray-500 shadow-premium-sm dark:border-white/10 dark:bg-white/5 dark:text-white/50">
+                {d("bookingSoon")}
               </div>
-              <button
-                type="button"
-                disabled
-                className="mt-4 w-full rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-3 text-sm font-semibold text-white opacity-60 disabled:cursor-not-allowed"
-              >
-                {d("bookCta")}
-              </button>
-            </div>
+            )}
           </aside>
         </div>
-      </div>
-
-      {/* Mobile bottom booking bar (§1.4 rule 3) — disabled until H5. */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 p-3 backdrop-blur-md dark:border-white/10 dark:bg-neutral-900/95 lg:hidden">
-        <button
-          type="button"
-          disabled
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-3 text-sm font-semibold text-white opacity-60 disabled:cursor-not-allowed"
-        >
-          <CalendarClock className="h-4 w-4" />
-          {d("bookCta")} · {d("bookingSoon")}
-        </button>
       </div>
     </div>
   );
