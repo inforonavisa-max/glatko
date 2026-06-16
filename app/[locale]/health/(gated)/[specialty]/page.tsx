@@ -17,19 +17,12 @@ type Props = {
 
 export const revalidate = 3600;
 
-/**
- * Pre-render the seed specialty slugs (ISR). Best-effort: if the DB is
- * unreachable at build time, fall back to on-demand rendering (dynamicParams
- * stays on) — the page still validates the slug and 404s unknown specialties.
- */
-export async function generateStaticParams() {
-  try {
-    const specialties = await listSpecialties("en");
-    return specialties.map((s) => ({ specialty: s.slug }));
-  } catch {
-    return [];
-  }
-}
+// No generateStaticParams on purpose. The data comes from the public read-RPC
+// over supabase-js, whose fetch is non-cacheable (dynamic); pinning this route
+// to build-time static generation triggers DYNAMIC_SERVER_USAGE and a 500 on
+// prod builds. Instead it renders on demand and is ISR-cached for `revalidate`
+// seconds — identical to the home and profile pages (both work this way).
+// Unknown specialties are validated below and 404, so no pre-render is needed.
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, specialty } = await Promise.resolve(params);
