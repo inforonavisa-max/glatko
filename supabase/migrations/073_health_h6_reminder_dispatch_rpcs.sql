@@ -19,16 +19,23 @@
 -- tablolara ALTER YASAK — hasta UI locale'i book-zamanında route'tan yazılır, claim
 -- LEFT JOIN'ler, fallback 'en'.
 --
--- ÇİFT-GÖNDERİM DURUŞU (at-least-once): reminders_outbox.status CHECK'i
--- ('pending','sent','failed','skipped') ile sabit; ALTER yasak olduğundan claim-zamanında
+-- ÇİFT-GÖNDERİM DURUŞU (at-least-once, mükerrer-azaltıcı — MUTLAK değil): reminders_outbox.status
+-- CHECK'i ('pending','sent','failed','skipped') ile sabit; ALTER yasak olduğundan claim-zamanında
 -- yeni bir 'sending'/'claimed' transient status EKLENEMEZ. Bunun yerine claim, satırları
 -- FOR UPDATE SKIP LOCKED ile kilitler (paralel cron çakışmasında ikinci koşu kilitli
 -- satırları ATLAR) ve dispatcher her satırı gönderdikten HEMEN sonra (aynı mantıksal
--- akış içinde) health_mark_reminder ile işaretler. Cron koşuları */5 dk arayla; tek satır
--- gönderiminden hemen sonra işaretlenir → çift gönderim riski yalnızca nadir "üst üste
--- binen koşu + gönderildi-ama-işaretlenmedi" penceresinde. SMS/email hatırlatma için
--- at-least-once kabul edilebilir (idempotent içerik). Küçük batch (p_limit ~25) bu
--- pencereyi minimize eder.
+-- akış içinde) health_mark_reminder ile işaretler. DİKKAT: kilit yalnız CLAIM tx'i boyunca
+-- tutulur — claim COMMIT olunca (jsonb dönerken) kilit BIRAKILIR ama satır hâlâ 'pending'tir;
+-- gönderim+mark sonraki ayrı tx'lerde olur. Bu post-claim/pre-mark penceresinde üst üste
+-- binen bir koşu satırı yeniden claim edip mükerrer gönderebilir. Vercel schedule başına
+-- at-most-one koşu normalde örtüşmeyi engeller; bir koşu */5 dk'yı aşarsa tek risk budur.
+-- İçerik idempotent → en kötü ihtimal hastaya 1 mükerrer SMS/email. Küçük batch (p_limit ~25)
+-- pencereyi küçük tutar. (Oturum-bazlı advisory lock pooled bağlantılarda koşu boyunca güvenilir
+-- span ETMEZ → kasıtlı olarak EKLENMEDİ; yanlış bir "kesin koruma" garantisi vermekten kaçınıldı.)
+--
+-- RETRY (correctness): başarısız gönderim satırı 'pending' bırakır + retry_count'u artırır;
+-- claim filtresi retry_count<3 → bir sonraki cron yeniden dener, 3 denemede teslim olmazsa
+-- terminal 'failed' + Sentry (poison satır artık claim edilmez).
 --
 -- ROLLBACK:
 --   drop function if exists public.health_claim_due_reminders(int);
@@ -103,11 +110,15 @@ declare
 begin
   v_key := (select decrypted_secret from vault.decrypted_secrets where name = 'health_pii_key');
 
+  -- retry_count < 3: bir satır 3 başarısız denemeden sonra POISON kabul edilir ve artık
+  -- claim EDİLMEZ (recordFailure satırı 'pending' bırakıp retry_count'u artırır → bir
+  -- sonraki cron koşusu yeniden dener; sayaç 3'e ulaşınca terminal kalır + Sentry).
   with due as (
     select r.id
     from health.reminders_outbox r
     where r.status = 'pending'
       and r.send_at <= now()
+      and r.retry_count < 3
     order by r.send_at
     limit greatest(p_limit, 0)
     for update skip locked
@@ -134,7 +145,13 @@ begin
       'providerTitle',  p.title,
       'providerSlug',   p.slug,
       'providerUserId', p.user_id,
-      'serviceName',    sv.name ->> coalesce(rl.locale, 'en'),
+      -- Hasta-locale (patient e-postaları/SMS) + provider-locale (provider e-postası)
+      -- ayrı çözülür; ikisinde de key yoksa value-level fallback (en → me). services.name
+      -- seed'i yalnız me/en/tr key taşır → ru/uk/de/it/sr/ar booking'lerde key absent.
+      'serviceName',         coalesce(sv.name ->> coalesce(rl.locale, 'en'),
+                                      sv.name ->> 'en', sv.name ->> 'me'),
+      'serviceNameProvider', coalesce(sv.name ->> coalesce((p.languages)[1], 'en'),
+                                      sv.name ->> 'en', sv.name ->> 'me'),
       'locationLabel',  l.label,
       'locationAddress', l.address,
       'locationCity',   l.city
@@ -160,6 +177,10 @@ grant execute on function public.health_claim_due_reminders(int) to service_role
 -- 3) health_mark_reminder (4-arg additive overload) — retry-aware.
 --    071'in 3-arg sürümü DOKUNULMADAN durur. p_bump_retry=true iken retry_count++
 --    (dispatcher başarısız gönderimde geçer → sayaç tırmanır). status='sent' → sent_at.
+--    RETRY DESENİ: dispatcher retryable hatada p_status='pending'+p_bump_retry=true geçer
+--    (satır 'pending' kalır → bir sonraki cron retry_count<3 filtresiyle yeniden claim
+--    eder); retry_count 3'e ulaşınca terminal p_status='failed' geçer. Teslim edilemeyen
+--    no-op kapanışlarda p_status='skipped' (sent ≠ skipped, outbox doğru kalır).
 -- ─────────────────────────────────────────────────────────────────────────────
 create or replace function public.health_mark_reminder(
   p_reminder_id uuid, p_status text, p_provider_msg_id text, p_bump_retry boolean
@@ -331,12 +352,16 @@ grant execute on function public.health_enqueue_followups(int) to service_role;
 --     raise notice 're-claim within same tx (locked) = %', jsonb_array_length(v2);  -- beklenen: 0
 --   end $$;
 --
---   -- (4) retry bump: 4-arg health_mark_reminder(...,true) retry_count'u artırmalı.
---   --   update öncesi/sonrası retry_count'u SAYI olarak karşılaştır (PII yok):
+--   -- (4) retry bump + re-claim: retryable hata 'pending'+bump → bir sonraki claim yeniden
+--   --   görür; retry_count=3 olunca claim ARTIK döndürmez (poison).
 --   --   select id from health.reminders_outbox where status='pending' limit 1  → :rid
---   --   select retry_count from health.reminders_outbox where id = :rid;        → R0
---   --   select public.health_mark_reminder(:rid,'failed',null,true);
---   --   select retry_count from health.reminders_outbox where id = :rid;        → R0+1 olmalı
+--   --   select retry_count from health.reminders_outbox where id = :rid;        → R0 (0 varsay)
+--   --   select public.health_mark_reminder(:rid,'pending',null,true);           -- retryable fail
+--   --   select retry_count, status from health.reminders_outbox where id = :rid;→ R0+1, 'pending'
+--   --   -- retry_count'u 3'e it → claim filtresi onu DIŞLAMALI:
+--   --   update health.reminders_outbox set retry_count=3 where id=:rid;
+--   --   select jsonb_path_query_array(public.health_claim_due_reminders(50),'$[*].reminderId')
+--   --     ? (:rid)::text;                                                       → false (claim etmez)
 --
 --   -- (5) 066/071 DEĞİŞMEDİ kanıtı (additive teyidi):
 --   --   \df health.book_appointment            → hâlâ 3-arg (uuid,uuid,text)

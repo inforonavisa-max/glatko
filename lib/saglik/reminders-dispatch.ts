@@ -75,7 +75,10 @@ export type ClaimedReminder = {
   providerTitle: string | null;
   providerSlug: string;
   providerUserId: string | null;
+  /** Service name resolved in the PATIENT's locale (patient SMS/email). */
   serviceName: string | null;
+  /** Service name resolved in the PROVIDER's locale (provider_new_booking email). */
+  serviceNameProvider: string | null;
   locationLabel: string;
   locationAddress: string;
   locationCity: string;
@@ -98,12 +101,20 @@ export type SmsSender = (to: string, text: string) => Promise<SendResult>;
 export type EmailSender = (args: {
   to: string;
   subject: string;
-  react: React.ReactElement;
+  react: ReactElement;
 }) => Promise<SendResult>;
-/** Marks a reminder row sent/failed, optionally bumping retry_count. */
+/**
+ * Marks a reminder row's terminal/transient status, optionally bumping retry_count.
+ *   - 'sent'    : delivered.
+ *   - 'failed'  : terminal failure (retry budget exhausted) → no longer re-claimed.
+ *   - 'pending' : retryable failure — left re-claimable; pair with bumpRetry=true so
+ *                 the claim's `retry_count < 3` filter eventually stops a poison row.
+ *   - 'skipped' : nothing to deliver (no recipient / no template) — truthful no-op close.
+ */
+export type ReminderStatus = "sent" | "failed" | "pending" | "skipped";
 export type MarkReminder = (
   reminderId: string,
-  status: "sent" | "failed",
+  status: ReminderStatus,
   providerMsgId: string | null,
   bumpRetry: boolean,
 ) => Promise<void>;
@@ -230,9 +241,11 @@ export function renderEmail(
           providerName: formatDoctor(r.providerTitle, r.providerName),
           patientFirstName: firstName(r.patientName),
           dateTime: pDt,
-          serviceName,
+          // Service name in the PROVIDER's locale (not the patient's).
+          serviceName: r.serviceNameProvider ?? "",
           locationLabel: r.locationLabel,
-          detailsUrl: url,
+          // Intentionally NO detailsUrl: the only link we have is the patient's
+          // manage_token (their cancel credential) — never send it to the provider.
         }),
       };
     }
@@ -246,18 +259,15 @@ function firstName(full: string): string {
 }
 
 /**
- * Records a send outcome on a row. On failure, bumps retry_count while the row is
- * still retryable (retry_count+1 < MAX_RETRY) leaving it 'failed' (re-eligible only
- * by a future enqueue is NOT how it works — see note); once the attempt count hits
- * MAX_RETRY the row is marked terminal 'failed' + reported to Sentry.
+ * Records a send failure on a row, bumping retry_count.
  *
- * NOTE on retry semantics with a fixed status CHECK: 'failed' is terminal in the
- * outbox CHECK, so a failed row is NOT auto-re-scanned. We therefore treat a send
- * failure as: bump retry_count and mark 'failed'. The row will not be retried by a
- * later cron (it is no longer 'pending'). This favours NOT spamming a patient over
- * guaranteed delivery — acceptable for reminders, and the confirm path already has
- * the immediate route attempt as a first try. retryCount/MAX_RETRY is preserved for
- * observability and a possible future requeue tool. Terminal failures hit Sentry.
+ * Retry semantics (069/073 status CHECK has no transient state, ALTER forbidden):
+ *   - While still retryable (attempts = retryCount+1 < MAX_RETRY) the row is left
+ *     'pending' with retry_count++ so the NEXT cron re-claims it (the claim filters
+ *     `retry_count < 3`). This delivers the spec's "retry cap (max 3 → failed)".
+ *   - Once attempts reach MAX_RETRY the row is marked terminal 'failed' + reported to
+ *     Sentry; the claim's `retry_count < 3` filter then permanently excludes it (poison).
+ * Content is idempotent so a re-send after a transient outage is safe.
  */
 async function recordFailure(
   r: ClaimedReminder,
@@ -265,7 +275,8 @@ async function recordFailure(
 ): Promise<"failed" | "exhausted"> {
   const attempts = r.retryCount + 1;
   const exhausted = attempts >= MAX_RETRY;
-  await mark(r.reminderId, "failed", null, true);
+  // Retryable → leave 'pending' (re-claimable next run); exhausted → terminal 'failed'.
+  await mark(r.reminderId, exhausted ? "failed" : "pending", null, true);
   if (exhausted) {
     glatkoCaptureException(
       new Error(`health reminder exhausted: template=${r.template} channel=${r.channel}`),
@@ -273,6 +284,31 @@ async function recordFailure(
     );
   }
   return exhausted ? "exhausted" : "failed";
+}
+
+/** Appointment-time templates whose relevance depends on the slot still being ahead. */
+const SLOT_RELATIVE_TEMPLATES = new Set(["t24", "t2", "followup"]);
+
+/**
+ * Defense-in-depth relevance guard (findings: past-slot staleness + cancelled race).
+ * Returns true when a claimed row is no longer worth sending and should be closed
+ * 'skipped' instead of delivered. Uses the payload already carried by the claim:
+ *   - t24/t2: the whole point is a heads-up BEFORE the visit — once the slot has
+ *     started, a "your appointment is in 2 hours" SMS is wrong, so skip it. (Under
+ *     cron downtime a long-overdue t24/t2 could otherwise fire after the visit.)
+ *   - any slot-relative template on a non-confirmed appointment: the 071 cancel RPC
+ *     already flips pending t24/t2 to 'skipped', but if a row ever coexists with a
+ *     cancelled/no-show appointment (race / manual op), don't deliver it.
+ * cancelled / provider_new_booking are unaffected (they SHOULD fire post-cancel / pre-slot).
+ */
+export function isStaleOrIrrelevant(r: ClaimedReminder, now: number = Date.now()): boolean {
+  if (!SLOT_RELATIVE_TEMPLATES.has(r.template)) return false;
+  if (r.appointmentStatus !== "confirmed") return true;
+  if (r.template === "t24" || r.template === "t2") {
+    const slotStartMs = Date.parse(r.slotStart);
+    if (Number.isFinite(slotStartMs) && slotStartMs <= now) return true;
+  }
+  return false;
 }
 
 /**
@@ -284,17 +320,24 @@ export async function dispatchOne(
   deps: DispatchDeps,
 ): Promise<"sent" | "failed" | "exhausted" | "skipped"> {
   try {
+    // Relevance guard: a stale t24/t2 (slot already started) or a slot-relative row on
+    // a no-longer-confirmed appointment is closed 'skipped' rather than delivered.
+    if (isStaleOrIrrelevant(r)) {
+      await deps.mark(r.reminderId, "skipped", null, false);
+      return "skipped";
+    }
+
     // provider_new_booking is delivered to the provider, never the patient. The
     // provider has no contact column (066) → resolve from auth.users; skip if absent.
     if (r.template === "provider_new_booking") {
       const providerEmail = await deps.resolveProviderEmail(r.providerUserId);
       if (!providerEmail) {
-        await deps.mark(r.reminderId, "sent", null, false); // nothing to deliver to → close the row
+        await deps.mark(r.reminderId, "skipped", null, false); // nothing to deliver to → close the row
         return "skipped";
       }
       const email = renderEmail(r);
       if (!email) {
-        await deps.mark(r.reminderId, "sent", null, false);
+        await deps.mark(r.reminderId, "skipped", null, false);
         return "skipped";
       }
       const res = await deps.sendEmailFn({ to: providerEmail, subject: email.subject, react: email.react });
@@ -307,12 +350,12 @@ export async function dispatchOne(
 
     if (r.channel === "email") {
       if (!r.email) {
-        await deps.mark(r.reminderId, "sent", null, false); // no patient email → close the row
+        await deps.mark(r.reminderId, "skipped", null, false); // no patient email → close the row
         return "skipped";
       }
       const email = renderEmail(r);
       if (!email) {
-        await deps.mark(r.reminderId, "sent", null, false);
+        await deps.mark(r.reminderId, "skipped", null, false);
         return "skipped";
       }
       const res = await deps.sendEmailFn({ to: r.email, subject: email.subject, react: email.react });
@@ -327,7 +370,7 @@ export async function dispatchOne(
     // WhatsApp opt-in and the Infobip omnichannel endpoint 404s on this account).
     const body = renderSmsBody(r);
     if (!body) {
-      await deps.mark(r.reminderId, "sent", null, false);
+      await deps.mark(r.reminderId, "skipped", null, false);
       return "skipped";
     }
     const res = await deps.sendSmsFn(r.phoneE164, body);

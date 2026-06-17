@@ -21,8 +21,13 @@ export type HealthProviderNewBookingEmailProps = {
   dateTime: string;
   serviceName: string;
   locationLabel: string;
-  /** Link to the appointment (manage page). */
-  detailsUrl: string;
+  /**
+   * Optional provider-scoped appointment link. Intentionally omitted in H6 v1: the
+   * only existing appointment link is keyed on the patient's manage_token (the patient's
+   * own cancel credential), which must NEVER be sent to the provider. A provider-scoped
+   * link can be supplied once the H7 provider dashboard exists (auth-gated, not token-based).
+   */
+  detailsUrl?: string;
 };
 
 type Copy = {
@@ -86,7 +91,7 @@ export function HealthProviderNewBookingEmail({
           <span className={lbl}>{c.whereLabel}:</span> {locationLabel}
         </Text>
       </Section>
-      <EmailPrimaryButton href={detailsUrl}>{c.cta}</EmailPrimaryButton>
+      {detailsUrl ? <EmailPrimaryButton href={detailsUrl}>{c.cta}</EmailPrimaryButton> : null}
       <Section className="mt-[24px]">
         <Text className="email-muted m-0 text-[13px] text-slate-500">{common.regards}</Text>
       </Section>

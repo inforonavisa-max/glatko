@@ -3,6 +3,8 @@ import type { ReactElement } from "react";
 import {
   dispatchClaimed,
   dispatchOne,
+  dispatchDueReminders,
+  isStaleOrIrrelevant,
   renderSmsBody,
   renderEmail,
   type ClaimedReminder,
@@ -50,6 +52,7 @@ function makeRow(overrides: Partial<ClaimedReminder> = {}): ClaimedReminder {
     providerSlug: "dr-helena-novak",
     providerUserId: "33333333-3333-3333-3333-333333333333",
     serviceName: "Pregled",
+    serviceNameProvider: "Pregled",
     locationLabel: "Klinika Budva",
     locationAddress: "Jadranski put 1",
     locationCity: "Budva",
@@ -77,7 +80,7 @@ function makeDeps(opts: {
   const mark = vi.fn(
     async (
       _id: string,
-      _status: "sent" | "failed",
+      _status: "sent" | "failed" | "pending" | "skipped",
       _msg: string | null,
       _bump: boolean,
     ) => {},
@@ -236,11 +239,12 @@ describe("dispatchOne — channel routing + retry + two-layer", () => {
     expect(mark).toHaveBeenCalledWith(expect.any(String), "sent", "msg-42", false);
   });
 
-  it("(c) send fails + retryCount<MAX → mark('failed', null, bump=true), failed", async () => {
+  it("(c) send fails + retryCount<MAX → mark('pending', null, bump=true) so it is re-claimed, failed", async () => {
     const { deps, mark } = makeDeps({ smsResult: { ok: false } });
     const outcome = await dispatchOne(makeRow({ retryCount: 0 }), deps);
     expect(outcome).toBe("failed");
-    expect(mark).toHaveBeenCalledWith(expect.any(String), "failed", null, true);
+    // Retryable failure stays 'pending' (re-claimable) with retry_count bumped.
+    expect(mark).toHaveBeenCalledWith(expect.any(String), "pending", null, true);
   });
 
   it("(c) send fails + attempts hit MAX → exhausted + Sentry", async () => {
@@ -250,6 +254,7 @@ describe("dispatchOne — channel routing + retry + two-layer", () => {
     const { deps, mark } = makeDeps({ smsResult: { ok: false } });
     const outcome = await dispatchOne(makeRow({ retryCount: 2 }), deps);
     expect(outcome).toBe("exhausted");
+    // Exhausted → terminal 'failed' (claim's retry_count<3 filter then excludes it).
     expect(mark).toHaveBeenCalledWith(expect.any(String), "failed", null, true);
     expect(spy).toHaveBeenCalledTimes(1);
     spy.mockRestore();
@@ -262,12 +267,13 @@ describe("dispatchOne — channel routing + retry + two-layer", () => {
     expect(mark).toHaveBeenCalled();
   });
 
-  it("provider_new_booking with no resolvable provider email → skipped (row closed)", async () => {
+  it("provider_new_booking with no resolvable provider email → skipped (row closed as 'skipped')", async () => {
     const { deps, email, mark } = makeDeps({ providerEmail: null });
     const outcome = await dispatchOne(makeRow({ template: "provider_new_booking" }), deps);
     expect(outcome).toBe("skipped");
     expect(email).not.toHaveBeenCalled();
-    expect(mark).toHaveBeenCalledWith(expect.any(String), "sent", null, false);
+    // No-op close is recorded as 'skipped' (not 'sent') so the outbox stays truthful.
+    expect(mark).toHaveBeenCalledWith(expect.any(String), "skipped", null, false);
   });
 
   it("email channel with no patient email → skipped", async () => {
@@ -342,5 +348,112 @@ describe("(f) PII safety — no phone/email/name in console on failure", () => {
     expect(blob).not.toContain("+38269999888");
     expect(blob).not.toContain("secret.patient@example.com");
     expect(blob).not.toContain("Sensitive FullName");
+  });
+});
+
+describe("isStaleOrIrrelevant — past-slot + cancelled-race relevance guard", () => {
+  it("t24/t2 are stale once the slot has already started", () => {
+    const past = "2026-06-18T08:00:00.000Z";
+    const after = Date.parse("2026-06-18T08:30:00.000Z");
+    expect(isStaleOrIrrelevant(makeRow({ template: "t24", slotStart: past }), after)).toBe(true);
+    expect(isStaleOrIrrelevant(makeRow({ template: "t2", slotStart: past }), after)).toBe(true);
+  });
+
+  it("t24/t2 are NOT stale while the slot is still ahead", () => {
+    const future = "2026-06-18T08:00:00.000Z";
+    const before = Date.parse("2026-06-17T08:00:00.000Z");
+    expect(isStaleOrIrrelevant(makeRow({ template: "t24", slotStart: future }), before)).toBe(false);
+    expect(isStaleOrIrrelevant(makeRow({ template: "t2", slotStart: future }), before)).toBe(false);
+  });
+
+  it("any slot-relative row on a non-confirmed appointment is irrelevant", () => {
+    const future = "2026-06-18T08:00:00.000Z";
+    const before = Date.parse("2026-06-17T08:00:00.000Z");
+    for (const template of ["t24", "t2", "followup"]) {
+      expect(
+        isStaleOrIrrelevant(makeRow({ template, slotStart: future, appointmentStatus: "cancelled" }), before),
+      ).toBe(true);
+    }
+  });
+
+  it("cancelled + provider_new_booking are never treated as stale (they fire post-cancel / pre-slot)", () => {
+    const past = "2026-06-18T08:00:00.000Z";
+    const after = Date.parse("2026-06-19T08:00:00.000Z");
+    expect(
+      isStaleOrIrrelevant(makeRow({ template: "cancelled", slotStart: past, appointmentStatus: "cancelled" }), after),
+    ).toBe(false);
+    expect(
+      isStaleOrIrrelevant(makeRow({ template: "provider_new_booking", slotStart: past }), after),
+    ).toBe(false);
+  });
+
+  it("dispatchOne closes a stale t24 as 'skipped' without sending", async () => {
+    const { deps, sms, mark } = makeDeps();
+    const stale = makeRow({ template: "t24", slotStart: "2000-01-01T00:00:00.000Z" });
+    const outcome = await dispatchOne(stale, deps);
+    expect(outcome).toBe("skipped");
+    expect(sms).not.toHaveBeenCalled();
+    expect(mark).toHaveBeenCalledWith(expect.any(String), "skipped", null, false);
+  });
+});
+
+describe("renderEmail — provider_new_booking uses the PROVIDER-locale service name + no patient token", () => {
+  it("provider email service value comes from serviceNameProvider, not the patient-locale serviceName", () => {
+    const out = renderEmail(
+      makeRow({
+        template: "provider_new_booking",
+        channel: "email",
+        providerLocale: "me",
+        patientLocale: "tr",
+        serviceName: "Diş muayenesi", // patient (tr)
+        serviceNameProvider: "Stomatološki pregled", // provider (me)
+      }),
+    );
+    expect(out).not.toBeNull();
+    // The provider email must not embed the patient's manage_token (cancel credential).
+    expect(out?.subject).toEqual(HEALTH_PROVIDER_NEW_BOOKING_EMAIL_SUBJECT.me);
+  });
+});
+
+describe("dispatchDueReminders — top-level orchestration", () => {
+  it("sums enqueuedFollowups + claim tally; never double-counts", async () => {
+    const { deps } = makeDeps({
+      claimRows: [
+        makeRow({ reminderId: "a", channel: "sms" }),
+        makeRow({ reminderId: "b", channel: "email", email: null }), // skipped
+      ],
+    });
+    (deps.enqueueFollowups as ReturnType<typeof vi.fn>).mockResolvedValue(3);
+    const summary = await dispatchDueReminders(deps);
+    expect(summary.enqueuedFollowups).toBe(3);
+    expect(summary.scanned).toBe(2);
+    expect(summary.sent).toBe(1);
+    expect(summary.skipped).toBe(1);
+    expect(deps.claim).toHaveBeenCalledWith(25);
+  });
+
+  it("claim THROWS → all-zero summary, Sentry called once, does not throw", async () => {
+    const sentry = await import("@/lib/sentry/glatko-capture");
+    const spy = vi.spyOn(sentry, "glatkoCaptureException").mockImplementation(() => {});
+    const { deps } = makeDeps();
+    (deps.claim as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("db down"));
+    (deps.enqueueFollowups as ReturnType<typeof vi.fn>).mockResolvedValue(2);
+    const summary = await dispatchDueReminders(deps);
+    expect(summary).toEqual({ enqueuedFollowups: 2, scanned: 0, sent: 0, failed: 0, exhausted: 0, skipped: 0 });
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
+  });
+
+  it("enqueueFollowups THROWS → caught (Sentry), claim + dispatch still run", async () => {
+    const sentry = await import("@/lib/sentry/glatko-capture");
+    const spy = vi.spyOn(sentry, "glatkoCaptureException").mockImplementation(() => {});
+    const { deps } = makeDeps({ claimRows: [makeRow({ reminderId: "a", channel: "sms" })] });
+    (deps.enqueueFollowups as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("seed boom"));
+    const summary = await dispatchDueReminders(deps);
+    expect(summary.enqueuedFollowups).toBe(0); // never assigned
+    expect(summary.sent).toBe(1); // claim + dispatch proceeded
+    expect(deps.claim).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
   });
 });
