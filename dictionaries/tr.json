@@ -31,7 +31,12 @@
     "businessProfile": "İşletme profili",
     "settings": "Ayarlar",
     "adminPanel": "Yönetim Paneli",
-    "leads": "İş Fırsatları"
+    "leads": "İş Fırsatları",
+    "careerTalentPool": "İşgücü Havuzu",
+    "careerHowItWorks": "Nasıl Çalışır",
+    "careerSectors": "Sektörler",
+    "careerEmployerJoin": "İşveren misiniz? Katılın",
+    "careerCreateRequisition": "Talep Oluştur"
   },
   "hero": {
     "title": "Karadağ'da Güvenilir Profesyoneller",
@@ -2564,6 +2569,838 @@
     "seoTitle": "İş — Yakında",
     "title": "İş geliyor",
     "subtitle": "Karadağ'da işverenlerle güvenilir çalışanları buluşturacağız. Bu bölüm çok yakında.",
-    "backHome": "Ana sayfaya dön"
+    "backHome": "Ana sayfaya dön",
+    "brand": {
+      "name": "Glatko İş & Kariyer",
+      "short": "İş & Kariyer",
+      "tagline": "Doğrulanmış işgücü, güvenli aracılık"
+    },
+    "comingSoon": {
+      "badge": "Yakında",
+      "title": "Glatko İş & Kariyer geliyor",
+      "subtitle": "Karadağ'da işverenleri doğrulanmış, görüşmeye hazır işgücüyle buluşturuyoruz. Anonim havuz, insan denetimli eşleştirme, işveren öder.",
+      "waitlistTitle": "Erken erişim listesine katılın",
+      "waitlistSubtitle": "İşveren ya da iş arayan — lansmanda öncelikli yerinizi alın.",
+      "employerCardTitle": "İşveren misiniz?",
+      "employerCardSubtitle": "İşgücü ihtiyacınızı bildirin — lansmanda doğrulanmış adaylarla buluşun.",
+      "workerCardTitle": "İş mi arıyorsunuz?",
+      "workerCardSubtitle": "Profilinizi oluşturun — sizin için ücretsiz, ücreti işveren öder.",
+      "backHome": "Ana sayfaya dön"
+    },
+    "landing": {
+      "seoTitle": "Glatko İş & Kariyer — Doğrulanmış işgücü, güvenli aracılık",
+      "hero": {
+        "badge": "RoNa Legal tarafından doğrulanmıştır",
+        "title": "Karadağ için doğrulanmış işgücü, güvenle",
+        "subtitle": "İnşaat ve turizm sektörlerinde görüşmeye hazır, belgeli adaylar. Anonim havuzdan seçin, insan denetimli eşleştirmeyle ilerleyin.",
+        "trustNote": "Adaylar asla ücret ödemez — tüm ücretleri işveren karşılar."
+      },
+      "dualCta": {
+        "employerTitle": "İşveren için",
+        "employerBody": "Doğrulanmış işgücü havuzunu inceleyin, talebinizi oluşturun, kısa listeyi alın.",
+        "employerCta": "Talep Oluştur",
+        "employerSecondary": "İşgücü havuzunu gör",
+        "workerTitle": "Çalışan için",
+        "workerBody": "Profilinizi oluşturun, belgelerinizi yükleyin, doğrulanmış adaylar arasına katılın.",
+        "workerCta": "Profil Oluştur",
+        "workerSecondary": "Nasıl çalışır?"
+      },
+      "trustStrip": {
+        "verifiedTitle": "RoNa Legal güvencesi",
+        "verifiedBody": "Her aday kimlik, beceri ve belge doğrulamasından geçer.",
+        "employerPaysTitle": "İşveren öder",
+        "employerPaysBody": "ILO ilkesi gereği iş arayan asla ücret ödemez.",
+        "guaranteeTitle": "90 gün ücretsiz değişim",
+        "guaranteeBody": "Yerleştirme uymazsa garanti süresinde ücretsiz değiştiririz.",
+        "anonymousTitle": "Anonim havuz",
+        "anonymousBody": "Kimlik, iletişim ve belgeler yalnızca onay ve ödeme sonrası açılır."
+      },
+      "teaser": {
+        "title": "İşgücü havuzundan örnekler",
+        "subtitle": "Tam kimlik gizli — onaylı işverenler tüm dosyayı açabilir.",
+        "lockedLabel": "Kilitli",
+        "viewPoolCta": "Tüm havuzu gör"
+      },
+      "sectorsTitle": "Sektörler",
+      "sectorsSubtitle": "İlk etapta inşaat ve turizm sektörlerine odaklanıyoruz.",
+      "steps": {
+        "title": "3 adımda nasıl çalışır",
+        "step1Title": "Havuzu inceleyin",
+        "step1Body": "Anonim kartlarda beceri, deneyim ve bölgeye göre filtreleyin.",
+        "step2Title": "İlgi gösterin",
+        "step2Body": "Uygun adayları talebinize ekleyin; RoNa Legal uygunluğu denetler.",
+        "step3Title": "Onay & yerleştirme",
+        "step3Body": "Onay ve ödeme sonrası tam dosya açılır, yerleştirme tamamlanır."
+      },
+      "stats": {
+        "title": "Rakamlarla Glatko İş & Kariyer",
+        "workersLabel": "Doğrulanmış aday",
+        "sectorsLabel": "Aktif sektör",
+        "placementsLabel": "Tamamlanan yerleştirme",
+        "comingSoon": "Çok yakında"
+      }
+    },
+    "howItWorks": {
+      "seoTitle": "Nasıl Çalışır — Glatko İş & Kariyer",
+      "title": "Nasıl çalışır",
+      "subtitle": "Şeffaf, insan denetimli ve işveren öder modeliyle iki taraf için de güvenli.",
+      "employerPath": {
+        "title": "İşveren yolu",
+        "subtitle": "İhtiyaçtan yerleştirmeye, tek bir denetimli akış.",
+        "step1Title": "Talep oluşturun",
+        "step1Body": "Sektör, rol, kişi sayısı ve koşulları belirtin.",
+        "step2Title": "Kısa liste alın",
+        "step2Body": "RoNa Legal size uygun anonim adaylardan oluşan kısa listeyi sunar.",
+        "step3Title": "İlgi gösterin",
+        "step3Body": "Seçtiğiniz adaylar için ilgi gösterin; onay sürecini başlatırız.",
+        "step4Title": "Onay & ödeme",
+        "step4Body": "Onay ve ödeme sonrası tam kimlik ve belgeler açılır.",
+        "step5Title": "Yerleştirme & garanti",
+        "step5Body": "Yerleştirme tamamlanır; 90 gün ücretsiz değişim güvencesi başlar."
+      },
+      "workerPath": {
+        "title": "Çalışan yolu",
+        "subtitle": "Sizin için ücretsiz — kimliğiniz onayınız olmadan paylaşılmaz.",
+        "step1Title": "Profil oluşturun",
+        "step1Body": "Rol, deneyim, beceri ve dillerinizi ekleyin.",
+        "step2Title": "Belgeleri yükleyin",
+        "step2Body": "Her belge için neyin herkese açık, neyin gizli olduğunu siz belirlersiniz.",
+        "step3Title": "Doğrulama",
+        "step3Body": "RoNa Legal kimlik, beceri ve belgelerinizi doğrular.",
+        "step4Title": "Havuzda görünün",
+        "step4Body": "Anonim kart olarak işverenlere gösterilirsiniz; kimliğiniz gizli kalır.",
+        "step5Title": "Eşleşme",
+        "step5Body": "Bir işveren ilgilendiğinde RoNa Legal süreci sizinle birlikte yürütür."
+      },
+      "revenuePaths": {
+        "title": "İki hizmet modeli",
+        "subtitle": "İhtiyacınıza göre seçin — her ikisinde de ücreti işveren öder.",
+        "commissionTitle": "Yalnızca komisyon",
+        "commissionBody": "Eşleştirme ve doğrulanmış havuza erişim; başarılı yerleştirmede komisyon.",
+        "fullServiceTitle": "Tam hizmet",
+        "fullServiceBody": "İzin, sözleşme ve yerleştirme sürecinin uçtan uca yönetimi dahil."
+      },
+      "employerPays": {
+        "title": "İşveren öder ilkesi",
+        "body": "ILO İşveren Öder İlkesi ve Karadağ mevzuatı gereği iş arayanlardan asla ücret alınmaz. Tüm aracılık ücretleri işveren tarafından karşılanır.",
+        "legalNote": "Karadağ'da iş arayandan ücret almak suçtur (€500–€20.000 para cezası)."
+      }
+    },
+    "sectors": {
+      "seoTitle": "Sektörler — Glatko İş & Kariyer",
+      "title": "Sektörler",
+      "subtitle": "Doğrulanmış işgücüne sektöre göre göz atın.",
+      "viewSector": "Sektörü gör",
+      "rolesLabel": "Roller",
+      "browsePool": "Bu sektörde işgücünü gör",
+      "emptyTitle": "Henüz sektör yok",
+      "emptyBody": "Sektörleri ekliyoruz. Yakında tekrar bakın.",
+      "construction": {
+        "name": "İnşaat",
+        "tagline": "Usta, kaynakçı, elektrikçi ve daha fazlası",
+        "intro": "Karadağ inşaat projeleri için doğrulanmış, deneyimli işgücü."
+      },
+      "hospitality": {
+        "name": "Turizm ve Otelcilik",
+        "tagline": "Garson, aşçı, kat görevlisi ve daha fazlası",
+        "intro": "Oteller, restoranlar ve turizm işletmeleri için görüşmeye hazır işgücü."
+      }
+    },
+    "pool": {
+      "seoTitle": "İşgücü Havuzu — Glatko İş & Kariyer",
+      "title": "İşgücü havuzu",
+      "subtitle": "Doğrulanmış, anonim adaylar. Kimlik yalnızca onay ve ödeme sonrası açılır.",
+      "resultsCount": "{count} aday",
+      "noResultsTitle": "Sonuç bulunamadı",
+      "noResultsBody": "Filtreleri değiştirip tekrar deneyin.",
+      "poolPreparingTitle": "Havuz hazırlanıyor",
+      "poolPreparingBody": "Adaylar doğrulanıyor. Çok yakında ilk işçiler burada görünecek.",
+      "loading": "Havuz yükleniyor…",
+      "errorTitle": "Yüklenemedi",
+      "errorBody": "Havuz yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.",
+      "retry": "Tekrar dene",
+      "loadMore": "Daha fazla göster",
+      "loginPrompt": "İlgi göstermek için işveren olarak giriş yapın.",
+      "filters": {
+        "title": "Filtreler",
+        "apply": "Uygula",
+        "clear": "Temizle",
+        "clearAll": "Tümünü temizle",
+        "sector": "Sektör",
+        "trade": "Meslek / branş",
+        "skillTier": "Beceri seviyesi",
+        "experienceBand": "Deneyim aralığı",
+        "region": "Bölge",
+        "ageBand": "Yaş aralığı",
+        "languages": "Diller",
+        "certifications": "Sertifikalar",
+        "readiness": "Hazırlık / doğrulama",
+        "availability": "Müsaitlik",
+        "anyOption": "Hepsi"
+      },
+      "skillTier": {
+        "entry": "Başlangıç",
+        "skilled": "Vasıflı",
+        "experienced": "Deneyimli",
+        "expert": "Uzman"
+      },
+      "experienceBand": {
+        "lt1": "1 yıldan az",
+        "1to3": "1–3 yıl",
+        "3to5": "3–5 yıl",
+        "5to10": "5–10 yıl",
+        "gt10": "10+ yıl"
+      },
+      "region": {
+        "farEast": "Uzak Doğu",
+        "middleEast": "Orta Doğu",
+        "africa": "Afrika",
+        "balkans": "Balkanlar",
+        "other": "Diğer"
+      },
+      "ageBand": {
+        "18to24": "18–24",
+        "25to34": "25–34",
+        "35to44": "35–44",
+        "45plus": "45+"
+      },
+      "readiness": {
+        "title": "Hazırlık",
+        "high": "Yüksek hazırlık",
+        "medium": "Orta hazırlık",
+        "low": "Profil tamamlanıyor"
+      },
+      "availability": {
+        "immediate": "Hemen müsait",
+        "within30": "30 gün içinde",
+        "within90": "90 gün içinde"
+      },
+      "sort": {
+        "label": "Sırala",
+        "relevance": "İlgiye göre",
+        "readiness": "Hazırlığa göre",
+        "experience": "Deneyime göre",
+        "recent": "En yeni"
+      },
+      "card": {
+        "verifiedBadge": "RoNa Legal doğrulamalı",
+        "readinessLabel": "Hazırlık",
+        "experienceLabel": "Deneyim",
+        "regionLabel": "Bölge",
+        "languagesLabel": "Diller",
+        "skillsLabel": "Öne çıkan beceriler",
+        "certsLabel": "Sertifikalar",
+        "tierLabel": "Seviye",
+        "photoBlurredNote": "Fotoğraf gizliliğiniz için bulanıklaştırıldı",
+        "viewProfile": "Profili gör",
+        "expressInterest": "İlgi Göster",
+        "addToRequisition": "Talebe Ekle",
+        "interestMarked": "İlgi gösterildi",
+        "addedToRequisition": "Talebe eklendi"
+      },
+      "lockedCta": {
+        "title": "Tam dosya kilitli",
+        "body": "Ad, iletişim, pasaport ve orijinal belgeler RoNa Legal onayı ve ücret sonrası açılır.",
+        "loginCta": "İşveren olarak giriş yap",
+        "registerCta": "İşveren hesabı oluştur"
+      },
+      "verificationStatus": {
+        "pending": "Doğrulama bekliyor",
+        "id_verified": "Kimlik doğrulandı",
+        "skills_verified": "Beceri doğrulandı",
+        "documents_verified": "Belgeler doğrulandı",
+        "interview_passed": "Görüşmeyi geçti",
+        "rejected": "Reddedildi"
+      }
+    },
+    "workerDetail": {
+      "seoTitle": "Aday profili — Glatko İş & Kariyer",
+      "backToPool": "Havuza dön",
+      "anonymousNote": "Bu profil anonimdir. Tam kimlik onay ve ödeme sonrası açılır.",
+      "overviewLabel": "Genel bakış",
+      "lockedPanel": {
+        "title": "Tam dosya kilitli",
+        "body": "Ad soyad, iletişim, pasaport ve orijinal belgeler yalnızca RoNa Legal onayı ve ücret sonrası açılır.",
+        "lockedItemsTitle": "Açıldığında görünür",
+        "itemFullName": "Ad soyad",
+        "itemContact": "Telefon ve e-posta",
+        "itemLocation": "Tam ülke / şehir",
+        "itemPassport": "Pasaport ve kimlik taramaları",
+        "itemDocuments": "Orijinal diploma ve sertifikalar",
+        "itemPhotos": "Bulanıklaştırılmamış fotoğraf ve video",
+        "expressInterest": "İlgi Göster",
+        "addToRequisition": "Talebe Ekle"
+      },
+      "skillsMatrix": {
+        "title": "Beceri matrisi",
+        "skillLabel": "Beceri",
+        "levelLabel": "Seviye",
+        "empty": "Beceri eklenmemiş."
+      },
+      "timeline": {
+        "title": "Deneyim geçmişi",
+        "redactedNote": "İşveren adları gizliliği için gizlenmiştir.",
+        "durationLabel": "Süre",
+        "yearsShort": "yıl",
+        "empty": "Geçmiş eklenmemiş."
+      },
+      "languagesLabel": "Diller",
+      "certificationsLabel": "Sertifikalar",
+      "certFileLocked": "Belge dosyası kilitli",
+      "readinessLabel": "Hazırlık skoru",
+      "videoIntroLabel": "Tanıtım videosu",
+      "videoLocked": "Video onay sonrası açılır"
+    },
+    "interest": {
+      "expressInterest": "İlgi Göster",
+      "addToRequisition": "Talebe Ekle",
+      "sending": "Gönderiliyor…",
+      "sentPill": "İlgi gönderildi — RoNa Legal incelemesi bekleniyor",
+      "successToast": "İlginiz iletildi. RoNa Legal inceleyecek.",
+      "loginRequired": "İşveren girişi gerekli",
+      "loginPrompt": "İlgi göstermek için işveren olarak giriş yapın.",
+      "loginCta": "İşveren olarak giriş yap",
+      "errForbidden": "Bu işlem için yetkiniz yok.",
+      "errNotFound": "Bu işçi/talep bulunamadı.",
+      "errGeneric": "Bir şeyler ters gitti, tekrar deneyin."
+    },
+    "worker": {
+      "landing": {
+        "seoTitle": "Çalışanlar için — Glatko İş & Kariyer",
+        "title": "İşiniz için ücretsiz",
+        "subtitle": "Doğrulanmış adaylar arasına katılın. Ücreti işveren öder, kimliğiniz onayınız olmadan paylaşılmaz.",
+        "cta": "Profil Oluştur",
+        "loginCta": "Zaten hesabım var",
+        "benefit1Title": "Sizin için ücretsiz",
+        "benefit1Body": "İş arayandan asla ücret alınmaz.",
+        "benefit2Title": "Kimliğiniz gizli",
+        "benefit2Body": "Anonim kart olarak görünürsünüz; kimlik onayınızla açılır.",
+        "benefit3Title": "Taşınabilir belge cüzdanı",
+        "benefit3Body": "Doğrulanmış belgeleriniz tek yerde, her başvuruda hazır."
+      },
+      "landingPage": {
+        "seoTitle": "Çalışanlar için — Glatko İş & Kariyer",
+        "eyebrow": "Çalışanlar için · Her zaman ücretsiz",
+        "title": "Yurt dışında işe girin — sizin için ücretsiz, uçtan uca yönetilen",
+        "subtitle": "Doğrulanmış adaylar havuzuna katılın. Ücreti işveren öder, kimliğiniz onayınız olmadan paylaşılmaz; gerisini RoNa Legal halleder.",
+        "registerCta": "Profil Oluştur",
+        "howItWorksCta": "Çalışanlar için nasıl işler",
+        "employerPays": {
+          "title": "Asla ücret ödemezsiniz",
+          "body": "Tüm işe alım masraflarını işveren karşılar (ILO İşveren Öder ilkesi). İş arayan olarak sizden hiçbir ücret, komisyon veya kesinti alınmaz."
+        },
+        "trust": {
+          "verified": "RoNa Legal doğrulamalı",
+          "privacy": "Verileriniz onaylayana kadar gizli kalır",
+          "portable": "Taşınabilir doğrulanmış belge"
+        },
+        "benefits": {
+          "title": "Neden Glatko İş & Kariyer",
+          "freeTitle": "Sizin için ücretsiz",
+          "freeBody": "Ücreti işveren öder; sizden asla ücret alınmaz.",
+          "vaultTitle": "Taşınabilir belge cüzdanı",
+          "vaultBody": "Doğrulanmış belgeleriniz tek yerde, her başvuruda hazır.",
+          "anonymousTitle": "Varsayılan anonim",
+          "anonymousBody": "Kimliğiniz yalnızca sizin onayınız ve RoNa onayıyla açılır.",
+          "singlePointTitle": "Tek iletişim noktası",
+          "singlePointBody": "İşverenlerle RoNa Legal ilgilenir; kimseyi siz aramazsınız.",
+          "legalTitle": "Yasal işler sizin için",
+          "legalBody": "İzin, sözleşme ve yasal süreçler sizin adınıza yürütülür.",
+          "readinessTitle": "Hazırlık skoru",
+          "readinessBody": "Profilinizi tamamladıkça havuzdaki görünürlüğünüz artar."
+        },
+        "howItWorks": {
+          "title": "Nasıl işler",
+          "step1Title": "Profilinizi oluşturun",
+          "step1Body": "Profilinizi oluşturun ve belgelerinizi yükleyin — sizin için ücretsiz.",
+          "step2Title": "Doğrulanın & gösterilin",
+          "step2Body": "RoNa Legal sizi doğrular, havuzda anonim olarak gösterilirsiniz.",
+          "step3Title": "Eşleşin",
+          "step3Body": "Bir işveren ilgi gösterir, RoNa Legal sizinle iletişime geçer ve eşleşirsiniz.",
+          "fullLink": "Tüm süreci görün"
+        },
+        "privacy": {
+          "body": "Her belge için rızayı siz yönetirsiniz. Tam kimliğiniz ve iletişim bilgileriniz yalnızca siz onayladıktan ve işveren RoNa Legal tarafından onaylandıktan sonra paylaşılır."
+        },
+        "closing": {
+          "title": "Profilinizi oluşturmaya hazır mısınız?",
+          "subtitle": "Sizin için her zaman ücretsiz — ücreti işveren öder."
+        }
+      },
+      "register": {
+        "seoTitle": "Çalışan kaydı — Glatko İş & Kariyer",
+        "title": "Çalışan hesabı oluştur",
+        "subtitle": "Profilinizi oluşturmak için birkaç adım. Sizin için ücretsiz — ücreti işveren öder.",
+        "accountGroup": "Hesap",
+        "basicsGroup": "Temel bilgiler",
+        "nameLabel": "Ad Soyad",
+        "emailLabel": "E-posta",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Şifre",
+        "roleLabel": "Rol / meslek",
+        "rolePlaceholder": "Rolünüzü seçin",
+        "regionLabel": "Geldiğiniz bölge",
+        "regionPlaceholder": "Bölge seçin",
+        "regionHint": "Yalnızca bölge — kesin ülke daha sonra gizli profilinizde toplanır.",
+        "languageLabel": "Tercih ettiğiniz dil",
+        "freeForYou": "Sizin için her zaman ücretsiz — ücreti işveren öder.",
+        "submit": "Hesap oluştur",
+        "submitting": "Oluşturuluyor…",
+        "haveAccount": "Zaten hesabınız var mı?",
+        "loginLink": "Giriş yap",
+        "consentLabel": "Pasaport, sertifika ve biyometrik belgeler dahil kişisel verilerimin Glatko İş & Kariyer tarafından anonim havuzda gösterim ve RoNa Legal doğrulaması amacıyla işlenmesine açık rıza veriyorum. Rızamı her belge için daha sonra geri çekebileceğimi biliyorum.",
+        "consentLink": "Gizlilik Politikası",
+        "successTitle": "Hesap oluşturuldu",
+        "successBody": "Şimdi profilinizi oluşturalım.",
+        "successCta": "Profili oluşturmaya devam et",
+        "errConsentRequired": "Devam etmek için rıza gereklidir.",
+        "errValidation": "Lütfen tüm zorunlu alanları doğru doldurun.",
+        "errGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+      },
+      "profileWizard": {
+        "title": "Profil oluşturucu",
+        "stepLabel": "Adım {current} / {total}",
+        "next": "İleri",
+        "back": "Geri",
+        "save": "Kaydet",
+        "saving": "Kaydediliyor…",
+        "finish": "Tamamla",
+        "completeness": "Profil tamamlanma",
+        "readinessMeter": "Hazırlık ölçer",
+        "steps": {
+          "account": {
+            "title": "Hesap & rıza",
+            "subtitle": "Hesabınız ve veri işleme rızanız."
+          },
+          "basics": {
+            "title": "Temel bilgiler",
+            "subtitle": "Rol, deneyim, bölge, diller ve yaş.",
+            "roleLabel": "Rol / meslek",
+            "yearsLabel": "Deneyim (yıl)",
+            "regionLabel": "Bölge / ülke",
+            "languagesLabel": "Diller",
+            "ageLabel": "Yaş"
+          },
+          "skills": {
+            "title": "Beceriler & iş geçmişi",
+            "subtitle": "Branşınıza özel beceriler ve geçmiş işleriniz.",
+            "skillsLabel": "Beceriler",
+            "addSkill": "Beceri ekle",
+            "historyLabel": "İş geçmişi",
+            "addHistory": "Geçmiş ekle"
+          },
+          "certifications": {
+            "title": "Sertifikalar & eğitim",
+            "subtitle": "Sertifika ve eğitim bilgilerinizi ekleyin.",
+            "addCertification": "Sertifika ekle"
+          },
+          "documents": {
+            "title": "Fotoğraf & belgeler",
+            "subtitle": "Belgelerinizi yükleyin ve görünürlüğünü ayarlayın."
+          },
+          "video": {
+            "title": "Tanıtım videosu (opsiyonel)",
+            "subtitle": "Kısa bir tanıtım videosu ekleyebilirsiniz."
+          }
+        }
+      },
+      "documents": {
+        "seoTitle": "Belgelerim — Glatko İş & Kariyer",
+        "title": "Belge ve fotoğraf merkezi",
+        "subtitle": "Her belge için neyin herkese açık, neyin gizli olduğunu siz belirlersiniz.",
+        "uploadCta": "Belge yükle",
+        "uploading": "Yükleniyor…",
+        "emptyTitle": "Henüz belge yok",
+        "emptyBody": "Doğrulama için belgelerinizi yükleyin.",
+        "categoryLabel": "Kategori",
+        "visibilityLabel": "Görünürlük",
+        "consentLabel": "Rıza durumu",
+        "uploadedAt": "Yüklenme",
+        "retentionLabel": "Saklama süresi",
+        "removeCta": "Kaldır",
+        "categories": {
+          "profile_photo": "Profil fotoğrafı",
+          "work_photo": "İş fotoğrafları",
+          "passport": "Pasaport / kimlik",
+          "diploma": "Diploma / sertifika",
+          "skill_cert": "Beceri sertifikası",
+          "insurance": "Sigorta / sağlık",
+          "reference": "Referanslar"
+        },
+        "visibility": {
+          "public_anonymized": "Herkese açık (anonim)",
+          "gated": "Gizli (onay sonrası)",
+          "internal_only": "Yalnızca dahili",
+          "publicHint": "Yüz bulanıklaştırılmış, filigranlı olarak havuzda görünür.",
+          "gatedHint": "Yalnızca onay ve ödeme sonrası işverene açılır.",
+          "internalHint": "Yalnızca RoNa Legal görür; havuzda görünmez."
+        },
+        "consent": {
+          "title": "Bu belgeyle verdiğiniz rıza",
+          "pending": "Rıza bekliyor",
+          "granted": "Rıza verildi",
+          "revoked": "Rıza geri çekildi",
+          "grantCta": "Rıza ver",
+          "revokeCta": "Rızayı geri çek",
+          "grantBody": "Bu belgenin seçtiğiniz görünürlükte işlenmesine izin veriyorsunuz.",
+          "revokeBody": "Rızayı dilediğiniz zaman geri çekebilirsiniz."
+        }
+      },
+      "dashboard": {
+        "seoTitle": "Panom — Glatko İş & Kariyer",
+        "title": "Çalışan panosu",
+        "subtitle": "Durumunuz ve sürecinizin özeti.",
+        "statusLabel": "Durum",
+        "readinessLabel": "Hazırlık skoru",
+        "interestCountLabel": "Gösterilen ilgi",
+        "completenessLabel": "Profil tamamlanma",
+        "singlePointNote": "RoNa Legal tek iletişim noktanızdır; işveren iletişimi paylaşılmaz.",
+        "editProfile": "Profili düzenle",
+        "manageDocuments": "Belgeleri yönet",
+        "statuses": {
+          "showcased": "Havuzda görünüyorsunuz",
+          "interest": "Bir işveren ilgi gösterdi",
+          "pendingApproval": "RoNa onayı bekleniyor",
+          "matched": "Eşleştiniz — yasal işlemler sürüyor",
+          "placed": "Yerleştirildiniz",
+          "notShowcased": "Henüz havuzda değilsiniz",
+          "underReview": "Profiliniz inceleniyor"
+        }
+      }
+    },
+    "employer": {
+      "landingPage": {
+        "seoTitle": "İşverenler için — Glatko İş & Kariyer",
+        "eyebrow": "İşverenler için",
+        "title": "Doğrulanmış, işe hazır işgücü — uçtan uca yönetilen",
+        "subtitle": "İhtiyacınızı bildirin; RoNa Legal doğrulanmış adaylardan kısa liste hazırlasın, onay ve ödeme sonrası işe alımı tamamlayın.",
+        "registerCta": "İşveren olarak kayıt ol",
+        "poolCta": "İşgücü havuzunu gör",
+        "trust": {
+          "verified": "RoNa Legal doğrulamalı",
+          "employerPays": "İşveren öder — iş arayan ücretsiz",
+          "guarantee": "90 gün ücretsiz değişim"
+        },
+        "benefits": {
+          "title": "Neden Glatko İş & Kariyer",
+          "verifiedTitle": "Doğrulanmış & denetlenmiş havuz",
+          "verifiedBody": "Her aday kimlik, beceri ve belge doğrulamasından geçer.",
+          "anonymousTitle": "Anonim inceleme, sızıntısız",
+          "anonymousBody": "Kimlik ve iletişim onay ve ödeme öncesi gizli kalır.",
+          "lifecycleTitle": "Uçtan uca yönetim",
+          "lifecycleBody": "İzin, sözleşme ve yasal süreçleri RoNa Legal yürütür.",
+          "guaranteeTitle": "90 gün ücretsiz değişim",
+          "guaranteeBody": "Yerleştirme uymazsa garanti süresinde ücretsiz değiştiririz.",
+          "escrowTitle": "Emanet korumalı ücret",
+          "escrowBody": "Ücret yalnızca başarılı yerleştirmede tahsil edilir.",
+          "matcherTitle": "İnsan eşleştirme uzmanı",
+          "matcherBody": "Size yalnızca gerçekten uygun adaylar sunulur."
+        },
+        "howItWorks": {
+          "title": "Nasıl çalışır",
+          "step1Title": "İhtiyacınızı bildirin",
+          "step1Body": "Sektör, rol ve koşulları girin; talebinizi oluşturun.",
+          "step2Title": "Kısa listeyi alın",
+          "step2Body": "RoNa Legal doğrulanmış adaylardan kısa liste hazırlar.",
+          "step3Title": "Açın & yerleştirin",
+          "step3Body": "Onay ve ödeme sonrası tam dosya açılır, işe alım tamamlanır.",
+          "fullLink": "Tüm süreci görün"
+        },
+        "pricing": {
+          "title": "Size uygun model",
+          "subtitle": "Yalnızca başarılı yerleştirmede ödersiniz.",
+          "commissionTitle": "Yalnızca komisyon",
+          "commissionBody": "Eşleştirme ve doğrulanmış havuza erişim; yerleştirmede ücret.",
+          "fullServiceTitle": "Tam hizmet",
+          "fullServiceBody": "İzin, sözleşme ve yerleştirmenin uçtan uca yönetimi."
+        },
+        "closing": {
+          "title": "Doğru ekibi kurmaya hazır mısınız?",
+          "subtitle": "Kayıt ücretsizdir; yalnızca başarılı yerleştirmede ödersiniz."
+        }
+      },
+      "landing": {
+        "seoTitle": "İşverenler için — Glatko İş & Kariyer",
+        "title": "Doğrulanmış işgücüne erişin",
+        "subtitle": "İhtiyacınızı bildirin, kısa listeyi alın, onaylı işe alımı tamamlayın.",
+        "cta": "Talep Oluştur",
+        "secondaryCta": "İşgücü havuzunu gör",
+        "loginCta": "Zaten hesabım var",
+        "benefit1Title": "Doğrulanmış havuz",
+        "benefit1Body": "Her aday kimlik, beceri ve belge doğrulamasından geçer.",
+        "benefit2Title": "İnsan denetimli kısa liste",
+        "benefit2Body": "RoNa Legal size yalnızca uygun adayları sunar.",
+        "benefit3Title": "90 gün garanti",
+        "benefit3Body": "Yerleştirme uymazsa ücretsiz değiştiririz."
+      },
+      "register": {
+        "seoTitle": "İşveren kaydı — Glatko İş & Kariyer",
+        "title": "İşveren hesabı oluştur",
+        "subtitle": "Şirketinizi kaydedin ve talep oluşturmaya başlayın.",
+        "companyLabel": "Şirket adı",
+        "contactLabel": "Yetkili kişi",
+        "emailLabel": "E-posta",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Şifre",
+        "submit": "Hesap oluştur",
+        "submitting": "Oluşturuluyor…",
+        "haveAccount": "Zaten hesabınız var mı?",
+        "loginLink": "Giriş yap",
+        "errGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+      },
+      "dashboard": {
+        "seoTitle": "İşveren panosu — Glatko İş & Kariyer",
+        "title": "İşveren panosu",
+        "subtitle": "Taleplerinizi, kısa listelerinizi ve açılımlarınızı yönetin.",
+        "newRequisition": "Yeni talep oluştur",
+        "requisitionsTab": "Taleplerim",
+        "unlocksTab": "Açılımlar",
+        "savedTab": "Kaydedilenler",
+        "emptyTitle": "Henüz talep yok",
+        "emptyBody": "İlk talebinizi oluşturun, size uygun adayları sunalım.",
+        "viewRequisition": "Talebi gör",
+        "shortlistReadyLabel": "Kısa liste hazır",
+        "guaranteeCountdown": "Garanti bitişine {days} gün",
+        "requestReplacement": "Değişim talep et"
+      },
+      "requisitionWizard": {
+        "title": "Talep oluştur",
+        "stepLabel": "Adım {current} / {total}",
+        "next": "İleri",
+        "back": "Geri",
+        "submit": "Talebi gönder",
+        "submitting": "Gönderiliyor…",
+        "review": "Gözden geçir",
+        "successTitle": "Talebiniz alındı",
+        "successBody": "RoNa Legal talebinizi inceleyip kısa listeyi hazırlayacak.",
+        "steps": {
+          "rolesStep": {
+            "title": "Sektör & roller",
+            "subtitle": "Sektör, rol(ler) ve her rol için kişi sayısı.",
+            "sectorLabel": "Sektör",
+            "roleLabel": "Rol",
+            "headcountLabel": "Kişi sayısı",
+            "addRole": "Rol ekle",
+            "sectorPlaceholder": "Sektör seçin",
+            "rolePlaceholder": "Rol seçin",
+            "removeRole": "Rolü kaldır",
+            "emptyHint": "En az bir rol ekleyin."
+          },
+          "requirementsStep": {
+            "title": "Gereksinimler",
+            "subtitle": "Deneyim, sertifika, dil ve beceri seviyesi.",
+            "experienceLabel": "Deneyim",
+            "certificationsLabel": "Sertifikalar",
+            "languagesLabel": "Diller",
+            "tierLabel": "Beceri seviyesi",
+            "subtitleOptional": "Tümü isteğe bağlı — açık bırakabilirsiniz.",
+            "addCertification": "Sertifika ekle",
+            "addLanguage": "Dil ekle",
+            "certPlaceholder": "Örn. Kaynakçı sertifikası",
+            "langPlaceholder": "Örn. İngilizce",
+            "anyOption": "Fark etmez"
+          },
+          "termsStep": {
+            "title": "Çalışma koşulları",
+            "subtitle": "Adaylara gösterilecek koşullar (mevzuat gereği).",
+            "wageRangeLabel": "Ücret aralığı",
+            "hoursLabel": "Çalışma saatleri",
+            "accommodationLabel": "Konaklama / yemek",
+            "durationLabel": "Sözleşme süresi",
+            "startDateLabel": "Başlangıç tarihi",
+            "wageMinLabel": "Asgari ücret",
+            "wageMaxLabel": "Azami ücret",
+            "currencyLabel": "Para birimi",
+            "wagePlaceholderMin": "Örn. 700",
+            "wagePlaceholderMax": "Örn. 1000",
+            "hoursPlaceholder": "Örn. Haftada 40 saat",
+            "accommodationLabelQ": "Konaklama / yemek sağlanıyor mu?",
+            "accommodationYes": "Evet, sağlanıyor",
+            "accommodationNo": "Hayır",
+            "accommodationNoteLabel": "Konaklama notu (isteğe bağlı)",
+            "accommodationNotePlaceholder": "Örn. Şantiyede tek kişilik oda + 3 öğün.",
+            "durationPlaceholder": "Örn. 12 ay",
+            "legalNote": "Bu koşullar, yerleştirme öncesinde adaylara açıklanır (Karadağ istihdam aracılığı mevzuatı)."
+          },
+          "serviceStep": {
+            "title": "Hizmet modeli",
+            "subtitle": "Yalnızca komisyon mu, tam hizmet mi?",
+            "commissionLabel": "Yalnızca komisyon",
+            "commissionBody": "Eşleştirme ve doğrulanmış havuza erişim.",
+            "fullServiceLabel": "Tam hizmet",
+            "fullServiceBody": "İzin, sözleşme ve yerleştirmenin uçtan uca yönetimi.",
+            "commissionTag": "Yerleştirmede ücret",
+            "fullServiceTag": "Pakete dahil"
+          },
+          "reviewStep": {
+            "title": "Gözden geçir & gönder",
+            "subtitle": "Bilgileri kontrol edip talebi gönderin.",
+            "rolesSection": "Sektör & roller",
+            "requirementsSection": "Gereksinimler",
+            "termsSection": "Çalışma koşulları",
+            "serviceSection": "Hizmet modeli",
+            "noteLabel": "RoNa Legal'a not (isteğe bağlı)",
+            "notePlaceholder": "Eklemek istediğiniz bir şey var mı?"
+          }
+        },
+        "subtitle": "İhtiyacınızı tarif edin; RoNa Legal size uygun bir kısa liste hazırlasın.",
+        "draftRestored": "Yarım kalan talep geri yüklendi.",
+        "startFresh": "Sıfırdan başla",
+        "viewRequisition": "Talebi gör",
+        "createAnother": "Yeni talep oluştur",
+        "edit": "Düzenle",
+        "none": "—",
+        "anyOption": "Fark etmez",
+        "errors": {
+          "generic": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+          "validation": "Lütfen işaretli alanları kontrol edin.",
+          "forbidden": "Bu işlem için yetkiniz yok.",
+          "network": "Bağlantı sorunu. Lütfen tekrar deneyin.",
+          "sessionExpired": "Oturumunuz sona erdi. Lütfen tekrar giriş yapın.",
+          "wageOrder": "Asgari ücret, azami ücretten büyük olamaz.",
+          "startDate": "Geçerli bir başlangıç tarihi seçin."
+        }
+      },
+      "unlocks": {
+        "seoTitle": "Açılımlar — Glatko İş & Kariyer",
+        "title": "Açılım ve ödeme merkezi",
+        "subtitle": "İlgi gösterdiğiniz adayların onay ve ödeme durumu.",
+        "emptyTitle": "Henüz açılım yok",
+        "emptyBody": "Havuzdan ilgi gösterdiğinizde burada görünür.",
+        "workerCodeLabel": "Aday kodu",
+        "interestAtLabel": "İlgi tarihi",
+        "approvalLabel": "Onay durumu",
+        "paymentLabel": "Ödeme durumu",
+        "unlockedAtLabel": "Açılma tarihi",
+        "payCta": "Ücreti öde",
+        "viewDossier": "Tam dosyayı gör",
+        "feeDueNote": "Onaylandı — ücret bekleniyor.",
+        "subhead": "İstek ve ödeme durumu",
+        "statusRegionLabel": "Açılım durumu",
+        "requisitionRefLabel": "Talep",
+        "pill": {
+          "interest": "RoNa Legal incelemesi bekleniyor",
+          "approved": "Onaylandı — ücret bekleniyor",
+          "unlocked": "Açıldı"
+        },
+        "interestBody": "İlginiz inceleniyor; onaylandığında sizi bilgilendireceğiz.",
+        "feeSummary": {
+          "title": "Ücret özeti",
+          "amountLabel": "Tutar",
+          "pathLabel": "Hizmet modeli"
+        },
+        "pay": {
+          "cta": "Ücreti öde",
+          "processing": "İşleniyor…"
+        },
+        "dossier": {
+          "title": "Tam dosya",
+          "nameLabel": "Ad soyad",
+          "contactLabel": "İletişim",
+          "locationLabel": "Konum",
+          "documentsTitle": "Belgeler"
+        },
+        "doc": {
+          "view": "Görüntüle / İndir",
+          "opening": "Açılıyor…",
+          "error": "Belge açılamadı."
+        },
+        "unavailableNote": "Bu profil artık mevcut değil.",
+        "toast": {
+          "paySuccess": "Ödeme alındı — dosya açıldı.",
+          "payNotApproved": "Bu istek henüz onaylanmadı.",
+          "payError": "Ödeme tamamlanamadı. Lütfen tekrar deneyin.",
+          "signError": "Belge bağlantısı oluşturulamadı."
+        },
+        "approval": {
+          "pending": "Onay bekliyor",
+          "approved": "Onaylandı",
+          "denied": "Reddedildi"
+        },
+        "payment": {
+          "unpaid": "Ödenmedi",
+          "invoiced": "Fatura kesildi",
+          "paid": "Ödendi"
+        }
+      },
+      "requisitionStatus": {
+        "submitted": "Gönderildi",
+        "under_curation": "Değerlendiriliyor",
+        "shortlist_ready": "Kısa liste hazır",
+        "interest_expressed": "İlgi gösterildi",
+        "approved": "Onaylandı / açıldı",
+        "placed": "Yerleştirildi",
+        "in_guarantee": "Garanti süresinde"
+      },
+      "servicePath": {
+        "commission": "Yalnızca komisyon",
+        "full_service": "Tam hizmet"
+      },
+      "tier": {
+        "free": "Ücretsiz",
+        "verified": "Doğrulanmış",
+        "premium": "Premium"
+      }
+    },
+    "login": {
+      "seoTitle": "Giriş — Glatko İş & Kariyer",
+      "title": "Giriş yap",
+      "subtitle": "İşveren veya çalışan hesabınıza giriş yapın.",
+      "emailLabel": "E-posta",
+      "passwordLabel": "Şifre",
+      "submit": "Giriş yap",
+      "submitting": "Giriş yapılıyor…",
+      "noAccount": "Hesabınız yok mu?",
+      "registerEmployer": "İşveren olarak kaydol",
+      "registerWorker": "Çalışan olarak kaydol",
+      "forgotPassword": "Şifremi unuttum",
+      "errInvalid": "E-posta veya şifre hatalı.",
+      "errGeneric": "Giriş yapılamadı. Lütfen tekrar deneyin."
+    },
+    "waitlist": {
+      "title": "Erken erişim listesi",
+      "employerTitle": "İşveren misiniz?",
+      "employerSubtitle": "Lansmanda öncelikli erişim için kaydolun.",
+      "workerTitle": "İş mi arıyorsunuz?",
+      "workerSubtitle": "Lansmanda profiliniz hazır olsun.",
+      "nameLabel": "Ad Soyad",
+      "companyLabel": "Şirket (opsiyonel)",
+      "roleLabel": "Rol / sektör",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-posta (opsiyonel)",
+      "submit": "Listeye katıl",
+      "submitting": "Gönderiliyor…",
+      "success": "Listedesiniz! Lansmanda haber vereceğiz.",
+      "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "errorValidation": "Lütfen zorunlu alanları doldurun.",
+      "privacyNote": "Bilgilerinizi yalnızca Glatko İş & Kariyer lansmanı için kullanırız; üçüncü taraflarla paylaşmayız. Detaylar:",
+      "privacyLinkText": "Gizlilik Politikası"
+    },
+    "trust": {
+      "verifiedByRonaLegal": "RoNa Legal tarafından doğrulanmıştır",
+      "verifiedByRonaLegalShort": "RoNa Legal doğrulamalı",
+      "employerPays": "İşveren öder — iş arayan asla ücret ödemez",
+      "employerPaysShort": "İşveren öder",
+      "guarantee": "90 gün ücretsiz değişim garantisi",
+      "anonymous": "Anonim havuz — kimlik onay sonrası açılır",
+      "tiers": {
+        "idVerified": "Kimlik doğrulanmış",
+        "skillsVerified": "Beceri doğrulanmış",
+        "documentsVerified": "Belgeler doğrulanmış",
+        "interviewPassed": "Görüşmeyi geçti"
+      }
+    },
+    "errors": {
+      "notFoundTitle": "Sayfa bulunamadı",
+      "notFoundBody": "Aradığınız sayfa taşınmış veya kaldırılmış olabilir.",
+      "genericTitle": "Bir şeyler ters gitti",
+      "genericBody": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
+      "retry": "Tekrar dene",
+      "backToCareer": "İş & Kariyer ana sayfasına dön",
+      "loginRequiredTitle": "Giriş gerekli",
+      "loginRequiredBody": "Bu sayfayı görmek için giriş yapmanız gerekir.",
+      "forbiddenTitle": "Erişim yok",
+      "forbiddenBody": "Bu sayfayı görme yetkiniz yok."
+    }
   }
 }

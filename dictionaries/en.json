@@ -31,7 +31,12 @@
     "businessProfile": "Business profile",
     "settings": "Settings",
     "adminPanel": "Admin Panel",
-    "leads": "Business Opportunities"
+    "leads": "Business Opportunities",
+    "careerTalentPool": "Talent Pool",
+    "careerHowItWorks": "How it works",
+    "careerSectors": "Sectors",
+    "careerEmployerJoin": "Register as an employer",
+    "careerCreateRequisition": "Create Requisition"
   },
   "hero": {
     "title": "Trusted Professionals in Montenegro",
@@ -2561,6 +2566,825 @@
     "seoTitle": "Jobs — Coming Soon",
     "title": "Jobs is coming",
     "subtitle": "We're building a trusted way to connect employers and workers in Montenegro. This section is coming soon.",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "brand": {
+      "name": "Glatko Work & Career",
+      "short": "Work & Career",
+      "tagline": "Verified workforce, trusted mediation"
+    },
+    "comingSoon": {
+      "badge": "Coming soon",
+      "title": "Glatko Work & Career is coming",
+      "subtitle": "We connect employers in Montenegro with verified, interview-ready talent. Anonymized pool, human-vetted matching, employer pays.",
+      "waitlistTitle": "Join the early-access list",
+      "waitlistSubtitle": "Employer or job seeker — secure your priority spot at launch.",
+      "employerCardTitle": "Are you an employer?",
+      "employerCardSubtitle": "Submit your workforce requirement — meet verified candidates at launch.",
+      "workerCardTitle": "Looking for work?",
+      "workerCardSubtitle": "Build your profile — free for you, the employer pays the fee.",
+      "backHome": "Back to home"
+    },
+    "landing": {
+      "seoTitle": "Glatko Work & Career — Verified workforce, trusted mediation",
+      "hero": {
+        "badge": "Verified by RoNa Legal",
+        "title": "Verified workforce for Montenegro, with confidence",
+        "subtitle": "Interview-ready, documented candidates in construction and hospitality. Browse the anonymized pool, advance through human-vetted matching.",
+        "trustNote": "Candidates never pay a fee — every cost is covered by the employer."
+      },
+      "dualCta": {
+        "employerTitle": "For employers",
+        "employerBody": "Browse the verified talent pool, create a requisition, receive your shortlist.",
+        "employerCta": "Create Requisition",
+        "employerSecondary": "Browse the talent pool",
+        "workerTitle": "For workers",
+        "workerBody": "Build your profile, upload your documents, join the verified candidate pool.",
+        "workerCta": "Create Profile",
+        "workerSecondary": "How it works"
+      },
+      "trustStrip": {
+        "verifiedTitle": "Verified by RoNa Legal",
+        "verifiedBody": "Every candidate passes identity, skills and document verification.",
+        "employerPaysTitle": "Employer pays",
+        "employerPaysBody": "Per the ILO principle, jobseekers never pay a fee.",
+        "guaranteeTitle": "90-day free replacement",
+        "guaranteeBody": "If a placement doesn't fit, we replace it free within the guarantee.",
+        "anonymousTitle": "Anonymized pool",
+        "anonymousBody": "Identity, contact and documents unlock only after approval and payment."
+      },
+      "teaser": {
+        "title": "A glimpse of the talent pool",
+        "subtitle": "Full identity hidden — approved employers can unlock the complete dossier.",
+        "lockedLabel": "Locked",
+        "viewPoolCta": "View the full pool"
+      },
+      "sectorsTitle": "Sectors",
+      "sectorsSubtitle": "We start with construction and hospitality.",
+      "steps": {
+        "title": "How it works in 3 steps",
+        "step1Title": "Browse the pool",
+        "step1Body": "Filter anonymized cards by skill, experience and region.",
+        "step2Title": "Express interest",
+        "step2Body": "Add suitable candidates to your requisition; RoNa Legal vets the fit.",
+        "step3Title": "Approval & placement",
+        "step3Body": "After approval and payment the full dossier unlocks and the placement completes."
+      },
+      "stats": {
+        "title": "Glatko Work & Career in numbers",
+        "workersLabel": "Verified candidates",
+        "sectorsLabel": "Active sectors",
+        "placementsLabel": "Completed placements",
+        "comingSoon": "Coming soon"
+      }
+    },
+    "howItWorks": {
+      "seoTitle": "How It Works — Glatko Work & Career",
+      "title": "How it works",
+      "subtitle": "A transparent, human-vetted, employer-pays model that is safe for both sides.",
+      "employerPath": {
+        "title": "Employer path",
+        "subtitle": "From need to placement, one vetted flow.",
+        "step1Title": "Create a requisition",
+        "step1Body": "Specify sector, roles, headcount and terms.",
+        "step2Title": "Receive a shortlist",
+        "step2Body": "RoNa Legal presents an anonymized shortlist suited to your need.",
+        "step3Title": "Express interest",
+        "step3Body": "Express interest in the candidates you choose; we start the approval process.",
+        "step4Title": "Approval & payment",
+        "step4Body": "After approval and payment, full identity and documents unlock.",
+        "step5Title": "Placement & guarantee",
+        "step5Body": "The placement completes; a 90-day free replacement guarantee begins."
+      },
+      "workerPath": {
+        "title": "Worker path",
+        "subtitle": "Free for you — your identity is never shared without your consent.",
+        "step1Title": "Create a profile",
+        "step1Body": "Add your role, experience, skills and languages.",
+        "step2Title": "Upload documents",
+        "step2Body": "You decide what is public and what stays private for each document.",
+        "step3Title": "Verification",
+        "step3Body": "RoNa Legal verifies your identity, skills and documents.",
+        "step4Title": "Appear in the pool",
+        "step4Body": "You're shown to employers as an anonymized card; your identity stays hidden.",
+        "step5Title": "Match",
+        "step5Body": "When an employer is interested, RoNa Legal runs the process with you."
+      },
+      "revenuePaths": {
+        "title": "Two service models",
+        "subtitle": "Choose what fits — in both, the employer pays the fee.",
+        "commissionTitle": "Commission only",
+        "commissionBody": "Matching and access to the verified pool; commission on a successful placement.",
+        "fullServiceTitle": "Full service",
+        "fullServiceBody": "End-to-end handling of permits, contracts and the placement process."
+      },
+      "employerPays": {
+        "title": "Employer Pays principle",
+        "body": "Under the ILO Employer Pays Principle and Montenegrin law, jobseekers are never charged. All mediation fees are covered by the employer.",
+        "legalNote": "In Montenegro, charging a jobseeker is an offence (€500–€20,000 fine)."
+      }
+    },
+    "sectors": {
+      "seoTitle": "Sectors — Glatko Work & Career",
+      "title": "Sectors",
+      "subtitle": "Browse the verified workforce by sector.",
+      "viewSector": "View sector",
+      "rolesLabel": "Roles",
+      "browsePool": "Browse workforce in this sector",
+      "emptyTitle": "No sectors yet",
+      "emptyBody": "We're adding sectors. Check back soon.",
+      "construction": {
+        "name": "Construction",
+        "tagline": "Masons, welders, electricians and more",
+        "intro": "Verified, experienced workforce for Montenegrin construction projects."
+      },
+      "hospitality": {
+        "name": "Hospitality",
+        "tagline": "Waiters, cooks, housekeepers and more",
+        "intro": "Interview-ready workforce for hotels, restaurants and tourism businesses."
+      }
+    },
+    "pool": {
+      "seoTitle": "Talent Pool — Glatko Work & Career",
+      "title": "Talent pool",
+      "subtitle": "Verified, anonymized candidates. Identity unlocks only after approval and payment.",
+      "resultsCount": "{count} candidates",
+      "noResultsTitle": "No results found",
+      "noResultsBody": "Adjust your filters and try again.",
+      "poolPreparingTitle": "The pool is being prepared",
+      "poolPreparingBody": "Candidates are being verified. The first workers will appear here very soon.",
+      "loading": "Loading the pool…",
+      "errorTitle": "Couldn't load",
+      "errorBody": "Something went wrong loading the pool. Please try again.",
+      "retry": "Try again",
+      "loadMore": "Show more",
+      "loginPrompt": "Log in as an employer to express interest.",
+      "filters": {
+        "title": "Filters",
+        "apply": "Apply",
+        "clear": "Clear",
+        "clearAll": "Clear all",
+        "sector": "Sector",
+        "trade": "Trade / role",
+        "skillTier": "Skill tier",
+        "experienceBand": "Experience",
+        "region": "Region",
+        "ageBand": "Age band",
+        "languages": "Languages",
+        "certifications": "Certifications",
+        "readiness": "Readiness / verification",
+        "availability": "Availability",
+        "anyOption": "Any"
+      },
+      "skillTier": {
+        "entry": "Entry",
+        "skilled": "Skilled",
+        "experienced": "Experienced",
+        "expert": "Expert"
+      },
+      "experienceBand": {
+        "lt1": "Under 1 year",
+        "1to3": "1–3 years",
+        "3to5": "3–5 years",
+        "5to10": "5–10 years",
+        "gt10": "10+ years"
+      },
+      "region": {
+        "farEast": "Far East",
+        "middleEast": "Middle East",
+        "africa": "Africa",
+        "balkans": "Balkans",
+        "other": "Other"
+      },
+      "ageBand": {
+        "18to24": "18–24",
+        "25to34": "25–34",
+        "35to44": "35–44",
+        "45plus": "45+"
+      },
+      "readiness": {
+        "title": "Readiness",
+        "high": "High readiness",
+        "medium": "Medium readiness",
+        "low": "Profile in progress"
+      },
+      "availability": {
+        "immediate": "Available now",
+        "within30": "Within 30 days",
+        "within90": "Within 90 days"
+      },
+      "sort": {
+        "label": "Sort",
+        "relevance": "By relevance",
+        "readiness": "By readiness",
+        "experience": "By experience",
+        "recent": "Most recent"
+      },
+      "card": {
+        "verifiedBadge": "Verified by RoNa Legal",
+        "readinessLabel": "Readiness",
+        "experienceLabel": "Experience",
+        "regionLabel": "Region",
+        "languagesLabel": "Languages",
+        "skillsLabel": "Top skills",
+        "certsLabel": "Certifications",
+        "tierLabel": "Tier",
+        "photoBlurredNote": "Photo blurred for privacy",
+        "viewProfile": "View profile",
+        "expressInterest": "Express Interest",
+        "addToRequisition": "Add to Requisition",
+        "interestMarked": "Interest expressed",
+        "addedToRequisition": "Added to requisition"
+      },
+      "lockedCta": {
+        "title": "Full dossier locked",
+        "body": "Name, contact, passport and original documents unlock after RoNa Legal approval and fee.",
+        "loginCta": "Log in as employer",
+        "registerCta": "Create employer account"
+      },
+      "verificationStatus": {
+        "pending": "Verification pending",
+        "id_verified": "ID verified",
+        "skills_verified": "Skills verified",
+        "documents_verified": "Documents verified",
+        "interview_passed": "Interview passed",
+        "rejected": "Rejected"
+      }
+    },
+    "workerDetail": {
+      "seoTitle": "Candidate profile — Glatko Work & Career",
+      "backToPool": "Back to pool",
+      "anonymousNote": "This profile is anonymized. Full identity unlocks after approval and payment.",
+      "overviewLabel": "Overview",
+      "lockedPanel": {
+        "title": "Full dossier locked",
+        "body": "Full name, contact, passport and original documents unlock only after RoNa Legal approval and fee.",
+        "lockedItemsTitle": "Visible once unlocked",
+        "itemFullName": "Full name",
+        "itemContact": "Phone and email",
+        "itemLocation": "Exact country / city",
+        "itemPassport": "Passport and ID scans",
+        "itemDocuments": "Original diplomas and certificates",
+        "itemPhotos": "Un-blurred photos and video",
+        "expressInterest": "Express Interest",
+        "addToRequisition": "Add to Requisition"
+      },
+      "skillsMatrix": {
+        "title": "Skills matrix",
+        "skillLabel": "Skill",
+        "levelLabel": "Level",
+        "empty": "No skills added."
+      },
+      "timeline": {
+        "title": "Experience history",
+        "redactedNote": "Employer names are redacted for privacy.",
+        "durationLabel": "Duration",
+        "yearsShort": "yrs",
+        "empty": "No history added."
+      },
+      "languagesLabel": "Languages",
+      "certificationsLabel": "Certifications",
+      "certFileLocked": "Certificate file locked",
+      "readinessLabel": "Readiness score",
+      "videoIntroLabel": "Intro video",
+      "videoLocked": "Video unlocks after approval"
+    },
+    "worker": {
+      "landing": {
+        "seoTitle": "For workers — Glatko Work & Career",
+        "title": "Free for you to find work",
+        "subtitle": "Join the verified candidate pool. The employer pays the fee; your identity is never shared without your consent.",
+        "cta": "Create Profile",
+        "loginCta": "I already have an account",
+        "benefit1Title": "Free for you",
+        "benefit1Body": "Jobseekers are never charged a fee.",
+        "benefit2Title": "Your identity stays private",
+        "benefit2Body": "You appear as an anonymized card; identity unlocks with your consent.",
+        "benefit3Title": "Portable document vault",
+        "benefit3Body": "Your verified documents in one place, ready for every match."
+      },
+      "landingPage": {
+        "seoTitle": "For workers — Glatko Work & Career",
+        "eyebrow": "For workers · Always free",
+        "title": "Get hired abroad — free for you, fully managed",
+        "subtitle": "Join the verified candidate pool. The employer pays the fee, your identity is never shared without your consent, and RoNa Legal handles the rest.",
+        "registerCta": "Create Profile",
+        "howItWorksCta": "How it works for workers",
+        "employerPays": {
+          "title": "You never pay a fee",
+          "body": "The employer covers every recruitment cost (the ILO Employer Pays principle). As a jobseeker you are never charged a fee, commission, or deduction."
+        },
+        "trust": {
+          "verified": "Verified by RoNa Legal",
+          "privacy": "Your data stays private until you approve",
+          "portable": "Portable verified credential"
+        },
+        "benefits": {
+          "title": "Why Glatko Work & Career",
+          "freeTitle": "Free for you",
+          "freeBody": "The employer pays the fee; you are never charged.",
+          "vaultTitle": "Portable document vault",
+          "vaultBody": "Your verified documents in one place, ready for every match.",
+          "anonymousTitle": "Anonymized by default",
+          "anonymousBody": "Your identity is revealed only with your consent and RoNa approval.",
+          "singlePointTitle": "One point of contact",
+          "singlePointBody": "RoNa Legal handles employers — you never chase anyone.",
+          "legalTitle": "Legal work done for you",
+          "legalBody": "Permits, contracts and legal steps are handled on your behalf.",
+          "readinessTitle": "Readiness score",
+          "readinessBody": "Completing your profile boosts your visibility in the pool."
+        },
+        "howItWorks": {
+          "title": "How it works",
+          "step1Title": "Create your profile",
+          "step1Body": "Create your profile and upload your documents — free for you.",
+          "step2Title": "Get verified & showcased",
+          "step2Body": "RoNa Legal verifies you and showcases you anonymously in the pool.",
+          "step3Title": "Get matched",
+          "step3Body": "An employer expresses interest, RoNa Legal contacts you, and you're matched.",
+          "fullLink": "See the full process"
+        },
+        "privacy": {
+          "body": "You control consent per document. Your full identity and contact details are shared only after you approve and the employer is approved by RoNa Legal."
+        },
+        "closing": {
+          "title": "Ready to create your profile?",
+          "subtitle": "Always free for you — the employer pays the fee."
+        }
+      },
+      "register": {
+        "seoTitle": "Worker registration — Glatko Work & Career",
+        "title": "Create a worker account",
+        "subtitle": "A few steps to build your profile. Always free for you — the employer pays.",
+        "accountGroup": "Account",
+        "basicsGroup": "Basics",
+        "nameLabel": "Full name",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "passwordLabel": "Password",
+        "roleLabel": "Role / trade",
+        "rolePlaceholder": "Select your role",
+        "regionLabel": "Where you're coming from",
+        "regionPlaceholder": "Select a region",
+        "regionHint": "Region only — your exact country is collected later in your private profile.",
+        "languageLabel": "Preferred language",
+        "freeForYou": "Always free for you — the employer pays.",
+        "submit": "Create account",
+        "submitting": "Creating…",
+        "haveAccount": "Already have an account?",
+        "loginLink": "Log in",
+        "consentLabel": "I give explicit consent for Glatko Work & Career to process my personal data — including passport, certificate and biometric documents — for the anonymized showcase and RoNa Legal verification. I understand I may revoke consent per document later.",
+        "consentLink": "Privacy Policy",
+        "successTitle": "Account created",
+        "successBody": "Let's build your profile.",
+        "successCta": "Continue to your profile",
+        "errConsentRequired": "Consent is required to continue.",
+        "errValidation": "Please fill in all required fields correctly.",
+        "errGeneric": "Something went wrong. Please try again."
+      },
+      "profileWizard": {
+        "title": "Profile builder",
+        "stepLabel": "Step {current} of {total}",
+        "next": "Next",
+        "back": "Back",
+        "save": "Save",
+        "saving": "Saving…",
+        "finish": "Finish",
+        "completeness": "Profile completeness",
+        "readinessMeter": "Readiness meter",
+        "steps": {
+          "account": {
+            "title": "Account & consent",
+            "subtitle": "Your account and data-processing consent."
+          },
+          "basics": {
+            "title": "Basics",
+            "subtitle": "Role, experience, region, languages and age.",
+            "roleLabel": "Role / trade",
+            "yearsLabel": "Experience (years)",
+            "regionLabel": "Region / country",
+            "languagesLabel": "Languages",
+            "ageLabel": "Age"
+          },
+          "skills": {
+            "title": "Skills & work history",
+            "subtitle": "Trade-specific skills and your past work.",
+            "skillsLabel": "Skills",
+            "addSkill": "Add skill",
+            "historyLabel": "Work history",
+            "addHistory": "Add history"
+          },
+          "certifications": {
+            "title": "Certifications & education",
+            "subtitle": "Add your certifications and education.",
+            "addCertification": "Add certification"
+          },
+          "documents": {
+            "title": "Photos & documents",
+            "subtitle": "Upload your documents and set their visibility."
+          },
+          "video": {
+            "title": "Intro video (optional)",
+            "subtitle": "You can add a short intro video."
+          }
+        }
+      },
+      "documents": {
+        "seoTitle": "My documents — Glatko Work & Career",
+        "title": "Document & photo center",
+        "subtitle": "You decide what is public and what stays private for each document.",
+        "uploadCta": "Upload document",
+        "uploading": "Uploading…",
+        "emptyTitle": "No documents yet",
+        "emptyBody": "Upload your documents for verification.",
+        "categoryLabel": "Category",
+        "visibilityLabel": "Visibility",
+        "consentLabel": "Consent status",
+        "uploadedAt": "Uploaded",
+        "retentionLabel": "Retention",
+        "removeCta": "Remove",
+        "categories": {
+          "profile_photo": "Profile photo",
+          "work_photo": "Work photos",
+          "passport": "Passport / ID",
+          "diploma": "Diploma / certificate",
+          "skill_cert": "Skill certificate",
+          "insurance": "Insurance / medical",
+          "reference": "References"
+        },
+        "visibility": {
+          "public_anonymized": "Public (anonymized)",
+          "gated": "Gated (after approval)",
+          "internal_only": "Internal only",
+          "publicHint": "Shown in the pool face-blurred and watermarked.",
+          "gatedHint": "Unlocks to the employer only after approval and payment.",
+          "internalHint": "Only RoNa Legal sees it; never shown in the pool."
+        },
+        "consent": {
+          "title": "The consent you grant with this document",
+          "pending": "Consent pending",
+          "granted": "Consent granted",
+          "revoked": "Consent revoked",
+          "grantCta": "Grant consent",
+          "revokeCta": "Revoke consent",
+          "grantBody": "You allow this document to be processed at the visibility you chose.",
+          "revokeBody": "You can revoke consent at any time."
+        }
+      },
+      "dashboard": {
+        "seoTitle": "My dashboard — Glatko Work & Career",
+        "title": "Worker dashboard",
+        "subtitle": "A summary of your status and process.",
+        "statusLabel": "Status",
+        "readinessLabel": "Readiness score",
+        "interestCountLabel": "Interest received",
+        "completenessLabel": "Profile completeness",
+        "singlePointNote": "RoNa Legal is your single point of contact; employer contact is never shared.",
+        "editProfile": "Edit profile",
+        "manageDocuments": "Manage documents",
+        "statuses": {
+          "showcased": "You are showcased in the pool",
+          "interest": "An employer expressed interest",
+          "pendingApproval": "Awaiting RoNa approval",
+          "matched": "Matched — legal processing underway",
+          "placed": "You've been placed",
+          "notShowcased": "You're not in the pool yet",
+          "underReview": "Your profile is under review"
+        }
+      }
+    },
+    "employer": {
+      "landingPage": {
+        "seoTitle": "For employers — Glatko Work & Career",
+        "eyebrow": "For employers",
+        "title": "Verified, ready-to-deploy workers, fully managed",
+        "subtitle": "Submit your need and RoNa Legal curates a verified shortlist; complete an approved hire after review and payment.",
+        "registerCta": "Register as an employer",
+        "poolCta": "Browse the talent pool",
+        "trust": {
+          "verified": "Verified by RoNa Legal",
+          "employerPays": "Employer Pays — free for workers",
+          "guarantee": "90-day replacement guarantee"
+        },
+        "benefits": {
+          "title": "Why Glatko Work & Career",
+          "verifiedTitle": "Verified & curated pool",
+          "verifiedBody": "Every candidate passes identity, skills and document verification.",
+          "anonymousTitle": "Anonymized browse, leak-proof",
+          "anonymousBody": "Identity and contact stay hidden until approval and payment.",
+          "lifecycleTitle": "Full-lifecycle handling",
+          "lifecycleBody": "RoNa Legal manages permits, contracts and the legal process.",
+          "guaranteeTitle": "90-day free replacement",
+          "guaranteeBody": "If a placement doesn't fit, we replace it free within the guarantee.",
+          "escrowTitle": "Escrow-protected fees",
+          "escrowBody": "Fees are only charged on a successful placement.",
+          "matcherTitle": "Human talent matcher",
+          "matcherBody": "You're only presented with candidates that genuinely fit."
+        },
+        "howItWorks": {
+          "title": "How it works",
+          "step1Title": "Submit your requirement",
+          "step1Body": "Enter the sector, role and terms, then create your requisition.",
+          "step2Title": "Receive a curated shortlist",
+          "step2Body": "RoNa Legal curates a shortlist of verified candidates.",
+          "step3Title": "Reveal & place",
+          "step3Body": "After approval and payment the full dossier opens and the hire completes.",
+          "fullLink": "How it works in full"
+        },
+        "pricing": {
+          "title": "The model that fits you",
+          "subtitle": "You pay only on a successful placement.",
+          "commissionTitle": "Commission only",
+          "commissionBody": "Matching and access to the verified pool; fee on placement.",
+          "fullServiceTitle": "Full service",
+          "fullServiceBody": "End-to-end handling of permits, contracts and placement."
+        },
+        "closing": {
+          "title": "Ready to build the right team?",
+          "subtitle": "Registration is free; you pay only on a successful placement."
+        }
+      },
+      "landing": {
+        "seoTitle": "For employers — Glatko Work & Career",
+        "title": "Access a verified workforce",
+        "subtitle": "Submit your need, receive a shortlist, complete an approved hire.",
+        "cta": "Create Requisition",
+        "secondaryCta": "Browse the talent pool",
+        "loginCta": "I already have an account",
+        "benefit1Title": "Verified pool",
+        "benefit1Body": "Every candidate passes identity, skills and document verification.",
+        "benefit2Title": "Human-vetted shortlist",
+        "benefit2Body": "RoNa Legal presents only the candidates that fit.",
+        "benefit3Title": "90-day guarantee",
+        "benefit3Body": "If a placement doesn't fit, we replace it free."
+      },
+      "register": {
+        "seoTitle": "Employer registration — Glatko Work & Career",
+        "title": "Create an employer account",
+        "subtitle": "Register your company and start creating requisitions.",
+        "companyLabel": "Company name",
+        "contactLabel": "Contact person",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "passwordLabel": "Password",
+        "submit": "Create account",
+        "submitting": "Creating…",
+        "haveAccount": "Already have an account?",
+        "loginLink": "Log in",
+        "errGeneric": "Something went wrong. Please try again."
+      },
+      "dashboard": {
+        "seoTitle": "Employer dashboard — Glatko Work & Career",
+        "title": "Employer dashboard",
+        "subtitle": "Manage your requisitions, shortlists and unlocks.",
+        "newRequisition": "Create new requisition",
+        "requisitionsTab": "My requisitions",
+        "unlocksTab": "Unlocks",
+        "savedTab": "Saved",
+        "emptyTitle": "No requisitions yet",
+        "emptyBody": "Create your first requisition and we'll present matching candidates.",
+        "viewRequisition": "View requisition",
+        "shortlistReadyLabel": "Shortlist ready",
+        "guaranteeCountdown": "{days} days left on guarantee",
+        "requestReplacement": "Request replacement"
+      },
+      "requisitionWizard": {
+        "title": "Create requisition",
+        "stepLabel": "Step {current} of {total}",
+        "next": "Next",
+        "back": "Back",
+        "submit": "Submit requisition",
+        "submitting": "Submitting…",
+        "review": "Review",
+        "successTitle": "Your requisition was received",
+        "successBody": "RoNa Legal will review it and prepare your shortlist.",
+        "steps": {
+          "rolesStep": {
+            "title": "Sector & roles",
+            "subtitle": "Sector, role(s) and headcount per role.",
+            "sectorLabel": "Sector",
+            "roleLabel": "Role",
+            "headcountLabel": "Headcount",
+            "addRole": "Add role",
+            "sectorPlaceholder": "Select a sector",
+            "rolePlaceholder": "Select a role",
+            "removeRole": "Remove role",
+            "emptyHint": "Add at least one role."
+          },
+          "requirementsStep": {
+            "title": "Requirements",
+            "subtitle": "Experience, certifications, languages and skill tier.",
+            "experienceLabel": "Experience",
+            "certificationsLabel": "Certifications",
+            "languagesLabel": "Languages",
+            "tierLabel": "Skill tier",
+            "subtitleOptional": "All optional — you can leave these open.",
+            "addCertification": "Add certification",
+            "addLanguage": "Add language",
+            "certPlaceholder": "e.g. Welder certificate",
+            "langPlaceholder": "e.g. English",
+            "anyOption": "Any"
+          },
+          "termsStep": {
+            "title": "Terms of employment",
+            "subtitle": "Terms shown to candidates (required by law).",
+            "wageRangeLabel": "Wage range",
+            "hoursLabel": "Working hours",
+            "accommodationLabel": "Accommodation / board",
+            "durationLabel": "Contract duration",
+            "startDateLabel": "Start date",
+            "wageMinLabel": "Minimum wage",
+            "wageMaxLabel": "Maximum wage",
+            "currencyLabel": "Currency",
+            "wagePlaceholderMin": "e.g. 700",
+            "wagePlaceholderMax": "e.g. 1000",
+            "hoursPlaceholder": "e.g. 40 hours / week",
+            "accommodationLabelQ": "Is accommodation / board provided?",
+            "accommodationYes": "Yes, provided",
+            "accommodationNo": "No",
+            "accommodationNoteLabel": "Accommodation note (optional)",
+            "accommodationNotePlaceholder": "e.g. Single room on site + 3 meals.",
+            "durationPlaceholder": "e.g. 12 months",
+            "legalNote": "These terms are disclosed to candidates before placement (MNE mediation law)."
+          },
+          "serviceStep": {
+            "title": "Service model",
+            "subtitle": "Commission only or full service?",
+            "commissionLabel": "Commission only",
+            "commissionBody": "Matching and access to the verified pool.",
+            "fullServiceLabel": "Full service",
+            "fullServiceBody": "End-to-end handling of permits, contracts and placement.",
+            "commissionTag": "Fee on placement",
+            "fullServiceTag": "Bundled"
+          },
+          "reviewStep": {
+            "title": "Review & submit",
+            "subtitle": "Check the details and submit the requisition.",
+            "rolesSection": "Sector & roles",
+            "requirementsSection": "Requirements",
+            "termsSection": "Terms of employment",
+            "serviceSection": "Service model",
+            "noteLabel": "Note to RoNa Legal (optional)",
+            "notePlaceholder": "Anything you'd like to add?"
+          }
+        },
+        "subtitle": "Describe your need and RoNa Legal will curate a matching shortlist.",
+        "draftRestored": "Your unfinished requisition was restored.",
+        "startFresh": "Start fresh",
+        "viewRequisition": "View requisition",
+        "createAnother": "Create another",
+        "edit": "Edit",
+        "none": "—",
+        "anyOption": "Any",
+        "errors": {
+          "generic": "Something went wrong. Please try again.",
+          "validation": "Please check the highlighted fields.",
+          "forbidden": "You are not authorized to do this.",
+          "network": "Connection problem. Please try again.",
+          "sessionExpired": "Your session has expired. Please sign in again.",
+          "wageOrder": "Minimum wage cannot be greater than maximum.",
+          "startDate": "Choose a valid start date."
+        }
+      },
+      "unlocks": {
+        "seoTitle": "Unlocks — Glatko Work & Career",
+        "title": "Unlock & payment center",
+        "subtitle": "Approval and payment status for the candidates you expressed interest in.",
+        "emptyTitle": "No unlocks yet",
+        "emptyBody": "They appear here once you express interest from the pool.",
+        "workerCodeLabel": "Candidate code",
+        "interestAtLabel": "Interest date",
+        "approvalLabel": "Approval status",
+        "paymentLabel": "Payment status",
+        "unlockedAtLabel": "Unlocked date",
+        "payCta": "Pay the fee",
+        "viewDossier": "View full dossier",
+        "feeDueNote": "Approved — fee due.",
+        "subhead": "Reveal requests & payment status",
+        "statusRegionLabel": "Unlock status",
+        "requisitionRefLabel": "Requisition",
+        "pill": {
+          "interest": "Pending RoNa Legal review",
+          "approved": "Approved — fee due",
+          "unlocked": "Unlocked"
+        },
+        "interestBody": "Your interest is under review; we'll notify you when approved.",
+        "feeSummary": {
+          "title": "Fee summary",
+          "amountLabel": "Amount",
+          "pathLabel": "Service model"
+        },
+        "pay": {
+          "cta": "Pay the fee",
+          "processing": "Processing…"
+        },
+        "dossier": {
+          "title": "Full dossier",
+          "nameLabel": "Full name",
+          "contactLabel": "Contact",
+          "locationLabel": "Location",
+          "documentsTitle": "Documents"
+        },
+        "doc": {
+          "view": "View / Download",
+          "opening": "Opening…",
+          "error": "Couldn't open document."
+        },
+        "unavailableNote": "This profile is no longer available.",
+        "toast": {
+          "paySuccess": "Payment received — dossier unlocked.",
+          "payNotApproved": "This request isn't approved yet.",
+          "payError": "Payment couldn't be completed. Please try again.",
+          "signError": "Couldn't create the document link."
+        },
+        "approval": {
+          "pending": "Approval pending",
+          "approved": "Approved",
+          "denied": "Denied"
+        },
+        "payment": {
+          "unpaid": "Unpaid",
+          "invoiced": "Invoiced",
+          "paid": "Paid"
+        }
+      },
+      "requisitionStatus": {
+        "submitted": "Submitted",
+        "under_curation": "Under curation",
+        "shortlist_ready": "Shortlist ready",
+        "interest_expressed": "Interest expressed",
+        "approved": "Approved / unlocked",
+        "placed": "Placed",
+        "in_guarantee": "In guarantee"
+      },
+      "servicePath": {
+        "commission": "Commission only",
+        "full_service": "Full service"
+      },
+      "tier": {
+        "free": "Free",
+        "verified": "Verified",
+        "premium": "Premium"
+      }
+    },
+    "login": {
+      "seoTitle": "Log in — Glatko Work & Career",
+      "title": "Log in",
+      "subtitle": "Log in to your employer or worker account.",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submit": "Log in",
+      "submitting": "Logging in…",
+      "noAccount": "Don't have an account?",
+      "registerEmployer": "Register as employer",
+      "registerWorker": "Register as worker",
+      "forgotPassword": "Forgot password",
+      "errInvalid": "Email or password is incorrect.",
+      "errGeneric": "Couldn't log in. Please try again."
+    },
+    "waitlist": {
+      "title": "Early-access list",
+      "employerTitle": "Are you an employer?",
+      "employerSubtitle": "Sign up for priority access at launch.",
+      "workerTitle": "Looking for work?",
+      "workerSubtitle": "Have your profile ready at launch.",
+      "nameLabel": "Full name",
+      "companyLabel": "Company (optional)",
+      "roleLabel": "Role / sector",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email (optional)",
+      "submit": "Join the list",
+      "submitting": "Submitting…",
+      "success": "You're on the list! We'll be in touch at launch.",
+      "errorGeneric": "Something went wrong. Please try again.",
+      "errorValidation": "Please fill in the required fields.",
+      "privacyNote": "We use your details only to contact you about the Glatko Work & Career launch; we don't share them with third parties. Details:",
+      "privacyLinkText": "Privacy Policy"
+    },
+    "trust": {
+      "verifiedByRonaLegal": "Verified by RoNa Legal",
+      "verifiedByRonaLegalShort": "Verified by RoNa Legal",
+      "employerPays": "Employer pays — jobseekers never pay a fee",
+      "employerPaysShort": "Employer pays",
+      "guarantee": "90-day free replacement guarantee",
+      "anonymous": "Anonymized pool — identity unlocks after approval",
+      "tiers": {
+        "idVerified": "ID verified",
+        "skillsVerified": "Skills verified",
+        "documentsVerified": "Documents verified",
+        "interviewPassed": "Interview passed"
+      }
+    },
+    "errors": {
+      "notFoundTitle": "Page not found",
+      "notFoundBody": "The page you're looking for may have moved or been removed.",
+      "genericTitle": "Something went wrong",
+      "genericBody": "An unexpected error occurred. Please try again.",
+      "retry": "Try again",
+      "backToCareer": "Back to Work & Career home",
+      "loginRequiredTitle": "Login required",
+      "loginRequiredBody": "You need to log in to see this page.",
+      "forbiddenTitle": "No access",
+      "forbiddenBody": "You don't have permission to view this page."
+    }
   }
 }

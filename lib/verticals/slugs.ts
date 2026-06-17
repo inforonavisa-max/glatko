@@ -28,6 +28,16 @@ export const HEALTH_COMING_SOON_BARE_PATHS: ReadonlySet<string> = new Set(
 );
 
 /**
+ * Bare (locale-stripped) paths of the career coming-soon page — the only
+ * career route that stays reachable while CAREER_VERTICAL_ENABLED=false (C0).
+ * Mirrors HEALTH_COMING_SOON_BARE_PATHS; the middleware career flag-guard
+ * carves these out of the 404 rewrite so the placeholder stays live.
+ */
+export const CAREER_COMING_SOON_BARE_PATHS: ReadonlySet<string> = new Set(
+  Object.values(routing.pathnames["/career/coming-soon"]),
+);
+
+/**
  * Provider-side surface (H7) has no routes yet; the guard is registered
  * ahead of time so the prefix can never leak before launch.
  */

@@ -31,7 +31,18 @@ export type AdminActionType =
   | "junction_remove"
   | "category_faq_edit"
   | "category_status_change"
-  | "pro_create_admin";
+  | "pro_create_admin"
+  // Career vertical (C0) admin console actions. target_table is a plain
+  // TEXT column (migration 045 — no CHECK/enum), so schema-qualified
+  // `career.*` strings below are accepted at runtime (R13 verified).
+  | "career_requisition_status"
+  | "career_unlock_approve"
+  | "career_unlock_paid"
+  | "career_worker_verify"
+  | "career_document_verify"
+  | "career_shortlist_publish"
+  | "career_employer_verify"
+  | "career_employer_tier";
 
 export type AuditTargetTable =
   | "auth.users"
@@ -39,7 +50,15 @@ export type AuditTargetTable =
   | "glatko_professional_profiles"
   | "glatko_pro_services"
   | "glatko_service_requests"
-  | "glatko_service_categories";
+  | "glatko_service_categories"
+  // Career vertical (C0) — schema-qualified `career.*` tables. Accepted by
+  // the plain-TEXT target_table column (no constraint; R13 verified).
+  | "career.requisitions"
+  | "career.reveal_unlocks"
+  | "career.worker_profiles"
+  | "career.worker_documents"
+  | "career.shortlists"
+  | "career.employer_accounts";
 
 export interface LogAdminActionParams {
   actionType: AdminActionType;

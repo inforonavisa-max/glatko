@@ -1,4 +1,5 @@
 import { HEALTH_ROUTES } from "@/lib/saglik/config";
+import { CAREER_ROUTES } from "@/lib/kariyer/config";
 
 /**
  * Cross-vertical switcher registry — single source for the 3-tab navigation
@@ -16,9 +17,12 @@ export type VerticalKey = "services" | "career" | "health";
 export type VerticalTabConfig = {
   key: VerticalKey;
   /** route key when the vertical is live (flag on) */
-  liveHref: "/" | "/career" | typeof HEALTH_ROUTES.home;
+  liveHref: "/" | typeof CAREER_ROUTES.home | typeof HEALTH_ROUTES.home;
   /** route key while still dark (flag off) — coming-soon placeholder */
-  comingSoonHref: "/" | "/career" | typeof HEALTH_ROUTES.comingSoon;
+  comingSoonHref:
+    | "/"
+    | typeof CAREER_ROUTES.comingSoon
+    | typeof HEALTH_ROUTES.comingSoon;
   accent: "teal" | "brandHealth" | "brandCareer";
 };
 
@@ -31,8 +35,8 @@ export const VERTICAL_TABS: readonly VerticalTabConfig[] = [
   },
   {
     key: "career",
-    liveHref: "/career",
-    comingSoonHref: "/career",
+    liveHref: CAREER_ROUTES.home,
+    comingSoonHref: CAREER_ROUTES.comingSoon,
     accent: "brandCareer",
   },
   {

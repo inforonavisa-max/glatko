@@ -4,11 +4,13 @@ import { updateSession } from '@/supabase/middleware';
 import { enforceRateLimit } from '@/lib/rateLimit';
 import { locales, routing } from '@/i18n/routing';
 import { isHealthVerticalEnabled } from '@/lib/saglik/flags';
+import { isCareerVerticalEnabled } from '@/lib/kariyer/flags';
 import {
   HEALTH_FIRST_SEGMENTS,
   HEALTH_COMING_SOON_BARE_PATHS,
   HEALTH_PRO_FIRST_SEGMENTS,
   CAREER_FIRST_SEGMENTS,
+  CAREER_COMING_SOON_BARE_PATHS,
 } from '@/lib/verticals/slugs';
 
 const intlMiddleware = createIntlMiddleware(routing);
@@ -142,6 +144,31 @@ export async function middleware(request: NextRequest) {
                 // page with a real 404 status (no redirect, no soft-200).
                 return NextResponse.rewrite(
                     new URL(`/${segs[0]}/__health-disabled-404`, request.url),
+                );
+            }
+        }
+    }
+
+    // ── C0: career vertical flag guard ────────────────────────────────────
+    // CAREER_VERTICAL_ENABLED=false (Production) → every localized /career/*
+    // (/kariyer, /karriere, /carriera, …) URL 404s, EXCEPT the coming-soon
+    // page (C0). Slug sets derive from i18n/routing.ts via
+    // lib/verticals/slugs.ts, so the guard cannot drift from the pathnames
+    // map. Defense-in-depth: the app/[locale]/career/(gated)/ layout also
+    // calls notFound(). Clone of the H0 block above.
+    if (!isCareerVerticalEnabled()) {
+        const segs = pathname.split('/').filter(Boolean);
+        if (segs.length >= 2 && isLocaleSegment(segs[0])) {
+            const bare = '/' + segs.slice(1).join('/');
+            const first = segs[1];
+            const blocked =
+                CAREER_FIRST_SEGMENTS.has(first) &&
+                !CAREER_COMING_SOON_BARE_PATHS.has(bare);
+            if (blocked) {
+                // Rewrite to a never-matching path → Next renders its 404
+                // page with a real 404 status (no redirect, no soft-200).
+                return NextResponse.rewrite(
+                    new URL(`/${segs[0]}/__career-disabled-404`, request.url),
                 );
             }
         }
