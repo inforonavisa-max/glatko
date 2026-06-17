@@ -414,6 +414,24 @@ export const routing = defineRouting({
       me: "/uslovi",
       ar: "/al-shuroot",
     },
+    // Health-specific privacy notice (H10 / PDPL Art.13). A SIBLING of /privacy &
+    // /terms — a top-level segment, NOT under /health/, so the health flag-guard
+    // middleware (which only blocks HEALTH_FIRST_SEGMENTS / HEALTH_PRO_FIRST_SEGMENTS)
+    // NEVER 404s it. It MUST resolve while the vertical flag is OFF because the H5b
+    // consent checkbox links to it. Slugs are deliberately distinct from every
+    // health first-segment ({saglik,health,gesundheit,salute,zdorove,zdorovya,
+    // zdravlje,al-sihha}) to avoid any collision.
+    "/health-privacy": {
+      tr: "/saglik-gizlilik",
+      en: "/health-privacy",
+      de: "/gesundheit-datenschutz",
+      it: "/privacy-salute",
+      ru: "/zdorove-konfidentsialnost",
+      uk: "/zdorovya-konfidentsialnist",
+      sr: "/zdravlje-privatnost",
+      me: "/zdravlje-privatnost",
+      ar: "/khususiyat-al-sihha",
+    },
     "/cookies": {
       tr: "/cerez-politikasi",
       en: "/cookies",

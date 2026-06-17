@@ -8,6 +8,7 @@ import { routing, type Locale } from "@/i18n/routing";
 import { getAppointment } from "@/lib/saglik/booking";
 import { intlLocale } from "@/lib/saglik/intl";
 import { ManageAppointment } from "@/components/glatko-saglik/ManageAppointment";
+import { DataRightsRequest } from "@/components/glatko-saglik/DataRightsRequest";
 
 type Props = {
   params:
@@ -83,6 +84,9 @@ export default async function ManageAppointmentPage({ params }: Props) {
           locale={l}
           slotPassed={Date.parse(appt.slotStart) <= Date.now()}
         />
+
+        {/* H10 — PDPL data-subject rights (identity already proven via manage_token). */}
+        <DataRightsRequest token={appt.manageToken} />
 
         <Link
           href="/health"

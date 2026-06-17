@@ -99,6 +99,13 @@ export function BookingWidget({
   const [reserving, setReserving] = useState(false);
   const [reserveError, setReserveError] = useState<string | null>(null);
 
+  // A11y: after a 409 "just taken" refresh clears the selection, move focus back
+  // into the slot grid so a keyboard/SR user is not stranded (the selected button
+  // they pressed is gone). `refocusSlots` is armed by the 409 branch and consumed
+  // by an effect once the refreshed grid has rendered.
+  const slotGridRef = useRef<HTMLDivElement>(null);
+  const [refocusSlots, setRefocusSlots] = useState(false);
+
   // Varsayılan hizmet = ilk (sunucu en kısayı başa koyar), varsayılan lokasyon = ilk.
   const [selectedServiceId, setSelectedServiceId] = useState<string>(
     services[0]?.id ?? "",
@@ -185,6 +192,15 @@ export function BookingWidget({
     runFetch(controller.signal);
     return () => controller.abort();
   }, [runFetch, retryNonce]);
+
+  // A11y: once a 409-triggered refresh has finished (fetchState ready) move focus
+  // to the first slot button in the refreshed grid, then disarm.
+  useEffect(() => {
+    if (!refocusSlots || fetchState.status !== "ready") return;
+    const firstSlot = slotGridRef.current?.querySelector<HTMLButtonElement>('button[role="radio"]');
+    firstSlot?.focus();
+    setRefocusSlots(false);
+  }, [refocusSlots, fetchState.status]);
 
   const days = fetchState.days;
   const selectedDay = useMemo<DaySlots | undefined>(
@@ -289,6 +305,7 @@ export function BookingWidget({
       if (res.status === 409) {
         setReserveError(t("booking.holdTaken"));
         setSelectedSlotIso(null);
+        setRefocusSlots(true); // a11y: refocus the grid once the refresh renders
         setRetryNonce((n) => n + 1); // availability'yi tazele
       } else {
         setReserveError(t("booking.holdFailed"));
@@ -395,7 +412,11 @@ export function BookingWidget({
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="grid flex-1 grid-cols-7 gap-1">
+            <div
+              role="radiogroup"
+              aria-label={t("booking.dayGroupLabel")}
+              className="grid flex-1 grid-cols-7 gap-1"
+            >
               {weekDates.map((dateStr) => {
                 const { weekday, day } = labelForDate(dateStr);
                 const active = dateStr === selectedDate;
@@ -404,7 +425,9 @@ export function BookingWidget({
                   <button
                     key={dateStr}
                     type="button"
-                    aria-pressed={active}
+                    role="radio"
+                    aria-checked={active}
+                    aria-label={`${weekday} ${day}`}
                     onClick={() => setSelectedDate(dateStr)}
                     className={
                       "flex flex-col items-center rounded-lg py-1.5 text-center transition-colors " +
@@ -450,14 +473,20 @@ export function BookingWidget({
                 ))}
               </div>
             ) : selectedDay && selectedDay.slots.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
+              <div
+                ref={slotGridRef}
+                role="radiogroup"
+                aria-label={t("booking.slotGroupLabel")}
+                className="flex flex-wrap gap-2"
+              >
                 {selectedDay.slots.map((slot) => {
                   const active = slot.startUtc === selectedSlotIso;
                   return (
                     <button
                       key={slot.startUtc}
                       type="button"
-                      aria-pressed={active}
+                      role="radio"
+                      aria-checked={active}
                       onClick={() => setSelectedSlotIso(slot.startUtc)}
                       className={
                         "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors " +
@@ -502,13 +531,14 @@ export function BookingWidget({
                 type="button"
                 onClick={reserve}
                 disabled={reserving}
+                aria-describedby={reserveError ? "bw-reserve-error" : undefined}
                 className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition-all hover:shadow-teal-500/40 disabled:opacity-60"
               >
                 {reserving && <Loader2 className="h-4 w-4 animate-spin" />}
                 {reserving ? t("booking.reserving") : t("booking.reserve")}
               </button>
               {reserveError && (
-                <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-300">
+                <p id="bw-reserve-error" role="alert" aria-live="assertive" className="mt-2 text-sm text-red-600 dark:text-red-300">
                   {reserveError}
                 </p>
               )}

@@ -521,6 +521,32 @@
       "whatsappDesc": "Chat with us on WhatsApp",
       "viberLabel": "Viber",
       "viberDesc": "Chat with us on Viber"
+    },
+    "healthPrivacy": "Datenschutzhinweis Gesundheit",
+    "healthPrivacyContent": {
+      "metaDescription": "Wie Glatko Gesundheit Ihre personenbezogenen und Gesundheitsdaten erhebt, nutzt, speichert und schützt, sowie Ihre Rechte nach dem montenegrinischen Datenschutzgesetz.",
+      "draftNote": "Entwurf zur rechtlichen Prüfung. Dieser Hinweis wird vom Rechtsteam von Glatko finalisiert und kann sich vor dem Start ändern.",
+      "intro": "Dieser Hinweis erläutert, wie Glatko (betrieben von RONA LEGAL DOO) Ihre personenbezogenen und gesundheitsbezogenen Daten verarbeitet, wenn Sie einen Gesundheitstermin buchen – im Einklang mit dem montenegrinischen Datenschutzgesetz.",
+      "s1Title": "1. Verantwortlicher",
+      "s1": "Verantwortlicher ist RONA LEGAL DOO, Budva, Montenegro, Betreiber der Plattform Glatko unter glatko.app. Bei Datenschutzfragen wenden Sie sich an privacy@glatko.app.",
+      "s2Title": "2. Zweck der Verarbeitung",
+      "s2": "Wir verarbeiten Ihre Daten ausschließlich, um Ihren Termin beim gewählten Anbieter zu planen, zu bestätigen, daran zu erinnern, zu verschieben oder zu stornieren und um Ihre Einwilligung zu dokumentieren.",
+      "s3Title": "3. Rechtsgrundlage",
+      "s3": "Gesundheitsdaten sind besondere Kategorien personenbezogener Daten. Wir verarbeiten sie nur auf Grundlage Ihrer ausdrücklichen Einwilligung über das Einwilligungsfeld bei der Buchung. Sie können die Einwilligung jederzeit widerrufen.",
+      "s4Title": "4. Erhobene Daten",
+      "s4": "Ihr Name, Ihre Telefonnummer, optional Ihre E-Mail und die Notiz, die Sie einer Buchung hinzufügen. Telefon und E-Mail werden verschlüsselt gespeichert. Wir erheben über diese Plattform keine Krankengeschichte.",
+      "s5Title": "5. Speicherdauer",
+      "s5": "Termin- und Einwilligungsnachweise bewahren wir nur so lange auf, wie es für die Leistung und zur Erfüllung gesetzlicher Pflichten erforderlich ist; danach werden sie gelöscht oder anonymisiert.",
+      "s6Title": "6. Empfänger",
+      "s6": "Ihre Buchungsdaten werden mit dem von Ihnen gewählten Gesundheitsanbieter geteilt. Wir nutzen Auftragsverarbeiter für SMS-/E-Mail-Versand und Hosting; diese handeln nur auf unsere Weisung und nutzen Ihre Daten nicht für eigene Zwecke.",
+      "s7Title": "7. Ihre Rechte",
+      "s7": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung oder Widerspruch gegen die Verarbeitung sowie auf Datenübertragbarkeit. Löschung oder Export Ihrer Daten können Sie direkt auf Ihrer Terminverwaltungsseite anfordern.",
+      "s8Title": "8. Ausübung Ihrer Rechte",
+      "s8": "Öffnen Sie den Verwaltungslink in Ihrer Bestätigung und nutzen Sie die dortigen Datenschutzoptionen oder schreiben Sie an privacy@glatko.app. Wir antworten innerhalb von 15 Tagen, wie gesetzlich vorgeschrieben.",
+      "s9Title": "9. Sicherheit",
+      "s9": "Telefonnummern und E-Mails werden verschlüsselt gespeichert, der Zugriff ist beschränkt und alle administrativen Aktionen werden protokolliert. Der Gesundheitsbereich ist auf Datenbankebene nicht öffentlich zugänglich.",
+      "s10Title": "10. Kontakt & Beschwerden",
+      "s10": "Bei Fragen wenden Sie sich an privacy@glatko.app. Sie haben außerdem das Recht, eine Beschwerde bei der Agentur für Datenschutz und freien Informationszugang Montenegros (AZLP) einzureichen."
     }
   },
   "pro": {
@@ -780,7 +806,39 @@
       "auditEmpty": "Keine Einträge",
       "prev": "Zurück",
       "next": "Weiter",
-      "page": "Seite"
+      "page": "Seite",
+      "dataRequestsLink": "Datenanfragen",
+      "consentLink": "Einwilligungsnachweise",
+      "consent": {
+        "title": "Einwilligungsnachweise",
+        "subtitle": "Zeitstempel der Patienteneinwilligung zu Gesundheitsdaten (PDPL-Nachweis der ausdrücklichen Einwilligung).",
+        "empty": "Noch keine Einwilligungsnachweise.",
+        "colPatient": "Patient",
+        "colHealthConsent": "Einwilligung Gesundheitsdaten",
+        "colMarketingConsent": "Marketing-Einwilligung",
+        "colCreated": "Erstellt",
+        "notGiven": "Nicht erteilt"
+      },
+      "dataRequests": {
+        "title": "Datenrechte-Anfragen",
+        "subtitle": "Lösch-/Exportanfragen, die innerhalb der 15-Tage-Frist zu bearbeiten sind.",
+        "empty": "Keine Datenrechte-Anfragen.",
+        "colRequested": "Angefragt",
+        "colType": "Art",
+        "colPatient": "Patient",
+        "colSla": "Frist",
+        "colAction": "Aktion",
+        "typeDelete": "Löschung",
+        "typeExport": "Export",
+        "slaDaysLeft": "noch {days} Tage",
+        "slaOverdue": "{days} Tage überfällig",
+        "markFulfilled": "Als erledigt markieren",
+        "markRejected": "Ablehnen",
+        "statusFulfilled": "Erledigt",
+        "statusRejected": "Abgelehnt",
+        "confirmFulfill": "Diese Anfrage als erledigt markieren?",
+        "confirmReject": "Diese Anfrage ablehnen?"
+      }
     }
   },
   "cities": {
@@ -2682,7 +2740,9 @@
       "rescheduleConfirmCta": "Verschiebung bestätigen",
       "rescheduleUnavailableTitle": "Verschieben nicht möglich",
       "rescheduleUnavailableBody": "Dieser Termin kann nicht mehr verschoben werden. Sie können ihn weiterhin auf der Terminseite verwalten.",
-      "backToManage": "Zurück zum Termin"
+      "backToManage": "Zurück zum Termin",
+      "dayGroupLabel": "Tag auswählen",
+      "slotGroupLabel": "Uhrzeit auswählen"
     },
     "account": {
       "title": "Meine Termine",
@@ -2944,6 +3004,19 @@
         "delete": "Löschen",
         "empty": "Noch keine Ausnahmen."
       }
+    },
+    "dataRequest": {
+      "title": "Ihre Datenrechte",
+      "intro": "Nach dem Datenschutzrecht können Sie eine Kopie Ihrer Daten anfordern oder deren Löschung verlangen. Wir antworten innerhalb von 15 Tagen.",
+      "exportCta": "Kopie meiner Daten anfordern",
+      "deleteCta": "Löschung anfordern",
+      "confirmExport": "Einen Export der mit diesem Termin verknüpften personenbezogenen Daten anfordern?",
+      "confirmDelete": "Die Löschung der mit diesem Termin verknüpften personenbezogenen Daten anfordern?",
+      "confirmCta": "Anfrage senden",
+      "cancelCta": "Abbrechen",
+      "doneTitle": "Anfrage erhalten",
+      "doneBody": "Wir haben Ihre Anfrage erfasst und werden sie innerhalb von 15 Tagen bearbeiten.",
+      "error": "Ihre Anfrage konnte nicht gesendet werden. Bitte erneut versuchen."
     }
   },
   "careerVertical": {

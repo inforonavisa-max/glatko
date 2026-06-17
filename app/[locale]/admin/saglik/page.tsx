@@ -119,6 +119,18 @@ export default async function HealthAdminPage({ params, searchParams }: Props) {
         >
           {t("admin.health.auditLink")}
         </Link>
+        <Link
+          href={`/${locale}/admin/saglik/talepler`}
+          className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-white/[0.08] dark:text-white/70 dark:hover:bg-white/[0.04]"
+        >
+          {t("admin.health.dataRequestsLink")}
+        </Link>
+        <Link
+          href={`/${locale}/admin/saglik/consent`}
+          className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-white/[0.08] dark:text-white/70 dark:hover:bg-white/[0.04]"
+        >
+          {t("admin.health.consentLink")}
+        </Link>
       </div>
 
       {/* Verification queue */}

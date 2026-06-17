@@ -190,6 +190,18 @@ const nextConfig = {
         me: "/uslovi",
         ar: "/al-shuroot",
       },
+      // Health-specific privacy notice (H10). Mirrors i18n/routing.ts "/health-privacy".
+      // EN stays "/health-privacy" (canonical, no redirect). NOT flag-gated.
+      "/health-privacy": {
+        tr: "/saglik-gizlilik",
+        de: "/gesundheit-datenschutz",
+        it: "/privacy-salute",
+        ru: "/zdorove-konfidentsialnost",
+        uk: "/zdorovya-konfidentsialnist",
+        sr: "/zdravlje-privatnost",
+        me: "/zdravlje-privatnost",
+        ar: "/khususiyat-al-sihha",
+      },
       "/cookies": {
         tr: "/cerez-politikasi",
         // de + it stay "/cookies" (identity), no redirect

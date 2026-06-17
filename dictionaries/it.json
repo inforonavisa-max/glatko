@@ -521,6 +521,32 @@
       "whatsappDesc": "Chat with us on WhatsApp",
       "viberLabel": "Viber",
       "viberDesc": "Chat with us on Viber"
+    },
+    "healthPrivacy": "Informativa sulla privacy sanitaria",
+    "healthPrivacyContent": {
+      "metaDescription": "Come Glatko Salute raccoglie, utilizza, conserva e protegge i tuoi dati personali e sanitari e i tuoi diritti ai sensi della legge sulla protezione dei dati personali del Montenegro.",
+      "draftNote": "Bozza per revisione legale. Questa informativa è in fase di finalizzazione da parte del team legale di Glatko e può cambiare prima del lancio.",
+      "intro": "Questa informativa spiega come Glatko (gestita da RONA LEGAL DOO) tratta i tuoi dati personali e sanitari quando prenoti un appuntamento sanitario, in conformità alla legge sulla protezione dei dati personali del Montenegro.",
+      "s1Title": "1. Titolare del trattamento",
+      "s1": "Il titolare del trattamento è RONA LEGAL DOO, Budva, Montenegro, che gestisce la piattaforma Glatko su glatko.app. Per questioni di privacy contatta privacy@glatko.app.",
+      "s2Title": "2. Finalità del trattamento",
+      "s2": "Trattiamo i tuoi dati esclusivamente per pianificare, confermare, ricordare, riprogrammare o annullare l'appuntamento con il professionista scelto e per conservare la documentazione del consenso prestato.",
+      "s3Title": "3. Base giuridica",
+      "s3": "I dati sanitari sono categorie particolari di dati. Li trattiamo solo sulla base del tuo consenso esplicito, prestato tramite la casella di consenso durante la prenotazione. Puoi revocare il consenso in qualsiasi momento.",
+      "s4Title": "4. Dati raccolti",
+      "s4": "Il tuo nome, numero di telefono, email facoltativa e la nota che aggiungi alla prenotazione. Telefono ed email sono conservati cifrati. Non raccogliamo l'anamnesi tramite questa piattaforma.",
+      "s5Title": "5. Conservazione",
+      "s5": "Conserviamo i dati di appuntamento e consenso solo per il tempo necessario al servizio e per adempiere agli obblighi di legge, dopodiché vengono cancellati o anonimizzati.",
+      "s6Title": "6. Destinatari",
+      "s6": "I dettagli della prenotazione sono condivisi con il professionista sanitario scelto. Utilizziamo responsabili del trattamento per l'invio di SMS/email e l'hosting; agiscono solo su nostra istruzione e non usano i tuoi dati per fini propri.",
+      "s7Title": "7. I tuoi diritti",
+      "s7": "Hai diritto di accesso, rettifica, cancellazione, limitazione o opposizione al trattamento e alla portabilità dei dati. Puoi richiedere la cancellazione o l'esportazione dei tuoi dati direttamente dalla pagina di gestione dell'appuntamento.",
+      "s8Title": "8. Esercizio dei diritti",
+      "s8": "Apri il link di gestione presente nel messaggio di conferma e usa le opzioni sui diritti dei dati, oppure scrivi a privacy@glatko.app. Rispondiamo entro 15 giorni, come previsto dalla legge.",
+      "s9Title": "9. Sicurezza",
+      "s9": "Numeri di telefono ed email sono cifrati a riposo, l'accesso è limitato e tutte le azioni amministrative sono registrate. La sezione sanitaria non è esposta pubblicamente a livello di database.",
+      "s10Title": "10. Contatti e reclami",
+      "s10": "Per qualsiasi domanda contatta privacy@glatko.app. Hai inoltre il diritto di presentare un reclamo all'Agenzia per la protezione dei dati personali e il libero accesso alle informazioni del Montenegro (AZLP)."
     }
   },
   "pro": {
@@ -780,7 +806,39 @@
       "auditEmpty": "Nessuna voce",
       "prev": "Precedente",
       "next": "Successivo",
-      "page": "Pagina"
+      "page": "Pagina",
+      "dataRequestsLink": "Richieste dati",
+      "consentLink": "Registro consensi",
+      "consent": {
+        "title": "Registro consensi",
+        "subtitle": "Marche temporali del consenso del paziente ai dati sanitari (prova PDPL del consenso esplicito).",
+        "empty": "Nessun consenso registrato.",
+        "colPatient": "Paziente",
+        "colHealthConsent": "Consenso dati sanitari",
+        "colMarketingConsent": "Consenso marketing",
+        "colCreated": "Creato",
+        "notGiven": "Non prestato"
+      },
+      "dataRequests": {
+        "title": "Richieste sui diritti dei dati",
+        "subtitle": "Richieste di cancellazione / esportazione da gestire entro l'SLA di 15 giorni.",
+        "empty": "Nessuna richiesta sui diritti dei dati.",
+        "colRequested": "Richiesto",
+        "colType": "Tipo",
+        "colPatient": "Paziente",
+        "colSla": "SLA",
+        "colAction": "Azione",
+        "typeDelete": "Cancellazione",
+        "typeExport": "Esportazione",
+        "slaDaysLeft": "{days} giorni rimasti",
+        "slaOverdue": "{days} giorni di ritardo",
+        "markFulfilled": "Segna come evasa",
+        "markRejected": "Rifiuta",
+        "statusFulfilled": "Evasa",
+        "statusRejected": "Rifiutata",
+        "confirmFulfill": "Segnare questa richiesta come evasa?",
+        "confirmReject": "Rifiutare questa richiesta?"
+      }
     }
   },
   "cities": {
@@ -2682,7 +2740,9 @@
       "rescheduleConfirmCta": "Conferma riprogrammazione",
       "rescheduleUnavailableTitle": "Riprogrammazione non disponibile",
       "rescheduleUnavailableBody": "Questo appuntamento non può più essere riprogrammato. Puoi comunque gestirlo dalla pagina dell'appuntamento.",
-      "backToManage": "Torna all'appuntamento"
+      "backToManage": "Torna all'appuntamento",
+      "dayGroupLabel": "Scegli un giorno",
+      "slotGroupLabel": "Scegli un orario"
     },
     "account": {
       "title": "I miei appuntamenti",
@@ -2944,6 +3004,19 @@
         "delete": "Elimina",
         "empty": "Ancora nessuna eccezione."
       }
+    },
+    "dataRequest": {
+      "title": "I tuoi diritti sui dati",
+      "intro": "Ai sensi della normativa sulla protezione dei dati puoi richiedere una copia dei tuoi dati o chiederne la cancellazione. Rispondiamo entro 15 giorni.",
+      "exportCta": "Richiedi una copia dei miei dati",
+      "deleteCta": "Richiedi la cancellazione",
+      "confirmExport": "Richiedere l'esportazione dei dati personali legati a questo appuntamento?",
+      "confirmDelete": "Richiedere la cancellazione dei dati personali legati a questo appuntamento?",
+      "confirmCta": "Invia richiesta",
+      "cancelCta": "Annulla",
+      "doneTitle": "Richiesta ricevuta",
+      "doneBody": "Abbiamo registrato la tua richiesta e la gestiremo entro 15 giorni.",
+      "error": "Impossibile inviare la richiesta. Riprova."
     }
   },
   "careerVertical": {

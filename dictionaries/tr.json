@@ -521,6 +521,32 @@
       "whatsappDesc": "Hızlı destek için WhatsApp üzerinden yazın",
       "viberLabel": "Viber",
       "viberDesc": "Hızlı destek için Viber üzerinden yazın"
+    },
+    "healthPrivacy": "Sağlık Gizlilik Bildirimi",
+    "healthPrivacyContent": {
+      "metaDescription": "Glatko Sağlık'ın kişisel ve sağlık verilerinizi nasıl topladığı, kullandığı, sakladığı ve koruduğu ile Karadağ Kişisel Verilerin Korunması Kanunu kapsamındaki haklarınız.",
+      "draftNote": "Hukuki inceleme için taslaktır. Bu bildirim Glatko hukuk ekibi tarafından sonlandırılmakta olup yayından önce değişebilir.",
+      "intro": "Bu bildirim, bir sağlık randevusu oluşturduğunuzda Glatko'nun (RONA LEGAL DOO tarafından işletilir) kişisel ve sağlıkla ilgili verilerinizi Karadağ Kişisel Verilerin Korunması Kanunu'na (Zakon o zaštiti podataka o ličnosti) uygun olarak nasıl işlediğini açıklar.",
+      "s1Title": "1. Veri Sorumlusu",
+      "s1": "Veri sorumlusu, glatko.app adresindeki Glatko platformunu işleten RONA LEGAL DOO, Budva, Karadağ'dır. Gizlilik konuları için privacy@glatko.app ile iletişime geçin.",
+      "s2Title": "2. İşleme Amacı",
+      "s2": "Verilerinizi yalnızca seçtiğiniz sağlayıcıyla randevunuzu planlamak, onaylamak, hatırlatmak, ertelemek veya iptal etmek ve verdiğiniz onayın kaydını tutmak için işliyoruz.",
+      "s3Title": "3. Hukuki Dayanak",
+      "s3": "Sağlıkla ilgili veriler özel nitelikli veridir. Bunları yalnızca rezervasyon sırasında onay kutusuyla verdiğiniz açık rızanıza dayanarak işleriz. Rızanızı dilediğiniz zaman geri çekebilirsiniz.",
+      "s4Title": "4. Topladığımız Veriler",
+      "s4": "Adınız, telefon numaranız, isteğe bağlı e-postanız ve rezervasyona eklediğiniz not. Telefon ve e-postanız şifreli saklanır. Bu platform üzerinden tıbbi geçmiş toplamıyoruz.",
+      "s5Title": "5. Saklama Süresi",
+      "s5": "Randevu ve onay kayıtlarını yalnızca hizmet için ve yasal yükümlülükleri karşılamak için gereken süre boyunca saklarız; ardından silinir veya anonimleştirilir.",
+      "s6Title": "6. Alıcılar",
+      "s6": "Rezervasyon bilgileriniz seçtiğiniz sağlık sağlayıcısıyla paylaşılır. SMS/e-posta gönderimi ve barındırma için işleyiciler kullanırız; bunlar yalnızca talimatlarımızla hareket eder ve verilerinizi kendi amaçları için kullanmaz.",
+      "s7Title": "7. Haklarınız",
+      "s7": "Verilerinizin işlenmesine erişme, düzeltme, silme, kısıtlama veya itiraz etme ve veri taşınabilirliği haklarına sahipsiniz. Verilerinizin silinmesini veya bir kopyasını doğrudan randevu yönetim sayfanızdan talep edebilirsiniz.",
+      "s8Title": "8. Haklarınızı Kullanma",
+      "s8": "Onay mesajınızdaki yönetim bağlantısını açın ve oradaki veri-hakları seçeneklerini kullanın veya privacy@glatko.app adresine e-posta gönderin. Yasaların gerektirdiği gibi 15 gün içinde yanıt veririz.",
+      "s9Title": "9. Güvenlik",
+      "s9": "Telefon numaraları ve e-postalar saklanırken şifrelenir, erişim kısıtlıdır ve tüm idari işlemler kayda alınır. Sağlık bölümü veritabanı düzeyinde herkese açık değildir.",
+      "s10Title": "10. İletişim ve Şikâyet",
+      "s10": "Her türlü soru için privacy@glatko.app ile iletişime geçin. Ayrıca Karadağ Kişisel Verilerin Korunması ve Bilgiye Serbest Erişim Ajansı'na (AZLP) şikâyette bulunma hakkına sahipsiniz."
     }
   },
   "pro": {
@@ -780,7 +806,39 @@
       "auditEmpty": "Kayıt yok",
       "prev": "Önceki",
       "next": "Sonraki",
-      "page": "Sayfa"
+      "page": "Sayfa",
+      "dataRequestsLink": "Veri talepleri",
+      "consentLink": "Onay kayıtları",
+      "consent": {
+        "title": "Onay kayıtları",
+        "subtitle": "Hasta sağlık-verisi onay damgaları (PDPL açık rıza kanıtı).",
+        "empty": "Henüz onay kaydı yok.",
+        "colPatient": "Hasta",
+        "colHealthConsent": "Sağlık-verisi onayı",
+        "colMarketingConsent": "Pazarlama onayı",
+        "colCreated": "Oluşturuldu",
+        "notGiven": "Verilmedi"
+      },
+      "dataRequests": {
+        "title": "Veri-hakları talepleri",
+        "subtitle": "15 günlük SLA içinde işleme alınacak silme / dışa-aktarma talepleri.",
+        "empty": "Veri-hakları talebi yok.",
+        "colRequested": "Talep tarihi",
+        "colType": "Tür",
+        "colPatient": "Hasta",
+        "colSla": "SLA",
+        "colAction": "İşlem",
+        "typeDelete": "Silme",
+        "typeExport": "Dışa aktarma",
+        "slaDaysLeft": "{days} gün kaldı",
+        "slaOverdue": "{days} gün gecikti",
+        "markFulfilled": "Tamamlandı işaretle",
+        "markRejected": "Reddet",
+        "statusFulfilled": "Tamamlandı",
+        "statusRejected": "Reddedildi",
+        "confirmFulfill": "Bu talep tamamlandı olarak işaretlensin mi?",
+        "confirmReject": "Bu talep reddedilsin mi?"
+      }
     }
   },
   "cities": {
@@ -2685,7 +2743,9 @@
       "rescheduleConfirmCta": "Ertelemeyi onayla",
       "rescheduleUnavailableTitle": "Erteleme yapılamıyor",
       "rescheduleUnavailableBody": "Bu randevu artık ertelenemez. Randevu sayfasından yine de yönetebilirsiniz.",
-      "backToManage": "Randevuya dön"
+      "backToManage": "Randevuya dön",
+      "dayGroupLabel": "Bir gün seçin",
+      "slotGroupLabel": "Bir saat seçin"
     },
     "account": {
       "title": "Randevularım",
@@ -2947,6 +3007,19 @@
         "delete": "Sil",
         "empty": "Henüz istisna yok."
       }
+    },
+    "dataRequest": {
+      "title": "Veri haklarınız",
+      "intro": "Veri koruma mevzuatı uyarınca verilerinizin bir kopyasını isteyebilir veya silinmesini talep edebilirsiniz. 15 gün içinde yanıt veririz.",
+      "exportCta": "Verilerimin kopyasını iste",
+      "deleteCta": "Silme talep et",
+      "confirmExport": "Bu randevuya bağlı kişisel verilerin dışa aktarılmasını talep edilsin mi?",
+      "confirmDelete": "Bu randevuya bağlı kişisel verilerin silinmesini talep edilsin mi?",
+      "confirmCta": "Talebi gönder",
+      "cancelCta": "Vazgeç",
+      "doneTitle": "Talep alındı",
+      "doneBody": "Talebinizi kaydettik ve 15 gün içinde işleme alacağız.",
+      "error": "Talebiniz gönderilemedi. Lütfen tekrar deneyin."
     }
   },
   "careerVertical": {

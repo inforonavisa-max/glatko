@@ -54,6 +54,15 @@ export function BookingForm({
 
   const [phase, setPhase] = useState<Phase>("form");
 
+  // A11y: move focus to the OTP input when the form advances to the 'code' phase
+  // so a keyboard/SR user lands on the field they must fill next (the input is
+  // conditionally rendered, so this fires after it mounts). Guarded behind the
+  // effect + a ref → no hydration impact (same lesson as the countdown null-init).
+  const codeInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (phase === "code") codeInputRef.current?.focus();
+  }, [phase]);
+
   useEffect(() => {
     if (phase === "verified") return; // stop the clock once verified
     const tick = () => {
@@ -267,7 +276,7 @@ export function BookingForm({
             className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-teal-600 focus:ring-teal-500/30 dark:border-white/20 dark:bg-white/5" />
           <span>
             {b("consentHealthLabel")}{" "}
-            <Link href="/privacy" className="font-medium text-teal-600 underline hover:text-teal-700 dark:text-teal-400">
+            <Link href="/health-privacy" className="font-medium text-teal-600 underline hover:text-teal-700 dark:text-teal-400">
               {b("consentHealthLink")}
             </Link>
           </span>
@@ -284,7 +293,8 @@ export function BookingForm({
           <div>
             <p className="text-sm text-gray-600 dark:text-white/70">{b("codeSent")}</p>
             <label htmlFor="bf-code" className={`${labelCls} mt-3 block`}>{b("codeLabel")}</label>
-            <input id="bf-code" type="text" inputMode="numeric" autoComplete="one-time-code"
+            <input id="bf-code" ref={codeInputRef} type="text" inputMode="numeric" autoComplete="one-time-code"
+              aria-describedby={error ? "bf-error" : undefined}
               maxLength={6} value={code}
               onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
               placeholder={b("codePlaceholder")} className={`${inputCls} font-mono tracking-[0.4em]`} />
@@ -292,7 +302,7 @@ export function BookingForm({
         )}
 
         {error && (
-          <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
+          <p id="bf-error" role="alert" aria-live="assertive" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
             {error}
           </p>
         )}

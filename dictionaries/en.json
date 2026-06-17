@@ -521,6 +521,32 @@
       "whatsappDesc": "Chat with us on WhatsApp for quick support",
       "viberLabel": "Viber",
       "viberDesc": "Chat with us on Viber for quick support"
+    },
+    "healthPrivacy": "Health Privacy Notice",
+    "healthPrivacyContent": {
+      "metaDescription": "How Glatko Health collects, uses, retains and protects your personal and health data, and your rights under Montenegro's Personal Data Protection Law.",
+      "draftNote": "Draft for legal review. This notice is being finalized by Glatko's legal team and may change before launch.",
+      "intro": "This notice explains how Glatko (operated by RONA LEGAL DOO) processes your personal and health-related data when you book a health appointment, in line with Montenegro's Personal Data Protection Law (Zakon o zaštiti podataka o ličnosti).",
+      "s1Title": "1. Data Controller",
+      "s1": "The data controller is RONA LEGAL DOO, Budva, Montenegro, operating the Glatko platform at glatko.app. For privacy matters, contact privacy@glatko.app.",
+      "s2Title": "2. Purpose of Processing",
+      "s2": "We process your data solely to schedule, confirm, remind, reschedule or cancel your health appointment with the provider you choose, and to keep a record of the consent you gave.",
+      "s3Title": "3. Legal Basis",
+      "s3": "Health-related data is special-category data. We process it only on the basis of your explicit consent, given via the consent checkbox during booking. You may withdraw consent at any time.",
+      "s4Title": "4. Data We Collect",
+      "s4": "Your name, phone number, optional email, and the note you add to a booking. Your phone and email are stored encrypted. We do not collect medical history through this platform.",
+      "s5Title": "5. Retention",
+      "s5": "We keep appointment and consent records only as long as necessary for the service and to meet legal obligations, after which they are deleted or anonymized.",
+      "s6Title": "6. Recipients",
+      "s6": "Your booking details are shared with the health provider you select. We use processors for SMS/email delivery and hosting; they act only on our instructions and do not use your data for their own purposes.",
+      "s7Title": "7. Your Rights",
+      "s7": "You have the right to access, rectify, erase, restrict or object to the processing of your data, and to data portability. You can request deletion or an export of your data directly from your appointment management page.",
+      "s8Title": "8. Exercising Your Rights",
+      "s8": "Open the management link in your confirmation message and use the data-rights options there, or email privacy@glatko.app. We respond within 15 days as required by law.",
+      "s9Title": "9. Security",
+      "s9": "Phone numbers and emails are encrypted at rest, access is restricted, and all administrative actions are logged. The health section is not publicly exposed at the database level.",
+      "s10Title": "10. Contact & Complaints",
+      "s10": "For any question contact privacy@glatko.app. You also have the right to lodge a complaint with the Agency for Personal Data Protection and Free Access to Information of Montenegro (AZLP)."
     }
   },
   "pro": {
@@ -780,7 +806,39 @@
       "auditEmpty": "No entries",
       "prev": "Previous",
       "next": "Next",
-      "page": "Page"
+      "page": "Page",
+      "dataRequestsLink": "Data requests",
+      "consentLink": "Consent records",
+      "consent": {
+        "title": "Consent records",
+        "subtitle": "Patient health-data consent timestamps (PDPL proof of explicit consent).",
+        "empty": "No consent records yet.",
+        "colPatient": "Patient",
+        "colHealthConsent": "Health-data consent",
+        "colMarketingConsent": "Marketing consent",
+        "colCreated": "Created",
+        "notGiven": "Not given"
+      },
+      "dataRequests": {
+        "title": "Data-rights requests",
+        "subtitle": "Deletion / export requests to action within the 15-day SLA.",
+        "empty": "No data-rights requests.",
+        "colRequested": "Requested",
+        "colType": "Type",
+        "colPatient": "Patient",
+        "colSla": "SLA",
+        "colAction": "Action",
+        "typeDelete": "Deletion",
+        "typeExport": "Export",
+        "slaDaysLeft": "{days} days left",
+        "slaOverdue": "{days} days overdue",
+        "markFulfilled": "Mark fulfilled",
+        "markRejected": "Reject",
+        "statusFulfilled": "Fulfilled",
+        "statusRejected": "Rejected",
+        "confirmFulfill": "Mark this request as fulfilled?",
+        "confirmReject": "Reject this request?"
+      }
     }
   },
   "cities": {
@@ -2682,7 +2740,9 @@
       "rescheduleConfirmCta": "Confirm reschedule",
       "rescheduleUnavailableTitle": "Reschedule unavailable",
       "rescheduleUnavailableBody": "This appointment can no longer be rescheduled. You can still manage it from the appointment page.",
-      "backToManage": "Back to appointment"
+      "backToManage": "Back to appointment",
+      "dayGroupLabel": "Choose a day",
+      "slotGroupLabel": "Choose a time"
     },
     "account": {
       "title": "My appointments",
@@ -2944,6 +3004,19 @@
         "delete": "Delete",
         "empty": "No exceptions yet."
       }
+    },
+    "dataRequest": {
+      "title": "Your data rights",
+      "intro": "Under data-protection law you can request a copy of your data or ask us to delete it. We respond within 15 days.",
+      "exportCta": "Request a copy of my data",
+      "deleteCta": "Request deletion",
+      "confirmExport": "Request an export of the personal data linked to this appointment?",
+      "confirmDelete": "Request deletion of the personal data linked to this appointment?",
+      "confirmCta": "Send request",
+      "cancelCta": "Cancel",
+      "doneTitle": "Request received",
+      "doneBody": "We have logged your request and will action it within 15 days.",
+      "error": "Could not send your request. Please try again."
     }
   },
   "careerVertical": {

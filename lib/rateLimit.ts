@@ -4,7 +4,7 @@ import { Redis } from "@upstash/redis/cloudflare";
 import { Ratelimit } from "@upstash/ratelimit";
 import { decideBotDecision, type BotDecision } from "@/lib/botDefense";
 
-type RouteClass =
+export type RouteClass =
   | "exception"
   | "admin-sensitive"
   | "verified-bot"
@@ -105,7 +105,12 @@ const limiterByClass: Partial<Record<LimitPolicy["routeClass"], Ratelimit>> = re
 let warnedMissingRedis = false;
 let warnedMissingCrypto = false;
 
-function classifyRoute(pathname: string): RouteClass {
+/**
+ * Maps a locale-stripped pathname to its rate-limit route class. Exported so the
+ * H10 security-coverage test can lock every /api/health/* mapping against
+ * regression (the health vertical's only rate-limit guard is this classification).
+ */
+export function classifyRoute(pathname: string): RouteClass {
   if (
     pathname.startsWith("/_next") ||
     pathname === "/favicon.ico" ||

@@ -521,6 +521,32 @@
       "whatsappDesc": "Chat with us on WhatsApp",
       "viberLabel": "Viber",
       "viberDesc": "Chat with us on Viber"
+    },
+    "healthPrivacy": "Obaveštenje o privatnosti za zdravlje",
+    "healthPrivacyContent": {
+      "metaDescription": "Kako Glatko Zdravlje prikuplja, koristi, čuva i štiti vaše lične i zdravstvene podatke i vaša prava prema Zakonu o zaštiti podataka o ličnosti.",
+      "draftNote": "Nacrt za pravnu proveru. Ovo obaveštenje finalizuje pravni tim Glatka i može se promeniti pre lansiranja.",
+      "intro": "Ovo obaveštenje objašnjava kako Glatko (kojim upravlja RONA LEGAL DOO) obrađuje vaše lične i zdravstvene podatke kada zakažete zdravstveni termin, u skladu sa Zakonom o zaštiti podataka o ličnosti.",
+      "s1Title": "1. Rukovalac podacima",
+      "s1": "Rukovalac podacima je RONA LEGAL DOO, Budva, Crna Gora, koji upravlja platformom Glatko na glatko.app. Za pitanja privatnosti kontaktirajte privacy@glatko.app.",
+      "s2Title": "2. Svrha obrade",
+      "s2": "Vaše podatke obrađujemo isključivo radi zakazivanja, potvrde, podsećanja, odlaganja ili otkazivanja vašeg termina kod izabranog pružaoca i radi vođenja evidencije o datoj saglasnosti.",
+      "s3Title": "3. Pravni osnov",
+      "s3": "Zdravstveni podaci su posebna kategorija podataka. Obrađujemo ih samo na osnovu vaše izričite saglasnosti date putem polja za saglasnost tokom rezervacije. Saglasnost možete povući u bilo kom trenutku.",
+      "s4Title": "4. Podaci koje prikupljamo",
+      "s4": "Vaše ime, broj telefona, opciona e-pošta i napomena koju dodate uz rezervaciju. Telefon i e-pošta čuvaju se šifrovano. Putem ove platforme ne prikupljamo medicinsku istoriju.",
+      "s5Title": "5. Period čuvanja",
+      "s5": "Evidenciju o terminima i saglasnostima čuvamo samo onoliko dugo koliko je potrebno za uslugu i radi ispunjenja zakonskih obaveza, nakon čega se brišu ili anonimizuju.",
+      "s6Title": "6. Primaoci",
+      "s6": "Detalji vaše rezervacije dele se sa izabranim zdravstvenim pružaocem. Koristimo obrađivače za slanje SMS-a/e-pošte i hosting; oni postupaju samo po našim uputstvima i ne koriste vaše podatke za sopstvene svrhe.",
+      "s7Title": "7. Vaša prava",
+      "s7": "Imate pravo na pristup, ispravku, brisanje, ograničenje ili prigovor na obradu vaših podataka, kao i na prenosivost podataka. Brisanje ili izvoz podataka možete zatražiti direktno sa stranice za upravljanje terminom.",
+      "s8Title": "8. Ostvarivanje prava",
+      "s8": "Otvorite link za upravljanje iz poruke o potvrdi i koristite opcije za prava na podatke ili pišite na privacy@glatko.app. Odgovaramo u roku od 15 dana, kako zakon nalaže.",
+      "s9Title": "9. Bezbednost",
+      "s9": "Brojevi telefona i e-pošte šifrovani su pri čuvanju, pristup je ograničen, a sve administrativne radnje se beleže. Zdravstveni deo nije javno izložen na nivou baze podataka.",
+      "s10Title": "10. Kontakt i pritužbe",
+      "s10": "Za svako pitanje kontaktirajte privacy@glatko.app. Takođe imate pravo da podnesete pritužbu Agenciji za zaštitu ličnih podataka i slobodan pristup informacijama (AZLP)."
     }
   },
   "pro": {
@@ -780,7 +806,39 @@
       "auditEmpty": "Nema unosa",
       "prev": "Prethodno",
       "next": "Sledeće",
-      "page": "Strana"
+      "page": "Strana",
+      "dataRequestsLink": "Zahtevi za podatke",
+      "consentLink": "Evidencija saglasnosti",
+      "consent": {
+        "title": "Evidencija saglasnosti",
+        "subtitle": "Vremenske oznake saglasnosti pacijenata za zdravstvene podatke (PDPL dokaz izričite saglasnosti).",
+        "empty": "Još nema evidencije saglasnosti.",
+        "colPatient": "Pacijent",
+        "colHealthConsent": "Saglasnost za zdravstvene podatke",
+        "colMarketingConsent": "Marketinška saglasnost",
+        "colCreated": "Kreirano",
+        "notGiven": "Nije data"
+      },
+      "dataRequests": {
+        "title": "Zahtevi za prava na podatke",
+        "subtitle": "Zahtevi za brisanje / izvoz koje treba obraditi u roku od 15 dana (SLA).",
+        "empty": "Nema zahteva za prava na podatke.",
+        "colRequested": "Zatraženo",
+        "colType": "Tip",
+        "colPatient": "Pacijent",
+        "colSla": "SLA",
+        "colAction": "Radnja",
+        "typeDelete": "Brisanje",
+        "typeExport": "Izvoz",
+        "slaDaysLeft": "preostalo {days} dana",
+        "slaOverdue": "{days} dana kašnjenja",
+        "markFulfilled": "Označi kao obrađeno",
+        "markRejected": "Odbij",
+        "statusFulfilled": "Obrađeno",
+        "statusRejected": "Odbijeno",
+        "confirmFulfill": "Označiti ovaj zahtev kao obrađen?",
+        "confirmReject": "Odbiti ovaj zahtev?"
+      }
     }
   },
   "cities": {
@@ -2685,7 +2743,9 @@
       "rescheduleConfirmCta": "Potvrdi pomjeranje",
       "rescheduleUnavailableTitle": "Pomjeranje nije dostupno",
       "rescheduleUnavailableBody": "Ovaj termin se više ne može pomjeriti. I dalje ga možete upravljati sa stranice termina.",
-      "backToManage": "Nazad na termin"
+      "backToManage": "Nazad na termin",
+      "dayGroupLabel": "Izaberite dan",
+      "slotGroupLabel": "Izaberite vreme"
     },
     "account": {
       "title": "Moji termini",
@@ -2947,6 +3007,19 @@
         "delete": "Obriši",
         "empty": "Još nema izuzetaka."
       }
+    },
+    "dataRequest": {
+      "title": "Vaša prava na podatke",
+      "intro": "Prema zakonu o zaštiti podataka možete zatražiti kopiju svojih podataka ili njihovo brisanje. Odgovaramo u roku od 15 dana.",
+      "exportCta": "Zatraži kopiju mojih podataka",
+      "deleteCta": "Zatraži brisanje",
+      "confirmExport": "Zatražiti izvoz ličnih podataka povezanih sa ovim terminom?",
+      "confirmDelete": "Zatražiti brisanje ličnih podataka povezanih sa ovim terminom?",
+      "confirmCta": "Pošalji zahtev",
+      "cancelCta": "Otkaži",
+      "doneTitle": "Zahtev primljen",
+      "doneBody": "Evidentirali smo vaš zahtev i obradićemo ga u roku od 15 dana.",
+      "error": "Slanje zahteva nije uspelo. Pokušajte ponovo."
     }
   },
   "careerVertical": {

@@ -33,12 +33,14 @@ export type AdminRpcError =
   | "NOT_FOUND"
   | "INVALID_DECISION"
   | "INVALID_TIER"
+  | "INVALID_STATUS"
   | "ERROR";
 
 const ADMIN_RPC_ERRORS: AdminRpcError[] = [
   "NOT_FOUND",
   "INVALID_DECISION",
   "INVALID_TIER",
+  "INVALID_STATUS",
 ];
 
 function parseAdminError(message: string): AdminRpcError {
@@ -350,6 +352,94 @@ export async function getMetrics(nowIso: string): Promise<AdminMetricsRaw | null
 const HEALTH_LICENSE_BUCKET = "health-licenses";
 /** Short TTL for the regulated identity doc — mint on demand, NOT the 7-day used elsewhere. */
 export const LICENSE_SIGNED_URL_TTL_SECONDS = 120;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// H10 — data-subject rights (consent records + delete/export request queue)
+// ─────────────────────────────────────────────────────────────────────────────
+// All four reads/writes go through migration 080's public SECURITY DEFINER RPCs
+// (service-role; admin-gated in the calling action via isAdminEmail). PII posture
+// matches the appointment list: phone is masked in-RPC (last-3), name is masked
+// (first initial), email is NEVER returned. The export CONTENT is fulfilled
+// manually out-of-band — the queue only tracks the request + the SLA clock.
+
+export type AdminConsentRecord = {
+  id: string;
+  /** Already masked in-RPC ('•••' + last 3). Never the full number. */
+  patientPhoneMasked: string;
+  /** First initial + '•••'. Never the full name. */
+  patientNameMasked: string;
+  consentHealthAt: string;
+  consentMarketingAt: string | null;
+  createdAt: string;
+};
+
+/** Patient health-consent timestamps (masked phone/name, never email). A genuine RPC failure throws. */
+export async function listConsents(
+  limit: number,
+  offset: number,
+): Promise<AdminConsentRecord[]> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_admin_list_consents", {
+    p_limit: limit,
+    p_offset: offset,
+  });
+  if (error) {
+    throw new Error(`health_admin_list_consents failed: ${error.message}`);
+  }
+  return (data as AdminConsentRecord[] | null) ?? [];
+}
+
+export type DataRequestType = "delete" | "export";
+export type DataRequestStatus = "pending" | "fulfilled" | "rejected";
+export type DataRequestFilter = DataRequestStatus | "all";
+
+export type AdminDataRequest = {
+  id: string;
+  patientId: string;
+  type: DataRequestType;
+  status: DataRequestStatus;
+  requestedAt: string;
+  resolvedAt: string | null;
+  /** Already masked in-RPC ('•••' + last 3). Never the full number. */
+  patientPhoneMasked: string;
+  /** First initial + '•••'. Never the full name. */
+  patientNameMasked: string;
+};
+
+/** Data-rights request queue, filtered by status (default 'pending'). A genuine RPC failure throws. */
+export async function listDataRequests(
+  status: DataRequestFilter,
+  limit: number,
+  offset: number,
+): Promise<AdminDataRequest[]> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_admin_list_data_requests", {
+    p_status: status,
+    p_limit: limit,
+    p_offset: offset,
+  });
+  if (error) {
+    throw new Error(`health_admin_list_data_requests failed: ${error.message}`);
+  }
+  return (data as AdminDataRequest[] | null) ?? [];
+}
+
+/** Mark a request fulfilled/rejected (manual fulfilment). Never throws on a business error. */
+export async function resolveDataRequest(
+  actorId: string,
+  requestId: string,
+  status: "fulfilled" | "rejected",
+): Promise<AdminWriteResult<{ status: DataRequestStatus }>> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_admin_resolve_data_request", {
+    p_actor_id: actorId,
+    p_request_id: requestId,
+    p_status: status,
+  });
+  if (error) return { ok: false, code: parseAdminError(error.message) };
+  const d = data as { ok: boolean; status: DataRequestStatus };
+  return { ok: true, status: d.status };
+}
 
 /**
  * Mint a short-lived signed download URL for a provider license in the PRIVATE

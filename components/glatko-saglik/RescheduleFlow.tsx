@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { CalendarClock, Loader2, ShieldCheck } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
@@ -52,6 +52,13 @@ export function RescheduleFlow({
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // A11y: move focus to the OTP input when the verify step advances to 'code'
+  // (the input is conditionally rendered, so this runs after it mounts).
+  const codeInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (otpPhase === "code") codeInputRef.current?.focus();
+  }, [otpPhase]);
 
   // Confirm step.
   const [confirming, setConfirming] = useState(false);
@@ -209,7 +216,8 @@ export function RescheduleFlow({
             <div>
               <p className="text-sm text-gray-600 dark:text-white/70">{t("codeSent")}</p>
               <label htmlFor="rf-code" className={`${labelCls} mt-3 block`}>{t("codeLabel")}</label>
-              <input id="rf-code" type="text" inputMode="numeric" autoComplete="one-time-code"
+              <input id="rf-code" ref={codeInputRef} type="text" inputMode="numeric" autoComplete="one-time-code"
+                aria-describedby={error ? "rf-error" : undefined}
                 maxLength={6} value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
                 placeholder={t("codePlaceholder")} className={`${inputCls} font-mono tracking-[0.4em]`} />
@@ -217,7 +225,7 @@ export function RescheduleFlow({
           )}
 
           {error && (
-            <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
+            <p id="rf-error" role="alert" aria-live="assertive" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
               {error}
             </p>
           )}

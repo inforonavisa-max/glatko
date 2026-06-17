@@ -480,6 +480,44 @@ export async function cancelAppointment(manageToken: string): Promise<CancelResu
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// H10 — data-subject rights request intake (PDPL 15-day SLA). Keyed on the
+// appointment manage_token (the patient's only credential); the RPC resolves the
+// patient itself (never trusts a client-supplied id) and records a queue row +
+// audit. The token is the only secret → it NEVER appears in logs.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type DataRequestType = "delete" | "export";
+
+export type DataActionResult =
+  | { ok: true; requestId: string }
+  | { ok: false; reason: "NOT_FOUND" | "INVALID_TYPE" | "ERROR" };
+
+export async function requestDataAction(
+  manageToken: string,
+  type: DataRequestType,
+): Promise<DataActionResult> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_request_data_action", {
+    p_manage_token: manageToken,
+    p_type: type,
+  });
+  if (error) {
+    // No token/PII in logs — error.message is the raised code (NOT_FOUND / INVALID_TYPE).
+    console.error("[health-data-request] failed:", error.message);
+    const reason =
+      error.message.includes("NOT_FOUND")
+        ? "NOT_FOUND"
+        : error.message.includes("INVALID_TYPE")
+          ? "INVALID_TYPE"
+          : "ERROR";
+    return { ok: false, reason };
+  }
+  const d = data as { ok: boolean; requestId?: string };
+  if (d.ok && d.requestId) return { ok: true, requestId: d.requestId };
+  return { ok: false, reason: "ERROR" };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // H9 — atomic reschedule (book-new-then-cancel-old) + the single patient move
 // notice + the provider move notice. The reschedule RPC (migration 075) reuses
 // health.book_appointment for the NEW appointment (atomicity not duplicated) and

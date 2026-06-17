@@ -39,7 +39,11 @@ export type AdminActionType =
   | "health_provider_reject"
   | "health_provider_unpublish"
   | "health_provider_publish"
-  | "health_provider_set_tier";
+  | "health_provider_set_tier"
+  // H10 — health data-subject rights queue resolution (the canonical health.audit_log
+  // row is written INSIDE the 080 RPC; this app-side row mirrors it with IP/UA).
+  | "health_data_request_fulfilled"
+  | "health_data_request_rejected";
 
 export type AuditTargetTable =
   | "auth.users"
@@ -48,7 +52,8 @@ export type AuditTargetTable =
   | "glatko_pro_services"
   | "glatko_service_requests"
   | "glatko_service_categories"
-  | "health.providers";
+  | "health.providers"
+  | "health.data_requests";
 
 export interface LogAdminActionParams {
   actionType: AdminActionType;
