@@ -60,12 +60,22 @@ export function WeeklyScheduleEditor({
     setRowsByLocation((prev) => ({ ...prev, [locationId]: next }));
   }
 
+  const DAY_END = 23 * 60 + 30; // 23:30 ceiling for the time inputs
   function addRow(weekday: number) {
     const dayRows = rows.filter((r) => r.weekday === weekday);
     const last = dayRows[dayRows.length - 1];
-    const start = last ? last.endTime : "09:00";
-    const end = last ? minutesToHm(Math.min(hmToMinutes(last.endTime) + 60, 23 * 60 + 30)) : "17:00";
-    updateRows([...rows, { weekday, startTime: start, endTime: end }]);
+    if (!last) {
+      updateRows([...rows, { weekday, startTime: "09:00", endTime: "17:00" }]);
+      return;
+    }
+    // Seed start at the previous range's end, end +60min capped at 23:30. When the
+    // previous range already ends at/near the ceiling this would give start==end
+    // (a zero-width range the submit guard rejects); clamp start back so the new
+    // range is always valid (start < end) and never auto-creates a broken row.
+    const lastEnd = hmToMinutes(last.endTime);
+    const end = Math.min(lastEnd + 60, DAY_END);
+    const start = Math.min(lastEnd, end - 30);
+    updateRows([...rows, { weekday, startTime: minutesToHm(start), endTime: minutesToHm(end) }]);
   }
 
   function removeRow(index: number) {
@@ -79,24 +89,44 @@ export function WeeklyScheduleEditor({
   function submit() {
     setError(null);
     setSaved(false);
-    // Per-row validity (start<end) + intra-weekday overlap.
-    for (const r of rows) {
-      if (r.startTime >= r.endTime) {
-        setError(sc("errStartEnd"));
+    // Save EVERY location whose rows differ from the loaded seed — not just the
+    // currently selected one. The set_schedules RPC is atomic per (provider,
+    // location), so a multi-location doctor who edits A, switches to B, edits B,
+    // then saves persists BOTH (previously A's edits were silently dropped).
+    const dirtyLocationIds = Object.keys(rowsByLocation).filter(
+      (id) => !rowsEqual(rowsByLocation[id] ?? [], seed[id] ?? []),
+    );
+    // Always include the current location so a first-edit on it is never missed
+    // (its seed may legitimately equal its rows after a no-op toggle).
+    const toSave = dirtyLocationIds.includes(locationId)
+      ? dirtyLocationIds
+      : [locationId, ...dirtyLocationIds];
+
+    // Validate every location we're about to write (start<end + intra-weekday
+    // overlap) before any network call, so a bad row blocks the whole save.
+    for (const id of toSave) {
+      const locRows = rowsByLocation[id] ?? [];
+      for (const r of locRows) {
+        if (r.startTime >= r.endTime) {
+          setError(sc("errStartEnd"));
+          return;
+        }
+      }
+      if (hasWeekdayOverlap(locRows)) {
+        setError(sc("errOverlap"));
         return;
       }
     }
-    if (hasWeekdayOverlap(rows)) {
-      setError(sc("errOverlap"));
-      return;
-    }
+
     startTransition(async () => {
-      const res = await saveSchedules({ locationId, rows });
-      if (res.ok) {
-        setSaved(true);
-      } else {
-        setError(res.error === "SCHEDULE_OVERLAP" ? sc("errOverlap") : sc("saveError"));
+      for (const id of toSave) {
+        const res = await saveSchedules({ locationId: id, rows: rowsByLocation[id] ?? [] });
+        if (!res.ok) {
+          setError(res.error === "SCHEDULE_OVERLAP" ? sc("errOverlap") : sc("saveError"));
+          return;
+        }
       }
+      setSaved(true);
     });
   }
 
@@ -220,6 +250,15 @@ export function WeeklyScheduleEditor({
       </button>
     </div>
   );
+}
+
+/** Order-insensitive equality of two locations' row sets (dirty detection). */
+function rowsEqual(a: readonly Row[], b: readonly Row[]): boolean {
+  if (a.length !== b.length) return false;
+  const key = (r: Row) => `${r.weekday}|${r.startTime}|${r.endTime}`;
+  const sa = a.map(key).sort();
+  const sb = b.map(key).sort();
+  return sa.every((v, i) => v === sb[i]);
 }
 
 function hmToMinutes(hm: string): number {

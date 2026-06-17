@@ -30,7 +30,7 @@ export default async function TakvimPage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect(`/${locale}/login?redirect=/saglik-pro/takvim`);
+  if (!user) redirect(`/${locale}/login`);
 
   const [draft, t] = await Promise.all([
     getOwnProvider(user.id, l),

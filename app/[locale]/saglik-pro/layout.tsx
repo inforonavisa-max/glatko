@@ -35,7 +35,11 @@ export default async function SaglikProLayout({
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    redirect(`/${locale}/login?redirect=/saglik-pro/basvuru`);
+    // No ?redirect= suffix: the login page does not honor it (it always lands on
+    // "/"), and the /saglik-pro/* tree is a LOCALIZED pathname (en=/health-pro,
+    // de=/gesundheit-pro, …) so a hardcoded tr segment would be the wrong path for
+    // 8 of 9 locales the moment login ever started honoring it.
+    redirect(`/${locale}/login`);
   }
 
   return children;

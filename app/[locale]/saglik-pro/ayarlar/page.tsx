@@ -30,7 +30,7 @@ export default async function AyarlarPage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect(`/${locale}/login?redirect=/saglik-pro/ayarlar`);
+  if (!user) redirect(`/${locale}/login`);
 
   const [draft, t] = await Promise.all([
     getOwnProvider(user.id, l),

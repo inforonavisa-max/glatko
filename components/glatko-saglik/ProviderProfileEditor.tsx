@@ -384,7 +384,20 @@ export function LocationForm({
 
   function submit() {
     setError(null);
-    const payload = { locationId: initial?.id ?? null, label, address, city, lat: null, lng: null };
+    // Preserve any precise coordinates the row already holds (an edit must not
+    // snap a precise pin back to the city seat) — BUT only when the city is
+    // unchanged; if the provider picked a different city, drop them so the schema
+    // re-derives that city's seat. No map picker yet (H7b), so today coords are
+    // always seat-based, but this keeps an edit lossless once precise pins exist.
+    const cityUnchanged = initial != null && initial.city === city;
+    const payload = {
+      locationId: initial?.id ?? null,
+      label,
+      address,
+      city,
+      lat: cityUnchanged ? (initial?.lat ?? null) : null,
+      lng: cityUnchanged ? (initial?.lng ?? null) : null,
+    };
     const parsed = locationSchema.safeParse(payload);
     if (!parsed.success) {
       setError(p("invalid"));

@@ -13,7 +13,6 @@ import {
   normalizeLanguages,
   resolveCity,
   hasWeekdayOverlap,
-  buildOwnedRpcArgs,
   buildLicensePath,
 } from "./provider-validation";
 
@@ -282,26 +281,6 @@ describe("slugify", () => {
     expect(slugWithSuffix("ana-petrovic", 0)).toBe("ana-petrovic");
     expect(slugWithSuffix("ana-petrovic", 1)).toBe("ana-petrovic-1");
     expect(slugWithSuffix("ana-petrovic", 3)).toBe("ana-petrovic-3");
-  });
-});
-
-describe("buildOwnedRpcArgs (ownership-shape guard)", () => {
-  it("injects the session user id and drops client-forgeable identity keys", () => {
-    const args = buildOwnedRpcArgs("session-uid", {
-      p_user_id: "ATTACKER",
-      user_id: "ATTACKER",
-      provider_id: "ATTACKER",
-      userId: "ATTACKER",
-      providerId: "ATTACKER",
-      p_full_name: "Dr A",
-    });
-    expect(args.p_user_id).toBe("session-uid");
-    // none of the forged identity keys survive
-    expect((args as Record<string, unknown>).user_id).toBeUndefined();
-    expect((args as Record<string, unknown>).provider_id).toBeUndefined();
-    expect((args as Record<string, unknown>).userId).toBeUndefined();
-    expect((args as Record<string, unknown>).providerId).toBeUndefined();
-    expect((args as Record<string, unknown>).p_full_name).toBe("Dr A");
   });
 });
 

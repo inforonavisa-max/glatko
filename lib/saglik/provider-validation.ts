@@ -236,37 +236,6 @@ export const settingsSchema = z.object({
 export type SettingsInput = z.infer<typeof settingsSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Ownership-shape helper (pure) — the #1 correctness guard.
-//
-// The server action builds the RPC args by INJECTING the cookie-verified user.id
-// as p_user_id and NEVER reading provider_id/user_id from the client request body.
-// This builder makes that contract explicit + unit-testable: it takes a trusted
-// session userId + an arbitrary client payload, and emits the RPC arg object with
-// p_user_id forced to the session id — any user_id/provider_id keys in the payload
-// are dropped on the floor.
-// ─────────────────────────────────────────────────────────────────────────────
-
-export function buildOwnedRpcArgs<T extends Record<string, unknown>>(
-  sessionUserId: string,
-  payload: T,
-): { p_user_id: string } & Omit<T, "p_user_id" | "user_id" | "provider_id" | "userId" | "providerId"> {
-  const clone: Record<string, unknown> = { ...payload };
-  // Strip any client-forgeable identity keys — the server is the only source.
-  delete clone.p_user_id;
-  delete clone.user_id;
-  delete clone.provider_id;
-  delete clone.userId;
-  delete clone.providerId;
-  return {
-    p_user_id: sessionUserId,
-    ...(clone as Omit<
-      T,
-      "p_user_id" | "user_id" | "provider_id" | "userId" | "providerId"
-    >),
-  };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // License upload path/ext helper (pure) — mirrors the route's logic so it's
 // unit-testable independently of the request handler.
 // ─────────────────────────────────────────────────────────────────────────────

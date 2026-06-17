@@ -16,11 +16,18 @@ import type {
  * provider read/write goes through the public SECURITY DEFINER owner-checked RPCs
  * from migration 077, called with the service-role client.
  *
- * OWNERSHIP: every wrapper takes a server-VERIFIED userId (the cookie-authenticated
- * user.id resolved by the calling Server Component / action — NEVER the client) and
- * forwards it as p_user_id. The RPC re-checks `providers.user_id = p_user_id` inside
- * the definer, so a caller can only ever touch their own rows. health.owns_provider()
- * is deliberately NOT used here — it reads auth.uid() which is NULL under service_role.
+ * OWNERSHIP (the #1 correctness guard — enforced HERE): every wrapper takes a
+ * server-VERIFIED userId (the cookie-authenticated user.id resolved by the calling
+ * Server Component / action — NEVER the client) and forwards it as p_user_id. The
+ * RPC re-checks `providers.user_id = p_user_id` inside the definer, so a caller can
+ * only ever touch their own rows. health.owns_provider() is deliberately NOT used
+ * here — it reads auth.uid() which is NULL under service_role.
+ *
+ * CONTRACT — NEVER spread the client payload into the RPC args. Each wrapper builds
+ * the arg object field-by-field (p_user_id: userId, p_full_name: input.fullName, …)
+ * so no client-supplied key (user_id/provider_id/etc.) can ever reach the RPC. Do
+ * NOT "simplify" a wrapper to `...input`: that would let a forged identity key slip
+ * through. This field-by-field construction IS the ownership-injection guarantee.
  *
  * RPC-raised business errors surface as PostgREST errors whose message IS the raised
  * code (e.g. "NOT_OWNER"); parseProviderError maps them to a stable union.

@@ -417,8 +417,8 @@ grant execute on function public.health_provider_upsert_location(uuid,uuid,text,
   to service_role;
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- 5) Lokasyon sil (kendi provider'ına bağlı + confirmed randevu/schedule
---    tarafından kullanılmıyorsa). Owner-checked. Döner boolean.
+-- 5) Lokasyon sil (kendi provider'ına bağlı + HİÇBİR randevu — confirmed veya
+--    geçmiş — tarafından kullanılmıyorsa). Owner-checked. Döner boolean.
 -- ─────────────────────────────────────────────────────────────────────────────
 create or replace function public.health_provider_delete_location(
   p_user_id uuid, p_location_id uuid
@@ -442,11 +442,13 @@ begin
     raise exception 'NOT_OWNER';
   end if;
 
-  -- Aktif randevuda kullanılıyorsa engelle (veri bütünlüğü).
+  -- Herhangi bir randevuda kullanılıyorsa engelle (confirmed AYRICA completed/
+  -- cancelled/no_show geçmişi). appointments.location_id FK'sinde ON DELETE
+  -- yok → geçmiş randevulu satırı silmek 23503 fırlatır; bu kontrol o ham FK
+  -- hatası yerine dostça LOCATION_IN_USE döndürür (lib parseProviderError eşler).
   if exists (
     select 1 from health.appointments a
     where a.location_id = p_location_id and a.provider_id = v_pid
-      and a.status = 'confirmed'
   ) then
     raise exception 'LOCATION_IN_USE';
   end if;
@@ -528,7 +530,8 @@ grant execute on function public.health_provider_upsert_service(uuid,uuid,jsonb,
   to service_role;
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- 7) Hizmet sil (kendi provider'ı + confirmed randevu kullanmıyorsa). Owner-checked.
+-- 7) Hizmet sil (kendi provider'ı + HİÇBİR randevu — confirmed veya geçmiş —
+--    kullanmıyorsa). Owner-checked.
 -- ─────────────────────────────────────────────────────────────────────────────
 create or replace function public.health_provider_delete_service(
   p_user_id uuid, p_service_id uuid
@@ -550,9 +553,12 @@ begin
   ) then
     raise exception 'NOT_OWNER';
   end if;
+  -- Herhangi bir randevuda kullanılıyorsa engelle (confirmed + geçmiş). services
+  -- FK'sinde de ON DELETE yok → geçmiş randevulu silmek 23503; bu kontrol ham FK
+  -- yerine dostça SERVICE_IN_USE döndürür.
   if exists (
     select 1 from health.appointments a
-    where a.service_id = p_service_id and a.provider_id = v_pid and a.status = 'confirmed'
+    where a.service_id = p_service_id and a.provider_id = v_pid
   ) then
     raise exception 'SERVICE_IN_USE';
   end if;
