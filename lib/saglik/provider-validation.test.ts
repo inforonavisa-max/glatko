@@ -8,6 +8,8 @@ import {
   scheduleSetSchema,
   scheduleRowSchema,
   settingsSchema,
+  overrideSchema,
+  manualBookSchema,
   slugify,
   slugWithSuffix,
   normalizeLanguages,
@@ -322,5 +324,121 @@ describe("licenseSchema", () => {
   });
   it("accepts a file path", () => {
     expect(licenseSchema.safeParse({ filePath: "uid/license.pdf" }).success).toBe(true);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// H7b — overrideSchema (holiday/break/extra) + manualBookSchema (phone-in booking).
+// ─────────────────────────────────────────────────────────────────────────────
+describe("overrideSchema", () => {
+  it("holiday with no times is valid", () => {
+    const r = overrideSchema.safeParse({ date: "2026-07-01", kind: "holiday" });
+    expect(r.success).toBe(true);
+  });
+
+  it("break requires start < end", () => {
+    expect(
+      overrideSchema.safeParse({
+        date: "2026-07-01",
+        kind: "break",
+        startTime: "12:00",
+        endTime: "13:00",
+      }).success,
+    ).toBe(true);
+    expect(
+      overrideSchema.safeParse({
+        date: "2026-07-01",
+        kind: "break",
+        startTime: "13:00",
+        endTime: "12:00",
+      }).success,
+    ).toBe(false);
+  });
+
+  it("extra requires both times present", () => {
+    expect(
+      overrideSchema.safeParse({ date: "2026-07-01", kind: "extra", startTime: "18:00" }).success,
+    ).toBe(false);
+    expect(
+      overrideSchema.safeParse({
+        date: "2026-07-01",
+        kind: "extra",
+        startTime: "18:00",
+        endTime: "20:00",
+      }).success,
+    ).toBe(true);
+  });
+
+  it("rejects an invalid kind", () => {
+    expect(
+      overrideSchema.safeParse({ date: "2026-07-01", kind: "vacation" }).success,
+    ).toBe(false);
+  });
+
+  it("enforces YYYY-MM-DD date format", () => {
+    expect(overrideSchema.safeParse({ date: "01/07/2026", kind: "holiday" }).success).toBe(false);
+    expect(overrideSchema.safeParse({ date: "2026-7-1", kind: "holiday" }).success).toBe(false);
+  });
+
+  it("accepts an existing id for update", () => {
+    const r = overrideSchema.safeParse({
+      id: "11111111-1111-1111-1111-111111111111",
+      date: "2026-07-01",
+      kind: "holiday",
+    });
+    expect(r.success).toBe(true);
+  });
+});
+
+describe("manualBookSchema", () => {
+  const base = {
+    serviceId: "11111111-1111-1111-1111-111111111111",
+    locationId: "22222222-2222-2222-2222-222222222222",
+    slotStart: "2026-07-01T08:00:00.000Z",
+    slotEnd: "2026-07-01T08:30:00.000Z",
+    patientName: "Marko Markovic",
+    phone: "+38267123456",
+  };
+
+  it("valid name + phone + service/location/slot passes", () => {
+    expect(manualBookSchema.safeParse(base).success).toBe(true);
+  });
+
+  it("rejects a missing/short name", () => {
+    expect(manualBookSchema.safeParse({ ...base, patientName: "" }).success).toBe(false);
+    expect(manualBookSchema.safeParse({ ...base, patientName: "A" }).success).toBe(false);
+  });
+
+  it("rejects a too-short phone string (normalizePhone gate is in the action)", () => {
+    expect(manualBookSchema.safeParse({ ...base, phone: "12" }).success).toBe(false);
+  });
+
+  it("rejects slotStart >= slotEnd", () => {
+    expect(
+      manualBookSchema.safeParse({ ...base, slotEnd: base.slotStart }).success,
+    ).toBe(false);
+    expect(
+      manualBookSchema.safeParse({
+        ...base,
+        slotStart: "2026-07-01T09:00:00.000Z",
+        slotEnd: "2026-07-01T08:00:00.000Z",
+      }).success,
+    ).toBe(false);
+  });
+
+  it("email is optional", () => {
+    expect(manualBookSchema.safeParse(base).success).toBe(true);
+    expect(manualBookSchema.safeParse({ ...base, email: "p@example.com" }).success).toBe(true);
+    expect(manualBookSchema.safeParse({ ...base, email: "not-an-email" }).success).toBe(false);
+  });
+
+  it("note is length-capped at 500", () => {
+    expect(manualBookSchema.safeParse({ ...base, note: "x".repeat(500) }).success).toBe(true);
+    expect(manualBookSchema.safeParse({ ...base, note: "x".repeat(501) }).success).toBe(false);
+  });
+
+  it("rejects a non-UUID service/location", () => {
+    expect(manualBookSchema.safeParse({ ...base, serviceId: "nope" }).success).toBe(false);
+    expect(manualBookSchema.safeParse({ ...base, locationId: "nope" }).success).toBe(false);
   });
 });

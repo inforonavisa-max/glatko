@@ -2637,7 +2637,8 @@
         "ariaLabel": "Prostor pružaoca",
         "profil": "Profil",
         "takvim": "Raspored",
-        "ayarlar": "Podešavanja"
+        "ayarlar": "Podešavanja",
+        "randevular": "Termini"
       },
       "providerType": {
         "doctor": "Ljekar",
@@ -2789,6 +2790,93 @@
           "sat": "Subota",
           "sun": "Nedjelja"
         }
+      },
+      "dashboard": {
+        "title": "Danas ukratko",
+        "manageOverrides": "Upravljaj izuzecima (praznik / pauza / dodatno)",
+        "occupancy": "Popunjenost (2 dana)",
+        "occupancyDetail": "{booked} zakazano / {total} termina",
+        "today": "Danas",
+        "tomorrow": "Sjutra",
+        "noneToday": "Danas nema termina.",
+        "noneTomorrow": "Sjutra nema termina.",
+        "manualAdd": "Dodaj termin",
+        "manualCancel": "Zatvori"
+      },
+      "appointments": {
+        "title": "Termini",
+        "scope": {
+          "upcoming": "Predstojeći",
+          "past": "Prošli",
+          "all": "Svi"
+        },
+        "status": {
+          "any": "Svi statusi",
+          "confirmed": "Potvrđen",
+          "completed": "Završen",
+          "cancelled": "Otkazan",
+          "no_show": "Nije došao"
+        },
+        "sourceProvider": "ručno",
+        "markCompleted": "Završi",
+        "markNoShow": "Nije došao",
+        "markCancelled": "Otkaži",
+        "cancelReasonLabel": "Razlog otkazivanja (ne prikazuje se pacijentu)",
+        "cancelReasonPlaceholder": "npr. ljekar nedostupan",
+        "confirmCancel": "Potvrdi otkazivanje",
+        "cancelAbort": "Zadrži",
+        "empty": "Nema termina za ovaj filter.",
+        "loadError": "Nije moguće učitati termine.",
+        "actionError": "Radnja nije uspjela. Pokušajte ponovo.",
+        "invalidStatus": "Ovaj termin se više ne može mijenjati."
+      },
+      "manual": {
+        "title": "Dodaj termin telefonom",
+        "subtitle": "Unesite podatke pacijenta; potvrda (OTP) nije potrebna.",
+        "service": "Usluga",
+        "location": "Lokacija",
+        "date": "Datum",
+        "slot": "Vrijeme",
+        "min": "min",
+        "loadingSlots": "Učitavanje termina…",
+        "noSlots": "Tog dana nema slobodnih termina.",
+        "noSlot": "Izaberite vrijeme.",
+        "patientName": "Ime pacijenta",
+        "phone": "Telefon",
+        "email": "Imejl",
+        "note": "Napomena",
+        "optional": "opciono",
+        "book": "Kreiraj termin",
+        "booked": "Termin je kreiran.",
+        "bookError": "Nije moguće kreirati termin. Pokušajte ponovo.",
+        "slotTaken": "Taj termin je upravo zauzet. Izaberite drugi.",
+        "badPhone": "Unesite ispravan broj telefona.",
+        "invalid": "Provjerite označena polja."
+      },
+      "override": {
+        "title": "Izuzeci u rasporedu",
+        "subtitle": "Dodajte jednodnevni praznik, pauzu ili dodatne sate.",
+        "date": "Datum",
+        "kind": "Tip",
+        "kindLabel": {
+          "holiday": "Praznik",
+          "break": "Pauza",
+          "extra": "Dodatni sati"
+        },
+        "startTime": "Početak",
+        "endTime": "Kraj",
+        "hint": {
+          "holiday": "Tog dana se ne primaju termini.",
+          "break": "Tog dana su navedeni sati zatvoreni.",
+          "extra": "Tog dana se otvaraju dodatni sati."
+        },
+        "add": "Dodaj",
+        "saved": "Sačuvano",
+        "invalid": "Provjerite datum i vrijeme.",
+        "saveError": "Čuvanje nije uspjelo. Pokušajte ponovo.",
+        "deleteError": "Brisanje nije uspjelo. Pokušajte ponovo.",
+        "delete": "Obriši",
+        "empty": "Još nema izuzetaka."
       }
     }
   },

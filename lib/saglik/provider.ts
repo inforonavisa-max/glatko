@@ -41,16 +41,40 @@ export type ProviderRpcError =
   | "SCHEDULE_OVERLAP"
   | "LOCATION_IN_USE"
   | "SERVICE_IN_USE"
+  // H7b — provider day-ops (status / manual-book / override) codes.
+  | "NOT_FOUND"
+  | "APPOINTMENT_NOT_OWNED"
+  | "INVALID_STATUS"
+  | "SLOT_TAKEN"
+  | "SLOT_INVALID"
+  | "SLOT_PAST"
+  | "SERVICE_INVALID"
+  | "LOCATION_INVALID"
+  | "OVERRIDE_INVALID"
+  | "PATIENT_INPUT_INVALID"
   | "ERROR";
 
 const PROVIDER_RPC_ERRORS: ProviderRpcError[] = [
+  // Order matters: parseProviderError uses .includes(), so longer/more-specific codes
+  // come BEFORE their substrings (APPOINTMENT_NOT_OWNED before NOT_OWNER, SLOT_INVALID
+  // before the looser ones) to avoid a shorter code shadowing a longer raised message.
+  "APPOINTMENT_NOT_OWNED",
   "NOT_A_PROVIDER",
   "NOT_OWNER",
+  "NOT_FOUND",
   "INVALID_FILE_PATH",
+  "INVALID_STATUS",
   "INVALID_INPUT",
   "SCHEDULE_OVERLAP",
   "LOCATION_IN_USE",
+  "LOCATION_INVALID",
   "SERVICE_IN_USE",
+  "SERVICE_INVALID",
+  "SLOT_TAKEN",
+  "SLOT_INVALID",
+  "SLOT_PAST",
+  "OVERRIDE_INVALID",
+  "PATIENT_INPUT_INVALID",
 ];
 
 function parseProviderError(message: string): ProviderRpcError {
@@ -326,4 +350,264 @@ export async function submitForReview(userId: string): Promise<SubmitResult> {
   const d = data as { ok: boolean; missing: string[]; providerId?: string; slug?: string };
   if (!d.ok) return { ok: false, missing: d.missing ?? [] };
   return { ok: true, providerId: d.providerId ?? "", slug: d.slug ?? "" };
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// H7b — provider day-ops data-access (migration 078). Same contract as H7a:
+// createAdminClient().rpc(name, {p_user_id: userId, ...}) built FIELD-BY-FIELD
+// (never ...input); the owner-checked RPC re-verifies providers.user_id=p_user_id
+// (v_pid) + child ownership. PII NEVER leaves the definer un-masked: the list/
+// dashboard RPCs return patientPhoneMasked (last-3) only; email is never returned.
+// ═════════════════════════════════════════════════════════════════════════════
+
+export type AppointmentScope = "upcoming" | "past" | "all";
+
+/** One row of the provider appointment list (PII-safe: masked phone, no email). */
+export type ProviderAppointment = {
+  appointmentId: string;
+  manageToken: string;
+  status: "confirmed" | "cancelled" | "completed" | "no_show";
+  slotStart: string;
+  slotEnd: string;
+  source: "web" | "admin" | "provider";
+  serviceName: string;
+  serviceDurationMin: number;
+  locationLabel: string;
+  locationCity: string;
+  patientNote: string | null;
+  patientName: string;
+  /** Already masked in-RPC ('•••' + last 3 digits). Never the full number. */
+  patientPhoneMasked: string;
+};
+
+/**
+ * The caller's OWN appointments (v_pid filter), masked patient phone only. scope filters
+ * upcoming/past/all; status optionally narrows (confirmed/completed/cancelled/no_show).
+ * A genuine RPC failure throws. (The list itself is read-only; mutations go through the
+ * action wrappers below.)
+ */
+export async function listProviderAppointments(
+  userId: string,
+  locale: Locale,
+  scope: AppointmentScope,
+  status: ProviderAppointment["status"] | null,
+): Promise<ProviderAppointment[]> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_list_appointments", {
+    p_user_id: userId,
+    p_locale: locale,
+    p_scope: scope,
+    p_status: status,
+  });
+  if (error) {
+    throw new Error(`health_provider_list_appointments failed: ${error.message}`);
+  }
+  return (data as ProviderAppointment[] | null) ?? [];
+}
+
+/** The availability inputs bundle (069 shape) the dashboard runs the pure engine over. */
+export type DashboardAvailabilityInputs = {
+  serviceDurationMin: number;
+  settings: {
+    bufferMin: number;
+    minNoticeMin: number;
+    horizonDays: number;
+    dailyCap: number | null;
+    slotGridMin: number;
+  };
+  schedules: Array<{
+    weekday: number;
+    startTime: string;
+    endTime: string;
+    validFrom: string | null;
+    validUntil: string | null;
+  }>;
+  overrides: Array<{
+    date: string;
+    startTime: string | null;
+    endTime: string | null;
+    kind: "holiday" | "break" | "extra";
+  }>;
+  busy: Array<{ start: string; end: string }>;
+  holds: Array<{ start: string; end: string }>;
+};
+
+export type ProviderDashboard = {
+  appointments: ProviderAppointment[];
+  availabilityInputs: DashboardAvailabilityInputs;
+};
+
+/**
+ * Single-call dashboard: confirmed appointments in [from,to] (masked phone) + the
+ * availability-inputs bundle (settings + ALL own-location schedules + overrides + busy +
+ * holds) shaped exactly like 069, so the page runs the pure generateAvailability() twice
+ * (real-busy vs empty-busy) for occupancy without any N+1. A genuine RPC failure throws.
+ */
+export async function getProviderDashboard(
+  userId: string,
+  fromIso: string,
+  toIso: string,
+  locale: Locale,
+): Promise<ProviderDashboard | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_dashboard", {
+    p_user_id: userId,
+    p_from: fromIso,
+    p_to: toIso,
+    p_locale: locale,
+  });
+  if (error) {
+    throw new Error(`health_provider_dashboard failed: ${error.message}`);
+  }
+  return (data as ProviderDashboard | null) ?? null;
+}
+
+/**
+ * Status change (completed/no_show/cancelled), owner-checked. Returns the new status +
+ * manage_token (the cancel path needs the token to enqueue the H6 patient 'cancelled'
+ * notice). The RPC validates the confirmed→target transition + is idempotent.
+ */
+export async function setAppointmentStatus(
+  userId: string,
+  appointmentId: string,
+  status: "completed" | "no_show" | "cancelled",
+  reason: string | null,
+): Promise<WriteResult<{ status: string; manageToken: string }>> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_set_appointment_status", {
+    p_user_id: userId,
+    p_appointment_id: appointmentId,
+    p_status: status,
+    p_reason: reason,
+  });
+  if (error) return { ok: false, code: parseProviderError(error.message) };
+  const d = data as { status: string; manageToken: string };
+  return { ok: true, status: d.status, manageToken: d.manageToken };
+}
+
+export type ManualBookDispatch = {
+  phoneE164: string;
+  email: string | null;
+  patientName: string;
+  confirmSmsReminderId: string;
+  confirmEmailReminderId: string | null;
+};
+export type ManualBookSummary = {
+  providerName: string;
+  providerTitle: string | null;
+  providerSlug: string;
+  serviceName: string;
+  serviceDurationMin: number;
+  servicePriceEur: number | null;
+  locationLabel: string;
+  locationAddress: string;
+  locationCity: string;
+};
+
+export type ManualBookOk = {
+  appointmentId: string;
+  manageToken: string;
+  slotStart: string;
+  slotEnd: string;
+  dispatch: ManualBookDispatch;
+  summary: ManualBookSummary;
+};
+
+/**
+ * Provider-vouched manual booking (no OTP), owner-checked + atomic. Creates the encrypted
+ * patient (Vault key) + the source='provider' appointment guarded by the no_overlap
+ * EXCLUDE (→ SLOT_TAKEN on a double-book) + seeds confirm/t24/t2 reminders, all in one tx.
+ * Returns the dispatch payload (PII the provider TYPED) so the action sends the confirm SMS
+ * immediately. The phone is normalized + hashed BY THE CALLER (lib/saglik/phone); we forward
+ * both p_phone_e164 (RPC encrypts) and p_phone_hash field-by-field.
+ */
+export async function manualBook(
+  userId: string,
+  input: {
+    serviceId: string;
+    locationId: string;
+    slotStart: string;
+    slotEnd: string;
+    patientName: string;
+    phoneE164: string;
+    phoneHash: string;
+    email: string | null;
+    note: string | null;
+  },
+): Promise<WriteResult<ManualBookOk>> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_manual_book", {
+    p_user_id: userId,
+    p_service_id: input.serviceId,
+    p_location_id: input.locationId,
+    p_slot_start: input.slotStart,
+    p_slot_end: input.slotEnd,
+    p_patient_name: input.patientName,
+    p_phone_e164: input.phoneE164,
+    p_phone_hash: input.phoneHash,
+    p_email: input.email,
+    p_note: input.note,
+  });
+  if (error) return { ok: false, code: parseProviderError(error.message) };
+  const d = data as ManualBookOk;
+  return { ok: true, ...d };
+}
+
+export type ProviderOverride = {
+  id: string;
+  date: string;
+  startTime: string | null;
+  endTime: string | null;
+  kind: "holiday" | "break" | "extra";
+};
+
+/** The caller's own schedule overrides. A genuine RPC failure throws. */
+export async function listOverrides(userId: string): Promise<ProviderOverride[]> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_list_overrides", {
+    p_user_id: userId,
+  });
+  if (error) {
+    throw new Error(`health_provider_list_overrides failed: ${error.message}`);
+  }
+  return (data as ProviderOverride[] | null) ?? [];
+}
+
+/** Create/update one override (owner-checked). overrideId null → insert; else update. */
+export async function upsertOverride(
+  userId: string,
+  input: {
+    overrideId: string | null;
+    date: string;
+    kind: "holiday" | "break" | "extra";
+    startTime: string | null;
+    endTime: string | null;
+  },
+): Promise<WriteResult<{ overrideId: string }>> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("health_provider_upsert_override", {
+    p_user_id: userId,
+    p_override_id: input.overrideId,
+    p_date: input.date,
+    p_kind: input.kind,
+    p_start_time: input.startTime,
+    p_end_time: input.endTime,
+  });
+  if (error) return { ok: false, code: parseProviderError(error.message) };
+  const d = data as { overrideId: string };
+  return { ok: true, overrideId: d.overrideId };
+}
+
+/** Delete one override (owner-checked). */
+export async function deleteOverride(
+  userId: string,
+  overrideId: string,
+): Promise<WriteResult<Record<never, never>>> {
+  const supabase = createAdminClient();
+  const { error } = await supabase.rpc("health_provider_delete_override", {
+    p_user_id: userId,
+    p_override_id: overrideId,
+  });
+  if (error) return { ok: false, code: parseProviderError(error.message) };
+  return { ok: true };
 }

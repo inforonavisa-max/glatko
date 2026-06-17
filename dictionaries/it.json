@@ -2634,7 +2634,8 @@
         "ariaLabel": "Area professionista",
         "profil": "Profilo",
         "takvim": "Agenda",
-        "ayarlar": "Impostazioni"
+        "ayarlar": "Impostazioni",
+        "randevular": "Appuntamenti"
       },
       "providerType": {
         "doctor": "Medico",
@@ -2786,6 +2787,93 @@
           "sat": "Sabato",
           "sun": "Domenica"
         }
+      },
+      "dashboard": {
+        "title": "Oggi in sintesi",
+        "manageOverrides": "Gestisci eccezioni (festivo / pausa / extra)",
+        "occupancy": "Occupazione (2 giorni)",
+        "occupancyDetail": "{booked} prenotati / {total} slot",
+        "today": "Oggi",
+        "tomorrow": "Domani",
+        "noneToday": "Nessun appuntamento oggi.",
+        "noneTomorrow": "Nessun appuntamento domani.",
+        "manualAdd": "Aggiungi appuntamento",
+        "manualCancel": "Chiudi"
+      },
+      "appointments": {
+        "title": "Appuntamenti",
+        "scope": {
+          "upcoming": "In arrivo",
+          "past": "Passati",
+          "all": "Tutti"
+        },
+        "status": {
+          "any": "Tutti gli stati",
+          "confirmed": "Confermato",
+          "completed": "Completato",
+          "cancelled": "Annullato",
+          "no_show": "Assente"
+        },
+        "sourceProvider": "manuale",
+        "markCompleted": "Completa",
+        "markNoShow": "Assente",
+        "markCancelled": "Annulla",
+        "cancelReasonLabel": "Motivo dell'annullamento (non mostrato al paziente)",
+        "cancelReasonPlaceholder": "es. medico non disponibile",
+        "confirmCancel": "Conferma annullamento",
+        "cancelAbort": "Mantieni",
+        "empty": "Nessun appuntamento per questo filtro.",
+        "loadError": "Impossibile caricare gli appuntamenti.",
+        "actionError": "Azione non riuscita. Riprova.",
+        "invalidStatus": "Questo appuntamento non può più essere modificato."
+      },
+      "manual": {
+        "title": "Aggiungi appuntamento telefonico",
+        "subtitle": "Inserisci i dati del paziente; nessuna verifica (OTP) richiesta.",
+        "service": "Servizio",
+        "location": "Sede",
+        "date": "Data",
+        "slot": "Ora",
+        "min": "min",
+        "loadingSlots": "Caricamento orari…",
+        "noSlots": "Nessun orario libero quel giorno.",
+        "noSlot": "Seleziona un orario.",
+        "patientName": "Nome del paziente",
+        "phone": "Telefono",
+        "email": "Email",
+        "note": "Nota",
+        "optional": "facoltativo",
+        "book": "Crea appuntamento",
+        "booked": "Appuntamento creato.",
+        "bookError": "Impossibile creare l'appuntamento. Riprova.",
+        "slotTaken": "Quell'orario è appena stato occupato. Scegline un altro.",
+        "badPhone": "Inserisci un numero di telefono valido.",
+        "invalid": "Controlla i campi evidenziati."
+      },
+      "override": {
+        "title": "Eccezioni di orario",
+        "subtitle": "Aggiungi un festivo, una pausa o ore extra di un giorno.",
+        "date": "Data",
+        "kind": "Tipo",
+        "kindLabel": {
+          "holiday": "Festivo",
+          "break": "Pausa",
+          "extra": "Ore extra"
+        },
+        "startTime": "Inizio",
+        "endTime": "Fine",
+        "hint": {
+          "holiday": "Quel giorno non si accettano appuntamenti.",
+          "break": "Le ore indicate sono chiuse quel giorno.",
+          "extra": "Quel giorno si aprono ore extra."
+        },
+        "add": "Aggiungi",
+        "saved": "Salvato",
+        "invalid": "Controlla data e orari.",
+        "saveError": "Salvataggio non riuscito. Riprova.",
+        "deleteError": "Eliminazione non riuscita. Riprova.",
+        "delete": "Elimina",
+        "empty": "Ancora nessuna eccezione."
       }
     }
   },

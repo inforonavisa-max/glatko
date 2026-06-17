@@ -388,6 +388,29 @@ export async function dispatchConfirm(result: Extract<BookResult, { ok: true }>,
   }
 }
 
+/**
+ * H7b: dispatch the confirm SMS/email for a PROVIDER manual booking. The migration-078
+ * manual-book RPC returns the SAME dispatch/summary shape as the patient book RPC (071),
+ * so this is a thin reuse of dispatchConfirm — the provider-vouched patient gets the
+ * identical confirm copy + manage link, and the t24/t2 rows stay 'pending' for the H6
+ * cron. Best-effort & two-layer (dispatchConfirm itself never throws). The structural
+ * `ok:true` wrapper lets us pass the manual-book payload straight through without
+ * duplicating the SMS/email/markReminder logic.
+ */
+export async function dispatchManualConfirm(
+  result: {
+    appointmentId: string;
+    manageToken: string;
+    slotStart: string;
+    slotEnd: string;
+    dispatch: BookDispatch;
+    summary: BookSummary;
+  },
+  locale: Locale,
+): Promise<void> {
+  await dispatchConfirm({ ok: true, ...result }, locale);
+}
+
 export type AppointmentSummary = {
   status: "confirmed" | "cancelled" | "completed" | "no_show";
   slotStart: string;

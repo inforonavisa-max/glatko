@@ -2637,7 +2637,8 @@
         "ariaLabel": "Sağlayıcı alanı",
         "profil": "Profil",
         "takvim": "Takvim",
-        "ayarlar": "Ayarlar"
+        "ayarlar": "Ayarlar",
+        "randevular": "Randevular"
       },
       "providerType": {
         "doctor": "Doktor",
@@ -2789,6 +2790,93 @@
           "sat": "Cumartesi",
           "sun": "Pazar"
         }
+      },
+      "dashboard": {
+        "title": "Bugünün özeti",
+        "manageOverrides": "İstisnaları yönet (tatil / mola / ekstra)",
+        "occupancy": "Doluluk (2 gün)",
+        "occupancyDetail": "{booked} dolu / {total} slot",
+        "today": "Bugün",
+        "tomorrow": "Yarın",
+        "noneToday": "Bugün randevu yok.",
+        "noneTomorrow": "Yarın randevu yok.",
+        "manualAdd": "Manuel randevu",
+        "manualCancel": "Kapat"
+      },
+      "appointments": {
+        "title": "Randevular",
+        "scope": {
+          "upcoming": "Yaklaşan",
+          "past": "Geçmiş",
+          "all": "Tümü"
+        },
+        "status": {
+          "any": "Tüm durumlar",
+          "confirmed": "Onaylı",
+          "completed": "Tamamlandı",
+          "cancelled": "İptal edildi",
+          "no_show": "Gelmedi"
+        },
+        "sourceProvider": "manuel",
+        "markCompleted": "Tamamlandı",
+        "markNoShow": "Gelmedi",
+        "markCancelled": "İptal et",
+        "cancelReasonLabel": "İptal nedeni (hastaya bildirilmez)",
+        "cancelReasonPlaceholder": "ör. doktor müsait değil",
+        "confirmCancel": "İptali onayla",
+        "cancelAbort": "Vazgeç",
+        "empty": "Bu filtreyle randevu yok.",
+        "loadError": "Randevular yüklenemedi.",
+        "actionError": "İşlem başarısız. Lütfen tekrar deneyin.",
+        "invalidStatus": "Bu randevu artık değiştirilemez."
+      },
+      "manual": {
+        "title": "Telefonla randevu ekle",
+        "subtitle": "Hasta bilgilerini girin; doğrulama (OTP) gerekmez.",
+        "service": "Hizmet",
+        "location": "Lokasyon",
+        "date": "Tarih",
+        "slot": "Saat",
+        "min": "dk",
+        "loadingSlots": "Saatler yükleniyor…",
+        "noSlots": "Bu gün müsait saat yok.",
+        "noSlot": "Lütfen bir saat seçin.",
+        "patientName": "Hasta adı",
+        "phone": "Telefon",
+        "email": "E-posta",
+        "note": "Not",
+        "optional": "isteğe bağlı",
+        "book": "Randevu oluştur",
+        "booked": "Randevu oluşturuldu.",
+        "bookError": "Randevu oluşturulamadı. Lütfen tekrar deneyin.",
+        "slotTaken": "Bu saat az önce doldu. Lütfen başka bir saat seçin.",
+        "badPhone": "Geçerli bir telefon numarası girin.",
+        "invalid": "Lütfen işaretli alanları kontrol edin."
+      },
+      "override": {
+        "title": "Takvim istisnaları",
+        "subtitle": "Tek günlük tatil, mola veya ekstra mesai ekleyin.",
+        "date": "Tarih",
+        "kind": "Tür",
+        "kindLabel": {
+          "holiday": "Tatil",
+          "break": "Mola",
+          "extra": "Ekstra mesai"
+        },
+        "startTime": "Başlangıç",
+        "endTime": "Bitiş",
+        "hint": {
+          "holiday": "O gün hiç randevu alınmaz.",
+          "break": "O gün belirtilen saatler kapatılır.",
+          "extra": "O gün belirtilen saatlerde ekstra çalışılır."
+        },
+        "add": "Ekle",
+        "saved": "Kaydedildi",
+        "invalid": "Lütfen tarih ve saatleri kontrol edin.",
+        "saveError": "Kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteError": "Silinemedi. Lütfen tekrar deneyin.",
+        "delete": "Sil",
+        "empty": "Henüz istisna yok."
       }
     }
   },

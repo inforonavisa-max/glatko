@@ -219,6 +219,63 @@ export function hasWeekdayOverlap(rows: readonly ScheduleRowInput[]): boolean {
   return false;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// H7b — schedule override + manual booking schemas (provider day-ops).
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const OVERRIDE_KINDS = ["holiday", "break", "extra"] as const;
+export type OverrideKind = (typeof OVERRIDE_KINDS)[number];
+
+const HHMM_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * One schedule_override (holiday/break/extra) for a local calendar date. holiday
+ * needs NO times (the whole day is off); break/extra REQUIRE start<end (the window
+ * to carve out / add). Mirrors the 078 health_provider_upsert_override RPC, which is
+ * the final authority. `id` present = update an existing row, absent = insert.
+ */
+export const overrideSchema = z
+  .object({
+    id: z.string().uuid().optional().nullable(),
+    date: z.string().regex(DATE_RE, "YYYY-MM-DD"),
+    kind: z.enum(OVERRIDE_KINDS),
+    startTime: z.string().regex(HHMM_RE, "HH:MM").optional().nullable(),
+    endTime: z.string().regex(HHMM_RE, "HH:MM").optional().nullable(),
+  })
+  .refine(
+    (o) =>
+      o.kind === "holiday" ||
+      (!!o.startTime && !!o.endTime && o.startTime < o.endTime),
+    { message: "break/extra require start < end" },
+  );
+export type OverrideInput = z.infer<typeof overrideSchema>;
+
+/**
+ * Provider-vouched manual booking (phone-in patient; NO OTP — the provider is the
+ * trusted actor). The phone is validated/normalized server-side via lib/saglik/phone
+ * (normalizePhone) before the RPC; here we only sanity-check it's a non-empty string,
+ * length-cap the note, and require name + service/location/slot. Mirrors the 078
+ * health_provider_manual_book RPC, which re-checks ownership + the slot atomically.
+ */
+export const manualBookSchema = z
+  .object({
+    serviceId: z.string().uuid(),
+    locationId: z.string().uuid(),
+    /** ISO UTC instants (from the slot picker). */
+    slotStart: z.string().datetime({ offset: true }),
+    slotEnd: z.string().datetime({ offset: true }),
+    patientName: z.string().trim().min(2, "name required").max(120),
+    /** Raw user input; normalized to E.164 in the action (normalizePhone). */
+    phone: z.string().trim().min(4, "phone required").max(32),
+    email: z.string().trim().email("invalid email").max(320).optional().nullable(),
+    note: z.string().trim().max(500).optional().nullable(),
+  })
+  .refine((m) => Date.parse(m.slotStart) < Date.parse(m.slotEnd), {
+    message: "slotStart must be before slotEnd",
+  });
+export type ManualBookInput = z.infer<typeof manualBookSchema>;
+
 export const settingsSchema = z.object({
   bufferMin: z.number().int().min(0).max(240),
   minNoticeMin: z.number().int().min(0).max(20160), // <= 2 weeks

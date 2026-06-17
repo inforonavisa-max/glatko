@@ -1,18 +1,20 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { User, Settings, CalendarClock } from "lucide-react";
+import { User, Settings, CalendarClock, CalendarDays } from "lucide-react";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 /**
- * Glatko Sağlık — provider tree nav (H7a). Mirrors components/settings/SettingsNav:
- * profil / ayarlar / takvim tabs (the onboarding wizard at /basvuru renders its own
- * step indicator, so it's intentionally NOT a tab here — onboarding is a one-time
- * flow, these three are the recurring editors). brandHealth accent.
+ * Glatko Sağlık — provider tree nav (H7a + H7b). Mirrors components/settings/SettingsNav:
+ * randevular (day-ops dashboard) / profil / takvim / ayarlar tabs (the onboarding wizard at
+ * /basvuru renders its own step indicator, so it's intentionally NOT a tab here — onboarding
+ * is a one-time flow). randevular is first because it's the recurring landing the provider
+ * lives in. brandHealth accent.
  */
 const TABS = [
+  { href: "/health-pro/randevular", labelKey: "randevular", icon: CalendarDays },
   { href: "/health-pro/profil", labelKey: "profil", icon: User },
   { href: "/health-pro/takvim", labelKey: "takvim", icon: CalendarClock },
   { href: "/health-pro/ayarlar", labelKey: "ayarlar", icon: Settings },

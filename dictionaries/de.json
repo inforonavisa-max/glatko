@@ -2634,7 +2634,8 @@
         "ariaLabel": "Anbieterbereich",
         "profil": "Profil",
         "takvim": "Zeitplan",
-        "ayarlar": "Einstellungen"
+        "ayarlar": "Einstellungen",
+        "randevular": "Termine"
       },
       "providerType": {
         "doctor": "Arzt",
@@ -2786,6 +2787,93 @@
           "sat": "Samstag",
           "sun": "Sonntag"
         }
+      },
+      "dashboard": {
+        "title": "Heute im Überblick",
+        "manageOverrides": "Ausnahmen verwalten (Feiertag / Pause / Extra)",
+        "occupancy": "Auslastung (2 Tage)",
+        "occupancyDetail": "{booked} gebucht / {total} Slots",
+        "today": "Heute",
+        "tomorrow": "Morgen",
+        "noneToday": "Heute keine Termine.",
+        "noneTomorrow": "Morgen keine Termine.",
+        "manualAdd": "Termin hinzufügen",
+        "manualCancel": "Schließen"
+      },
+      "appointments": {
+        "title": "Termine",
+        "scope": {
+          "upcoming": "Anstehend",
+          "past": "Vergangen",
+          "all": "Alle"
+        },
+        "status": {
+          "any": "Alle Status",
+          "confirmed": "Bestätigt",
+          "completed": "Abgeschlossen",
+          "cancelled": "Storniert",
+          "no_show": "Nicht erschienen"
+        },
+        "sourceProvider": "manuell",
+        "markCompleted": "Abschließen",
+        "markNoShow": "Nicht erschienen",
+        "markCancelled": "Stornieren",
+        "cancelReasonLabel": "Stornogrund (dem Patienten nicht angezeigt)",
+        "cancelReasonPlaceholder": "z. B. Arzt nicht verfügbar",
+        "confirmCancel": "Stornierung bestätigen",
+        "cancelAbort": "Behalten",
+        "empty": "Keine Termine für diesen Filter.",
+        "loadError": "Termine konnten nicht geladen werden.",
+        "actionError": "Aktion fehlgeschlagen. Bitte erneut versuchen.",
+        "invalidStatus": "Dieser Termin kann nicht mehr geändert werden."
+      },
+      "manual": {
+        "title": "Telefontermin hinzufügen",
+        "subtitle": "Patientendaten eingeben; keine Verifizierung (OTP) nötig.",
+        "service": "Leistung",
+        "location": "Standort",
+        "date": "Datum",
+        "slot": "Uhrzeit",
+        "min": "Min.",
+        "loadingSlots": "Zeiten werden geladen…",
+        "noSlots": "An diesem Tag keine freien Zeiten.",
+        "noSlot": "Bitte eine Uhrzeit wählen.",
+        "patientName": "Name des Patienten",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "note": "Notiz",
+        "optional": "optional",
+        "book": "Termin erstellen",
+        "booked": "Termin erstellt.",
+        "bookError": "Termin konnte nicht erstellt werden. Bitte erneut versuchen.",
+        "slotTaken": "Diese Zeit wurde gerade vergeben. Bitte eine andere wählen.",
+        "badPhone": "Gültige Telefonnummer eingeben.",
+        "invalid": "Bitte markierte Felder prüfen."
+      },
+      "override": {
+        "title": "Ausnahmen im Zeitplan",
+        "subtitle": "Eintägigen Feiertag, Pause oder Extra-Stunden hinzufügen.",
+        "date": "Datum",
+        "kind": "Art",
+        "kindLabel": {
+          "holiday": "Feiertag",
+          "break": "Pause",
+          "extra": "Extra-Stunden"
+        },
+        "startTime": "Beginn",
+        "endTime": "Ende",
+        "hint": {
+          "holiday": "An diesem Tag werden keine Termine angenommen.",
+          "break": "Die angegebenen Stunden sind an diesem Tag geschlossen.",
+          "extra": "An diesem Tag werden Extra-Stunden geöffnet."
+        },
+        "add": "Hinzufügen",
+        "saved": "Gespeichert",
+        "invalid": "Bitte Datum und Zeiten prüfen.",
+        "saveError": "Speichern fehlgeschlagen. Bitte erneut versuchen.",
+        "deleteError": "Löschen fehlgeschlagen. Bitte erneut versuchen.",
+        "delete": "Löschen",
+        "empty": "Noch keine Ausnahmen."
       }
     }
   },

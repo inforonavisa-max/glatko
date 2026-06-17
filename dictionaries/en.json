@@ -2634,7 +2634,8 @@
         "ariaLabel": "Provider area",
         "profil": "Profile",
         "takvim": "Schedule",
-        "ayarlar": "Settings"
+        "ayarlar": "Settings",
+        "randevular": "Appointments"
       },
       "providerType": {
         "doctor": "Doctor",
@@ -2786,6 +2787,93 @@
           "sat": "Saturday",
           "sun": "Sunday"
         }
+      },
+      "dashboard": {
+        "title": "Today at a glance",
+        "manageOverrides": "Manage exceptions (holiday / break / extra)",
+        "occupancy": "Occupancy (2 days)",
+        "occupancyDetail": "{booked} booked / {total} slots",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "noneToday": "No appointments today.",
+        "noneTomorrow": "No appointments tomorrow.",
+        "manualAdd": "Add appointment",
+        "manualCancel": "Close"
+      },
+      "appointments": {
+        "title": "Appointments",
+        "scope": {
+          "upcoming": "Upcoming",
+          "past": "Past",
+          "all": "All"
+        },
+        "status": {
+          "any": "All statuses",
+          "confirmed": "Confirmed",
+          "completed": "Completed",
+          "cancelled": "Cancelled",
+          "no_show": "No-show"
+        },
+        "sourceProvider": "manual",
+        "markCompleted": "Complete",
+        "markNoShow": "No-show",
+        "markCancelled": "Cancel",
+        "cancelReasonLabel": "Cancellation reason (not shown to patient)",
+        "cancelReasonPlaceholder": "e.g. doctor unavailable",
+        "confirmCancel": "Confirm cancel",
+        "cancelAbort": "Keep",
+        "empty": "No appointments match this filter.",
+        "loadError": "Could not load appointments.",
+        "actionError": "Action failed. Please try again.",
+        "invalidStatus": "This appointment can no longer be changed."
+      },
+      "manual": {
+        "title": "Add a phone-in appointment",
+        "subtitle": "Enter the patient's details; no verification (OTP) needed.",
+        "service": "Service",
+        "location": "Location",
+        "date": "Date",
+        "slot": "Time",
+        "min": "min",
+        "loadingSlots": "Loading times…",
+        "noSlots": "No open times that day.",
+        "noSlot": "Please pick a time.",
+        "patientName": "Patient name",
+        "phone": "Phone",
+        "email": "Email",
+        "note": "Note",
+        "optional": "optional",
+        "book": "Create appointment",
+        "booked": "Appointment created.",
+        "bookError": "Could not create the appointment. Please try again.",
+        "slotTaken": "That time was just taken. Please pick another.",
+        "badPhone": "Enter a valid phone number.",
+        "invalid": "Please check the highlighted fields."
+      },
+      "override": {
+        "title": "Schedule exceptions",
+        "subtitle": "Add a single-day holiday, break, or extra hours.",
+        "date": "Date",
+        "kind": "Type",
+        "kindLabel": {
+          "holiday": "Holiday",
+          "break": "Break",
+          "extra": "Extra hours"
+        },
+        "startTime": "Start",
+        "endTime": "End",
+        "hint": {
+          "holiday": "No appointments are taken that day.",
+          "break": "The given hours are closed that day.",
+          "extra": "Extra hours are opened that day."
+        },
+        "add": "Add",
+        "saved": "Saved",
+        "invalid": "Please check the date and times.",
+        "saveError": "Could not save. Please try again.",
+        "deleteError": "Could not delete. Please try again.",
+        "delete": "Delete",
+        "empty": "No exceptions yet."
       }
     }
   },

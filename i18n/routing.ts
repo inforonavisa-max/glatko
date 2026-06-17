@@ -320,6 +320,30 @@ export const routing = defineRouting({
       me: "/zdravlje-pro/takvim",
       ar: "/al-sihha-pro/takvim",
     },
+    // H7b — provider day-ops landing (dashboard + appointment list + manual add).
+    "/health-pro/randevular": {
+      tr: "/saglik-pro/randevular",
+      en: "/health-pro/randevular",
+      de: "/gesundheit-pro/randevular",
+      it: "/salute-pro/randevular",
+      ru: "/zdorove-pro/randevular",
+      uk: "/zdorovya-pro/randevular",
+      sr: "/zdravlje-pro/randevular",
+      me: "/zdravlje-pro/randevular",
+      ar: "/al-sihha-pro/randevular",
+    },
+    // H7b — schedule override editor (holiday/break/extra).
+    "/health-pro/randevular/override": {
+      tr: "/saglik-pro/randevular/override",
+      en: "/health-pro/randevular/override",
+      de: "/gesundheit-pro/randevular/override",
+      it: "/salute-pro/randevular/override",
+      ru: "/zdorove-pro/randevular/override",
+      uk: "/zdorovya-pro/randevular/override",
+      sr: "/zdravlje-pro/randevular/override",
+      me: "/zdravlje-pro/randevular/override",
+      ar: "/al-sihha-pro/randevular/override",
+    },
 
     // Work & career vertical placeholder (K1 — own coming-soon page)
     "/career": {

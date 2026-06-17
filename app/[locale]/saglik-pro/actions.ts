@@ -12,6 +12,8 @@ import {
   serviceSchema,
   scheduleSetSchema,
   settingsSchema,
+  overrideSchema,
+  manualBookSchema,
 } from "@/lib/saglik/provider-validation";
 import {
   upsertProfile,
@@ -24,9 +26,22 @@ import {
   upsertSettings,
   submitForReview,
   getOwnProvider,
+  setAppointmentStatus,
+  manualBook,
+  upsertOverride,
+  deleteOverride,
+  listProviderAppointments,
   type OwnProvider,
   type ProviderRpcError,
+  type ManualBookOk,
+  type ProviderAppointment,
 } from "@/lib/saglik/provider";
+import { normalizePhone, phoneHash } from "@/lib/saglik/phone";
+import {
+  enqueueCancelledNotice,
+  enqueueBookingFollowups,
+  dispatchManualConfirm,
+} from "@/lib/saglik/booking";
 
 /**
  * Glatko Sağlık — H7a provider mutation server actions.
@@ -249,4 +264,134 @@ export async function finalizeOnboarding(): Promise<
   }
   if ("missing" in r) return { ok: false, missing: r.missing };
   return { ok: false, error: r.code };
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// H7b — provider day-ops actions (status change / manual-book / overrides).
+//
+// Same path as H7a: requireUserId() → zod-validate → owner-checked 078 RPC →
+// revalidateProviderTree(). The cancel + manual-book actions additionally fire the
+// best-effort H6 enqueue + immediate dispatch AFTER the RPC commits, two-layer /
+// never-throw (a notification hiccup must NOT roll back the DB change). No PII logged.
+// ═════════════════════════════════════════════════════════════════════════════
+
+const UUID_RE = /^[0-9a-f-]{36}$/i;
+
+/**
+ * Reload the caller's OWN appointments for a scope/status (the list filter re-fetch).
+ * Owner-checked inside the RPC; masked phone only. Returns [] when unauthenticated so the
+ * client just renders empty rather than throwing.
+ */
+export async function loadProviderAppointments(
+  locale: Locale,
+  scope: "upcoming" | "past" | "all",
+  status: "confirmed" | "completed" | "cancelled" | "no_show" | null,
+): Promise<{ ok: true; appointments: ProviderAppointment[] } | { ok: false }> {
+  const userId = await requireUserId();
+  if (!userId) return { ok: false };
+  const appointments = await listProviderAppointments(userId, locale, scope, status);
+  return { ok: true, appointments };
+}
+
+/**
+ * Mark an appointment completed / no_show / cancelled. On a successful CANCEL, queue the
+ * patient's H6 'cancelled' notice (idempotent, only-cancelled) BEST-EFFORT — exactly like
+ * the patient cancel path. completed/no_show enqueue nothing.
+ */
+export async function changeAppointmentStatus(
+  appointmentId: string,
+  status: "completed" | "no_show" | "cancelled",
+  reason?: string,
+): Promise<ActionResult<{ status: string }>> {
+  const userId = await requireUserId();
+  if (!userId) return { ok: false, error: "UNAUTHORIZED" };
+  if (!UUID_RE.test(appointmentId)) return { ok: false, error: "VALIDATION" };
+  if (status !== "completed" && status !== "no_show" && status !== "cancelled") {
+    return { ok: false, error: "VALIDATION" };
+  }
+  const r = await setAppointmentStatus(userId, appointmentId, status, reason ?? null);
+  if (!r.ok) return { ok: false, error: r.code };
+
+  // Two-layer: enqueue the patient cancelled notice AFTER the RPC committed. The H6 cron
+  // delivers the SMS/email in the patient's locale (reminder_locale sidecar). Never-throw.
+  if (status === "cancelled") {
+    await enqueueCancelledNotice(r.manageToken);
+  }
+  revalidateProviderTree();
+  return { ok: true, status: r.status };
+}
+
+/**
+ * Provider-vouched manual booking (phone-in patient). Normalizes + hashes the phone here
+ * (the RPC encrypts + computes nothing), books atomically via the owner-checked 078 RPC,
+ * then dispatches the confirm SMS/email immediately + sets the reminder locale, both
+ * best-effort. Takes the locale so the confirm copy + date render correctly.
+ */
+export async function createManualBooking(
+  locale: Locale,
+  raw: unknown,
+): Promise<ActionResult<{ appointmentId: string; manageToken: string }>> {
+  const userId = await requireUserId();
+  if (!userId) return { ok: false, error: "UNAUTHORIZED" };
+  const parsed = manualBookSchema.safeParse(raw);
+  if (!parsed.success) return { ok: false, error: "VALIDATION" };
+
+  // Normalize the provider-typed phone to E.164 (ME default) + compute the patients
+  // lookup hash EXACTLY like the OTP path, so the RPC just encrypts + stores.
+  const e164 = normalizePhone(parsed.data.phone);
+  if (!e164) return { ok: false, error: "PATIENT_INPUT_INVALID" };
+  const hash = phoneHash(e164);
+
+  const r = await manualBook(userId, {
+    serviceId: parsed.data.serviceId,
+    locationId: parsed.data.locationId,
+    slotStart: parsed.data.slotStart,
+    slotEnd: parsed.data.slotEnd,
+    patientName: parsed.data.patientName,
+    phoneE164: e164,
+    phoneHash: hash,
+    email: parsed.data.email ?? null,
+    note: parsed.data.note ?? null,
+  });
+  if (!r.ok) return { ok: false, error: r.code };
+
+  // Two-layer best-effort, AFTER the booking committed: send the confirm SMS/email now +
+  // persist the patient's locale so the H6 cron renders t24/t2 in the right language.
+  const ok: ManualBookOk = r;
+  await dispatchManualConfirm(ok, locale);
+  await enqueueBookingFollowups(ok.appointmentId, locale);
+
+  revalidateProviderTree();
+  return { ok: true, appointmentId: ok.appointmentId, manageToken: ok.manageToken };
+}
+
+/** Create/update one schedule override (holiday/break/extra), owner-checked. */
+export async function saveOverride(
+  raw: unknown,
+): Promise<ActionResult<{ overrideId: string }>> {
+  const userId = await requireUserId();
+  if (!userId) return { ok: false, error: "UNAUTHORIZED" };
+  const parsed = overrideSchema.safeParse(raw);
+  if (!parsed.success) return { ok: false, error: "VALIDATION" };
+  const r = await upsertOverride(userId, {
+    overrideId: parsed.data.id ?? null,
+    date: parsed.data.date,
+    kind: parsed.data.kind,
+    startTime: parsed.data.kind === "holiday" ? null : parsed.data.startTime ?? null,
+    endTime: parsed.data.kind === "holiday" ? null : parsed.data.endTime ?? null,
+  });
+  if (!r.ok) return { ok: false, error: r.code };
+  revalidateProviderTree();
+  return { ok: true, overrideId: r.overrideId };
+}
+
+/** Delete one schedule override, owner-checked. */
+export async function removeOverride(overrideId: string): Promise<ActionResult> {
+  const userId = await requireUserId();
+  if (!userId) return { ok: false, error: "UNAUTHORIZED" };
+  if (!UUID_RE.test(overrideId)) return { ok: false, error: "VALIDATION" };
+  const r = await deleteOverride(userId, overrideId);
+  if (!r.ok) return { ok: false, error: r.code };
+  revalidateProviderTree();
+  return { ok: true };
 }
