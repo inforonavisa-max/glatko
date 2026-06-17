@@ -158,7 +158,7 @@ export function ProviderAppointmentList({
                       {item.patientName}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-white/50">
-                      {item.patientPhoneMasked} · {item.serviceName}
+                      <bdi>{item.patientPhoneMasked}</bdi> · {item.serviceName}
                       {item.source === "provider" && (
                         <span className="ml-1 rounded bg-brandHealth-50 px-1.5 py-0.5 text-[10px] font-medium text-brandHealth-700 dark:bg-brandHealth/10 dark:text-brandHealth">
                           {a("sourceProvider")}

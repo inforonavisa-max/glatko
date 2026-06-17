@@ -17,7 +17,12 @@ import {
   DEFAULT_TIME_ZONE,
   type AvailabilityInputs,
 } from "@/lib/saglik/availability";
-import { computeOccupancy, countSlots, type Occupancy } from "@/lib/saglik/occupancy";
+import {
+  computeOccupancy,
+  countSlots,
+  countCapacitySlots,
+  type Occupancy,
+} from "@/lib/saglik/occupancy";
 import { PageBackground } from "@/components/ui/PageBackground";
 import { Link } from "@/i18n/navigation";
 import { SaglikProNav } from "@/components/glatko-saglik/SaglikProNav";
@@ -63,14 +68,20 @@ function occupancyForWindow(
   }
   const freeDays = generateAvailability(inputs, opts);
   const capacityDays = generateAvailability({ ...inputs, busy: [], holds: [] }, opts);
-  // booked = confirmed appointments whose start falls in the window.
-  const fromMs = new Date(`${fromDate}T00:00:00Z`).getTime() - MS_PER_DAY;
-  const toMs = new Date(`${toDate}T23:59:59Z`).getTime() + MS_PER_DAY;
+  // booked = confirmed appointments whose LOCAL calendar day is inside [fromDate,toDate].
+  // The RPC over-widens busy[] by ±1 day for boundary safety, so we must bucket by the
+  // SAME local-day window the capacity/free runs cover — otherwise a day-before/after
+  // appointment inflates the numerator against a denominator that excludes that day.
+  const dayOf = (iso: string) =>
+    new Intl.DateTimeFormat("en-CA", { timeZone: DEFAULT_TIME_ZONE }).format(new Date(iso));
   const booked = inputs.busy.filter((b) => {
-    const t = Date.parse(b.start);
-    return Number.isFinite(t) && t >= fromMs && t <= toMs;
+    const day = dayOf(b.start);
+    return day >= fromDate && day <= toDate;
   }).length;
-  return computeOccupancy(countSlots(capacityDays), countSlots(freeDays), booked);
+  // capacity must respect daily_cap: the empty-busy run can't apply the cap (the engine
+  // derives it from busy[], which is [] here), so clamp per-day with countCapacitySlots.
+  const capacity = countCapacitySlots(capacityDays, inputs.settings.dailyCap);
+  return computeOccupancy(capacity, countSlots(freeDays), booked);
 }
 
 export default async function RandevularPage({

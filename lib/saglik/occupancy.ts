@@ -48,10 +48,28 @@ export function countSlots(days: DaySlots[]): number {
 }
 
 /**
+ * Cap-aware capacity count for a DaySlots[] window. The capacity run feeds the engine
+ * busy=[]/holds=[] so daily_cap NEVER shrinks it (confirmedPerDay is built from busy[]
+ * only). We therefore clamp each day's grid count to `dailyCap` HERE so a configured cap
+ * bounds the denominator the same way it bounds the free run — otherwise a fully-capped
+ * day reads far below 100% (e.g. booked=cap against the full ungated grid). dailyCap=null
+ * (no cap) → plain slot count.
+ */
+export function countCapacitySlots(days: DaySlots[], dailyCap: number | null): number {
+  if (dailyCap == null) return countSlots(days);
+  const cap = Math.max(0, dailyCap);
+  let n = 0;
+  for (const d of days) n += Math.min(d.slots.length, cap);
+  return n;
+}
+
+/**
  * Occupancy from the two engine runs + the confirmed count. capacity = free + booked
  * is NOT used (a booked slot no longer appears as free, and the empty-busy run already
  * yields the true capacity incl. the slots the bookings occupy) — we take capacity from
- * the empty-busy run directly so daily-cap / overrides shrink BOTH consistently.
+ * the empty-busy run directly. daily_cap can NOT shrink the empty-busy run (the engine
+ * derives its per-day cap from busy[], which is empty there), so the caller passes a
+ * cap-aware capacity via countCapacitySlots() — overrides shrink both runs natively.
  *
  * rate = booked / total. When total is 0 (provider closed that window, or daily-cap
  * already 0) the rate is 0 (not NaN, not Infinity) — a closed day is "0% busy", which is

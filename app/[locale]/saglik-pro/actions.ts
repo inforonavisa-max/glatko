@@ -39,7 +39,7 @@ import {
 import { normalizePhone, phoneHash } from "@/lib/saglik/phone";
 import {
   enqueueCancelledNotice,
-  enqueueBookingFollowups,
+  setReminderLocale,
   dispatchManualConfirm,
 } from "@/lib/saglik/booking";
 
@@ -356,10 +356,12 @@ export async function createManualBooking(
   if (!r.ok) return { ok: false, error: r.code };
 
   // Two-layer best-effort, AFTER the booking committed: send the confirm SMS/email now +
-  // persist the patient's locale so the H6 cron renders t24/t2 in the right language.
+  // persist the patient's locale so the H6 cron renders t24/t2 in the right language. We
+  // do NOT enqueue the provider's "new booking" notice here — the provider is the actor
+  // (phone-in entry) and already knows; only the patient-facing locale sidecar is set.
   const ok: ManualBookOk = r;
   await dispatchManualConfirm(ok, locale);
-  await enqueueBookingFollowups(ok.appointmentId, locale);
+  await setReminderLocale(ok.appointmentId, locale);
 
   revalidateProviderTree();
   return { ok: true, appointmentId: ok.appointmentId, manageToken: ok.manageToken };

@@ -230,7 +230,9 @@ export function ProviderScheduleOverrideEditor({
                 </p>
                 {item.kind !== "holiday" && item.startTime && item.endTime && (
                   <p className="text-xs text-gray-500 dark:text-white/50">
-                    {item.startTime} – {item.endTime}
+                    <bdi>
+                      {item.startTime} – {item.endTime}
+                    </bdi>
                   </p>
                 )}
               </div>

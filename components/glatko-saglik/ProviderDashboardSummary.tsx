@@ -107,9 +107,10 @@ export function ProviderDashboardSummary({
             />
           </div>
           <p className="mt-2 text-xs text-gray-500 dark:text-white/40">
-            {d("occupancyDetail")
-              .replace("{booked}", String(occupancy.booked))
-              .replace("{total}", String(occupancy.total))}
+            {t("pro.dashboard.occupancyDetail", {
+              booked: occupancy.booked,
+              total: occupancy.total,
+            })}
           </p>
         </div>
         <DayCount label={d("today")} count={today.length} />

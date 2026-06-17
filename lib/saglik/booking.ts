@@ -273,14 +273,13 @@ export async function bookAppointment(args: {
 }
 
 /**
- * H6: persist the patient's UI locale + enqueue the provider's new-booking notice.
- * Both go through additive migration-073 RPCs (the 071 book RPC is frozen). Best-effort
- * & never-throw: a sidecar/enqueue hiccup must not fail the booking. No PII logged.
- *  - health_set_reminder_locale: claim RPC LEFT JOINs this so t24/t2/followup render in
- *    the patient's locale (health.patients/reminders_outbox carry no locale column).
- *  - health_enqueue_provider_new_booking: queues a provider email row the cron delivers.
+ * H6: persist the patient's UI locale so t24/t2/followup reminders render in their
+ * language (health.patients/reminders_outbox carry no locale column; the claim RPC LEFT
+ * JOINs this sidecar). Migration-073 RPC, best-effort & never-throw — no PII logged.
+ * Extracted so the manual-book path can set the locale WITHOUT also self-notifying the
+ * provider (who is the booking actor there).
  */
-export async function enqueueBookingFollowups(appointmentId: string, locale: Locale): Promise<void> {
+export async function setReminderLocale(appointmentId: string, locale: Locale): Promise<void> {
   const supabase = createAdminClient();
   try {
     const { error: locErr } = await supabase.rpc("health_set_reminder_locale", {
@@ -291,6 +290,19 @@ export async function enqueueBookingFollowups(appointmentId: string, locale: Loc
   } catch (e) {
     console.error("[health-booking] set_reminder_locale threw:", e instanceof Error ? e.message : "unknown");
   }
+}
+
+/**
+ * H6: persist the patient's UI locale + enqueue the provider's new-booking notice.
+ * Both go through additive migration-073 RPCs (the 071 book RPC is frozen). Best-effort
+ * & never-throw: a sidecar/enqueue hiccup must not fail the booking. No PII logged.
+ *  - setReminderLocale: claim RPC LEFT JOINs this so t24/t2/followup render in the
+ *    patient's locale (health.patients/reminders_outbox carry no locale column).
+ *  - health_enqueue_provider_new_booking: queues a provider email row the cron delivers.
+ */
+export async function enqueueBookingFollowups(appointmentId: string, locale: Locale): Promise<void> {
+  await setReminderLocale(appointmentId, locale);
+  const supabase = createAdminClient();
   try {
     const { error: pnbErr } = await supabase.rpc("health_enqueue_provider_new_booking", {
       p_appointment_id: appointmentId,

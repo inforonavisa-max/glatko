@@ -163,7 +163,12 @@ begin
       'slotStart',         lower(a.slot_range),
       'slotEnd',           upper(a.slot_range),
       'source',            a.source,
-      'serviceName',       coalesce(sv.name ->> p_locale, sv.name ->> 'en', sv.name ->> 'me'),
+      -- serviceName: locale → en → me → HERHANGİ kalan dil → '' (TS lib/saglik tarafındaki
+      -- s.name[l] ?? en ?? me ?? Object.values(s.name)[0] ?? '' fallback'ını birebir aynalar;
+      -- yalnız off-list bir dilde (örn. {"de":...}) adlandırılmış hizmet boş HÜCRE göstermesin).
+      'serviceName',       coalesce(
+                             sv.name ->> p_locale, sv.name ->> 'en', sv.name ->> 'me',
+                             (select v from jsonb_each_text(sv.name) as e(k, v) limit 1), ''),
       'serviceDurationMin', sv.duration_min,
       'locationLabel',     l.label,
       'locationCity',      l.city,
@@ -234,7 +239,10 @@ begin
           'slotStart',         lower(a.slot_range),
           'slotEnd',           upper(a.slot_range),
           'source',            a.source,
-          'serviceName',       coalesce(sv.name ->> p_locale, sv.name ->> 'en', sv.name ->> 'me'),
+          -- serviceName: list RPC ile aynı locale→en→me→herhangi-kalan→'' zinciri (boş hücre yok).
+          'serviceName',       coalesce(
+                                 sv.name ->> p_locale, sv.name ->> 'en', sv.name ->> 'me',
+                                 (select v from jsonb_each_text(sv.name) as e(k, v) limit 1), ''),
           'serviceDurationMin', sv.duration_min,
           'locationLabel',     l.label,
           'locationCity',      l.city,
@@ -542,12 +550,16 @@ begin
       'providerName',       v_provider.full_name,
       'providerTitle',      v_provider.title,
       'providerSlug',       v_provider.slug,
-      -- serviceName burada locale'siz (en/me fallback) döner; action confirm SMS'i
+      -- serviceName burada locale'siz (en→me→herhangi-kalan dil) döner; action confirm SMS'i
       -- KENDİ locale'inde başka bir alandan değil bu özetten render eder → bu yüzden
       -- manuel-book RPC'sine p_locale param'ı eklemeye gerek yok (action zaten kendi
       -- locale'ini biliyor; service adının tam-yerelleştirmesi confirm SMS için kritik
       -- değil, en/me yedek yeterli ve dispatchConfirm doctor+date'i locale'de formatlar).
-      'serviceName',        coalesce(v_service.name ->> 'en', v_service.name ->> 'me', v_service.name ->> 'tr'),
+      -- Fallback zinciri list/dashboard ile hizalı (stray 'tr' tier kaldırıldı); off-list
+      -- tek-dil hizmet adı bile boş kalmasın diye son çare any-key.
+      'serviceName',        coalesce(
+                              v_service.name ->> 'en', v_service.name ->> 'me',
+                              (select v from jsonb_each_text(v_service.name) as e(k, v) limit 1), ''),
       'serviceDurationMin', v_service.duration_min,
       'servicePriceEur',    v_service.price_eur,
       'locationLabel',      v_location.label,

@@ -4,6 +4,7 @@ import {
   computeOccupancy,
   occupancyPercent,
   countSlots,
+  countCapacitySlots,
   canTransition,
   maskPhone,
 } from "./occupancy";
@@ -82,6 +83,43 @@ describe("countSlots", () => {
 
   it("empty window → 0", () => {
     expect(countSlots([])).toBe(0);
+  });
+});
+
+describe("countCapacitySlots", () => {
+  const days: DaySlots[] = [
+    { date: "2026-06-17", slots: [slot("a"), slot("b"), slot("c"), slot("d")] }, // 4
+    { date: "2026-06-18", slots: [slot("e"), slot("f")] }, // 2
+  ];
+
+  it("dailyCap null → plain slot count (no clamp)", () => {
+    expect(countCapacitySlots(days, null)).toBe(6);
+  });
+
+  it("clamps each day's grid count to the cap (cap=3 → 3 + 2 = 5)", () => {
+    // The empty-busy capacity run never applies daily_cap, so without this clamp a fully
+    // capped day would over-report capacity and drag occupancy below 100%.
+    expect(countCapacitySlots(days, 3)).toBe(5);
+  });
+
+  it("cap larger than any day's grid → unchanged", () => {
+    expect(countCapacitySlots(days, 10)).toBe(6);
+  });
+
+  it("cap 0 → capacity 0 (closed by cap)", () => {
+    expect(countCapacitySlots(days, 0)).toBe(0);
+  });
+
+  it("a single fully-capped day reads 100% via computeOccupancy", () => {
+    // Grid has 8 capacity slots, cap=3, all 3 booked → capacity clamps to 3, free 0,
+    // booked 3 → 100% (was ~37% before the cap-aware denominator fix).
+    const oneDay: DaySlots[] = [
+      { date: "2026-06-17", slots: Array.from({ length: 8 }, (_, i) => slot(String.fromCharCode(97 + i))) },
+    ];
+    const capacity = countCapacitySlots(oneDay, 3);
+    expect(capacity).toBe(3);
+    const o = computeOccupancy(capacity, 0, 3);
+    expect(occupancyPercent(o)).toBe(100);
   });
 });
 
