@@ -296,7 +296,7 @@ export async function getNextSlotsBySpecialty(
 // Cookie-free admin client → ISR-safe (H2 dersi).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { emptyFilters, type HealthFilters } from "@/lib/saglik/filters";
+import { type HealthFilters } from "@/lib/saglik/filters";
 import { getCityNameBySlug } from "@/lib/glatko/cities";
 
 /** Kart + opsiyonel mesafe (geo araması). 068 kartının üst kümesi. */

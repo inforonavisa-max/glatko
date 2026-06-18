@@ -8,9 +8,7 @@ import { useRouter } from "@/i18n/navigation";
 import {
   saveProfile,
   saveLicense,
-  saveLocation,
   removeLocation,
-  saveService,
   removeService,
   finalizeOnboarding,
 } from "@/app/[locale]/saglik-pro/actions";
@@ -40,7 +38,6 @@ import { LocationForm, ServiceForm } from "@/components/glatko-saglik/ProviderPr
  */
 
 const STEPS = ["profile", "license", "locations", "services", "schedule"] as const;
-type StepKey = (typeof STEPS)[number];
 
 const inputCls =
   "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brandHealth focus:outline-none focus:ring-1 focus:ring-brandHealth dark:border-white/10 dark:bg-white/5 dark:text-white";
