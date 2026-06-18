@@ -12,6 +12,7 @@ import { useTheme } from "next-themes";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
 import { useActiveVertical } from "@/lib/verticals/useActiveVertical";
 import { HEALTH_ROUTES } from "@/lib/saglik/config";
+import { CAREER_ROUTES } from "@/lib/kariyer/config";
 import { cn } from "@/lib/utils";
 import { UnreadBadge } from "@/components/glatko/messaging/UnreadBadge";
 import { SearchTrigger } from "@/components/glatko/search/SearchTrigger";
@@ -52,6 +53,7 @@ export function GlatkoHeader({
   const activeVertical = useActiveVertical();
   const isServices = activeVertical === "services";
   const isHealth = activeVertical === "health";
+  const isCareer = activeVertical === "career";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [headerOpacity, setHeaderOpacity] = useState(0);
@@ -229,6 +231,51 @@ export function GlatkoHeader({
                 {t("nav.healthProviderJoin")}
               </Link>
             )}
+            {/* Career vertical (C0) — employer-facing nav. Accent = amber-600
+                (brandCareer) where Health uses teal/sky. Route keys are typed
+                (registered in i18n/routing.ts); the CTA points at the bulk
+                requisition wizard. TODO(i18n-deck): nav.careerTalentPool /
+                careerHowItWorks / careerSectors / careerEmployerJoin /
+                careerCreateRequisition keys are owned by the dictionary deck
+                (tr/en) — falls back to the key string until they land. */}
+            {isCareer && (
+              <>
+                <Link
+                  href={CAREER_ROUTES.pool}
+                  className="rounded-md px-4 py-2 text-xs font-medium text-gray-600 transition-colors hover:bg-amber-50 hover:text-amber-700 dark:text-neutral-400 dark:hover:bg-amber-500/10"
+                >
+                  {t("nav.careerTalentPool")}
+                </Link>
+                <Link
+                  href={CAREER_ROUTES.howItWorks}
+                  className="rounded-md px-4 py-2 text-xs font-medium text-gray-600 transition-colors hover:bg-amber-50 hover:text-amber-700 dark:text-neutral-400 dark:hover:bg-amber-500/10"
+                >
+                  {t("nav.careerHowItWorks")}
+                </Link>
+                <Link
+                  href={CAREER_ROUTES.sectors}
+                  className="rounded-md px-4 py-2 text-xs font-medium text-gray-600 transition-colors hover:bg-amber-50 hover:text-amber-700 dark:text-neutral-400 dark:hover:bg-amber-500/10"
+                >
+                  {t("nav.careerSectors")}
+                </Link>
+                <Link
+                  href={CAREER_ROUTES.employerJoin}
+                  className="rounded-md px-4 py-2 text-xs font-medium text-amber-600 transition-colors hover:bg-amber-50 hover:text-amber-700 dark:text-amber-400 dark:hover:bg-amber-500/10"
+                >
+                  {t("nav.careerEmployerJoin")}
+                </Link>
+                <Link
+                  // Typed route key registered in i18n/routing.ts. Not exposed
+                  // as a CAREER_ROUTES.* constant (lib/kariyer/config is owned
+                  // by the core deck, R14) — the bulk-requisition wizard is the
+                  // employer conversion CTA, so the key is used directly here.
+                  href="/career/employer/dashboard/requisitions/new"
+                  className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-amber-500/40"
+                >
+                  {t("nav.careerCreateRequisition")}
+                </Link>
+              </>
+            )}
             {userId && <NotificationBell userId={userId} />}
             <LanguageSwitcher />
             <ThemeToggle />
@@ -370,6 +417,51 @@ export function GlatkoHeader({
                 >
                   {t("nav.healthProviderJoin")}
                 </Link>
+              )}
+
+              {/* Career vertical (C0) — mobile employer nav mirror of the
+                  desktop block. Amber-600 (brandCareer) accent; same TODO on
+                  the deck-owned nav.career* dictionary keys as desktop. */}
+              {isCareer && (
+                <>
+                  <Link
+                    href={CAREER_ROUTES.pool}
+                    onClick={() => setMobileOpen(false)}
+                    className="border-b border-gray-100 py-3 text-lg font-medium text-gray-900 dark:border-white/5 dark:text-white"
+                  >
+                    {t("nav.careerTalentPool")}
+                  </Link>
+                  <Link
+                    href={CAREER_ROUTES.howItWorks}
+                    onClick={() => setMobileOpen(false)}
+                    className="border-b border-gray-100 py-3 text-lg font-medium text-gray-900 dark:border-white/5 dark:text-white"
+                  >
+                    {t("nav.careerHowItWorks")}
+                  </Link>
+                  <Link
+                    href={CAREER_ROUTES.sectors}
+                    onClick={() => setMobileOpen(false)}
+                    className="border-b border-gray-100 py-3 text-lg font-medium text-gray-900 dark:border-white/5 dark:text-white"
+                  >
+                    {t("nav.careerSectors")}
+                  </Link>
+                  <Link
+                    href={CAREER_ROUTES.employerJoin}
+                    onClick={() => setMobileOpen(false)}
+                    className="border-b border-gray-100 py-3 text-lg font-medium text-amber-600 dark:border-white/5 dark:text-amber-400"
+                  >
+                    {t("nav.careerEmployerJoin")}
+                  </Link>
+                  <Link
+                    // Typed route key registered in i18n/routing.ts (see
+                    // desktop CTA note) — bulk-requisition wizard.
+                    href="/career/employer/dashboard/requisitions/new"
+                    onClick={() => setMobileOpen(false)}
+                    className="mt-3 w-full rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 py-3 text-center text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-amber-500/30"
+                  >
+                    {t("nav.careerCreateRequisition")}
+                  </Link>
+                </>
               )}
 
               {userId && (

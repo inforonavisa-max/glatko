@@ -31,7 +31,12 @@
     "businessProfile": "Geschäftsprofil",
     "settings": "Einstellungen",
     "adminPanel": "Admin-Panel",
-    "leads": "Jobaufträge"
+    "leads": "Jobaufträge",
+    "careerTalentPool": "Talentpool",
+    "careerHowItWorks": "So funktioniert's",
+    "careerSectors": "Branchen",
+    "careerEmployerJoin": "Als Arbeitgeber registrieren",
+    "careerCreateRequisition": "Anforderung erstellen"
   },
   "hero": {
     "title": "Vertrauenswürdige Fachleute in Montenegro",
@@ -3020,9 +3025,828 @@
     }
   },
   "careerVertical": {
-    "seoTitle": "Arbeit — Bald verfügbar",
-    "title": "Arbeit kommt",
+    "seoTitle": "Jobs — Bald verfügbar",
+    "title": "Jobs kommen bald",
     "subtitle": "Wir bauen eine vertrauenswürdige Verbindung zwischen Arbeitgebern und Arbeitskräften in Montenegro auf. Dieser Bereich folgt in Kürze.",
-    "backHome": "Zur Startseite"
+    "backHome": "Zurück zur Startseite",
+    "brand": {
+      "name": "Glatko Work & Career",
+      "short": "Work & Career",
+      "tagline": "Geprüfte Arbeitskräfte, vertrauensvolle Vermittlung"
+    },
+    "comingSoon": {
+      "badge": "Bald verfügbar",
+      "title": "Glatko Work & Career kommt",
+      "subtitle": "Wir verbinden Arbeitgeber in Montenegro mit geprüften, gesprächsbereiten Fachkräften. Anonymisierter Pool, menschlich geprüftes Matching, der Arbeitgeber zahlt.",
+      "waitlistTitle": "Zur Early-Access-Liste hinzufügen",
+      "waitlistSubtitle": "Arbeitgeber oder Arbeitsuchende:r — sichern Sie sich Ihren Vorrangplatz zum Start.",
+      "employerCardTitle": "Sind Sie Arbeitgeber?",
+      "employerCardSubtitle": "Reichen Sie Ihren Personalbedarf ein — treffen Sie zum Start geprüfte Kandidat:innen.",
+      "workerCardTitle": "Suchen Sie Arbeit?",
+      "workerCardSubtitle": "Erstellen Sie Ihr Profil — für Sie kostenlos, der Arbeitgeber zahlt die Gebühr.",
+      "backHome": "Zurück zur Startseite"
+    },
+    "landing": {
+      "seoTitle": "Glatko Work & Career — Geprüfte Arbeitskräfte, vertrauensvolle Vermittlung",
+      "hero": {
+        "badge": "Geprüft von RoNa Legal",
+        "title": "Geprüfte Arbeitskräfte für Montenegro, mit Sicherheit",
+        "subtitle": "Gesprächsbereite, dokumentierte Kandidat:innen im Bau und im Gastgewerbe. Durchsuchen Sie den anonymisierten Pool, kommen Sie über menschlich geprüftes Matching weiter.",
+        "trustNote": "Kandidat:innen zahlen nie eine Gebühr — alle Kosten trägt der Arbeitgeber."
+      },
+      "dualCta": {
+        "employerTitle": "Für Arbeitgeber",
+        "employerBody": "Durchsuchen Sie den geprüften Talentpool, erstellen Sie eine Anforderung, erhalten Sie Ihre Vorauswahl.",
+        "employerCta": "Anforderung erstellen",
+        "employerSecondary": "Talentpool durchsuchen",
+        "workerTitle": "Für Arbeitskräfte",
+        "workerBody": "Erstellen Sie Ihr Profil, laden Sie Ihre Dokumente hoch, treten Sie dem geprüften Kandidat:innenpool bei.",
+        "workerCta": "Profil erstellen",
+        "workerSecondary": "So funktioniert's"
+      },
+      "trustStrip": {
+        "verifiedTitle": "Geprüft von RoNa Legal",
+        "verifiedBody": "Jede:r Kandidat:in durchläuft die Prüfung von Identität, Fähigkeiten und Dokumenten.",
+        "employerPaysTitle": "Der Arbeitgeber zahlt",
+        "employerPaysBody": "Gemäß dem ILO-Prinzip zahlen Arbeitsuchende nie eine Gebühr.",
+        "guaranteeTitle": "90 Tage kostenloser Ersatz",
+        "guaranteeBody": "Passt eine Vermittlung nicht, ersetzen wir sie innerhalb der Garantie kostenlos.",
+        "anonymousTitle": "Anonymisierter Pool",
+        "anonymousBody": "Identität, Kontakt und Dokumente werden erst nach Freigabe und Zahlung freigeschaltet."
+      },
+      "teaser": {
+        "title": "Ein Einblick in den Talentpool",
+        "subtitle": "Vollständige Identität verborgen — freigegebene Arbeitgeber können das komplette Dossier freischalten.",
+        "lockedLabel": "Gesperrt",
+        "viewPoolCta": "Den vollständigen Pool ansehen"
+      },
+      "sectorsTitle": "Branchen",
+      "sectorsSubtitle": "Wir starten mit Bau und Gastgewerbe.",
+      "steps": {
+        "title": "So funktioniert's in 3 Schritten",
+        "step1Title": "Den Pool durchsuchen",
+        "step1Body": "Filtern Sie anonymisierte Karten nach Fähigkeit, Erfahrung und Region.",
+        "step2Title": "Interesse bekunden",
+        "step2Body": "Fügen Sie passende Kandidat:innen Ihrer Anforderung hinzu; RoNa Legal prüft die Eignung.",
+        "step3Title": "Freigabe & Vermittlung",
+        "step3Body": "Nach Freigabe und Zahlung wird das vollständige Dossier freigeschaltet und die Vermittlung abgeschlossen."
+      },
+      "stats": {
+        "title": "Glatko Work & Career in Zahlen",
+        "workersLabel": "Geprüfte Kandidat:innen",
+        "sectorsLabel": "Aktive Branchen",
+        "placementsLabel": "Abgeschlossene Vermittlungen",
+        "comingSoon": "Bald verfügbar"
+      }
+    },
+    "howItWorks": {
+      "seoTitle": "So funktioniert's — Glatko Work & Career",
+      "title": "So funktioniert's",
+      "subtitle": "Ein transparentes, menschlich geprüftes Modell, bei dem der Arbeitgeber zahlt und das für beide Seiten sicher ist.",
+      "employerPath": {
+        "title": "Weg des Arbeitgebers",
+        "subtitle": "Vom Bedarf zur Vermittlung, ein geprüfter Ablauf.",
+        "step1Title": "Eine Anforderung erstellen",
+        "step1Body": "Geben Sie Branche, Rollen, Personalzahl und Konditionen an.",
+        "step2Title": "Eine Vorauswahl erhalten",
+        "step2Body": "RoNa Legal präsentiert eine anonymisierte, auf Ihren Bedarf abgestimmte Vorauswahl.",
+        "step3Title": "Interesse bekunden",
+        "step3Body": "Bekunden Sie Interesse an den von Ihnen gewählten Kandidat:innen; wir starten den Freigabeprozess.",
+        "step4Title": "Freigabe & Zahlung",
+        "step4Body": "Nach Freigabe und Zahlung werden vollständige Identität und Dokumente freigeschaltet.",
+        "step5Title": "Vermittlung & Garantie",
+        "step5Body": "Die Vermittlung wird abgeschlossen; eine 90-tägige kostenlose Ersatzgarantie beginnt."
+      },
+      "workerPath": {
+        "title": "Weg der Arbeitskraft",
+        "subtitle": "Für Sie kostenlos — Ihre Identität wird nie ohne Ihre Zustimmung geteilt.",
+        "step1Title": "Ein Profil erstellen",
+        "step1Body": "Fügen Sie Ihre Rolle, Erfahrung, Fähigkeiten und Sprachen hinzu.",
+        "step2Title": "Dokumente hochladen",
+        "step2Body": "Sie entscheiden für jedes Dokument, was öffentlich und was privat bleibt.",
+        "step3Title": "Prüfung",
+        "step3Body": "RoNa Legal prüft Ihre Identität, Fähigkeiten und Dokumente.",
+        "step4Title": "Im Pool erscheinen",
+        "step4Body": "Sie werden Arbeitgebern als anonymisierte Karte gezeigt; Ihre Identität bleibt verborgen.",
+        "step5Title": "Match",
+        "step5Body": "Wenn ein Arbeitgeber interessiert ist, führt RoNa Legal den Prozess mit Ihnen durch."
+      },
+      "revenuePaths": {
+        "title": "Zwei Servicemodelle",
+        "subtitle": "Wählen Sie, was passt — in beiden zahlt der Arbeitgeber die Gebühr.",
+        "commissionTitle": "Nur Provision",
+        "commissionBody": "Matching und Zugang zum geprüften Pool; Provision bei erfolgreicher Vermittlung.",
+        "fullServiceTitle": "Full Service",
+        "fullServiceBody": "Durchgängige Abwicklung von Genehmigungen, Verträgen und dem Vermittlungsprozess."
+      },
+      "employerPays": {
+        "title": "Prinzip „Der Arbeitgeber zahlt“",
+        "body": "Nach dem ILO-Prinzip „Der Arbeitgeber zahlt“ und nach montenegrinischem Recht werden Arbeitsuchenden nie Gebühren berechnet. Alle Vermittlungsgebühren trägt der Arbeitgeber.",
+        "legalNote": "In Montenegro ist es eine Ordnungswidrigkeit, Arbeitsuchenden Gebühren zu berechnen (Bußgeld von 500–20.000 €)."
+      }
+    },
+    "sectors": {
+      "seoTitle": "Branchen — Glatko Work & Career",
+      "title": "Branchen",
+      "subtitle": "Durchsuchen Sie die geprüften Arbeitskräfte nach Branche.",
+      "viewSector": "Branche ansehen",
+      "rolesLabel": "Rollen",
+      "browsePool": "Arbeitskräfte in dieser Branche durchsuchen",
+      "emptyTitle": "Noch keine Branchen",
+      "emptyBody": "Wir fügen Branchen hinzu. Schauen Sie bald wieder vorbei.",
+      "construction": {
+        "name": "Bau",
+        "tagline": "Maurer, Schweißer, Elektriker und mehr",
+        "intro": "Geprüfte, erfahrene Arbeitskräfte für montenegrinische Bauprojekte."
+      },
+      "hospitality": {
+        "name": "Gastgewerbe",
+        "tagline": "Kellner, Köche, Reinigungskräfte und mehr",
+        "intro": "Gesprächsbereite Arbeitskräfte für Hotels, Restaurants und Tourismusbetriebe."
+      }
+    },
+    "pool": {
+      "seoTitle": "Talentpool — Glatko Work & Career",
+      "title": "Talentpool",
+      "subtitle": "Geprüfte, anonymisierte Kandidat:innen. Die Identität wird erst nach Freigabe und Zahlung freigeschaltet.",
+      "resultsCount": "{count} Kandidat:innen",
+      "noResultsTitle": "Keine Ergebnisse gefunden",
+      "noResultsBody": "Passen Sie Ihre Filter an und versuchen Sie es erneut.",
+      "poolPreparingTitle": "Der Pool wird vorbereitet",
+      "poolPreparingBody": "Kandidat:innen werden geprüft. Die ersten Arbeitskräfte erscheinen hier sehr bald.",
+      "loading": "Pool wird geladen…",
+      "errorTitle": "Konnte nicht geladen werden",
+      "errorBody": "Beim Laden des Pools ist etwas schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "retry": "Erneut versuchen",
+      "loadMore": "Mehr anzeigen",
+      "loginPrompt": "Melden Sie sich als Arbeitgeber an, um Interesse zu bekunden.",
+      "filters": {
+        "title": "Filter",
+        "apply": "Anwenden",
+        "clear": "Zurücksetzen",
+        "clearAll": "Alle zurücksetzen",
+        "sector": "Branche",
+        "trade": "Gewerk / Rolle",
+        "skillTier": "Qualifikationsstufe",
+        "experienceBand": "Erfahrung",
+        "region": "Region",
+        "ageBand": "Altersgruppe",
+        "languages": "Sprachen",
+        "certifications": "Zertifikate",
+        "readiness": "Bereitschaft / Prüfung",
+        "availability": "Verfügbarkeit",
+        "anyOption": "Beliebig"
+      },
+      "skillTier": {
+        "entry": "Einstieg",
+        "skilled": "Qualifiziert",
+        "experienced": "Erfahren",
+        "expert": "Experte"
+      },
+      "experienceBand": {
+        "lt1": "Unter 1 Jahr",
+        "1to3": "1–3 Jahre",
+        "3to5": "3–5 Jahre",
+        "5to10": "5–10 Jahre",
+        "gt10": "Über 10 Jahre"
+      },
+      "region": {
+        "farEast": "Ferner Osten",
+        "middleEast": "Naher Osten",
+        "africa": "Afrika",
+        "balkans": "Balkan",
+        "other": "Andere"
+      },
+      "ageBand": {
+        "18to24": "18–24",
+        "25to34": "25–34",
+        "35to44": "35–44",
+        "45plus": "45+"
+      },
+      "readiness": {
+        "title": "Bereitschaft",
+        "high": "Hohe Bereitschaft",
+        "medium": "Mittlere Bereitschaft",
+        "low": "Profil in Bearbeitung"
+      },
+      "availability": {
+        "immediate": "Sofort verfügbar",
+        "within30": "Innerhalb von 30 Tagen",
+        "within90": "Innerhalb von 90 Tagen"
+      },
+      "sort": {
+        "label": "Sortieren",
+        "relevance": "Nach Relevanz",
+        "readiness": "Nach Bereitschaft",
+        "experience": "Nach Erfahrung",
+        "recent": "Neueste zuerst"
+      },
+      "card": {
+        "verifiedBadge": "Geprüft von RoNa Legal",
+        "readinessLabel": "Bereitschaft",
+        "experienceLabel": "Erfahrung",
+        "regionLabel": "Region",
+        "languagesLabel": "Sprachen",
+        "skillsLabel": "Top-Fähigkeiten",
+        "certsLabel": "Zertifikate",
+        "tierLabel": "Stufe",
+        "photoBlurredNote": "Foto zum Schutz der Privatsphäre unscharf",
+        "viewProfile": "Profil ansehen",
+        "expressInterest": "Interesse bekunden",
+        "addToRequisition": "Zur Anforderung hinzufügen",
+        "interestMarked": "Interesse bekundet",
+        "addedToRequisition": "Zur Anforderung hinzugefügt"
+      },
+      "lockedCta": {
+        "title": "Vollständiges Dossier gesperrt",
+        "body": "Name, Kontakt, Reisepass und Originaldokumente werden nach Freigabe durch RoNa Legal und Gebühr freigeschaltet.",
+        "loginCta": "Als Arbeitgeber anmelden",
+        "registerCta": "Arbeitgeberkonto erstellen"
+      },
+      "verificationStatus": {
+        "pending": "Prüfung ausstehend",
+        "id_verified": "Identität geprüft",
+        "skills_verified": "Fähigkeiten geprüft",
+        "documents_verified": "Dokumente geprüft",
+        "interview_passed": "Gespräch bestanden",
+        "rejected": "Abgelehnt"
+      }
+    },
+    "workerDetail": {
+      "seoTitle": "Kandidat:innenprofil — Glatko Work & Career",
+      "backToPool": "Zurück zum Pool",
+      "anonymousNote": "Dieses Profil ist anonymisiert. Die vollständige Identität wird nach Freigabe und Zahlung freigeschaltet.",
+      "overviewLabel": "Überblick",
+      "lockedPanel": {
+        "title": "Vollständiges Dossier gesperrt",
+        "body": "Vollständiger Name, Kontakt, Reisepass und Originaldokumente werden erst nach Freigabe durch RoNa Legal und Gebühr freigeschaltet.",
+        "lockedItemsTitle": "Sichtbar nach Freischaltung",
+        "itemFullName": "Vollständiger Name",
+        "itemContact": "Telefon und E-Mail",
+        "itemLocation": "Genaues Land / Stadt",
+        "itemPassport": "Reisepass- und Ausweis-Scans",
+        "itemDocuments": "Original-Diplome und -Zertifikate",
+        "itemPhotos": "Unverpixelte Fotos und Video",
+        "expressInterest": "Interesse bekunden",
+        "addToRequisition": "Zur Anforderung hinzufügen"
+      },
+      "skillsMatrix": {
+        "title": "Fähigkeitsmatrix",
+        "skillLabel": "Fähigkeit",
+        "levelLabel": "Niveau",
+        "empty": "Keine Fähigkeiten hinzugefügt."
+      },
+      "timeline": {
+        "title": "Erfahrungsverlauf",
+        "redactedNote": "Arbeitgebernamen werden zum Schutz der Privatsphäre geschwärzt.",
+        "durationLabel": "Dauer",
+        "yearsShort": "J.",
+        "empty": "Kein Verlauf hinzugefügt."
+      },
+      "languagesLabel": "Sprachen",
+      "certificationsLabel": "Zertifikate",
+      "certFileLocked": "Zertifikatsdatei gesperrt",
+      "readinessLabel": "Bereitschaftswert",
+      "videoIntroLabel": "Vorstellungsvideo",
+      "videoLocked": "Video wird nach Freigabe freigeschaltet"
+    },
+    "worker": {
+      "landing": {
+        "seoTitle": "Für Arbeitskräfte — Glatko Work & Career",
+        "title": "Für Sie kostenlos Arbeit finden",
+        "subtitle": "Treten Sie dem geprüften Kandidat:innenpool bei. Der Arbeitgeber zahlt die Gebühr; Ihre Identität wird nie ohne Ihre Zustimmung geteilt.",
+        "cta": "Profil erstellen",
+        "loginCta": "Ich habe bereits ein Konto",
+        "benefit1Title": "Für Sie kostenlos",
+        "benefit1Body": "Arbeitsuchenden werden nie Gebühren berechnet.",
+        "benefit2Title": "Ihre Identität bleibt privat",
+        "benefit2Body": "Sie erscheinen als anonymisierte Karte; die Identität wird mit Ihrer Zustimmung freigeschaltet.",
+        "benefit3Title": "Mobiler Dokumententresor",
+        "benefit3Body": "Ihre geprüften Dokumente an einem Ort, bereit für jedes Match."
+      },
+      "landingPage": {
+        "seoTitle": "Für Arbeitskräfte — Glatko Work & Career",
+        "eyebrow": "Für Arbeitskräfte · Immer kostenlos",
+        "title": "Im Ausland eingestellt werden — für Sie kostenlos, vollständig betreut",
+        "subtitle": "Treten Sie dem geprüften Kandidat:innenpool bei. Der Arbeitgeber zahlt die Gebühr, Ihre Identität wird nie ohne Ihre Zustimmung geteilt, und RoNa Legal erledigt den Rest.",
+        "registerCta": "Profil erstellen",
+        "howItWorksCta": "So funktioniert's für Arbeitskräfte",
+        "employerPays": {
+          "title": "Sie zahlen nie eine Gebühr",
+          "body": "Der Arbeitgeber trägt alle Vermittlungskosten (das ILO-Prinzip „Der Arbeitgeber zahlt“). Als arbeitsuchende Person werden Ihnen nie Gebühren, Provisionen oder Abzüge berechnet."
+        },
+        "trust": {
+          "verified": "Geprüft von RoNa Legal",
+          "privacy": "Ihre Daten bleiben privat, bis Sie zustimmen",
+          "portable": "Mobiler geprüfter Nachweis"
+        },
+        "benefits": {
+          "title": "Warum Glatko Work & Career",
+          "freeTitle": "Für Sie kostenlos",
+          "freeBody": "Der Arbeitgeber zahlt die Gebühr; Ihnen wird nie etwas berechnet.",
+          "vaultTitle": "Mobiler Dokumententresor",
+          "vaultBody": "Ihre geprüften Dokumente an einem Ort, bereit für jedes Match.",
+          "anonymousTitle": "Standardmäßig anonymisiert",
+          "anonymousBody": "Ihre Identität wird nur mit Ihrer Zustimmung und nach RoNa-Freigabe offengelegt.",
+          "singlePointTitle": "Ein Ansprechpartner",
+          "singlePointBody": "RoNa Legal kümmert sich um die Arbeitgeber — Sie müssen niemandem hinterherlaufen.",
+          "legalTitle": "Rechtliche Schritte für Sie erledigt",
+          "legalBody": "Genehmigungen, Verträge und rechtliche Schritte werden für Sie erledigt.",
+          "readinessTitle": "Bereitschaftswert",
+          "readinessBody": "Ein vollständiges Profil erhöht Ihre Sichtbarkeit im Pool."
+        },
+        "howItWorks": {
+          "title": "So funktioniert's",
+          "step1Title": "Ihr Profil erstellen",
+          "step1Body": "Erstellen Sie Ihr Profil und laden Sie Ihre Dokumente hoch — für Sie kostenlos.",
+          "step2Title": "Geprüft & präsentiert werden",
+          "step2Body": "RoNa Legal prüft Sie und präsentiert Sie anonym im Pool.",
+          "step3Title": "Vermittelt werden",
+          "step3Body": "Ein Arbeitgeber bekundet Interesse, RoNa Legal kontaktiert Sie, und Sie werden vermittelt.",
+          "fullLink": "Den vollständigen Prozess ansehen"
+        },
+        "privacy": {
+          "body": "Sie steuern die Zustimmung pro Dokument. Ihre vollständige Identität und Ihre Kontaktdaten werden erst geteilt, nachdem Sie zugestimmt haben und der Arbeitgeber von RoNa Legal freigegeben wurde."
+        },
+        "closing": {
+          "title": "Bereit, Ihr Profil zu erstellen?",
+          "subtitle": "Für Sie immer kostenlos — der Arbeitgeber zahlt die Gebühr."
+        }
+      },
+      "register": {
+        "seoTitle": "Registrierung für Arbeitskräfte — Glatko Work & Career",
+        "title": "Ein Arbeitskraftkonto erstellen",
+        "subtitle": "Ein paar Schritte, um Ihr Profil aufzubauen. Für Sie immer kostenlos — der Arbeitgeber zahlt.",
+        "accountGroup": "Konto",
+        "basicsGroup": "Grundangaben",
+        "nameLabel": "Vollständiger Name",
+        "emailLabel": "E-Mail",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Passwort",
+        "roleLabel": "Rolle / Gewerk",
+        "rolePlaceholder": "Wählen Sie Ihre Rolle",
+        "regionLabel": "Woher Sie kommen",
+        "regionPlaceholder": "Wählen Sie eine Region",
+        "regionHint": "Nur Region — Ihr genaues Land wird später in Ihrem privaten Profil erfasst.",
+        "languageLabel": "Bevorzugte Sprache",
+        "freeForYou": "Für Sie immer kostenlos — der Arbeitgeber zahlt.",
+        "submit": "Konto erstellen",
+        "submitting": "Wird erstellt…",
+        "haveAccount": "Haben Sie bereits ein Konto?",
+        "loginLink": "Anmelden",
+        "consentLabel": "Ich erteile Glatko Work & Career meine ausdrückliche Zustimmung zur Verarbeitung meiner personenbezogenen Daten — einschließlich Reisepass-, Zertifikats- und biometrischer Dokumente — für die anonymisierte Präsentation und die Prüfung durch RoNa Legal. Ich verstehe, dass ich meine Zustimmung später pro Dokument widerrufen kann.",
+        "consentLink": "Datenschutzerklärung",
+        "successTitle": "Konto erstellt",
+        "successBody": "Lassen Sie uns Ihr Profil aufbauen.",
+        "successCta": "Weiter zu Ihrem Profil",
+        "errConsentRequired": "Die Zustimmung ist erforderlich, um fortzufahren.",
+        "errValidation": "Bitte füllen Sie alle Pflichtfelder korrekt aus.",
+        "errGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      },
+      "profileWizard": {
+        "title": "Profil-Assistent",
+        "stepLabel": "Schritt {current} von {total}",
+        "next": "Weiter",
+        "back": "Zurück",
+        "save": "Speichern",
+        "saving": "Wird gespeichert…",
+        "finish": "Fertigstellen",
+        "completeness": "Profilvollständigkeit",
+        "readinessMeter": "Bereitschaftsanzeige",
+        "steps": {
+          "account": {
+            "title": "Konto & Zustimmung",
+            "subtitle": "Ihr Konto und Ihre Zustimmung zur Datenverarbeitung."
+          },
+          "basics": {
+            "title": "Grundangaben",
+            "subtitle": "Rolle, Erfahrung, Region, Sprachen und Alter.",
+            "roleLabel": "Rolle / Gewerk",
+            "yearsLabel": "Erfahrung (Jahre)",
+            "regionLabel": "Region / Land",
+            "languagesLabel": "Sprachen",
+            "ageLabel": "Alter"
+          },
+          "skills": {
+            "title": "Fähigkeiten & Werdegang",
+            "subtitle": "Gewerkspezifische Fähigkeiten und Ihre bisherige Arbeit.",
+            "skillsLabel": "Fähigkeiten",
+            "addSkill": "Fähigkeit hinzufügen",
+            "historyLabel": "Werdegang",
+            "addHistory": "Eintrag hinzufügen"
+          },
+          "certifications": {
+            "title": "Zertifikate & Ausbildung",
+            "subtitle": "Fügen Sie Ihre Zertifikate und Ausbildung hinzu.",
+            "addCertification": "Zertifikat hinzufügen"
+          },
+          "documents": {
+            "title": "Fotos & Dokumente",
+            "subtitle": "Laden Sie Ihre Dokumente hoch und legen Sie deren Sichtbarkeit fest."
+          },
+          "video": {
+            "title": "Vorstellungsvideo (optional)",
+            "subtitle": "Sie können ein kurzes Vorstellungsvideo hinzufügen."
+          }
+        }
+      },
+      "documents": {
+        "seoTitle": "Meine Dokumente — Glatko Work & Career",
+        "title": "Dokumenten- & Fotozentrum",
+        "subtitle": "Sie entscheiden für jedes Dokument, was öffentlich und was privat bleibt.",
+        "uploadCta": "Dokument hochladen",
+        "uploading": "Wird hochgeladen…",
+        "emptyTitle": "Noch keine Dokumente",
+        "emptyBody": "Laden Sie Ihre Dokumente zur Prüfung hoch.",
+        "categoryLabel": "Kategorie",
+        "visibilityLabel": "Sichtbarkeit",
+        "consentLabel": "Zustimmungsstatus",
+        "uploadedAt": "Hochgeladen",
+        "retentionLabel": "Aufbewahrung",
+        "removeCta": "Entfernen",
+        "categories": {
+          "profile_photo": "Profilfoto",
+          "work_photo": "Arbeitsfotos",
+          "passport": "Reisepass / Ausweis",
+          "diploma": "Diplom / Zertifikat",
+          "skill_cert": "Qualifikationsnachweis",
+          "insurance": "Versicherung / Medizinisches",
+          "reference": "Referenzen"
+        },
+        "visibility": {
+          "public_anonymized": "Öffentlich (anonymisiert)",
+          "gated": "Geschützt (nach Freigabe)",
+          "internal_only": "Nur intern",
+          "publicHint": "Wird im Pool gesichtsunscharf und mit Wasserzeichen gezeigt.",
+          "gatedHint": "Wird dem Arbeitgeber erst nach Freigabe und Zahlung freigeschaltet.",
+          "internalHint": "Nur RoNa Legal sieht es; wird nie im Pool gezeigt."
+        },
+        "consent": {
+          "title": "Die Zustimmung, die Sie mit diesem Dokument erteilen",
+          "pending": "Zustimmung ausstehend",
+          "granted": "Zustimmung erteilt",
+          "revoked": "Zustimmung widerrufen",
+          "grantCta": "Zustimmung erteilen",
+          "revokeCta": "Zustimmung widerrufen",
+          "grantBody": "Sie erlauben, dass dieses Dokument mit der von Ihnen gewählten Sichtbarkeit verarbeitet wird.",
+          "revokeBody": "Sie können Ihre Zustimmung jederzeit widerrufen."
+        }
+      },
+      "dashboard": {
+        "seoTitle": "Mein Dashboard — Glatko Work & Career",
+        "title": "Arbeitskraft-Dashboard",
+        "subtitle": "Eine Zusammenfassung Ihres Status und Prozesses.",
+        "statusLabel": "Status",
+        "readinessLabel": "Bereitschaftswert",
+        "interestCountLabel": "Erhaltenes Interesse",
+        "completenessLabel": "Profilvollständigkeit",
+        "singlePointNote": "RoNa Legal ist Ihr einziger Ansprechpartner; Arbeitgeberkontakte werden nie geteilt.",
+        "editProfile": "Profil bearbeiten",
+        "manageDocuments": "Dokumente verwalten",
+        "statuses": {
+          "showcased": "Sie werden im Pool präsentiert",
+          "interest": "Ein Arbeitgeber hat Interesse bekundet",
+          "pendingApproval": "Warten auf RoNa-Freigabe",
+          "matched": "Vermittelt — rechtliche Bearbeitung läuft",
+          "placed": "Sie wurden vermittelt",
+          "notShowcased": "Sie sind noch nicht im Pool",
+          "underReview": "Ihr Profil wird geprüft"
+        }
+      }
+    },
+    "employer": {
+      "landingPage": {
+        "seoTitle": "Für Arbeitgeber — Glatko Work & Career",
+        "eyebrow": "Für Arbeitgeber",
+        "title": "Geprüfte, einsatzbereite Arbeitskräfte, vollständig betreut",
+        "subtitle": "Reichen Sie Ihren Bedarf ein, und RoNa Legal stellt eine geprüfte Vorauswahl zusammen; schließen Sie nach Prüfung und Zahlung eine freigegebene Einstellung ab.",
+        "registerCta": "Als Arbeitgeber registrieren",
+        "poolCta": "Talentpool durchsuchen",
+        "trust": {
+          "verified": "Geprüft von RoNa Legal",
+          "employerPays": "Der Arbeitgeber zahlt — für Arbeitskräfte kostenlos",
+          "guarantee": "90-Tage-Ersatzgarantie"
+        },
+        "benefits": {
+          "title": "Warum Glatko Work & Career",
+          "verifiedTitle": "Geprüfter & kuratierter Pool",
+          "verifiedBody": "Jede:r Kandidat:in durchläuft die Prüfung von Identität, Fähigkeiten und Dokumenten.",
+          "anonymousTitle": "Anonymisiertes Durchsuchen, leckdicht",
+          "anonymousBody": "Identität und Kontakt bleiben bis zur Freigabe und Zahlung verborgen.",
+          "lifecycleTitle": "Betreuung über den gesamten Prozess",
+          "lifecycleBody": "RoNa Legal verwaltet Genehmigungen, Verträge und den rechtlichen Prozess.",
+          "guaranteeTitle": "90 Tage kostenloser Ersatz",
+          "guaranteeBody": "Passt eine Vermittlung nicht, ersetzen wir sie innerhalb der Garantie kostenlos.",
+          "escrowTitle": "Treuhandgeschützte Gebühren",
+          "escrowBody": "Gebühren werden nur bei erfolgreicher Vermittlung berechnet.",
+          "matcherTitle": "Menschliche Talentvermittlung",
+          "matcherBody": "Ihnen werden nur Kandidat:innen präsentiert, die wirklich passen."
+        },
+        "howItWorks": {
+          "title": "So funktioniert's",
+          "step1Title": "Ihren Bedarf einreichen",
+          "step1Body": "Geben Sie Branche, Rolle und Konditionen ein und erstellen Sie dann Ihre Anforderung.",
+          "step2Title": "Eine kuratierte Vorauswahl erhalten",
+          "step2Body": "RoNa Legal stellt eine Vorauswahl geprüfter Kandidat:innen zusammen.",
+          "step3Title": "Freigeben & vermitteln",
+          "step3Body": "Nach Freigabe und Zahlung öffnet sich das vollständige Dossier und die Einstellung wird abgeschlossen.",
+          "fullLink": "So funktioniert's im Detail"
+        },
+        "pricing": {
+          "title": "Das Modell, das zu Ihnen passt",
+          "subtitle": "Sie zahlen nur bei erfolgreicher Vermittlung.",
+          "commissionTitle": "Nur Provision",
+          "commissionBody": "Matching und Zugang zum geprüften Pool; Gebühr bei Vermittlung.",
+          "fullServiceTitle": "Full Service",
+          "fullServiceBody": "Durchgängige Abwicklung von Genehmigungen, Verträgen und Vermittlung."
+        },
+        "closing": {
+          "title": "Bereit, das richtige Team aufzubauen?",
+          "subtitle": "Die Registrierung ist kostenlos; Sie zahlen nur bei erfolgreicher Vermittlung."
+        }
+      },
+      "landing": {
+        "seoTitle": "Für Arbeitgeber — Glatko Work & Career",
+        "title": "Zugang zu geprüften Arbeitskräften",
+        "subtitle": "Reichen Sie Ihren Bedarf ein, erhalten Sie eine Vorauswahl, schließen Sie eine freigegebene Einstellung ab.",
+        "cta": "Anforderung erstellen",
+        "secondaryCta": "Talentpool durchsuchen",
+        "loginCta": "Ich habe bereits ein Konto",
+        "benefit1Title": "Geprüfter Pool",
+        "benefit1Body": "Jede:r Kandidat:in durchläuft die Prüfung von Identität, Fähigkeiten und Dokumenten.",
+        "benefit2Title": "Menschlich geprüfte Vorauswahl",
+        "benefit2Body": "RoNa Legal präsentiert nur die Kandidat:innen, die passen.",
+        "benefit3Title": "90-Tage-Garantie",
+        "benefit3Body": "Passt eine Vermittlung nicht, ersetzen wir sie kostenlos."
+      },
+      "register": {
+        "seoTitle": "Arbeitgeberregistrierung — Glatko Work & Career",
+        "title": "Ein Arbeitgeberkonto erstellen",
+        "subtitle": "Registrieren Sie Ihr Unternehmen und beginnen Sie, Anforderungen zu erstellen.",
+        "companyLabel": "Firmenname",
+        "contactLabel": "Ansprechpartner",
+        "emailLabel": "E-Mail",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Passwort",
+        "submit": "Konto erstellen",
+        "submitting": "Wird erstellt…",
+        "haveAccount": "Haben Sie bereits ein Konto?",
+        "loginLink": "Anmelden",
+        "errGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      },
+      "dashboard": {
+        "seoTitle": "Arbeitgeber-Dashboard — Glatko Work & Career",
+        "title": "Arbeitgeber-Dashboard",
+        "subtitle": "Verwalten Sie Ihre Anforderungen, Vorauswahllisten und Freischaltungen.",
+        "newRequisition": "Neue Anforderung erstellen",
+        "requisitionsTab": "Meine Anforderungen",
+        "unlocksTab": "Freischaltungen",
+        "savedTab": "Gespeichert",
+        "emptyTitle": "Noch keine Anforderungen",
+        "emptyBody": "Erstellen Sie Ihre erste Anforderung, und wir präsentieren passende Kandidat:innen.",
+        "viewRequisition": "Anforderung ansehen",
+        "shortlistReadyLabel": "Vorauswahl bereit",
+        "guaranteeCountdown": "Noch {days} Tage Garantie",
+        "requestReplacement": "Ersatz anfordern"
+      },
+      "requisitionWizard": {
+        "title": "Anforderung erstellen",
+        "stepLabel": "Schritt {current} von {total}",
+        "next": "Weiter",
+        "back": "Zurück",
+        "submit": "Anforderung einreichen",
+        "submitting": "Wird eingereicht…",
+        "review": "Überprüfen",
+        "successTitle": "Ihre Anforderung ist eingegangen",
+        "successBody": "RoNa Legal prüft sie und bereitet Ihre Vorauswahl vor.",
+        "steps": {
+          "rolesStep": {
+            "title": "Branche & Rollen",
+            "subtitle": "Branche, Rolle(n) und Personalzahl pro Rolle.",
+            "sectorLabel": "Branche",
+            "roleLabel": "Rolle",
+            "headcountLabel": "Personalzahl",
+            "addRole": "Rolle hinzufügen",
+            "sectorPlaceholder": "Wählen Sie eine Branche",
+            "rolePlaceholder": "Wählen Sie eine Rolle",
+            "removeRole": "Rolle entfernen",
+            "emptyHint": "Fügen Sie mindestens eine Rolle hinzu."
+          },
+          "requirementsStep": {
+            "title": "Anforderungen",
+            "subtitle": "Erfahrung, Zertifikate, Sprachen und Qualifikationsstufe.",
+            "experienceLabel": "Erfahrung",
+            "certificationsLabel": "Zertifikate",
+            "languagesLabel": "Sprachen",
+            "tierLabel": "Qualifikationsstufe",
+            "subtitleOptional": "Alles optional — Sie können diese Felder offen lassen.",
+            "addCertification": "Zertifikat hinzufügen",
+            "addLanguage": "Sprache hinzufügen",
+            "certPlaceholder": "z. B. Schweißer-Zertifikat",
+            "langPlaceholder": "z. B. Englisch",
+            "anyOption": "Beliebig"
+          },
+          "termsStep": {
+            "title": "Beschäftigungsbedingungen",
+            "subtitle": "Den Kandidat:innen gezeigte Bedingungen (gesetzlich vorgeschrieben).",
+            "wageRangeLabel": "Lohnspanne",
+            "hoursLabel": "Arbeitszeit",
+            "accommodationLabel": "Unterkunft / Verpflegung",
+            "durationLabel": "Vertragsdauer",
+            "startDateLabel": "Startdatum",
+            "wageMinLabel": "Mindestlohn",
+            "wageMaxLabel": "Höchstlohn",
+            "currencyLabel": "Währung",
+            "wagePlaceholderMin": "z. B. 700",
+            "wagePlaceholderMax": "z. B. 1000",
+            "hoursPlaceholder": "z. B. 40 Stunden / Woche",
+            "accommodationLabelQ": "Werden Unterkunft / Verpflegung gestellt?",
+            "accommodationYes": "Ja, gestellt",
+            "accommodationNo": "Nein",
+            "accommodationNoteLabel": "Hinweis zur Unterkunft (optional)",
+            "accommodationNotePlaceholder": "z. B. Einzelzimmer vor Ort + 3 Mahlzeiten.",
+            "durationPlaceholder": "z. B. 12 Monate",
+            "legalNote": "Diese Bedingungen werden den Kandidat:innen vor der Vermittlung offengelegt (MNE-Vermittlungsrecht)."
+          },
+          "serviceStep": {
+            "title": "Servicemodell",
+            "subtitle": "Nur Provision oder Full Service?",
+            "commissionLabel": "Nur Provision",
+            "commissionBody": "Matching und Zugang zum geprüften Pool.",
+            "fullServiceLabel": "Full Service",
+            "fullServiceBody": "Durchgängige Abwicklung von Genehmigungen, Verträgen und Vermittlung.",
+            "commissionTag": "Gebühr bei Vermittlung",
+            "fullServiceTag": "Paket"
+          },
+          "reviewStep": {
+            "title": "Überprüfen & einreichen",
+            "subtitle": "Prüfen Sie die Angaben und reichen Sie die Anforderung ein.",
+            "rolesSection": "Branche & Rollen",
+            "requirementsSection": "Anforderungen",
+            "termsSection": "Beschäftigungsbedingungen",
+            "serviceSection": "Servicemodell",
+            "noteLabel": "Hinweis an RoNa Legal (optional)",
+            "notePlaceholder": "Möchten Sie noch etwas hinzufügen?"
+          }
+        },
+        "subtitle": "Beschreiben Sie Ihren Bedarf, und RoNa Legal stellt eine passende Vorauswahl zusammen.",
+        "draftRestored": "Ihre nicht abgeschlossene Anforderung wurde wiederhergestellt.",
+        "startFresh": "Neu beginnen",
+        "viewRequisition": "Anforderung ansehen",
+        "createAnother": "Weitere erstellen",
+        "edit": "Bearbeiten",
+        "none": "—",
+        "anyOption": "Beliebig",
+        "errors": {
+          "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+          "validation": "Bitte überprüfen Sie die markierten Felder.",
+          "forbidden": "Sie sind dazu nicht berechtigt.",
+          "network": "Verbindungsproblem. Bitte versuchen Sie es erneut.",
+          "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+          "wageOrder": "Der Mindestlohn darf nicht höher als der Höchstlohn sein.",
+          "startDate": "Wählen Sie ein gültiges Startdatum."
+        }
+      },
+      "unlocks": {
+        "seoTitle": "Freischaltungen — Glatko Work & Career",
+        "title": "Freischaltungs- & Zahlungszentrum",
+        "subtitle": "Freigabe- und Zahlungsstatus für die Kandidat:innen, an denen Sie Interesse bekundet haben.",
+        "emptyTitle": "Noch keine Freischaltungen",
+        "emptyBody": "Sie erscheinen hier, sobald Sie aus dem Pool Interesse bekunden.",
+        "workerCodeLabel": "Kandidat:innencode",
+        "interestAtLabel": "Datum des Interesses",
+        "approvalLabel": "Freigabestatus",
+        "paymentLabel": "Zahlungsstatus",
+        "unlockedAtLabel": "Freischaltdatum",
+        "payCta": "Gebühr zahlen",
+        "viewDossier": "Vollständiges Dossier ansehen",
+        "feeDueNote": "Freigegeben — Gebühr fällig.",
+        "subhead": "Freigabeanfragen & Zahlungsstatus",
+        "statusRegionLabel": "Freischaltstatus",
+        "requisitionRefLabel": "Anforderung",
+        "pill": {
+          "interest": "Wartet auf Prüfung durch RoNa Legal",
+          "approved": "Freigegeben — Gebühr fällig",
+          "unlocked": "Freigeschaltet"
+        },
+        "interestBody": "Ihr Interesse wird geprüft; wir benachrichtigen Sie bei Freigabe.",
+        "feeSummary": {
+          "title": "Gebührenübersicht",
+          "amountLabel": "Betrag",
+          "pathLabel": "Servicemodell"
+        },
+        "pay": {
+          "cta": "Gebühr zahlen",
+          "processing": "Wird verarbeitet…"
+        },
+        "dossier": {
+          "title": "Vollständiges Dossier",
+          "nameLabel": "Vollständiger Name",
+          "contactLabel": "Kontakt",
+          "locationLabel": "Standort",
+          "documentsTitle": "Dokumente"
+        },
+        "doc": {
+          "view": "Ansehen / Herunterladen",
+          "opening": "Wird geöffnet…",
+          "error": "Dokument konnte nicht geöffnet werden."
+        },
+        "unavailableNote": "Dieses Profil ist nicht mehr verfügbar.",
+        "toast": {
+          "paySuccess": "Zahlung erhalten — Dossier freigeschaltet.",
+          "payNotApproved": "Diese Anfrage ist noch nicht freigegeben.",
+          "payError": "Die Zahlung konnte nicht abgeschlossen werden. Bitte versuchen Sie es erneut.",
+          "signError": "Der Dokumentlink konnte nicht erstellt werden."
+        },
+        "approval": {
+          "pending": "Freigabe ausstehend",
+          "approved": "Freigegeben",
+          "denied": "Abgelehnt"
+        },
+        "payment": {
+          "unpaid": "Unbezahlt",
+          "invoiced": "In Rechnung gestellt",
+          "paid": "Bezahlt"
+        }
+      },
+      "requisitionStatus": {
+        "submitted": "Eingereicht",
+        "under_curation": "In Kuratierung",
+        "shortlist_ready": "Vorauswahl bereit",
+        "interest_expressed": "Interesse bekundet",
+        "approved": "Freigegeben / freigeschaltet",
+        "placed": "Vermittelt",
+        "in_guarantee": "In Garantie"
+      },
+      "servicePath": {
+        "commission": "Nur Provision",
+        "full_service": "Full Service"
+      },
+      "tier": {
+        "free": "Kostenlos",
+        "verified": "Geprüft",
+        "premium": "Premium"
+      }
+    },
+    "login": {
+      "seoTitle": "Anmelden — Glatko Work & Career",
+      "title": "Anmelden",
+      "subtitle": "Melden Sie sich bei Ihrem Arbeitgeber- oder Arbeitskraftkonto an.",
+      "emailLabel": "E-Mail",
+      "passwordLabel": "Passwort",
+      "submit": "Anmelden",
+      "submitting": "Wird angemeldet…",
+      "noAccount": "Haben Sie noch kein Konto?",
+      "registerEmployer": "Als Arbeitgeber registrieren",
+      "registerWorker": "Als Arbeitskraft registrieren",
+      "forgotPassword": "Passwort vergessen",
+      "errInvalid": "E-Mail oder Passwort ist falsch.",
+      "errGeneric": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    },
+    "waitlist": {
+      "title": "Early-Access-Liste",
+      "employerTitle": "Sind Sie Arbeitgeber?",
+      "employerSubtitle": "Melden Sie sich für vorrangigen Zugang zum Start an.",
+      "workerTitle": "Suchen Sie Arbeit?",
+      "workerSubtitle": "Haben Sie Ihr Profil zum Start bereit.",
+      "nameLabel": "Vollständiger Name",
+      "companyLabel": "Unternehmen (optional)",
+      "roleLabel": "Rolle / Branche",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-Mail (optional)",
+      "submit": "Zur Liste hinzufügen",
+      "submitting": "Wird übermittelt…",
+      "success": "Sie stehen auf der Liste! Wir melden uns zum Start bei Ihnen.",
+      "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "errorValidation": "Bitte füllen Sie die Pflichtfelder aus.",
+      "privacyNote": "Wir verwenden Ihre Angaben nur, um Sie über den Start von Glatko Work & Career zu kontaktieren; wir geben sie nicht an Dritte weiter. Details:",
+      "privacyLinkText": "Datenschutzerklärung"
+    },
+    "trust": {
+      "verifiedByRonaLegal": "Geprüft von RoNa Legal",
+      "verifiedByRonaLegalShort": "Geprüft von RoNa Legal",
+      "employerPays": "Der Arbeitgeber zahlt — Arbeitsuchende zahlen nie eine Gebühr",
+      "employerPaysShort": "Der Arbeitgeber zahlt",
+      "guarantee": "90 Tage kostenlose Ersatzgarantie",
+      "anonymous": "Anonymisierter Pool — Identität wird nach Freigabe freigeschaltet",
+      "tiers": {
+        "idVerified": "Identität geprüft",
+        "skillsVerified": "Fähigkeiten geprüft",
+        "documentsVerified": "Dokumente geprüft",
+        "interviewPassed": "Gespräch bestanden"
+      }
+    },
+    "errors": {
+      "notFoundTitle": "Seite nicht gefunden",
+      "notFoundBody": "Die gesuchte Seite wurde möglicherweise verschoben oder entfernt.",
+      "genericTitle": "Etwas ist schiefgelaufen",
+      "genericBody": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "retry": "Erneut versuchen",
+      "backToCareer": "Zurück zur Work & Career-Startseite",
+      "loginRequiredTitle": "Anmeldung erforderlich",
+      "loginRequiredBody": "Sie müssen sich anmelden, um diese Seite zu sehen.",
+      "forbiddenTitle": "Kein Zugriff",
+      "forbiddenBody": "Sie haben keine Berechtigung, diese Seite anzuzeigen."
+    }
   }
 }

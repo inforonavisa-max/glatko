@@ -31,7 +31,12 @@
     "businessProfile": "Poslovni profil",
     "settings": "Подешавања",
     "adminPanel": "Admin panel",
-    "leads": "Poslovne prilike"
+    "leads": "Poslovne prilike",
+    "careerTalentPool": "Bazen radne snage",
+    "careerHowItWorks": "Kako funkcioniše",
+    "careerSectors": "Sektori",
+    "careerEmployerJoin": "Registruj se kao poslodavac",
+    "careerCreateRequisition": "Kreiraj zahtjev"
   },
   "hero": {
     "title": "Pouzdani profesionalci u Crnoj Gori",
@@ -3023,9 +3028,828 @@
     }
   },
   "careerVertical": {
-    "seoTitle": "Posao — uskoro",
-    "title": "Posao stiže",
+    "seoTitle": "Poslovi — uskoro",
+    "title": "Poslovi stižu",
     "subtitle": "Gradimo pouzdan način povezivanja poslodavaca i radnika u Crnoj Gori. Ova sekcija stiže uskoro.",
-    "backHome": "Nazad na početnu"
+    "backHome": "Nazad na početnu",
+    "brand": {
+      "name": "Glatko Posao i Karijera",
+      "short": "Posao i Karijera",
+      "tagline": "Provjerena radna snaga, pouzdano posredovanje"
+    },
+    "comingSoon": {
+      "badge": "Uskoro",
+      "title": "Glatko Posao i Karijera stiže",
+      "subtitle": "Povezujemo poslodavce u Crnoj Gori sa provjerenim kandidatima spremnim za razgovor. Anonimni bazen, ljudski provjereno uparivanje, poslodavac plaća.",
+      "waitlistTitle": "Pridružite se listi za rani pristup",
+      "waitlistSubtitle": "Poslodavac ili tražilac posla — osigurajte prioritetno mjesto na lansiranju.",
+      "employerCardTitle": "Jeste li poslodavac?",
+      "employerCardSubtitle": "Podnesite svoju potrebu za radnom snagom — upoznajte provjerene kandidate na lansiranju.",
+      "workerCardTitle": "Tražite posao?",
+      "workerCardSubtitle": "Napravite svoj profil — besplatno za vas, naknadu plaća poslodavac.",
+      "backHome": "Nazad na početnu"
+    },
+    "landing": {
+      "seoTitle": "Glatko Posao i Karijera — Provjerena radna snaga, pouzdano posredovanje",
+      "hero": {
+        "badge": "Provjereno od strane RoNa Legal",
+        "title": "Provjerena radna snaga za Crnu Goru, sa sigurnošću",
+        "subtitle": "Kandidati spremni za razgovor i sa dokumentima u građevinarstvu i ugostiteljstvu. Pregledajte anonimni bazen, napredujte kroz ljudski provjereno uparivanje.",
+        "trustNote": "Kandidati nikada ne plaćaju naknadu — sve troškove pokriva poslodavac."
+      },
+      "dualCta": {
+        "employerTitle": "Za poslodavce",
+        "employerBody": "Pregledajte bazen provjerene radne snage, kreirajte zahtjev, primite svoju užu listu.",
+        "employerCta": "Kreiraj zahtjev",
+        "employerSecondary": "Pregledaj bazen radne snage",
+        "workerTitle": "Za radnike",
+        "workerBody": "Napravite profil, otpremite dokumente, pridružite se bazenu provjerenih kandidata.",
+        "workerCta": "Napravi profil",
+        "workerSecondary": "Kako funkcioniše"
+      },
+      "trustStrip": {
+        "verifiedTitle": "Provjereno od strane RoNa Legal",
+        "verifiedBody": "Svaki kandidat prolazi provjeru identiteta, vještina i dokumenata.",
+        "employerPaysTitle": "Poslodavac plaća",
+        "employerPaysBody": "Po ILO principu, tražioci posla nikada ne plaćaju naknadu.",
+        "guaranteeTitle": "90 dana besplatne zamjene",
+        "guaranteeBody": "Ako zaposlenje ne odgovara, besplatno ga zamjenjujemo u okviru garancije.",
+        "anonymousTitle": "Anonimni bazen",
+        "anonymousBody": "Identitet, kontakt i dokumenti otključavaju se tek nakon odobrenja i plaćanja."
+      },
+      "teaser": {
+        "title": "Pogled na bazen radne snage",
+        "subtitle": "Puni identitet je skriven — odobreni poslodavci mogu otključati kompletan dosije.",
+        "lockedLabel": "Zaključano",
+        "viewPoolCta": "Pogledaj cijeli bazen"
+      },
+      "sectorsTitle": "Sektori",
+      "sectorsSubtitle": "Počinjemo sa građevinarstvom i ugostiteljstvom.",
+      "steps": {
+        "title": "Kako funkcioniše u 3 koraka",
+        "step1Title": "Pregledajte bazen",
+        "step1Body": "Filtrirajte anonimne kartice po vještini, iskustvu i regionu.",
+        "step2Title": "Iskažite interesovanje",
+        "step2Body": "Dodajte odgovarajuće kandidate u svoj zahtjev; RoNa Legal provjerava podobnost.",
+        "step3Title": "Odobrenje i zaposlenje",
+        "step3Body": "Nakon odobrenja i plaćanja otključava se kompletan dosije i zaposlenje se završava."
+      },
+      "stats": {
+        "title": "Glatko Posao i Karijera u brojkama",
+        "workersLabel": "Provjereni kandidati",
+        "sectorsLabel": "Aktivni sektori",
+        "placementsLabel": "Završena zaposlenja",
+        "comingSoon": "Uskoro"
+      }
+    },
+    "howItWorks": {
+      "seoTitle": "Kako funkcioniše — Glatko Posao i Karijera",
+      "title": "Kako funkcioniše",
+      "subtitle": "Transparentan, ljudski provjeren model u kojem poslodavac plaća, siguran za obje strane.",
+      "employerPath": {
+        "title": "Put poslodavca",
+        "subtitle": "Od potrebe do zaposlenja, jedan provjeren tok.",
+        "step1Title": "Kreirajte zahtjev",
+        "step1Body": "Navedite sektor, uloge, broj radnika i uslove.",
+        "step2Title": "Primite užu listu",
+        "step2Body": "RoNa Legal predstavlja anonimnu užu listu prilagođenu vašoj potrebi.",
+        "step3Title": "Iskažite interesovanje",
+        "step3Body": "Iskažite interesovanje za kandidate koje odaberete; pokrećemo proces odobrenja.",
+        "step4Title": "Odobrenje i plaćanje",
+        "step4Body": "Nakon odobrenja i plaćanja otključavaju se puni identitet i dokumenti.",
+        "step5Title": "Zaposlenje i garancija",
+        "step5Body": "Zaposlenje se završava; počinje garancija besplatne zamjene od 90 dana."
+      },
+      "workerPath": {
+        "title": "Put radnika",
+        "subtitle": "Besplatno za vas — vaš identitet se nikada ne dijeli bez vaše saglasnosti.",
+        "step1Title": "Napravite profil",
+        "step1Body": "Dodajte svoju ulogu, iskustvo, vještine i jezike.",
+        "step2Title": "Otpremite dokumente",
+        "step2Body": "Vi odlučujete šta je javno, a šta ostaje privatno za svaki dokument.",
+        "step3Title": "Provjera",
+        "step3Body": "RoNa Legal provjerava vaš identitet, vještine i dokumente.",
+        "step4Title": "Pojavite se u bazenu",
+        "step4Body": "Poslodavcima se prikazujete kao anonimna kartica; vaš identitet ostaje skriven.",
+        "step5Title": "Uparivanje",
+        "step5Body": "Kada je poslodavac zainteresovan, RoNa Legal vodi proces zajedno s vama."
+      },
+      "revenuePaths": {
+        "title": "Dva modela usluge",
+        "subtitle": "Odaberite ono što vam odgovara — u oba poslodavac plaća naknadu.",
+        "commissionTitle": "Samo provizija",
+        "commissionBody": "Uparivanje i pristup provjerenom bazenu; provizija na uspješno zaposlenje.",
+        "fullServiceTitle": "Puna usluga",
+        "fullServiceBody": "Vođenje dozvola, ugovora i procesa zaposlenja od početka do kraja."
+      },
+      "employerPays": {
+        "title": "Princip „Poslodavac plaća”",
+        "body": "U skladu sa ILO principom „Poslodavac plaća” i crnogorskim zakonom, tražiocima posla se nikada ne naplaćuje. Sve naknade za posredovanje pokriva poslodavac.",
+        "legalNote": "U Crnoj Gori je naplaćivanje tražiocu posla prekršaj (kazna od €500 do €20.000)."
+      }
+    },
+    "sectors": {
+      "seoTitle": "Sektori — Glatko Posao i Karijera",
+      "title": "Sektori",
+      "subtitle": "Pregledajte provjerenu radnu snagu po sektoru.",
+      "viewSector": "Pogledaj sektor",
+      "rolesLabel": "Uloge",
+      "browsePool": "Pregledaj radnu snagu u ovom sektoru",
+      "emptyTitle": "Još nema sektora",
+      "emptyBody": "Dodajemo sektore. Provjerite ponovo uskoro.",
+      "construction": {
+        "name": "Građevinarstvo",
+        "tagline": "Zidari, zavarivači, električari i drugi",
+        "intro": "Provjerena, iskusna radna snaga za crnogorske građevinske projekte."
+      },
+      "hospitality": {
+        "name": "Ugostiteljstvo",
+        "tagline": "Konobari, kuvari, sobarice i drugi",
+        "intro": "Radna snaga spremna za razgovor za hotele, restorane i turistička preduzeća."
+      }
+    },
+    "pool": {
+      "seoTitle": "Bazen radne snage — Glatko Posao i Karijera",
+      "title": "Bazen radne snage",
+      "subtitle": "Provjereni, anonimni kandidati. Identitet se otključava tek nakon odobrenja i plaćanja.",
+      "resultsCount": "{count} kandidata",
+      "noResultsTitle": "Nema rezultata",
+      "noResultsBody": "Podesite filtere i pokušajte ponovo.",
+      "poolPreparingTitle": "Bazen se priprema",
+      "poolPreparingBody": "Kandidati se provjeravaju. Prvi radnici će se pojaviti ovdje vrlo brzo.",
+      "loading": "Učitavanje bazena…",
+      "errorTitle": "Učitavanje nije uspjelo",
+      "errorBody": "Došlo je do greške pri učitavanju bazena. Pokušajte ponovo.",
+      "retry": "Pokušaj ponovo",
+      "loadMore": "Prikaži više",
+      "loginPrompt": "Prijavite se kao poslodavac da iskažete interesovanje.",
+      "filters": {
+        "title": "Filteri",
+        "apply": "Primijeni",
+        "clear": "Očisti",
+        "clearAll": "Očisti sve",
+        "sector": "Sektor",
+        "trade": "Zanat / uloga",
+        "skillTier": "Nivo vještine",
+        "experienceBand": "Iskustvo",
+        "region": "Region",
+        "ageBand": "Starosna grupa",
+        "languages": "Jezici",
+        "certifications": "Sertifikati",
+        "readiness": "Spremnost / provjera",
+        "availability": "Dostupnost",
+        "anyOption": "Bilo koji"
+      },
+      "skillTier": {
+        "entry": "Početni",
+        "skilled": "Kvalifikovan",
+        "experienced": "Iskusan",
+        "expert": "Ekspert"
+      },
+      "experienceBand": {
+        "lt1": "Manje od 1 godine",
+        "1to3": "1–3 godine",
+        "3to5": "3–5 godina",
+        "5to10": "5–10 godina",
+        "gt10": "10+ godina"
+      },
+      "region": {
+        "farEast": "Daleki istok",
+        "middleEast": "Bliski istok",
+        "africa": "Afrika",
+        "balkans": "Balkan",
+        "other": "Ostalo"
+      },
+      "ageBand": {
+        "18to24": "18–24",
+        "25to34": "25–34",
+        "35to44": "35–44",
+        "45plus": "45+"
+      },
+      "readiness": {
+        "title": "Spremnost",
+        "high": "Visoka spremnost",
+        "medium": "Srednja spremnost",
+        "low": "Profil u izradi"
+      },
+      "availability": {
+        "immediate": "Dostupan odmah",
+        "within30": "U roku od 30 dana",
+        "within90": "U roku od 90 dana"
+      },
+      "sort": {
+        "label": "Sortiraj",
+        "relevance": "Po relevantnosti",
+        "readiness": "Po spremnosti",
+        "experience": "Po iskustvu",
+        "recent": "Najnovije"
+      },
+      "card": {
+        "verifiedBadge": "Provjereno od strane RoNa Legal",
+        "readinessLabel": "Spremnost",
+        "experienceLabel": "Iskustvo",
+        "regionLabel": "Region",
+        "languagesLabel": "Jezici",
+        "skillsLabel": "Glavne vještine",
+        "certsLabel": "Sertifikati",
+        "tierLabel": "Nivo",
+        "photoBlurredNote": "Fotografija zamućena radi privatnosti",
+        "viewProfile": "Pogledaj profil",
+        "expressInterest": "Iskaži interesovanje",
+        "addToRequisition": "Dodaj u zahtjev",
+        "interestMarked": "Interesovanje iskazano",
+        "addedToRequisition": "Dodato u zahtjev"
+      },
+      "lockedCta": {
+        "title": "Kompletan dosije je zaključan",
+        "body": "Ime, kontakt, pasoš i originalni dokumenti otključavaju se nakon odobrenja RoNa Legal i naknade.",
+        "loginCta": "Prijavi se kao poslodavac",
+        "registerCta": "Napravi nalog poslodavca"
+      },
+      "verificationStatus": {
+        "pending": "Provjera u toku",
+        "id_verified": "Identitet provjeren",
+        "skills_verified": "Vještine provjerene",
+        "documents_verified": "Dokumenti provjereni",
+        "interview_passed": "Razgovor položen",
+        "rejected": "Odbijeno"
+      }
+    },
+    "workerDetail": {
+      "seoTitle": "Profil kandidata — Glatko Posao i Karijera",
+      "backToPool": "Nazad na bazen",
+      "anonymousNote": "Ovaj profil je anoniman. Puni identitet se otključava nakon odobrenja i plaćanja.",
+      "overviewLabel": "Pregled",
+      "lockedPanel": {
+        "title": "Kompletan dosije je zaključan",
+        "body": "Puno ime, kontakt, pasoš i originalni dokumenti otključavaju se tek nakon odobrenja RoNa Legal i naknade.",
+        "lockedItemsTitle": "Vidljivo nakon otključavanja",
+        "itemFullName": "Puno ime",
+        "itemContact": "Telefon i e-pošta",
+        "itemLocation": "Tačna država / grad",
+        "itemPassport": "Skenovi pasoša i lične karte",
+        "itemDocuments": "Originalne diplome i sertifikati",
+        "itemPhotos": "Nezamućene fotografije i video",
+        "expressInterest": "Iskaži interesovanje",
+        "addToRequisition": "Dodaj u zahtjev"
+      },
+      "skillsMatrix": {
+        "title": "Matrica vještina",
+        "skillLabel": "Vještina",
+        "levelLabel": "Nivo",
+        "empty": "Nema dodatih vještina."
+      },
+      "timeline": {
+        "title": "Istorija iskustva",
+        "redactedNote": "Imena poslodavaca su skrivena radi privatnosti.",
+        "durationLabel": "Trajanje",
+        "yearsShort": "god.",
+        "empty": "Nema dodate istorije."
+      },
+      "languagesLabel": "Jezici",
+      "certificationsLabel": "Sertifikati",
+      "certFileLocked": "Datoteka sertifikata je zaključana",
+      "readinessLabel": "Ocjena spremnosti",
+      "videoIntroLabel": "Uvodni video",
+      "videoLocked": "Video se otključava nakon odobrenja"
+    },
+    "worker": {
+      "landing": {
+        "seoTitle": "Za radnike — Glatko Posao i Karijera",
+        "title": "Pronalaženje posla besplatno za vas",
+        "subtitle": "Pridružite se bazenu provjerenih kandidata. Naknadu plaća poslodavac; vaš identitet se nikada ne dijeli bez vaše saglasnosti.",
+        "cta": "Napravi profil",
+        "loginCta": "Već imam nalog",
+        "benefit1Title": "Besplatno za vas",
+        "benefit1Body": "Tražiocima posla se nikada ne naplaćuje naknada.",
+        "benefit2Title": "Vaš identitet ostaje privatan",
+        "benefit2Body": "Pojavljujete se kao anonimna kartica; identitet se otključava uz vašu saglasnost.",
+        "benefit3Title": "Prenosivi sef za dokumente",
+        "benefit3Body": "Vaši provjereni dokumenti na jednom mjestu, spremni za svako uparivanje."
+      },
+      "landingPage": {
+        "seoTitle": "Za radnike — Glatko Posao i Karijera",
+        "eyebrow": "Za radnike · Uvijek besplatno",
+        "title": "Zaposlite se u inostranstvu — besplatno za vas, potpuno vođeno",
+        "subtitle": "Pridružite se bazenu provjerenih kandidata. Naknadu plaća poslodavac, vaš identitet se nikada ne dijeli bez vaše saglasnosti, a RoNa Legal vodi ostalo.",
+        "registerCta": "Napravi profil",
+        "howItWorksCta": "Kako funkcioniše za radnike",
+        "employerPays": {
+          "title": "Vi nikada ne plaćate naknadu",
+          "body": "Poslodavac pokriva sve troškove zapošljavanja (ILO princip „Poslodavac plaća”). Kao tražiocu posla, vama se nikada ne naplaćuje naknada, provizija ili odbitak."
+        },
+        "trust": {
+          "verified": "Provjereno od strane RoNa Legal",
+          "privacy": "Vaši podaci ostaju privatni dok ih ne odobrite",
+          "portable": "Prenosiva provjerena referenca"
+        },
+        "benefits": {
+          "title": "Zašto Glatko Posao i Karijera",
+          "freeTitle": "Besplatno za vas",
+          "freeBody": "Naknadu plaća poslodavac; vama se nikada ne naplaćuje.",
+          "vaultTitle": "Prenosivi sef za dokumente",
+          "vaultBody": "Vaši provjereni dokumenti na jednom mjestu, spremni za svako uparivanje.",
+          "anonymousTitle": "Anonimno po podrazumijevanju",
+          "anonymousBody": "Vaš identitet se otkriva samo uz vašu saglasnost i odobrenje RoNa.",
+          "singlePointTitle": "Jedna tačka kontakta",
+          "singlePointBody": "RoNa Legal komunicira sa poslodavcima — vi nikoga ne morate da jurite.",
+          "legalTitle": "Pravni poslovi obavljeni za vas",
+          "legalBody": "Dozvole, ugovori i pravni koraci se obavljaju u vaše ime.",
+          "readinessTitle": "Ocjena spremnosti",
+          "readinessBody": "Popunjavanje profila povećava vašu vidljivost u bazenu."
+        },
+        "howItWorks": {
+          "title": "Kako funkcioniše",
+          "step1Title": "Napravite profil",
+          "step1Body": "Napravite profil i otpremite dokumente — besplatno za vas.",
+          "step2Title": "Provjereni i predstavljeni",
+          "step2Body": "RoNa Legal vas provjerava i anonimno vas predstavlja u bazenu.",
+          "step3Title": "Budite upareni",
+          "step3Body": "Poslodavac iskaže interesovanje, RoNa Legal vas kontaktira i bivate upareni.",
+          "fullLink": "Pogledaj cijeli proces"
+        },
+        "privacy": {
+          "body": "Vi kontrolišete saglasnost za svaki dokument. Vaš puni identitet i kontakt podaci dijele se tek nakon vašeg odobrenja i nakon što RoNa Legal odobri poslodavca."
+        },
+        "closing": {
+          "title": "Spremni da napravite profil?",
+          "subtitle": "Uvijek besplatno za vas — naknadu plaća poslodavac."
+        }
+      },
+      "register": {
+        "seoTitle": "Registracija radnika — Glatko Posao i Karijera",
+        "title": "Napravite nalog radnika",
+        "subtitle": "Nekoliko koraka do izrade vašeg profila. Uvijek besplatno za vas — poslodavac plaća.",
+        "accountGroup": "Nalog",
+        "basicsGroup": "Osnovno",
+        "nameLabel": "Puno ime",
+        "emailLabel": "E-pošta",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Lozinka",
+        "roleLabel": "Uloga / zanat",
+        "rolePlaceholder": "Izaberite svoju ulogu",
+        "regionLabel": "Odakle dolazite",
+        "regionPlaceholder": "Izaberite region",
+        "regionHint": "Samo region — vaša tačna država se prikuplja kasnije u vašem privatnom profilu.",
+        "languageLabel": "Željeni jezik",
+        "freeForYou": "Uvijek besplatno za vas — poslodavac plaća.",
+        "submit": "Napravi nalog",
+        "submitting": "Kreiranje…",
+        "haveAccount": "Već imate nalog?",
+        "loginLink": "Prijavite se",
+        "consentLabel": "Dajem izričitu saglasnost da Glatko Posao i Karijera obrađuje moje lične podatke — uključujući pasoš, sertifikate i biometrijske dokumente — za anonimni prikaz i provjeru od strane RoNa Legal. Razumijem da kasnije mogu povući saglasnost za svaki dokument.",
+        "consentLink": "Politika privatnosti",
+        "successTitle": "Nalog kreiran",
+        "successBody": "Hajde da napravimo vaš profil.",
+        "successCta": "Nastavi na svoj profil",
+        "errConsentRequired": "Saglasnost je obavezna za nastavak.",
+        "errValidation": "Molimo popunite sva obavezna polja ispravno.",
+        "errGeneric": "Došlo je do greške. Pokušajte ponovo."
+      },
+      "profileWizard": {
+        "title": "Izrada profila",
+        "stepLabel": "Korak {current} od {total}",
+        "next": "Dalje",
+        "back": "Nazad",
+        "save": "Sačuvaj",
+        "saving": "Čuvanje…",
+        "finish": "Završi",
+        "completeness": "Popunjenost profila",
+        "readinessMeter": "Mjerač spremnosti",
+        "steps": {
+          "account": {
+            "title": "Nalog i saglasnost",
+            "subtitle": "Vaš nalog i saglasnost za obradu podataka."
+          },
+          "basics": {
+            "title": "Osnovno",
+            "subtitle": "Uloga, iskustvo, region, jezici i godine.",
+            "roleLabel": "Uloga / zanat",
+            "yearsLabel": "Iskustvo (godine)",
+            "regionLabel": "Region / država",
+            "languagesLabel": "Jezici",
+            "ageLabel": "Godine"
+          },
+          "skills": {
+            "title": "Vještine i radna istorija",
+            "subtitle": "Vještine specifične za zanat i vaš prethodni rad.",
+            "skillsLabel": "Vještine",
+            "addSkill": "Dodaj vještinu",
+            "historyLabel": "Radna istorija",
+            "addHistory": "Dodaj istoriju"
+          },
+          "certifications": {
+            "title": "Sertifikati i obrazovanje",
+            "subtitle": "Dodajte svoje sertifikate i obrazovanje.",
+            "addCertification": "Dodaj sertifikat"
+          },
+          "documents": {
+            "title": "Fotografije i dokumenti",
+            "subtitle": "Otpremite dokumente i podesite njihovu vidljivost."
+          },
+          "video": {
+            "title": "Uvodni video (opcionalno)",
+            "subtitle": "Možete dodati kratki uvodni video."
+          }
+        }
+      },
+      "documents": {
+        "seoTitle": "Moji dokumenti — Glatko Posao i Karijera",
+        "title": "Centar za dokumente i fotografije",
+        "subtitle": "Vi odlučujete šta je javno, a šta ostaje privatno za svaki dokument.",
+        "uploadCta": "Otpremi dokument",
+        "uploading": "Otpremanje…",
+        "emptyTitle": "Još nema dokumenata",
+        "emptyBody": "Otpremite svoje dokumente radi provjere.",
+        "categoryLabel": "Kategorija",
+        "visibilityLabel": "Vidljivost",
+        "consentLabel": "Status saglasnosti",
+        "uploadedAt": "Otpremljeno",
+        "retentionLabel": "Čuvanje",
+        "removeCta": "Ukloni",
+        "categories": {
+          "profile_photo": "Profilna fotografija",
+          "work_photo": "Fotografije sa rada",
+          "passport": "Pasoš / lična karta",
+          "diploma": "Diploma / sertifikat",
+          "skill_cert": "Sertifikat o vještini",
+          "insurance": "Osiguranje / medicinski",
+          "reference": "Reference"
+        },
+        "visibility": {
+          "public_anonymized": "Javno (anonimno)",
+          "gated": "Ograničeno (nakon odobrenja)",
+          "internal_only": "Samo interno",
+          "publicHint": "Prikazuje se u bazenu sa zamućenim licem i vodenim žigom.",
+          "gatedHint": "Otključava se poslodavcu tek nakon odobrenja i plaćanja.",
+          "internalHint": "Vidi ga samo RoNa Legal; nikada se ne prikazuje u bazenu."
+        },
+        "consent": {
+          "title": "Saglasnost koju dajete uz ovaj dokument",
+          "pending": "Saglasnost na čekanju",
+          "granted": "Saglasnost data",
+          "revoked": "Saglasnost povučena",
+          "grantCta": "Daj saglasnost",
+          "revokeCta": "Povuci saglasnost",
+          "grantBody": "Dozvoljavate da se ovaj dokument obrađuje na vidljivosti koju ste izabrali.",
+          "revokeBody": "Saglasnost možete povući u bilo kojem trenutku."
+        }
+      },
+      "dashboard": {
+        "seoTitle": "Moja kontrolna tabla — Glatko Posao i Karijera",
+        "title": "Kontrolna tabla radnika",
+        "subtitle": "Pregled vašeg statusa i procesa.",
+        "statusLabel": "Status",
+        "readinessLabel": "Ocjena spremnosti",
+        "interestCountLabel": "Primljeno interesovanje",
+        "completenessLabel": "Popunjenost profila",
+        "singlePointNote": "RoNa Legal je vaša jedina tačka kontakta; kontakt poslodavca se nikada ne dijeli.",
+        "editProfile": "Uredi profil",
+        "manageDocuments": "Upravljaj dokumentima",
+        "statuses": {
+          "showcased": "Predstavljeni ste u bazenu",
+          "interest": "Poslodavac je iskazao interesovanje",
+          "pendingApproval": "Čeka se odobrenje RoNa",
+          "matched": "Upareni — pravna obrada je u toku",
+          "placed": "Zaposleni ste",
+          "notShowcased": "Još niste u bazenu",
+          "underReview": "Vaš profil je u pregledu"
+        }
+      }
+    },
+    "employer": {
+      "landingPage": {
+        "seoTitle": "Za poslodavce — Glatko Posao i Karijera",
+        "eyebrow": "Za poslodavce",
+        "title": "Provjereni radnici spremni za rad, potpuno vođeno",
+        "subtitle": "Podnesite svoju potrebu i RoNa Legal sastavlja provjerenu užu listu; završite odobreno zapošljavanje nakon pregleda i plaćanja.",
+        "registerCta": "Registruj se kao poslodavac",
+        "poolCta": "Pregledaj bazen radne snage",
+        "trust": {
+          "verified": "Provjereno od strane RoNa Legal",
+          "employerPays": "Poslodavac plaća — besplatno za radnike",
+          "guarantee": "Garancija zamjene od 90 dana"
+        },
+        "benefits": {
+          "title": "Zašto Glatko Posao i Karijera",
+          "verifiedTitle": "Provjeren i sastavljen bazen",
+          "verifiedBody": "Svaki kandidat prolazi provjeru identiteta, vještina i dokumenata.",
+          "anonymousTitle": "Anonimno pregledanje, zaštićeno od curenja",
+          "anonymousBody": "Identitet i kontakt ostaju skriveni do odobrenja i plaćanja.",
+          "lifecycleTitle": "Vođenje kompletnog procesa",
+          "lifecycleBody": "RoNa Legal upravlja dozvolama, ugovorima i pravnim procesom.",
+          "guaranteeTitle": "90 dana besplatne zamjene",
+          "guaranteeBody": "Ako zaposlenje ne odgovara, besplatno ga zamjenjujemo u okviru garancije.",
+          "escrowTitle": "Naknade zaštićene escrow-om",
+          "escrowBody": "Naknade se naplaćuju samo na uspješno zaposlenje.",
+          "matcherTitle": "Ljudski stručnjak za uparivanje",
+          "matcherBody": "Predstavljaju vam se samo kandidati koji zaista odgovaraju."
+        },
+        "howItWorks": {
+          "title": "Kako funkcioniše",
+          "step1Title": "Podnesite svoju potrebu",
+          "step1Body": "Unesite sektor, ulogu i uslove, zatim kreirajte svoj zahtjev.",
+          "step2Title": "Primite sastavljenu užu listu",
+          "step2Body": "RoNa Legal sastavlja užu listu provjerenih kandidata.",
+          "step3Title": "Otkrij i zaposli",
+          "step3Body": "Nakon odobrenja i plaćanja otvara se kompletan dosije i zapošljavanje se završava.",
+          "fullLink": "Kako funkcioniše u cjelosti"
+        },
+        "pricing": {
+          "title": "Model koji vam odgovara",
+          "subtitle": "Plaćate samo na uspješno zaposlenje.",
+          "commissionTitle": "Samo provizija",
+          "commissionBody": "Uparivanje i pristup provjerenom bazenu; naknada na zaposlenje.",
+          "fullServiceTitle": "Puna usluga",
+          "fullServiceBody": "Vođenje dozvola, ugovora i zaposlenja od početka do kraja."
+        },
+        "closing": {
+          "title": "Spremni da izgradite pravi tim?",
+          "subtitle": "Registracija je besplatna; plaćate samo na uspješno zaposlenje."
+        }
+      },
+      "landing": {
+        "seoTitle": "Za poslodavce — Glatko Posao i Karijera",
+        "title": "Pristupite provjerenoj radnoj snazi",
+        "subtitle": "Podnesite svoju potrebu, primite užu listu, završite odobreno zapošljavanje.",
+        "cta": "Kreiraj zahtjev",
+        "secondaryCta": "Pregledaj bazen radne snage",
+        "loginCta": "Već imam nalog",
+        "benefit1Title": "Provjeren bazen",
+        "benefit1Body": "Svaki kandidat prolazi provjeru identiteta, vještina i dokumenata.",
+        "benefit2Title": "Ljudski provjerena uža lista",
+        "benefit2Body": "RoNa Legal predstavlja samo kandidate koji odgovaraju.",
+        "benefit3Title": "Garancija od 90 dana",
+        "benefit3Body": "Ako zaposlenje ne odgovara, besplatno ga zamjenjujemo."
+      },
+      "register": {
+        "seoTitle": "Registracija poslodavca — Glatko Posao i Karijera",
+        "title": "Napravite nalog poslodavca",
+        "subtitle": "Registrujte svoju kompaniju i počnite da kreirate zahtjeve.",
+        "companyLabel": "Naziv kompanije",
+        "contactLabel": "Kontakt osoba",
+        "emailLabel": "E-pošta",
+        "phoneLabel": "Telefon",
+        "passwordLabel": "Lozinka",
+        "submit": "Napravi nalog",
+        "submitting": "Kreiranje…",
+        "haveAccount": "Već imate nalog?",
+        "loginLink": "Prijavite se",
+        "errGeneric": "Došlo je do greške. Pokušajte ponovo."
+      },
+      "dashboard": {
+        "seoTitle": "Kontrolna tabla poslodavca — Glatko Posao i Karijera",
+        "title": "Kontrolna tabla poslodavca",
+        "subtitle": "Upravljajte zahtjevima, užim listama i otključavanjima.",
+        "newRequisition": "Kreiraj novi zahtjev",
+        "requisitionsTab": "Moji zahtjevi",
+        "unlocksTab": "Otključavanja",
+        "savedTab": "Sačuvano",
+        "emptyTitle": "Još nema zahtjeva",
+        "emptyBody": "Kreirajte svoj prvi zahtjev i predstavićemo vam odgovarajuće kandidate.",
+        "viewRequisition": "Pogledaj zahtjev",
+        "shortlistReadyLabel": "Uža lista spremna",
+        "guaranteeCountdown": "{days} dana preostalo na garanciji",
+        "requestReplacement": "Zatraži zamjenu"
+      },
+      "requisitionWizard": {
+        "title": "Kreiraj zahtjev",
+        "stepLabel": "Korak {current} od {total}",
+        "next": "Dalje",
+        "back": "Nazad",
+        "submit": "Podnesi zahtjev",
+        "submitting": "Podnošenje…",
+        "review": "Pregled",
+        "successTitle": "Vaš zahtjev je primljen",
+        "successBody": "RoNa Legal će ga pregledati i pripremiti vašu užu listu.",
+        "steps": {
+          "rolesStep": {
+            "title": "Sektor i uloge",
+            "subtitle": "Sektor, uloga(e) i broj radnika po ulozi.",
+            "sectorLabel": "Sektor",
+            "roleLabel": "Uloga",
+            "headcountLabel": "Broj radnika",
+            "addRole": "Dodaj ulogu",
+            "sectorPlaceholder": "Izaberite sektor",
+            "rolePlaceholder": "Izaberite ulogu",
+            "removeRole": "Ukloni ulogu",
+            "emptyHint": "Dodajte bar jednu ulogu."
+          },
+          "requirementsStep": {
+            "title": "Zahtjevi",
+            "subtitle": "Iskustvo, sertifikati, jezici i nivo vještine.",
+            "experienceLabel": "Iskustvo",
+            "certificationsLabel": "Sertifikati",
+            "languagesLabel": "Jezici",
+            "tierLabel": "Nivo vještine",
+            "subtitleOptional": "Sve je opcionalno — možete ostaviti otvoreno.",
+            "addCertification": "Dodaj sertifikat",
+            "addLanguage": "Dodaj jezik",
+            "certPlaceholder": "npr. Sertifikat zavarivača",
+            "langPlaceholder": "npr. Engleski",
+            "anyOption": "Bilo koji"
+          },
+          "termsStep": {
+            "title": "Uslovi zaposlenja",
+            "subtitle": "Uslovi koji se prikazuju kandidatima (zakonska obaveza).",
+            "wageRangeLabel": "Raspon plate",
+            "hoursLabel": "Radno vrijeme",
+            "accommodationLabel": "Smještaj / ishrana",
+            "durationLabel": "Trajanje ugovora",
+            "startDateLabel": "Datum početka",
+            "wageMinLabel": "Minimalna plata",
+            "wageMaxLabel": "Maksimalna plata",
+            "currencyLabel": "Valuta",
+            "wagePlaceholderMin": "npr. 700",
+            "wagePlaceholderMax": "npr. 1000",
+            "hoursPlaceholder": "npr. 40 sati / nedjeljno",
+            "accommodationLabelQ": "Da li je obezbijeđen smještaj / ishrana?",
+            "accommodationYes": "Da, obezbijeđeno",
+            "accommodationNo": "Ne",
+            "accommodationNoteLabel": "Napomena o smještaju (opcionalno)",
+            "accommodationNotePlaceholder": "npr. Jednokrevetna soba na lokaciji + 3 obroka.",
+            "durationPlaceholder": "npr. 12 mjeseci",
+            "legalNote": "Ovi uslovi se objavljuju kandidatima prije zaposlenja (crnogorski zakon o posredovanju)."
+          },
+          "serviceStep": {
+            "title": "Model usluge",
+            "subtitle": "Samo provizija ili puna usluga?",
+            "commissionLabel": "Samo provizija",
+            "commissionBody": "Uparivanje i pristup provjerenom bazenu.",
+            "fullServiceLabel": "Puna usluga",
+            "fullServiceBody": "Vođenje dozvola, ugovora i zaposlenja od početka do kraja.",
+            "commissionTag": "Naknada na zaposlenje",
+            "fullServiceTag": "Sve uključeno"
+          },
+          "reviewStep": {
+            "title": "Pregled i podnošenje",
+            "subtitle": "Provjerite detalje i podnesite zahtjev.",
+            "rolesSection": "Sektor i uloge",
+            "requirementsSection": "Zahtjevi",
+            "termsSection": "Uslovi zaposlenja",
+            "serviceSection": "Model usluge",
+            "noteLabel": "Napomena za RoNa Legal (opcionalno)",
+            "notePlaceholder": "Želite li nešto da dodate?"
+          }
+        },
+        "subtitle": "Opišite svoju potrebu i RoNa Legal će sastaviti odgovarajuću užu listu.",
+        "draftRestored": "Vaš nezavršeni zahtjev je vraćen.",
+        "startFresh": "Počni iznova",
+        "viewRequisition": "Pogledaj zahtjev",
+        "createAnother": "Kreiraj još jedan",
+        "edit": "Uredi",
+        "none": "—",
+        "anyOption": "Bilo koji",
+        "errors": {
+          "generic": "Došlo je do greške. Pokušajte ponovo.",
+          "validation": "Molimo provjerite označena polja.",
+          "forbidden": "Niste ovlašćeni za ovu radnju.",
+          "network": "Problem sa vezom. Pokušajte ponovo.",
+          "sessionExpired": "Vaša sesija je istekla. Prijavite se ponovo.",
+          "wageOrder": "Minimalna plata ne može biti veća od maksimalne.",
+          "startDate": "Izaberite ispravan datum početka."
+        }
+      },
+      "unlocks": {
+        "seoTitle": "Otključavanja — Glatko Posao i Karijera",
+        "title": "Centar za otključavanje i plaćanje",
+        "subtitle": "Status odobrenja i plaćanja za kandidate za koje ste iskazali interesovanje.",
+        "emptyTitle": "Još nema otključavanja",
+        "emptyBody": "Pojavljuju se ovdje kada iskažete interesovanje iz bazena.",
+        "workerCodeLabel": "Šifra kandidata",
+        "interestAtLabel": "Datum interesovanja",
+        "approvalLabel": "Status odobrenja",
+        "paymentLabel": "Status plaćanja",
+        "unlockedAtLabel": "Datum otključavanja",
+        "payCta": "Plati naknadu",
+        "viewDossier": "Pogledaj kompletan dosije",
+        "feeDueNote": "Odobreno — naknada dospjela.",
+        "subhead": "Zahtjevi za otkrivanje i status plaćanja",
+        "statusRegionLabel": "Status otključavanja",
+        "requisitionRefLabel": "Zahtjev",
+        "pill": {
+          "interest": "Čeka pregled RoNa Legal",
+          "approved": "Odobreno — naknada dospjela",
+          "unlocked": "Otključano"
+        },
+        "interestBody": "Vaše interesovanje je u pregledu; obavijestićemo vas kada bude odobreno.",
+        "feeSummary": {
+          "title": "Pregled naknade",
+          "amountLabel": "Iznos",
+          "pathLabel": "Model usluge"
+        },
+        "pay": {
+          "cta": "Plati naknadu",
+          "processing": "Obrada…"
+        },
+        "dossier": {
+          "title": "Kompletan dosije",
+          "nameLabel": "Puno ime",
+          "contactLabel": "Kontakt",
+          "locationLabel": "Lokacija",
+          "documentsTitle": "Dokumenti"
+        },
+        "doc": {
+          "view": "Pregledaj / Preuzmi",
+          "opening": "Otvaranje…",
+          "error": "Dokument nije moguće otvoriti."
+        },
+        "unavailableNote": "Ovaj profil više nije dostupan.",
+        "toast": {
+          "paySuccess": "Plaćanje primljeno — dosije otključan.",
+          "payNotApproved": "Ovaj zahtjev još nije odobren.",
+          "payError": "Plaćanje nije moglo biti završeno. Pokušajte ponovo.",
+          "signError": "Nije moguće kreirati link ka dokumentu."
+        },
+        "approval": {
+          "pending": "Odobrenje na čekanju",
+          "approved": "Odobreno",
+          "denied": "Odbijeno"
+        },
+        "payment": {
+          "unpaid": "Neplaćeno",
+          "invoiced": "Fakturisano",
+          "paid": "Plaćeno"
+        }
+      },
+      "requisitionStatus": {
+        "submitted": "Podnijeto",
+        "under_curation": "U sastavljanju",
+        "shortlist_ready": "Uža lista spremna",
+        "interest_expressed": "Interesovanje iskazano",
+        "approved": "Odobreno / otključano",
+        "placed": "Zaposleno",
+        "in_guarantee": "U garanciji"
+      },
+      "servicePath": {
+        "commission": "Samo provizija",
+        "full_service": "Puna usluga"
+      },
+      "tier": {
+        "free": "Besplatno",
+        "verified": "Provjereno",
+        "premium": "Premium"
+      }
+    },
+    "login": {
+      "seoTitle": "Prijava — Glatko Posao i Karijera",
+      "title": "Prijavite se",
+      "subtitle": "Prijavite se na svoj nalog poslodavca ili radnika.",
+      "emailLabel": "E-pošta",
+      "passwordLabel": "Lozinka",
+      "submit": "Prijavi se",
+      "submitting": "Prijavljivanje…",
+      "noAccount": "Nemate nalog?",
+      "registerEmployer": "Registruj se kao poslodavac",
+      "registerWorker": "Registruj se kao radnik",
+      "forgotPassword": "Zaboravljena lozinka",
+      "errInvalid": "E-pošta ili lozinka su netačni.",
+      "errGeneric": "Prijava nije uspjela. Pokušajte ponovo."
+    },
+    "waitlist": {
+      "title": "Lista za rani pristup",
+      "employerTitle": "Jeste li poslodavac?",
+      "employerSubtitle": "Prijavite se za prioritetni pristup na lansiranju.",
+      "workerTitle": "Tražite posao?",
+      "workerSubtitle": "Neka vam profil bude spreman na lansiranju.",
+      "nameLabel": "Puno ime",
+      "companyLabel": "Kompanija (opcionalno)",
+      "roleLabel": "Uloga / sektor",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-pošta (opcionalno)",
+      "submit": "Pridruži se listi",
+      "submitting": "Podnošenje…",
+      "success": "Na listi ste! Javićemo vam se na lansiranju.",
+      "errorGeneric": "Došlo je do greške. Pokušajte ponovo.",
+      "errorValidation": "Molimo popunite obavezna polja.",
+      "privacyNote": "Vaše podatke koristimo isključivo da vas kontaktiramo u vezi sa lansiranjem Glatko Posao i Karijera; ne dijelimo ih sa trećim stranama. Detalji:",
+      "privacyLinkText": "Politika privatnosti"
+    },
+    "trust": {
+      "verifiedByRonaLegal": "Provjereno od strane RoNa Legal",
+      "verifiedByRonaLegalShort": "Provjereno od strane RoNa Legal",
+      "employerPays": "Poslodavac plaća — tražioci posla nikada ne plaćaju naknadu",
+      "employerPaysShort": "Poslodavac plaća",
+      "guarantee": "Garancija besplatne zamjene od 90 dana",
+      "anonymous": "Anonimni bazen — identitet se otključava nakon odobrenja",
+      "tiers": {
+        "idVerified": "Identitet provjeren",
+        "skillsVerified": "Vještine provjerene",
+        "documentsVerified": "Dokumenti provjereni",
+        "interviewPassed": "Razgovor položen"
+      }
+    },
+    "errors": {
+      "notFoundTitle": "Stranica nije pronađena",
+      "notFoundBody": "Stranica koju tražite je možda premještena ili uklonjena.",
+      "genericTitle": "Došlo je do greške",
+      "genericBody": "Došlo je do neočekivane greške. Pokušajte ponovo.",
+      "retry": "Pokušaj ponovo",
+      "backToCareer": "Nazad na početnu Posao i Karijera",
+      "loginRequiredTitle": "Potrebna prijava",
+      "loginRequiredBody": "Morate se prijaviti da biste vidjeli ovu stranicu.",
+      "forbiddenTitle": "Nema pristupa",
+      "forbiddenBody": "Nemate dozvolu da pregledate ovu stranicu."
+    }
   }
 }

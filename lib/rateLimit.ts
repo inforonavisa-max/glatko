@@ -130,6 +130,8 @@ export function classifyRoute(pathname: string): RouteClass {
   if (pathname.startsWith("/api/map-assets")) return "public-form";
   // Health vertical public endpoints (H0 waitlist; later slots/holds/otp)
   if (pathname.startsWith("/api/health/")) return "public-form";
+  // Career vertical public endpoints (C0 waitlist; later interest/unlocks/sign)
+  if (pathname.startsWith("/api/career/")) return "public-form";
 
   if (pathname.startsWith("/login") || pathname.startsWith("/auth") || pathname.startsWith("/api/auth")) {
     return "auth-sensitive";

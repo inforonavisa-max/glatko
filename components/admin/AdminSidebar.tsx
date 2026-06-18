@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Briefcase,
+  Building2,
   ClipboardList,
   FolderTree,
   LayoutDashboard,
@@ -66,6 +67,13 @@ export function AdminSidebar({ locale, adminEmail, healthEnabled }: Props) {
       href: `/${locale}/admin/categories`,
       label: "Kategoriler",
       icon: FolderTree,
+    },
+    {
+      // Career vertical (C0) owner console. Admin chrome stays TR-hardcoded
+      // per the admin-i18n policy; prefix-match keeps detail pages active.
+      href: `/${locale}/admin/career`,
+      label: "İş & Kariyer",
+      icon: Building2,
     },
   ];
 
