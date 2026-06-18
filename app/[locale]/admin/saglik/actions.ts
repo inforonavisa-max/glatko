@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient, createAdminClient } from "@/supabase/server";
 import { isAdminEmail } from "@/lib/admin";
+import { isHealthVerticalEnabled } from "@/lib/saglik/flags";
 import { logAdminAction } from "@/lib/admin/audit";
 import {
   decideProvider,
@@ -143,7 +144,7 @@ export async function approveProvider(providerId: string): Promise<AdminActionRe
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!isAdminEmail(user?.email) || !user) {
+  if (!isHealthVerticalEnabled() || !isAdminEmail(user?.email) || !user) {
     return { success: false, error: "Unauthorized" };
   }
 
@@ -184,7 +185,7 @@ export async function rejectProvider(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!isAdminEmail(user?.email) || !user) {
+  if (!isHealthVerticalEnabled() || !isAdminEmail(user?.email) || !user) {
     return { success: false, error: "Unauthorized" };
   }
 
@@ -221,7 +222,7 @@ export async function setProviderPublishedAction(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!isAdminEmail(user?.email) || !user) {
+  if (!isHealthVerticalEnabled() || !isAdminEmail(user?.email) || !user) {
     return { success: false, error: "Unauthorized" };
   }
 
@@ -251,7 +252,7 @@ export async function setProviderTierAction(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!isAdminEmail(user?.email) || !user) {
+  if (!isHealthVerticalEnabled() || !isAdminEmail(user?.email) || !user) {
     return { success: false, error: "Unauthorized" };
   }
   if (!isValidTier(tier)) {
@@ -285,7 +286,7 @@ export async function getLicenseDownloadUrl(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!isAdminEmail(user?.email)) {
+  if (!isHealthVerticalEnabled() || !isAdminEmail(user?.email)) {
     return { error: "Unauthorized" };
   }
 

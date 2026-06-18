@@ -4,6 +4,7 @@ import { createClient } from "@/supabase/server";
 import { setRequestLocale } from "next-intl/server";
 import { PageBackground } from "@/components/ui/PageBackground";
 import { isAdminEmail } from "@/lib/admin";
+import { isHealthVerticalEnabled } from "@/lib/saglik/flags";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
 export const metadata: Metadata = {
@@ -39,7 +40,11 @@ export default async function AdminLayout({ children, params }: Props) {
     <PageBackground opacity={0.06}>
       <div className="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:gap-8">
-          <AdminSidebar locale={locale} adminEmail={user.email ?? ""} />
+          <AdminSidebar
+            locale={locale}
+            adminEmail={user.email ?? ""}
+            healthEnabled={isHealthVerticalEnabled()}
+          />
           <main className="min-w-0 flex-1">{children}</main>
         </div>
       </div>

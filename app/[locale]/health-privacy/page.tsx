@@ -3,6 +3,7 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
+import { isHealthVerticalEnabled } from "@/lib/saglik/flags";
 import { PageBackground } from "@/components/ui/PageBackground";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { GlassmorphCard } from "@/components/ui/GlassmorphCard";
@@ -59,8 +60,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale,
       type: "website",
     },
-    // A legal notice is safe to index even while the vertical itself is gated.
-    robots: { index: true, follow: true },
+    // SEO quarantine: the notice stays REACHABLE (it's linked from the booking consent
+    // checkbox) but noindex while the vertical is dark — avoids an orphan indexed page
+    // (it's not in the sitemap) that leaks the vertical pre-launch. Flips to indexable
+    // automatically at launch when the flag turns on (matches the rest of the vertical).
+    robots: isHealthVerticalEnabled()
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 

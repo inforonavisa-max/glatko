@@ -100,22 +100,6 @@ export async function listSpecialties(locale: Locale): Promise<HealthSpecialty[]
 }
 
 /**
- * Published+approved providers for one specialty slug (directory list cards),
- * UNFILTERED. H3 routes the directory through searchProviders (074 RPC); an
- * unfiltered search returns the identical card shape + publish filter as the 068
- * health_providers_by_specialty RPC (074 is documented as its exact superset).
- * To avoid two divergent "providers for a specialty" query paths, this is now a
- * thin alias over searchProviders(emptyFilters) — a single source. (068's RPC
- * stays applied in prod but is superseded; new callers should use searchProviders.)
- */
-export async function providersBySpecialty(
-  specialtySlug: string,
-  locale: Locale,
-): Promise<HealthProviderCard[]> {
-  return searchProviders(specialtySlug, locale, emptyFilters());
-}
-
-/**
  * One published+approved provider profile, or null when not found (→ the page
  * calls notFound()). A genuine RPC failure throws (→ error.tsx) rather than
  * masquerading as a 404.

@@ -129,10 +129,12 @@ export async function sendSms({
   }
 
   if (!response.ok) {
+    // Log only the extracted error text + status — NEVER the raw body, which echoes the
+    // destination phone (messages[].to) into Vercel logs in cleartext (PII).
     console.error(
       "[GLATKO:sms] Infobip returned non-2xx",
       response.status,
-      typeof body === "string" ? body : JSON.stringify(body),
+      extractInfobipError(body, response.status),
     );
     glatkoCaptureException(new Error(`Infobip SMS HTTP ${response.status}`), {
       module: "sms-infobip",
@@ -157,9 +159,11 @@ export async function sendSms({
   }
 
   if (!first?.messageId) {
+    // Log only the status name — NOT the raw body, which echoes the destination phone
+    // (messages[].to) into Vercel logs in cleartext (PII).
     console.error(
       "[GLATKO:sms] Infobip response missing messageId",
-      JSON.stringify(body),
+      statusName ?? "unknown",
     );
     return { ok: false, error: "sms_no_message_id" };
   }
