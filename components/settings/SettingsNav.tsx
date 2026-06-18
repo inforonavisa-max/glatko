@@ -2,20 +2,32 @@
 
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { User, Bell, Shield } from "lucide-react";
+import { User, Bell, Shield, CalendarClock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { href: "/settings/profile", labelKey: "profile", icon: User },
+  { href: "/settings/appointments", labelKey: "appointments", icon: CalendarClock },
   { href: "/settings/notifications", labelKey: "notifications", icon: Bell },
   { href: "/settings/security", labelKey: "security", icon: Shield },
 ] as const;
 
 type TabHref = (typeof TABS)[number]["href"];
 
-export function SettingsNav() {
+/**
+ * `showAppointments` is resolved on the server (the layout reads the server-only
+ * HEALTH_VERTICAL_ENABLED flag and passes it down). This client component can't read
+ * that flag directly (no NEXT_PUBLIC_ prefix by design — see lib/saglik/flags.ts), so
+ * the prop is the single source: with the vertical off (prod) the Appointments tab is
+ * dropped entirely, matching the (gated) health layout's dark-launch behavior.
+ */
+export function SettingsNav({ showAppointments = false }: { showAppointments?: boolean }) {
   const t = useTranslations("settings.tabs");
   const pathname = usePathname();
+
+  const tabs = showAppointments
+    ? TABS
+    : TABS.filter((tab) => tab.href !== "/settings/appointments");
 
   return (
     <nav
@@ -24,7 +36,7 @@ export function SettingsNav() {
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <ul className="flex gap-1 overflow-x-auto whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {TABS.map(({ href, labelKey, icon: Icon }) => {
+          {tabs.map(({ href, labelKey, icon: Icon }) => {
             const active = pathname === href || pathname.startsWith(`${href}/`);
             return (
               <li key={href}>

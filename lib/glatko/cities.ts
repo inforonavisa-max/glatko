@@ -80,6 +80,11 @@ export function getCityName(key: string): string | undefined {
   return getCityByKey(key)?.name;
 }
 
+/** Official Latin name for a city SLUG (e.g. "budva" → "Budva"); undefined if unknown. */
+export function getCityNameBySlug(slug: string): string | undefined {
+  return getCityBySlug(slug)?.name;
+}
+
 /**
  * Backward-compatible with the pre-SSOT helper: true when `value` matches a
  * known city NAME (case-insensitive). Free-text "other" cities return false,

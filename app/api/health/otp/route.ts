@@ -9,6 +9,7 @@ import {
 } from "@/lib/saglik/phone";
 import { checkHealthOtpLimit } from "@/lib/saglik/otp-rate-limit";
 import { createOtp, verifyOtp } from "@/lib/saglik/booking";
+import { createClient } from "@/supabase/server";
 import { locales, type Locale } from "@/i18n/routing";
 
 export const runtime = "nodejs";
@@ -109,6 +110,20 @@ export async function PUT(request: Request) {
     return NextResponse.json({ ok: false, reason: "CONSENT_REQUIRED" }, { status: 422 });
   }
 
+  // H9: if a logged-in Glatko user is verifying, stamp patients.user_id so the
+  // appointment shows up under "Randevularım". Guests (no session) → null. A getUser()
+  // hiccup must never block booking → treat any failure as a guest (null user id).
+  let userId: string | null = null;
+  try {
+    const supabase = createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    userId = user?.id ?? null;
+  } catch {
+    userId = null;
+  }
+
   const result = await verifyOtp({
     phoneHashHex: phoneHash(e164),
     codeHashHex: otpCodeHash(code),
@@ -117,10 +132,21 @@ export async function PUT(request: Request) {
     email: emailRaw || null,
     consentHealth,
     consentMarketing,
+    userId,
   });
 
   if (result.ok) {
-    return NextResponse.json({ ok: true, patientId: result.patientId });
+    const res = NextResponse.json({ ok: true, patientId: result.patientId });
+    // Bind the verified patient to this browser session (httpOnly) so the H5b
+    // booking step takes the patient from the cookie, not a client-supplied id.
+    res.cookies.set("glatko_hpatient", result.patientId, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60,
+    });
+    return res;
   }
   return NextResponse.json(
     { ok: false, reason: result.reason, attemptsLeft: result.attemptsLeft },

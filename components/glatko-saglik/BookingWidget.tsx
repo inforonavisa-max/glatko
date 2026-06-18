@@ -48,6 +48,14 @@ type BookingWidgetProps = {
   services: HealthBookingService[];
   locations: HealthBookingLocation[];
   locale: string;
+  /**
+   * H9 reschedule reuse: when set, a successful hold calls this instead of routing
+   * to the new-booking page (the reschedule flow takes over from here). The widget
+   * stays the single slot-picker; only the post-hold destination differs.
+   */
+  onHoldCreated?: (holdId: string) => void;
+  /** H9: hide the service/location pickers (reschedule is locked to the original). */
+  lockSelectors?: boolean;
 };
 
 function pad2(n: number): string {
@@ -82,12 +90,21 @@ export function BookingWidget({
   services,
   locations,
   locale,
+  onHoldCreated,
+  lockSelectors = false,
 }: BookingWidgetProps) {
   const t = useTranslations("healthVertical");
   const searchParams = useSearchParams();
   const router = useRouter();
   const [reserving, setReserving] = useState(false);
   const [reserveError, setReserveError] = useState<string | null>(null);
+
+  // A11y: after a 409 "just taken" refresh clears the selection, move focus back
+  // into the slot grid so a keyboard/SR user is not stranded (the selected button
+  // they pressed is gone). `refocusSlots` is armed by the 409 branch and consumed
+  // by an effect once the refreshed grid has rendered.
+  const slotGridRef = useRef<HTMLDivElement>(null);
+  const [refocusSlots, setRefocusSlots] = useState(false);
 
   // Varsayılan hizmet = ilk (sunucu en kısayı başa koyar), varsayılan lokasyon = ilk.
   const [selectedServiceId, setSelectedServiceId] = useState<string>(
@@ -175,6 +192,15 @@ export function BookingWidget({
     runFetch(controller.signal);
     return () => controller.abort();
   }, [runFetch, retryNonce]);
+
+  // A11y: once a 409-triggered refresh has finished (fetchState ready) move focus
+  // to the first slot button in the refreshed grid, then disarm.
+  useEffect(() => {
+    if (!refocusSlots || fetchState.status !== "ready") return;
+    const firstSlot = slotGridRef.current?.querySelector<HTMLButtonElement>('button[role="radio"]');
+    firstSlot?.focus();
+    setRefocusSlots(false);
+  }, [refocusSlots, fetchState.status]);
 
   const days = fetchState.days;
   const selectedDay = useMemo<DaySlots | undefined>(
@@ -268,12 +294,18 @@ export function BookingWidget({
       });
       if (res.ok) {
         const data = (await res.json()) as { holdId: string };
+        // H9 reschedule: hand the hold to the parent flow instead of the new-booking page.
+        if (onHoldCreated) {
+          onHoldCreated(data.holdId);
+          return;
+        }
         router.push({ pathname: "/health/randevu/[holdId]", params: { holdId: data.holdId } });
         return;
       }
       if (res.status === 409) {
         setReserveError(t("booking.holdTaken"));
         setSelectedSlotIso(null);
+        setRefocusSlots(true); // a11y: refocus the grid once the refresh renders
         setRetryNonce((n) => n + 1); // availability'yi tazele
       } else {
         setReserveError(t("booking.holdFailed"));
@@ -283,7 +315,7 @@ export function BookingWidget({
     } finally {
       setReserving(false);
     }
-  }, [selectedSlot, selectedServiceId, selectedLocationId, services, providerId, router, t]);
+  }, [selectedSlot, selectedServiceId, selectedLocationId, services, providerId, router, t, onHoldCreated]);
 
   return (
     <div className="lg:sticky lg:top-24 rounded-2xl border border-gray-200 bg-white p-5 shadow-premium-sm dark:border-white/10 dark:bg-white/5">
@@ -308,8 +340,8 @@ export function BookingWidget({
         </div>
       ) : (
         <>
-          {/* Service selector (>1) */}
-          {services.length > 1 && (
+          {/* Service selector (>1) — hidden when locked to the original (reschedule). */}
+          {!lockSelectors && services.length > 1 && (
             <div className="mt-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40">
                 {t("booking.serviceLabel")}
@@ -340,8 +372,8 @@ export function BookingWidget({
             </div>
           )}
 
-          {/* Location selector (>1) */}
-          {locations.length > 1 && (
+          {/* Location selector (>1) — hidden when locked to the original (reschedule). */}
+          {!lockSelectors && locations.length > 1 && (
             <div className="mt-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40">
                 {t("booking.locationLabel")}
@@ -380,7 +412,11 @@ export function BookingWidget({
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="grid flex-1 grid-cols-7 gap-1">
+            <div
+              role="radiogroup"
+              aria-label={t("booking.dayGroupLabel")}
+              className="grid flex-1 grid-cols-7 gap-1"
+            >
               {weekDates.map((dateStr) => {
                 const { weekday, day } = labelForDate(dateStr);
                 const active = dateStr === selectedDate;
@@ -389,7 +425,9 @@ export function BookingWidget({
                   <button
                     key={dateStr}
                     type="button"
-                    aria-pressed={active}
+                    role="radio"
+                    aria-checked={active}
+                    aria-label={`${weekday} ${day}`}
                     onClick={() => setSelectedDate(dateStr)}
                     className={
                       "flex flex-col items-center rounded-lg py-1.5 text-center transition-colors " +
@@ -435,14 +473,20 @@ export function BookingWidget({
                 ))}
               </div>
             ) : selectedDay && selectedDay.slots.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
+              <div
+                ref={slotGridRef}
+                role="radiogroup"
+                aria-label={t("booking.slotGroupLabel")}
+                className="flex flex-wrap gap-2"
+              >
                 {selectedDay.slots.map((slot) => {
                   const active = slot.startUtc === selectedSlotIso;
                   return (
                     <button
                       key={slot.startUtc}
                       type="button"
-                      aria-pressed={active}
+                      role="radio"
+                      aria-checked={active}
                       onClick={() => setSelectedSlotIso(slot.startUtc)}
                       className={
                         "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors " +
@@ -487,13 +531,14 @@ export function BookingWidget({
                 type="button"
                 onClick={reserve}
                 disabled={reserving}
+                aria-describedby={reserveError ? "bw-reserve-error" : undefined}
                 className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition-all hover:shadow-teal-500/40 disabled:opacity-60"
               >
                 {reserving && <Loader2 className="h-4 w-4 animate-spin" />}
                 {reserving ? t("booking.reserving") : t("booking.reserve")}
               </button>
               {reserveError && (
-                <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-300">
+                <p id="bw-reserve-error" role="alert" aria-live="assertive" className="mt-2 text-sm text-red-600 dark:text-red-300">
                   {reserveError}
                 </p>
               )}

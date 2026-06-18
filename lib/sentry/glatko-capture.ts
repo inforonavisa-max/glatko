@@ -15,3 +15,16 @@ export function glatkoCaptureException(
   if (!sentryEnabled()) return;
   Sentry.captureException(err, { tags });
 }
+
+/**
+ * Best-effort message capture (non-error tripwires, e.g. the H3 Mapbox quota
+ * 80% alarm). No-op when DSN unset. `level` follows Sentry severity levels.
+ */
+export function glatkoCaptureMessage(
+  message: string,
+  level: "info" | "warning" | "error",
+  tags: Record<string, string>,
+): void {
+  if (!sentryEnabled()) return;
+  Sentry.captureMessage(message, { level, tags });
+}

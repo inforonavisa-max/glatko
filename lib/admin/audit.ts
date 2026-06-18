@@ -42,7 +42,19 @@ export type AdminActionType =
   | "career_document_verify"
   | "career_shortlist_publish"
   | "career_employer_verify"
-  | "career_employer_tier";
+  | "career_employer_tier"
+  // H8 — health provider admin actions. The canonical health audit row is written
+  // INSIDE the 079 RPC (health.audit_log, the H8 viewer source); this app-side
+  // glatko_admin_audit_log row mirrors it with IP/UA for the unified admin trail.
+  | "health_provider_approve"
+  | "health_provider_reject"
+  | "health_provider_unpublish"
+  | "health_provider_publish"
+  | "health_provider_set_tier"
+  // H10 — health data-subject rights queue resolution (the canonical health.audit_log
+  // row is written INSIDE the 080 RPC; this app-side row mirrors it with IP/UA).
+  | "health_data_request_fulfilled"
+  | "health_data_request_rejected";
 
 export type AuditTargetTable =
   | "auth.users"
@@ -58,7 +70,9 @@ export type AuditTargetTable =
   | "career.worker_profiles"
   | "career.worker_documents"
   | "career.shortlists"
-  | "career.employer_accounts";
+  | "career.employer_accounts"
+  | "health.providers"
+  | "health.data_requests";
 
 export interface LogAdminActionParams {
   actionType: AdminActionType;

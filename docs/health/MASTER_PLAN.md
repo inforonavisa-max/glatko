@@ -62,6 +62,20 @@
 > deep-link `?slot=`. Saat tıklama H4'te SEÇER (hold YOK → H5); CTA disabled "yakında".
 > `me`/`sr` Intl tarih formatı Latin Sırpça'ya maplenir (`lib/saglik/intl.ts`). Flag
 > prod=false KALIR.
+> **v1.9 (16.06.2026, H5b):** Sistemin tamamlanma anı — İLK GERÇEK YAZMA (appointment).
+> `071_health_h5b_booking_rpcs.sql` (prod'da; additive, book_appointment+H1+066-070 intact,
+> advisor 0 yeni bulgu): 4 public SECURITY DEFINER wrapper (service_role-only, search_path=''):
+> `health_book_appointment` (hold sahipliği + patient-verified + H1 atomik book_appointment +
+> reminders TEK tx; PII'li dispatch payload döner) / `health_mark_reminder` / `health_get_appointment`
+> (PII'siz özet) / `health_cancel_appointment` (status=cancelled + pending t24/t2 skip).
+> Booking route confirm SMS (Infobip) + email (Resend, `health-booking-confirm` template, varsa)
+> HEMEN gönderir; t24/t2 'pending' kalır → **H6 dispatch eder**. Patient↔session: verify route
+> `glatko_hpatient` httpOnly cookie set eder, bookings route oradan okur (client keyfi patientId
+> veremez). UI: BookingForm "Randevuyu Tamamla" aktif → `/saglik/randevu/onay/[token]` (onaylandı +
+> özet) + `/saglik/r/[token]` yönetim (iptal → slot tekrar müsait). ★ k6/concurrency: 50 paralel
+> booking → **1 confirmed + 49 HOLD_EXPIRED, DB count=1** (çift-rezervasyon yok); SLOT_TAKEN +
+> HOLD_NOT_OWNED + PATIENT_NOT_VERIFIED ayrıca kanıtlı. 18 yeni i18n key ×9. Flag prod=false.
+> **Sistem artık gerçek randevu alabilir** (launch checklist H11 + Rohat onayı ile flag açılınca).
 > **v1.8 (16.06.2026, H5a):** Booking giriş kapısı (hold + hasta formu + OTP). GERÇEK
 > REZERVASYON YOK — `book_appointment` H5b'de. `070_health_h5a_hold_otp_rpcs.sql`
 > (prod'da; additive, 066-069 intact, advisor 0 yeni bulgu): 5 SECURITY DEFINER

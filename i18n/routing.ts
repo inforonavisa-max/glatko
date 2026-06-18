@@ -194,6 +194,22 @@ export const routing = defineRouting({
       me: "/zdravlje/[specialty]",
       ar: "/al-sihha/[specialty]",
     },
+    // Health directory specialty × city (H3 — the canonical SEO form of the city
+    // filter: a clean path segment, not ?city=). [specialty]=specialty slug,
+    // [city]=GLATKO_CITIES slug — both locale-neutral; only the prefix is
+    // localized, mirroring "/health/[specialty]" + "/services/[slug]/[city]".
+    // Gated + noindex (SEO quarantine) until launch (H11).
+    "/health/[specialty]/[city]": {
+      tr: "/saglik/[specialty]/[city]",
+      en: "/health/[specialty]/[city]",
+      de: "/gesundheit/[specialty]/[city]",
+      it: "/salute/[specialty]/[city]",
+      ru: "/zdorove/[specialty]/[city]",
+      uk: "/zdorovya/[specialty]/[city]",
+      sr: "/zdravlje/[specialty]/[city]",
+      me: "/zdravlje/[specialty]/[city]",
+      ar: "/al-sihha/[specialty]/[city]",
+    },
     "/health/uzman/[slug]": {
       tr: "/saglik/uzman/[slug]",
       en: "/health/uzman/[slug]",
@@ -217,6 +233,116 @@ export const routing = defineRouting({
       sr: "/zdravlje/randevu/[holdId]",
       me: "/zdravlje/randevu/[holdId]",
       ar: "/al-sihha/randevu/[holdId]",
+    },
+    // Booking confirmation (H5b). [token] = appointment manage_token (server-issued).
+    "/health/randevu/onay/[token]": {
+      tr: "/saglik/randevu/onay/[token]",
+      en: "/health/randevu/onay/[token]",
+      de: "/gesundheit/randevu/onay/[token]",
+      it: "/salute/randevu/onay/[token]",
+      ru: "/zdorove/randevu/onay/[token]",
+      uk: "/zdorovya/randevu/onay/[token]",
+      sr: "/zdravlje/randevu/onay/[token]",
+      me: "/zdravlje/randevu/onay/[token]",
+      ar: "/al-sihha/randevu/onay/[token]",
+    },
+    // Short appointment-manage link (H5b). [token] = manage_token; cancel from here.
+    "/health/r/[token]": {
+      tr: "/saglik/r/[token]",
+      en: "/health/r/[token]",
+      de: "/gesundheit/r/[token]",
+      it: "/salute/r/[token]",
+      ru: "/zdorove/r/[token]",
+      uk: "/zdorovya/r/[token]",
+      sr: "/zdravlje/r/[token]",
+      me: "/zdravlje/r/[token]",
+      ar: "/al-sihha/r/[token]",
+    },
+    // Reschedule sub-page (H9). [token] = old manage_token; pick a new slot here.
+    "/health/r/[token]/reschedule": {
+      tr: "/saglik/r/[token]/reschedule",
+      en: "/health/r/[token]/reschedule",
+      de: "/gesundheit/r/[token]/reschedule",
+      it: "/salute/r/[token]/reschedule",
+      ru: "/zdorove/r/[token]/reschedule",
+      uk: "/zdorovya/r/[token]/reschedule",
+      sr: "/zdravlje/r/[token]/reschedule",
+      me: "/zdravlje/r/[token]/reschedule",
+      ar: "/al-sihha/r/[token]/reschedule",
+    },
+
+    // Health PROVIDER tree (H7a — doctor onboarding + profile/calendar). Auth +
+    // flag gated separately from the patient tree (folder app/[locale]/health-pro/*,
+    // its OWN route group). tr=/saglik-pro/..., en=/health-pro/...; the bare top
+    // segment ('saglik-pro'/'health-pro') is what HEALTH_PRO_FIRST_SEGMENTS guards.
+    // Gated + noindex (SEO quarantine) until launch (H11).
+    "/health-pro/basvuru": {
+      tr: "/saglik-pro/basvuru",
+      en: "/health-pro/basvuru",
+      de: "/gesundheit-pro/basvuru",
+      it: "/salute-pro/basvuru",
+      ru: "/zdorove-pro/basvuru",
+      uk: "/zdorovya-pro/basvuru",
+      sr: "/zdravlje-pro/basvuru",
+      me: "/zdravlje-pro/basvuru",
+      ar: "/al-sihha-pro/basvuru",
+    },
+    "/health-pro/profil": {
+      tr: "/saglik-pro/profil",
+      en: "/health-pro/profil",
+      de: "/gesundheit-pro/profil",
+      it: "/salute-pro/profil",
+      ru: "/zdorove-pro/profil",
+      uk: "/zdorovya-pro/profil",
+      sr: "/zdravlje-pro/profil",
+      me: "/zdravlje-pro/profil",
+      ar: "/al-sihha-pro/profil",
+    },
+    "/health-pro/ayarlar": {
+      tr: "/saglik-pro/ayarlar",
+      en: "/health-pro/ayarlar",
+      de: "/gesundheit-pro/ayarlar",
+      it: "/salute-pro/ayarlar",
+      ru: "/zdorove-pro/ayarlar",
+      uk: "/zdorovya-pro/ayarlar",
+      sr: "/zdravlje-pro/ayarlar",
+      me: "/zdravlje-pro/ayarlar",
+      ar: "/al-sihha-pro/ayarlar",
+    },
+    "/health-pro/takvim": {
+      tr: "/saglik-pro/takvim",
+      en: "/health-pro/takvim",
+      de: "/gesundheit-pro/takvim",
+      it: "/salute-pro/takvim",
+      ru: "/zdorove-pro/takvim",
+      uk: "/zdorovya-pro/takvim",
+      sr: "/zdravlje-pro/takvim",
+      me: "/zdravlje-pro/takvim",
+      ar: "/al-sihha-pro/takvim",
+    },
+    // H7b — provider day-ops landing (dashboard + appointment list + manual add).
+    "/health-pro/randevular": {
+      tr: "/saglik-pro/randevular",
+      en: "/health-pro/randevular",
+      de: "/gesundheit-pro/randevular",
+      it: "/salute-pro/randevular",
+      ru: "/zdorove-pro/randevular",
+      uk: "/zdorovya-pro/randevular",
+      sr: "/zdravlje-pro/randevular",
+      me: "/zdravlje-pro/randevular",
+      ar: "/al-sihha-pro/randevular",
+    },
+    // H7b — schedule override editor (holiday/break/extra).
+    "/health-pro/randevular/override": {
+      tr: "/saglik-pro/randevular/override",
+      en: "/health-pro/randevular/override",
+      de: "/gesundheit-pro/randevular/override",
+      it: "/salute-pro/randevular/override",
+      ru: "/zdorove-pro/randevular/override",
+      uk: "/zdorovya-pro/randevular/override",
+      sr: "/zdravlje-pro/randevular/override",
+      me: "/zdravlje-pro/randevular/override",
+      ar: "/al-sihha-pro/randevular/override",
     },
 
     // Work & career vertical (C0 — docs/career/career-vertical-plan-v1.md).
@@ -506,6 +632,24 @@ export const routing = defineRouting({
       me: "/uslovi",
       ar: "/al-shuroot",
     },
+    // Health-specific privacy notice (H10 / PDPL Art.13). A SIBLING of /privacy &
+    // /terms — a top-level segment, NOT under /health/, so the health flag-guard
+    // middleware (which only blocks HEALTH_FIRST_SEGMENTS / HEALTH_PRO_FIRST_SEGMENTS)
+    // NEVER 404s it. It MUST resolve while the vertical flag is OFF because the H5b
+    // consent checkbox links to it. Slugs are deliberately distinct from every
+    // health first-segment ({saglik,health,gesundheit,salute,zdorove,zdorovya,
+    // zdravlje,al-sihha}) to avoid any collision.
+    "/health-privacy": {
+      tr: "/saglik-gizlilik",
+      en: "/health-privacy",
+      de: "/gesundheit-datenschutz",
+      it: "/privacy-salute",
+      ru: "/zdorove-konfidentsialnost",
+      uk: "/zdorovya-konfidentsialnist",
+      sr: "/zdravlje-privatnost",
+      me: "/zdravlje-privatnost",
+      ar: "/khususiyat-al-sihha",
+    },
     "/cookies": {
       tr: "/cerez-politikasi",
       en: "/cookies",
@@ -536,6 +680,7 @@ export const routing = defineRouting({
     "/my-requests/[id]": "/my-requests/[id]",
     "/notifications": "/notifications",
     "/review/[requestId]": "/review/[requestId]",
+    "/settings/appointments": "/settings/appointments",
     "/settings/notifications": "/settings/notifications",
     "/settings/profile": "/settings/profile",
     "/settings/security": "/settings/security",

@@ -99,22 +99,6 @@ export async function listSpecialties(locale: Locale): Promise<HealthSpecialty[]
   return (data as HealthSpecialty[] | null) ?? [];
 }
 
-/** Published+approved providers for one specialty slug (directory list cards). */
-export async function providersBySpecialty(
-  specialtySlug: string,
-  locale: Locale,
-): Promise<HealthProviderCard[]> {
-  const supabase = createAdminClient();
-  const { data, error } = await supabase.rpc("health_providers_by_specialty", {
-    p_specialty_slug: specialtySlug,
-    p_locale: locale,
-  });
-  if (error) {
-    throw new Error(`health_providers_by_specialty failed: ${error.message}`);
-  }
-  return (data as HealthProviderCard[] | null) ?? [];
-}
-
 /**
  * One published+approved provider profile, or null when not found (→ the page
  * calls notFound()). A genuine RPC failure throws (→ error.tsx) rather than
@@ -299,4 +283,75 @@ export async function getNextSlotsBySpecialty(
     result[row.providerSlug] = flattenNextSlots(days, perProvider);
   }
   return result;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// H3 — Arama + filtre + geo okuma katmanı.
+//
+// searchProviders() TEK filtreli read-RPC'yi (074 health_search_providers) çağırır:
+// specialty + city + langs + mode + geo (lat/lng/radius). RPC PII döndürmez; kart
+// + (geo verilirse) distanceKm. "Bu hafta müsait" filtresi RPC'DE DEĞİL — slot
+// motoru (069) tek-kaynak kalsın diye TS'te cross-ref edilir (getNextSlotDates...).
+// 068/069 ile aynı sözleşme: gerçek RPC hatası ATAR (→ error.tsx), boş [] = boş-durum.
+// Cookie-free admin client → ISR-safe (H2 dersi).
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { type HealthFilters } from "@/lib/saglik/filters";
+import { getCityNameBySlug } from "@/lib/glatko/cities";
+
+/** Kart + opsiyonel mesafe (geo araması). 068 kartının üst kümesi. */
+export type HealthSearchCard = HealthProviderCard & {
+  distanceKm?: number;
+};
+
+/**
+ * Filtreli dizin araması. city/langs/mode/near → RPC argümanları; specialty rota
+ * segmentinden gelir. avail ('bu hafta') burada UYGULANMAZ (sayfa katmanı slot
+ * cross-ref'i ile süzer). RPC hatası atar; veri yoksa [] (boş-durum).
+ */
+export async function searchProviders(
+  specialtySlug: string,
+  locale: Locale,
+  filters: HealthFilters,
+): Promise<HealthSearchCard[]> {
+  const supabase = createAdminClient();
+  const near = filters.near;
+  const { data, error } = await supabase.rpc("health_search_providers", {
+    p_specialty_slug: specialtySlug,
+    p_locale: locale,
+    // RPC city ILIKE'ı şehir ADI bekler (lokasyon.city serbest metin, ad olarak
+    // saklı); filters.city SSOT slug'ı → ada çevir.
+    p_city: filters.city ? (getCityNameBySlug(filters.city) ?? null) : null,
+    p_langs: filters.langs.length > 0 ? filters.langs : null,
+    p_mode: filters.mode,
+    p_lat: near?.lat ?? null,
+    p_lng: near?.lng ?? null,
+    p_radius_m: near ? near.radiusKm * 1000 : null,
+  });
+  if (error) {
+    throw new Error(`health_search_providers failed: ${error.message}`);
+  }
+  return (data as HealthSearchCard[] | null) ?? [];
+}
+
+/**
+ * "Bu hafta müsait" cross-ref'i için slug → slot tarihleri ("YYYY-MM-DD").
+ * getNextSlotsBySpecialty (069) üzerine ince sarıcı: slot listesinden benzersiz
+ * tarihleri çıkarır (lookahead 7 gün; bu-hafta penceresi). Availability outage'ı
+ * sayfayı düşürmesin diye çağıran try/catch ile sarmalı (mevcut [specialty] deseni).
+ */
+export async function getNextSlotDatesBySpecialty(
+  specialtySlug: string,
+  opts?: { now?: Date },
+): Promise<Record<string, string[]>> {
+  const byProvider = await getNextSlotsBySpecialty(specialtySlug, {
+    now: opts?.now,
+    lookaheadDays: 7,
+    perProvider: 8,
+  });
+  const out: Record<string, string[]> = {};
+  for (const [slug, slots] of Object.entries(byProvider)) {
+    out[slug] = Array.from(new Set(slots.map((s) => s.date)));
+  }
+  return out;
 }

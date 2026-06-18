@@ -34,11 +34,14 @@ export function ProviderCard({
   slots,
   locale,
   labels,
+  distanceLabel,
 }: {
   provider: HealthProviderCard;
   slots: CardSlot[];
   locale: string;
   labels: { verified: string; noAvailability: string };
+  /** "Near me" result distance chip (e.g. "16 km away"); omitted when absent. */
+  distanceLabel?: string;
 }) {
   // me/sr → Latin Sırpça (aksi halde me→İngilizce, sr→Kiril); bkz. lib/saglik/intl.ts.
   const weekdayFmt = new Intl.DateTimeFormat(intlLocale(locale), {
@@ -93,6 +96,11 @@ export function ProviderCard({
                   {provider.location.city}
                   {provider.location.address ? ` · ${provider.location.address}` : ""}
                 </span>
+                {distanceLabel && (
+                  <span className="shrink-0 rounded-md bg-brandHealth-50 px-1.5 py-0.5 text-xs font-medium text-brandHealth-700 dark:bg-brandHealth/15 dark:text-brandHealth">
+                    {distanceLabel}
+                  </span>
+                )}
               </p>
             )}
 

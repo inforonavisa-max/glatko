@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { MapPin, Search, Stethoscope } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { VerticalBrand } from "@/components/glatko/verticals/VerticalBrand";
 import { listSpecialties } from "@/lib/saglik/queries";
 import { specialtyIcon } from "@/lib/saglik/specialty-icons";
+import { HealthHomeSearch } from "@/components/glatko-saglik/HealthHomeSearch";
+import { GLATKO_CITIES } from "@/lib/glatko/cities";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -31,10 +32,11 @@ const POPULAR_COUNT = 8;
 /**
  * Health vertical home (§1.4 rule 1): hero does ONE job — a two-field search +
  * single button — then popular specialty chips, then the full specialty grid.
- * Search is inert until H3 (full search); the specialty chips/cards are the real,
- * working navigation into the directory. All specialty data is read server-side
- * via the SECURITY DEFINER read-RPCs (lib/saglik/queries — health schema is never
- * touched by the browser). Reachable only where HEALTH_VERTICAL_ENABLED=true.
+ * H3: the hero search is now LIVE (HealthHomeSearch) — it routes to
+ * /health/[specialty] or /health/[specialty]/[city]; the directory page owns
+ * filtering. All specialty data is read server-side via the SECURITY DEFINER
+ * read-RPCs (lib/saglik/queries — health schema is never touched by the
+ * browser). Reachable only where HEALTH_VERTICAL_ENABLED=true.
  */
 export default async function HealthHomePage({ params }: Props) {
   const { locale } = await Promise.resolve(params);
@@ -45,6 +47,12 @@ export default async function HealthHomePage({ params }: Props) {
 
   const specialties = await listSpecialties(l);
   const popular = specialties.slice(0, POPULAR_COUNT);
+
+  // Localized city options for the hero search (cities i18n namespace).
+  const cityOptions = GLATKO_CITIES.map((c) => ({
+    slug: c.slug,
+    name: t.has(`cities.${c.key}`) ? t(`cities.${c.key}`) : c.name,
+  }));
 
   return (
     <div className="bg-brandHealth-50/60 dark:bg-transparent">
@@ -57,41 +65,17 @@ export default async function HealthHomePage({ params }: Props) {
           {t("healthVertical.landing.subtitle")}
         </p>
 
-        {/* Hero search — present but inert until H3 (full search). */}
-        <form
-          className="mx-auto mt-10 flex max-w-2xl flex-col gap-3 sm:flex-row"
-          aria-label={t("healthVertical.landing.searchCta")}
-        >
-          <label className="relative flex-1">
-            <Stethoscope className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              disabled
-              placeholder={t("healthVertical.landing.searchSpecialty")}
-              className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm text-gray-900 placeholder:text-gray-400 disabled:cursor-not-allowed dark:border-white/10 dark:bg-white/5 dark:text-white"
-            />
-          </label>
-          <label className="relative sm:w-48">
-            <MapPin className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              disabled
-              placeholder={t("healthVertical.landing.searchCity")}
-              className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm text-gray-900 placeholder:text-gray-400 disabled:cursor-not-allowed dark:border-white/10 dark:bg-white/5 dark:text-white"
-            />
-          </label>
-          <button
-            type="button"
-            disabled
-            className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            <Search className="h-4 w-4" />
-            {t("healthVertical.landing.searchCta")}
-          </button>
-        </form>
-        <p className="mt-3 text-xs text-gray-400 dark:text-white/30">
-          {t("healthVertical.directory.searchSoonNote")}
-        </p>
+        {/* Hero search — LIVE (H3): routes into the directory. */}
+        <HealthHomeSearch
+          specialties={specialties.map((s) => ({ slug: s.slug, name: s.name }))}
+          cities={cityOptions}
+          labels={{
+            searchSpecialty: t("healthVertical.landing.searchSpecialty"),
+            searchCity: t("healthVertical.landing.searchCity"),
+            searchCta: t("healthVertical.landing.searchCta"),
+            cityAll: t("healthVertical.directory.search.cityAll"),
+          }}
+        />
 
         {/* Popular specialty chips (real navigation into the directory) */}
         {popular.length > 0 && (

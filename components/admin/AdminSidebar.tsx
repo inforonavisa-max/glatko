@@ -9,6 +9,7 @@ import {
   FolderTree,
   LayoutDashboard,
   Star,
+  Stethoscope,
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,8 @@ import { cn } from "@/lib/utils";
 interface Props {
   locale: string;
   adminEmail: string;
+  /** Health vertical flag (server-read) — hides the Sağlık nav while the vertical is dark. */
+  healthEnabled: boolean;
 }
 
 /**
@@ -27,7 +30,7 @@ interface Props {
  * Tailwind v3 explicit colours only — no shadcn v4 design tokens
  * (memory item 21).
  */
-export function AdminSidebar({ locale, adminEmail }: Props) {
+export function AdminSidebar({ locale, adminEmail, healthEnabled }: Props) {
   const pathname = usePathname();
 
   const items: Array<{
@@ -73,6 +76,16 @@ export function AdminSidebar({ locale, adminEmail }: Props) {
       icon: Building2,
     },
   ];
+
+  // Sağlık vertical ships dark — only surface its admin nav when the flag is on (the
+  // /admin/saglik subtree 404s when off, so the link would otherwise be a dead end).
+  if (healthEnabled) {
+    items.push({
+      href: `/${locale}/admin/saglik`,
+      label: "Sağlık",
+      icon: Stethoscope,
+    });
+  }
 
   const dashboardRoot = `/${locale}/admin`;
 

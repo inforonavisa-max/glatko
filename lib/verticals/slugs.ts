@@ -38,7 +38,13 @@ export const CAREER_COMING_SOON_BARE_PATHS: ReadonlySet<string> = new Set(
 );
 
 /**
- * Provider-side surface (H7) has no routes yet; the guard is registered
- * ahead of time so the prefix can never leak before launch.
+ * Provider-side surface (H7a — doctor onboarding/profile/calendar). Derived from
+ * the i18n/routing.ts pathnames map (same single-source rationale as
+ * HEALTH_FIRST_SEGMENTS) so the middleware flag guard covers ALL 9 localized
+ * provider-tree prefixes (saglik-pro / health-pro / gesundheit-pro / salute-pro /
+ * zdorove-pro / zdorovya-pro / zdravlje-pro / al-sihha-pro), not just tr/en. The
+ * bare top segment is what 404s while HEALTH_VERTICAL_ENABLED=false.
  */
-export const HEALTH_PRO_FIRST_SEGMENTS = new Set(["saglik-pro", "health-pro"]);
+export const HEALTH_PRO_FIRST_SEGMENTS = firstSegments(
+  routing.pathnames["/health-pro/basvuru"],
+);
