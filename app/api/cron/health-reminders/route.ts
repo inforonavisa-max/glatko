@@ -6,6 +6,13 @@ import { dispatchDueReminders } from "@/lib/saglik/reminders-dispatch";
 // (mirror app/api/health/bookings/route.ts).
 export const runtime = "nodejs";
 
+// LOAD-BEARING (migration 083): a hung run MUST be killed long before the claim's
+// 15-minute stuck-recovery would re-admit its in-flight rows, otherwise an overlapping
+// run could double-send. This 60s ceiling keeps the invariant intact:
+//   per-send timeout  <  maxDuration (60s)  <  recovery interval (15 min).
+// Do not raise this toward 15 min without revisiting health_claim_due_reminders (083).
+export const maxDuration = 60;
+
 /**
  * H6 — health reminder dispatch cron. Runs every 5 min (vercel.json), draining
  * health.reminders_outbox: t24/t2 reminders that have come due, any confirm whose
