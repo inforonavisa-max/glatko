@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { buildAlternates } from "@/lib/seo";
 import { BecomeAProWizard } from "@/components/glatko/become-a-pro/BecomeAProWizard";
+import { ProOnboardingTabs } from "@/components/glatko/pro-voice/ProOnboardingTabs";
+import { isVoiceOnboardingEnabled } from "@/lib/pro-voice/flags";
 import { GlatkoBentoImages } from "@/components/glatko/landing/BentoImagesGrid";
 import { NoiseCTA } from "@/components/glatko/landing/NoiseCTA";
 import { PageBackground } from "@/components/ui/PageBackground";
@@ -99,14 +101,25 @@ export default async function BecomeAProPage({ params }: Props) {
           zaten "pro ol" demek için geldi; "neden Glatko" alttan referans
           rolünde kalsın. */}
       <div className="mx-auto max-w-3xl px-4 pt-28 pb-12 sm:px-6">
-        <BecomeAProWizard
-          userId={user.id}
+        {/* G-VOICE-1: additive tab layer. Manual wizard (default tab) is passed
+            through UNCHANGED as manualSlot; when the voice flag is off this
+            renders only the wizard, byte-identical to before. */}
+        <ProOnboardingTabs
+          voiceEnabled={isVoiceOnboardingEnabled()}
           categories={
             (categories ?? []) as import("@/types/glatko").ServiceCategory[]
           }
-          userEmail={user.email ?? ""}
-          displayName={accountProfile?.full_name ?? null}
-          initialAvatarUrl={accountProfile?.avatar_url ?? null}
+          manualSlot={
+            <BecomeAProWizard
+              userId={user.id}
+              categories={
+                (categories ?? []) as import("@/types/glatko").ServiceCategory[]
+              }
+              userEmail={user.email ?? ""}
+              displayName={accountProfile?.full_name ?? null}
+              initialAvatarUrl={accountProfile?.avatar_url ?? null}
+            />
+          }
         />
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
