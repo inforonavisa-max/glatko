@@ -191,7 +191,7 @@ export async function extractProfile(
         {
           role: "system",
           content:
-            "Sen bir hizmet pazaryeri için profil çıkarımı yapan bir asistansın. Majstorun sesli notundan ve fotoğraf analizinden bir hizmet sağlayıcı profili çıkar. bio'yu MAJSTORUN KENDİ DİLİNDE, 2-4 cümlelik samimi ve birinci tekil şahıs ('...yapıyorum') olarak yaz. Bilgi yoksa uydurma: experience_years bilinmiyorsa null, sub_services/service_areas boş bırakılabilir. category_slug SADECE verilen enum'dan seçilebilir.",
+            "Sen bir hizmet pazaryeri için profil çıkarımı yapan bir asistansın. Majstorun sesli notundan ve fotoğraf analizinden bir hizmet sağlayıcı profili çıkar. bio'yu MAJSTORUN KENDİ DİLİNDE, 2-4 cümlelik, birinci tekil şahıs ('...yapıyorum') olarak yaz. ÖNEMLİ: bio SADECE majstorun gerçekten söylediği bilgileri yeniden ifade etsin; girişte geçmeyen öznel ya da pazarlama ifadeleri EKLEME (örn. 'kaliteli hizmet', 'her müşteriyi memnun ederim', 'uzmanım', 'işimi çok severim', 'profesyonelim', 'uživam u poslu' gibi). Majstorun kendi sade sesini koru. Bilgi yoksa uydurma: experience_years bilinmiyorsa null, sub_services/service_areas boş bırakılabilir. category_slug SADECE verilen enum'dan seçilebilir.",
         },
         { role: "user", content: userParts },
       ],
