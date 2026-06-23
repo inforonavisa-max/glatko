@@ -65,7 +65,7 @@ export default async function BecomeAProPage({ params }: Props) {
           <div className="mt-8">
             <Link
               href={{ pathname: "/login", query: { redirect: "/become-a-pro" } }}
-              className="inline-flex rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/30 transition hover:opacity-95"
+              className="inline-flex rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/30 transition hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2"
             >
               {t("landing.cta.proFooterBtn")}
             </Link>

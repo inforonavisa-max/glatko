@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Loader2 } from "lucide-react";
 import { createClient } from "@/supabase/browser";
@@ -12,6 +12,7 @@ import { AccountLinkAlert } from "@/components/auth/AccountLinkAlert";
 import { lookupAuthMethods } from "@/lib/actions/auth-methods";
 import { cn } from "@/lib/utils";
 import { PhoneLoginPanel } from "@/components/auth/PhoneLoginPanel";
+import { readPostLoginRedirect } from "@/lib/auth/redirect";
 
 const inputCls = cn(
   "block w-full rounded-xl border border-gray-200 dark:border-white/10",
@@ -23,6 +24,7 @@ const inputCls = cn(
 export default function LoginPage() {
   const t = useTranslations();
   const router = useRouter();
+  const locale = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,15 +58,25 @@ export default function LoginPage() {
       setLoading(false);
       return;
     }
-    router.push("/");
+    // Honor a guarded ?redirect= so cold pro-acquisition traffic returns to the
+    // /become-a-pro wizard after auth. next-intl's router localizes the path.
+    const redirect = readPostLoginRedirect();
+    // @ts-expect-error -- dynamic guarded internal pathname; localized on push
+    router.push(redirect ?? "/");
     router.refresh();
   }
 
   async function handleOAuthLogin(provider: string) {
     const supabase = createClient();
+    // Carry a guarded ?redirect= through the OAuth round-trip via the callback's
+    // `next` param (locale-prefixed so the locale-agnostic callback resolves it).
+    const redirect = readPostLoginRedirect();
+    const callbackUrl = redirect
+      ? `${window.location.origin}/auth/callback?next=${encodeURIComponent(`/${locale}${redirect}`)}`
+      : `${window.location.origin}/auth/callback`;
     await supabase.auth.signInWithOAuth({
       provider: provider as "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: { redirectTo: callbackUrl },
     });
   }
 

@@ -13,6 +13,7 @@ import {
   resendPhoneLoginOtp,
   type PhoneLoginError,
 } from "@/lib/actions/phone-login";
+import { readPostLoginRedirect } from "@/lib/auth/redirect";
 
 const inputCls = cn(
   "block w-full rounded-xl border border-gray-200 dark:border-white/10",
@@ -101,7 +102,11 @@ export function PhoneLoginPanel() {
         setError(messageFor(res.error));
         return;
       }
-      router.push(res.needsOnboarding ? "/onboarding" : "/");
+      // A guarded ?redirect= (pro-acquisition funnel) takes precedence over the
+      // default landing, so a new pro signing up returns to the wizard.
+      const redirect = readPostLoginRedirect();
+      // @ts-expect-error -- dynamic guarded internal pathname; localized on push
+      router.push(redirect ?? (res.needsOnboarding ? "/onboarding" : "/"));
       router.refresh();
     } catch {
       setError(t("errNetwork"));

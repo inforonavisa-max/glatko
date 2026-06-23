@@ -89,6 +89,22 @@ export function trackEvent(
 
   window.gtag("event", eventName, fullParams);
 
+  // Additive belt-and-suspenders for Google Ads: also emit a literal top-level
+  // `event` push so a GTM Custom Event trigger (event === "glatko_conversion")
+  // fires WITHOUT depending on GTM's gtag-arguments normalization, exposing flat
+  // top-level params (the gtag push above nests them under eventModel.*). This
+  // drives the Google Ads conversion tag; GTM decides which events count via a
+  // {{DLV - conversion_name}} trigger condition. GA4 + Meta keep reading the
+  // gtag push above — untouched.
+  window.dataLayer.push({
+    event: "glatko_conversion",
+    conversion_name: eventName,
+    conversion_value: fullParams.value ?? 0,
+    conversion_currency: fullParams.currency ?? "EUR",
+    job_category: fullParams.job_category,
+    job_id: fullParams.job_id,
+  });
+
   // Dev-mode debug log — production builds strip console.debug minification-safe.
   if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
