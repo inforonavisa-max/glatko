@@ -249,17 +249,26 @@ export default withSentryConfig(withAnalyzer, {
   sourcemaps: {
     deleteSourcemapsAfterUpload: true,
   },
-  // Reliability: a transient Sentry API error (e.g. a 504 on `releases
-  // finalize` or sourcemap upload) must NOT fail the whole build/deploy — a
-  // healthy app build should ship even if Sentry is briefly down. Providing an
-  // errorHandler tells the bundler plugin to WARN and continue instead of
-  // throwing (default). Upload/release still happens normally when Sentry is
-  // healthy — only the failure is made non-fatal. (@sentry/nextjs 8.55:
-  // bundler-plugin-core Options.errorHandler — continues compilation unless the
-  // callback itself throws.)
+  // Reliability hardening (G-SENTRY-BUILD, 2026-06-24): the @sentry/nextjs 8.55
+  // build step runs `sentry-cli releases new/finalize <sha>`. When Sentry's API
+  // returns a transient 504, that child-process rejection surfaces as an
+  // `unhandledRejection` which the `errorHandler` below does NOT intercept — it
+  // crashed `next build` and failed the whole production deploy twice (prod
+  // build of #127). Source maps are associated via Debug IDs in v8, independent
+  // of releases, so disabling automatic release create/finalize removes the only
+  // fatal Sentry network call from the build while keeping readable stack traces.
+  // Trade-off: no auto-created Sentry "release" entities (release-health /
+  // regression-by-release / deploy markers) — errors still symbolicate normally.
+  release: {
+    create: false,
+    finalize: false,
+  },
+  // Defense-in-depth for the sourcemap UPLOAD path (which DOES route through the
+  // plugin's error handling): warn and continue instead of throwing, so a
+  // transient upload error can't fail the build either.
   errorHandler: (err) => {
     console.warn(
-      "[sentry] release/sourcemap step failed — continuing build (non-fatal):",
+      "[sentry] sourcemap step failed — continuing build (non-fatal):",
       err?.message ?? err,
     );
   },
