@@ -120,17 +120,96 @@ export default async function BecomeAProPage({ params }: Props) {
     .order("sort_order");
 
   if (existingPro) {
+    // Persistent application-status surface (replaces the ephemeral success
+    // card + the old generic "already a pro" message). Pros who return to
+    // /become-a-pro now see exactly where their application stands.
+    const STATUS_KEY: Record<string, string> = {
+      pending: "pending",
+      in_review: "inReview",
+      approved: "approved",
+      rejected: "rejected",
+    };
+    const rawStatus = existingPro.verification_status ?? "pending";
+    const sk = STATUS_KEY[rawStatus] ?? "pending";
+    const tone =
+      sk === "approved"
+        ? "teal"
+        : sk === "rejected"
+          ? "red"
+          : "amber";
+    const ring =
+      tone === "teal"
+        ? "border-teal-500/20 bg-teal-500/10 text-teal-500"
+        : tone === "red"
+          ? "border-red-500/20 bg-red-500/10 text-red-500"
+          : "border-amber-500/20 bg-amber-500/10 text-amber-500";
+    const needsPhoto = !accountProfile?.avatar_url?.trim();
+
     return (
       <PageBackground opacity={0.12}>
-        <div className="flex min-h-[60vh] items-center justify-center px-4">
-          <div className="text-center">
-            <h1 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white">
-              {t("pro.wizard.alreadyPro")}
-            </h1>
-            <p className="mt-2 text-gray-500 dark:text-white/50">
-              {t("pro.wizard.successDesc")}
-            </p>
+        <div className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-4 py-20 text-center">
+          <div
+            className={`mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border ${ring}`}
+          >
+            <svg
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              aria-hidden
+            >
+              {sk === "approved" ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              ) : sk === "rejected" ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              )}
+            </svg>
           </div>
+          <h1 className="font-serif text-2xl font-semibold text-gray-900 dark:text-white">
+            {t(`pro.wizard.status.${sk}Title`)}
+          </h1>
+          <p className="mt-3 max-w-md text-gray-600 dark:text-white/55">
+            {t(`pro.wizard.status.${sk}Desc`)}
+          </p>
+
+          {needsPhoto && (
+            <div className="mt-8 w-full rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 text-left">
+              <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-300">
+                {t("pro.wizard.status.addPhotoTitle")}
+              </h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-white/55">
+                {t("pro.wizard.status.addPhotoDesc")}
+              </p>
+              <Link
+                href="/settings/profile"
+                className="mt-3 inline-flex rounded-xl border border-amber-500/30 px-4 py-2 text-xs font-semibold text-amber-700 transition hover:bg-amber-500/10 dark:text-amber-300"
+              >
+                {t("pro.wizard.status.addPhotoCta")}
+              </Link>
+            </div>
+          )}
+
+          <Link
+            href="/pro/dashboard"
+            className="mt-8 inline-flex rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/30 transition hover:opacity-95"
+          >
+            {t("pro.wizard.status.dashboardCta")}
+          </Link>
         </div>
       </PageBackground>
     );

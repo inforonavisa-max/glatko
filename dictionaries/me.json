@@ -574,10 +574,30 @@
       "documentsUpload": "Dokumenti za verifikaciju",
       "comingSoon": "Otpremanje fajlova uskoro",
       "avatarTitle": "Profilna fotografija",
-      "avatarHint": "Obavezno — JPG, PNG ili WebP, najviše 5 MB.",
+      "avatarHint": "Opciono ali preporučeno — JPG, PNG ili WebP, najviše 5 MB.",
       "avatarRequired": "Otpremite profilnu fotografiju prije nego što nastavite ili pošaljete prijavu.",
       "categoryRequired": "Izaberite bar jednu oblast usluge.",
-      "reviewNote": "Vaša prijava biće pregledana od strane našeg tima u roku od 24-48 sati."
+      "reviewNote": "Vaša prijava biće pregledana od strane našeg tima u roku od 24-48 sati.",
+      "avatarNudge": "Dodajte fotografiju — profili sa fotografijom dobijaju mnogo više poslova.",
+      "nextHint": {
+        "step0": "Unesite naziv, telefon i grad da biste nastavili.",
+        "step1": "Izaberite bar jednu uslugu i primarnu uslugu.",
+        "step3": "Unesite cijenu da biste nastavili."
+      },
+      "status": {
+        "pendingTitle": "Prijava je primljena",
+        "pendingDesc": "Vaša prijava je u redu za pregled. Naš tim je pregleda u roku od 1–2 radna dana i obavještava vas e-poštom.",
+        "inReviewTitle": "Prijava se pregleda",
+        "inReviewDesc": "Naš tim trenutno pregleda vašu prijavu. Uskoro ćete dobiti rezultat e-poštom.",
+        "approvedTitle": "Odobreni ste",
+        "approvedDesc": "Čestitamo! Sada ste aktivni kao profesionalac na Glatko. Otvorite panel da vidite poslove.",
+        "rejectedTitle": "Prijava nije odobrena",
+        "rejectedDesc": "Vaša prijava ovog puta nije odobrena. Za pitanja nam pišite na info@glatko.app.",
+        "dashboardCta": "Idi na panel",
+        "addPhotoTitle": "Dodajte profilnu fotografiju",
+        "addPhotoDesc": "Vašem profilu nedostaje fotografija. Profesionalci sa fotografijom dobijaju primjetno više interesovanja klijenata.",
+        "addPhotoCta": "Dodaj fotografiju"
+      }
     },
     "profile": {
       "about": "O specialisti",
@@ -2017,6 +2037,13 @@
     "legalLink": {
       "title": "Pravni zahtjevi za pružaoce usluga u Crnoj Gori",
       "body": "Osnivanje DOO, dozvole i porez u Crnoj Gori? Pogledajte vodiče <link>RoNa Legal</link> namijenjene englesko govornim klijentima i firmama."
+    },
+    "errors": {
+      "auth": "Prijavite se da biste nastavili.",
+      "selectService": "Izaberite bar jednu uslugu.",
+      "pickPrimary": "Izaberite primarnu uslugu.",
+      "validation": "Neki podaci nisu ispravni. Provjerite polja.",
+      "generic": "Nismo uspjeli da pošaljemo prijavu. Pokušajte ponovo za trenutak."
     }
   },
   "validation": {

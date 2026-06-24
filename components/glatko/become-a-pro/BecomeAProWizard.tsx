@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import {
+  AlertCircle,
   Briefcase,
   CheckCircle,
   ChevronLeft,
@@ -17,6 +18,8 @@ import {
   X,
 } from "lucide-react";
 import { submitProfessionalApplication } from "@/app/[locale]/become-a-pro/actions";
+import { adoptOAuthAvatar } from "@/lib/actions/profile";
+import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { trackEventWithMeta } from "@/lib/analytics/track";
 import { useFormPersistence } from "@/lib/hooks/useFormPersistence";
@@ -99,7 +102,11 @@ export function BecomeAProWizard({
 }: Props) {
   const t = useTranslations();
   const locale = useLocale() as Locale;
+  const router = useRouter();
   const [isNarrow, setIsNarrow] = useState(false);
+  // Anchor we scroll the submit error into view on (long form → top error box
+  // alone is invisible from the bottom submit button; G-FUNNEL).
+  const submitErrorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -169,6 +176,29 @@ export function BecomeAProWizard({
   useEffect(() => {
     setAvatarUrl(initialAvatarUrl?.trim() ?? "");
   }, [initialAvatarUrl]);
+
+  // G-FUNNEL: if the user has no avatar yet but signed up via an OAuth
+  // provider that carries a profile picture (e.g. Google), adopt it once on
+  // mount so most users skip the upload entirely. No-op for users without a
+  // provider picture (they add one via the single-step uploader). Best-effort.
+  const oauthAdoptTried = useRef(false);
+  useEffect(() => {
+    if (oauthAdoptTried.current) return;
+    if (initialAvatarUrl && initialAvatarUrl.trim().length > 0) return;
+    oauthAdoptTried.current = true;
+    let active = true;
+    void adoptOAuthAvatar()
+      .then((res) => {
+        if (active && "success" in res && res.success && res.url) {
+          setAvatarUrl(res.url);
+          router.refresh();
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, [initialAvatarUrl, router]);
 
   // Helpers
   const parents = useMemo(() => categories.filter((c) => !c.parent_id), [
@@ -400,11 +430,20 @@ export function BecomeAProWizard({
   // Validation gate per step
   const applicationValidateRef = useRef<(() => boolean) | null>(null);
 
-  const hasAvatar = avatarUrl.trim().length > 0;
+  // Avatar is no longer part of the step-0 gate (G-FUNNEL): it is optional.
   const step1Ok =
-    hasAvatar && businessName.trim().length > 0 && phone.trim().length > 0 && city;
+    businessName.trim().length > 0 && phone.trim().length > 0 && Boolean(city);
   const step2Ok = selectedCategoryIds.length > 0 && Boolean(primaryCategoryId);
   const step4Ok = pricing.baseRate.trim().length > 0 && Number(pricing.baseRate) > 0;
+
+  // Reason the "Next" button is disabled for the current step (shown inline
+  // so the user knows what is missing instead of facing a dead grey button).
+  const nextDisabledReason = useMemo(() => {
+    if (step === 0 && !step1Ok) return t("pro.wizard.nextHint.step0");
+    if (step === 1 && !step2Ok) return t("pro.wizard.nextHint.step1");
+    if (step === 3 && !step4Ok) return t("pro.wizard.nextHint.step3");
+    return null;
+  }, [step, step1Ok, step2Ok, step4Ok, t]);
 
   function tryAdvance() {
     if (step === 0 && !step1Ok) return;
@@ -426,7 +465,6 @@ export function BecomeAProWizard({
     fd.set("yearsExperience", experience);
     fd.set("hourlyRateMin", hourlyMin);
     fd.set("hourlyRateMax", hourlyMax);
-    fd.set("avatar_url", avatarUrl.trim());
     fd.set("serviceRadiusKm", String(serviceRadiusKm));
     fd.set("insuranceStatus", insuranceStatus);
     fd.set("introductionVideoUrl", introductionVideoUrl.trim());
@@ -451,6 +489,18 @@ export function BecomeAProWizard({
           event_category: "pro_funnel",
         });
         clearDraft();
+        // Re-render the server page → it now finds the new profile and shows
+        // the persistent application-status surface (not an ephemeral card).
+        router.refresh();
+      } else if (result.error) {
+        // Long form: pull the error (and the submit button) into view so the
+        // user actually sees why nothing happened.
+        requestAnimationFrame(() => {
+          submitErrorRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        });
       }
     });
   }
@@ -567,12 +617,6 @@ export function BecomeAProWizard({
           })}
         </div>
 
-        {submitState.error && (
-          <div className="mb-6 rounded-xl border border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
-            {submitState.error}
-          </div>
-        )}
-
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
@@ -681,7 +725,8 @@ export function BecomeAProWizard({
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8">
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
           <button
             type="button"
             onClick={() => setStep((s) => Math.max(0, s - 1))}
@@ -730,6 +775,23 @@ export function BecomeAProWizard({
                 t("becomePro.submit")
               )}
             </button>
+          )}
+          </div>
+
+          {!isLastStep && nextDisabledReason && (
+            <p className="mt-3 text-center text-xs font-medium text-amber-700 dark:text-amber-400 sm:text-right">
+              {nextDisabledReason}
+            </p>
+          )}
+
+          {isLastStep && submitState.error && (
+            <div
+              ref={submitErrorRef}
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-400"
+            >
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <span>{submitState.error}</span>
+            </div>
           )}
         </div>
       </div>

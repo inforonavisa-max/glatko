@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { createClient } from "@/supabase/server";
+import { safeFetchImage } from "@/lib/utils/safe-image-fetch";
 import {
   createProfileFieldsSchema,
   createPasswordSchema,
@@ -235,6 +236,99 @@ export async function deleteAvatar() {
 
   revalidateProfile();
   return { success: true as const };
+}
+
+/**
+ * G-FUNNEL: adopt an OAuth provider's profile picture as the user's avatar.
+ *
+ * Called once on the become-a-pro wizard mount for users who have no avatar
+ * yet. handle_new_user does NOT copy the OAuth `picture` into profiles, so
+ * Google/etc. users arrive with a null avatar and previously hit the hard
+ * "Avatar required" wall. This re-hosts the provider picture in our own
+ * `avatars` bucket (so it renders through the same supabase-storage path as
+ * uploaded avatars — no remote-image allowlist needed) and persists it.
+ *
+ * Idempotent + best-effort: skips when an avatar already exists or no
+ * provider picture is present, and never throws into the caller.
+ */
+export async function adoptOAuthAvatar(): Promise<
+  | { success: true; url: string | null; skipped?: boolean }
+  | { error: string }
+> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "unauthorized" as const };
+  }
+
+  // Already has an avatar? leave it alone.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("avatar_url")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (profile?.avatar_url && profile.avatar_url.trim().length > 0) {
+    return { success: true as const, url: profile.avatar_url, skipped: true };
+  }
+
+  // Read the provider picture from the OAuth IDENTITY, NOT user_metadata.
+  // user_metadata is writable by the user (updateUser({ data: { picture }})),
+  // so trusting it would let a user point this server-side fetch at an
+  // internal / cloud-metadata endpoint (SSRF) and land the response in the
+  // public avatars bucket. identity_data is written by the provider and is not
+  // user-modifiable. (DB-verified: Google identity_data carries `picture`.)
+  const googleIdentity = (user.identities ?? []).find(
+    (i) => i.provider === "google",
+  );
+  const idData = (googleIdentity?.identity_data ?? {}) as Record<
+    string,
+    unknown
+  >;
+  const picture =
+    (typeof idData.picture === "string" && idData.picture) ||
+    (typeof idData.avatar_url === "string" && idData.avatar_url) ||
+    "";
+  if (!picture) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  // Defense-in-depth: https-only + host allowlist + manual redirect validation
+  // + content-type / size / timeout guards. Never requests a non-allowlisted
+  // host, even via a redirect. Returns null (→ skip) on any violation.
+  const image = await safeFetchImage(picture);
+  if (!image) {
+    return { success: true as const, url: null, skipped: true };
+  }
+  const { bytes, contentType } = image;
+
+  const ext = contentType.split("/")[1] ?? "jpeg";
+  const filePath = `${user.id}/avatar.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(filePath, bytes, { upsert: true, contentType });
+  if (uploadError) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  const { data: urlData } = supabase.storage
+    .from("avatars")
+    .getPublicUrl(filePath);
+  const publicUrl = urlData.publicUrl;
+
+  const { error: updateError } = await supabase
+    .from("profiles")
+    .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+    .eq("id", user.id);
+  if (updateError) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  revalidateProfile();
+  return { success: true as const, url: publicUrl };
 }
 
 export async function updateLanguagePreference(locale: string) {
