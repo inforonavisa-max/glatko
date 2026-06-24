@@ -154,7 +154,7 @@ export function ProDashboardClient(props: Props) {
       color: "text-amber-400",
     },
     {
-      href: `/${props.locale}/inbox`,
+      href: `/${props.locale}/messages`,
       icon: MessageSquare,
       label: t("nav.inbox"),
       color: "text-blue-400",

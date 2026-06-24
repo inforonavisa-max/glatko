@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { activateAllPendingWaitlists } from "@/lib/notifications/match-dispatch";
 
+// Per-run ceiling (mirrors health-reminders). The worker does sequential
+// per-row email sends; without this the route inherits Vercel's low default
+// timeout and can be killed mid-loop, silently dropping waitlist activations.
+export const maxDuration = 60;
+
 /**
  * G-REQ-2 wait-list activation cron — runs every 5 min (vercel.json).
  *

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/supabase/browser";
 import { AuthBrandPanel } from "@/components/glatko/auth/AuthBrandPanel";
 import { cn } from "@/lib/utils";
 import { trackEventWithMeta } from "@/lib/analytics/track";
+import { readPostLoginRedirect } from "@/lib/auth/redirect";
 
 const inputCls = cn(
   "block w-full rounded-xl border border-gray-200 dark:border-white/10",
@@ -19,6 +20,7 @@ const inputCls = cn(
 
 export default function RegisterPage() {
   const t = useTranslations();
+  const locale = useLocale();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,10 +41,18 @@ export default function RegisterPage() {
     try {
       const supabase = createClient();
       const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+      // Honor ?redirect= so a cold pro who registers (rather than logs in) is
+      // returned to the wizard after email confirmation. Locale-prefixed to
+      // mirror login's OAuth handler; falls back to "/" when absent.
+      const redirect = readPostLoginRedirect();
+      const nextPath = redirect ? `/${locale}${redirect}` : "/";
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
-        options: { data: { full_name: fullName }, emailRedirectTo: `${baseUrl}/auth/callback?next=/` },
+        options: {
+          data: { full_name: fullName },
+          emailRedirectTo: `${baseUrl}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+        },
       });
       if (authError) throw authError;
       if (data.user) {

@@ -52,7 +52,6 @@ export default async function BecomeAProPage({ params }: Props) {
   // G-ADS supply-side: pro Search/Demand Gen ads can now land here directly
   // without bouncing cold clicks straight into a login wall.
   if (!user) {
-    const loginHref = "/login?redirect=/become-a-pro";
     return (
       <PageBackground opacity={0.1}>
         <section className="mx-auto max-w-3xl px-4 pt-28 pb-10 text-center sm:px-6">
@@ -88,7 +87,7 @@ export default async function BecomeAProPage({ params }: Props) {
           title={t("landing.cta.proTitle")}
           subtitle={t("landing.cta.proSubtitle")}
           buttonText={t("landing.cta.proFooterBtn")}
-          buttonHref={loginHref}
+          buttonHref={{ pathname: "/login", query: { redirect: "/become-a-pro" } }}
         />
       </PageBackground>
     );

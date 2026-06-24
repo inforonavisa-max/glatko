@@ -64,6 +64,15 @@ export function createAdminClient() {
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY
 
     if (!url || !key) {
+        // Fail loud in production: a missing service-role key there is an operator
+        // misconfig. Silently returning a dead-localhost client masks it as opaque
+        // connection-refused 500s / silent cron no-ops. Keep the localhost fallback
+        // only for local dev/test (matches supabase/service-role.ts).
+        if (process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production') {
+            throw new Error(
+                'SUPABASE_SERVICE_ROLE_KEY and NEXT_PUBLIC_SUPABASE_URL are required in production',
+            )
+        }
         return createSupabaseClient('http://localhost:54321', 'dummy-key')
     }
 

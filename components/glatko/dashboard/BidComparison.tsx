@@ -69,10 +69,12 @@ export function BidComparison({ bids, requestId, requestStatus, locale }: Props)
           });
         }
         if (result.success && result.conversationId) {
-          router.push({
-            pathname: "/inbox/[conversationId]",
-            params: { conversationId: result.conversationId },
-          });
+          // A conversation exists for this accepted bid, but acceptBidAction
+          // returns a legacy glatko_conversations id — NOT a glatko_message_threads
+          // id — so /messages/[id] would 404. Land on the messages list instead
+          // (matches the prior /inbox → 308 → /messages behavior). Bid creation is
+          // retired (R1); this only fires for legacy pending bids.
+          router.push({ pathname: "/messages" });
           return;
         }
         if (result.success) {
@@ -156,7 +158,7 @@ export function BidComparison({ bids, requestId, requestStatus, locale }: Props)
             {/* Quick message link for accepted */}
             {isAccepted && (
               <Link
-                href={`/${locale}/inbox`}
+                href={`/${locale}/messages`}
                 className="mb-4 inline-flex items-center gap-1.5 rounded-xl border border-teal-500/30 bg-teal-500/[0.04] px-4 py-2 text-xs font-medium text-teal-600 transition-all hover:bg-teal-500/10 dark:text-teal-400"
               >
                 <MessageSquare className="h-3 w-3" />

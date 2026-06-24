@@ -2204,6 +2204,9 @@
         "subtitle": "Free, no card required. Pros bid on your job — you pick the best fit.",
         "button": "Get started"
       }
+    },
+    "badge": {
+      "tooltip": "One of Glatko’s first professionals — #{number} / 50"
     }
   },
   "launchMetrics": {
@@ -3847,6 +3850,19 @@
       "loginRequiredBody": "You need to log in to see this page.",
       "forbiddenTitle": "No access",
       "forbiddenBody": "You don't have permission to view this page."
+    },
+    "interest": {
+      "expressInterest": "Express Interest",
+      "addToRequisition": "Add to Requisition",
+      "sending": "Sending…",
+      "sentPill": "Interest sent — pending RoNa Legal review",
+      "successToast": "Your interest has been submitted. RoNa Legal will review it.",
+      "loginRequired": "Employer login required",
+      "loginPrompt": "Log in as an employer to express interest.",
+      "loginCta": "Log in as employer",
+      "errForbidden": "You do not have permission for this action.",
+      "errNotFound": "This worker/requisition was not found.",
+      "errGeneric": "Something went wrong, please try again."
     }
   }
 }

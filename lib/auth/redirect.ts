@@ -10,6 +10,25 @@
 // can never be abused for an open redirect to an external origin.
 
 /**
+ * Single source of truth for "is this a safe internal redirect target?".
+ *
+ * Accepts only a single leading "/" path. Rejects protocol-relative "//…",
+ * backslash-prefixed "/\…" (some browsers normalize "\" → "/", turning it into
+ * a protocol-relative open redirect), and anything over 512 chars. Shared by
+ * readPostLoginRedirect and the auth/callback + auth/confirm route handlers so
+ * the open-redirect policy can never drift between them.
+ */
+export function isSafeInternalPath(raw: string | null | undefined): raw is string {
+  return Boolean(
+    raw &&
+      raw.startsWith("/") &&
+      !raw.startsWith("//") &&
+      !raw.includes("\\") &&
+      raw.length <= 512,
+  );
+}
+
+/**
  * Read a safe internal post-login redirect target from the current URL's
  * `?redirect=` query param.
  *
@@ -21,7 +40,5 @@
 export function readPostLoginRedirect(): string | null {
   if (typeof window === "undefined") return null;
   const raw = new URLSearchParams(window.location.search).get("redirect");
-  return raw && raw.startsWith("/") && !raw.startsWith("//") && raw.length <= 512
-    ? raw
-    : null;
+  return isSafeInternalPath(raw) ? raw : null;
 }

@@ -41,12 +41,30 @@ export default async function LocaleHomePage({ params }: Props) {
 
   const supabase = createClient();
 
-  const { data: rows } = await supabase
-    .from("glatko_service_categories")
-    .select("id, slug, name, description, hero_image_url, icon")
-    .in("slug", FEATURED_CATEGORY_SLUGS as unknown as string[])
-    .is("parent_id", null)
-    .eq("is_active", true);
+  // Three independent category reads — run them concurrently so the homepage
+  // pays one round-trip instead of three serial ones. (All active root
+  // categories feed crawlable internal links from home, incl. provider-less
+  // roots which stay indexable; not gated on is_p0, which curates /services.)
+  const [{ data: rows }, { count: totalCategoryCount }, { data: rootRows }] =
+    await Promise.all([
+      supabase
+        .from("glatko_service_categories")
+        .select("id, slug, name, description, hero_image_url, icon")
+        .in("slug", FEATURED_CATEGORY_SLUGS as unknown as string[])
+        .is("parent_id", null)
+        .eq("is_active", true),
+      supabase
+        .from("glatko_service_categories")
+        .select("id", { count: "exact", head: true })
+        .is("parent_id", null)
+        .eq("is_active", true),
+      supabase
+        .from("glatko_service_categories")
+        .select("slug, name")
+        .is("parent_id", null)
+        .eq("is_active", true)
+        .order("badge_priority", { ascending: true, nullsFirst: false }),
+    ]);
 
   const bySlug = new Map(
     (rows ?? []).map((r) => [r.slug as string, r as FeaturedCategoryCard]),
@@ -55,21 +73,6 @@ export default async function LocaleHomePage({ params }: Props) {
     .map((s) => bySlug.get(s))
     .filter((c): c is FeaturedCategoryCard => Boolean(c));
 
-  const { count: totalCategoryCount } = await supabase
-    .from("glatko_service_categories")
-    .select("id", { count: "exact", head: true })
-    .is("parent_id", null)
-    .eq("is_active", true);
-
-  // All active root categories → crawlable internal links from home (incl.
-  // provider-less roots, which stay indexable). Mirrors the totalCategoryCount
-  // filter; not gated on is_p0 (which curates the /services grid, not links).
-  const { data: rootRows } = await supabase
-    .from("glatko_service_categories")
-    .select("slug, name")
-    .is("parent_id", null)
-    .eq("is_active", true)
-    .order("badge_priority", { ascending: true, nullsFirst: false });
   const allCategories: RootCategoryLink[] = (rootRows ?? []).map((r) => ({
     slug: r.slug as string,
     name: r.name as RootCategoryLink["name"],

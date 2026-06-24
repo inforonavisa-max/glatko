@@ -191,7 +191,7 @@ export function ProBidsList({ bids, locale }: Props) {
                 {bid.status === "accepted" && req && (
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
                     <Link
-                      href={`/${locale}/inbox`}
+                      href={`/${locale}/messages`}
                       className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-teal-500/30 bg-teal-500/5 px-4 py-2 text-xs font-medium text-teal-400 transition-all hover:bg-teal-500/10"
                     >
                       <MessageSquare className="h-3 w-3" />

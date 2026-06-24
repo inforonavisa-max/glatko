@@ -2204,6 +2204,9 @@
         "subtitle": "Gratis, nessuna carta richiesta. I pro fanno offerte — tu scegli la migliore.",
         "button": "Inizia"
       }
+    },
+    "badge": {
+      "tooltip": "Uno dei primi professionisti di Glatko — #{number} / 50"
     }
   },
   "launchMetrics": {

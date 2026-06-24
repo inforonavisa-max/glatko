@@ -2204,6 +2204,9 @@
         "subtitle": "Kostenlos, keine Karte nötig. Profis bieten — Sie wählen den passenden.",
         "button": "Loslegen"
       }
+    },
+    "badge": {
+      "tooltip": "Einer der ersten Glatko-Profis — #{number} / 50"
     }
   },
   "launchMetrics": {

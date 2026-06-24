@@ -309,6 +309,7 @@ export default function LandingPageClient({
                           height={450}
                           className="h-44 w-full object-cover sm:h-52"
                           sizes="(min-width: 768px) 50vw, 100vw"
+                          priority={i === 0}
                         />
                       </div>
                     )}

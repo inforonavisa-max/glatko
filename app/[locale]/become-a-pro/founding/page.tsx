@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { PageBackground } from "@/components/ui/PageBackground";
 import { FoundingCounter } from "@/components/glatko/founding/FoundingCounter";
 import { createAdminClient } from "@/supabase/server";
+import { buildAlternates } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 
 type PageProps = {
@@ -19,14 +20,16 @@ export async function generateMetadata({
   const { locale } = await Promise.resolve(params);
   if (!hasLocale(routing.locales, locale)) return {};
   const t = await getTranslations({ locale, namespace: "founding.pro" });
+  const alternates = buildAlternates(locale, "/become-a-pro/founding");
   return {
     title: { absolute: t("hero.title") },
     description: t("hero.subtitle"),
+    alternates,
     openGraph: {
       title: t("hero.title"),
       description: t("hero.subtitle"),
       type: "website",
-      url: `https://glatko.app/${locale}/become-a-pro/founding`,
+      url: alternates.canonical,
       siteName: "Glatko",
       locale,
     },

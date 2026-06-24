@@ -1,5 +1,6 @@
 "use client";
 
+import type { ComponentProps } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -8,7 +9,11 @@ type NoiseCTAProps = {
   title: string;
   subtitle: string;
   buttonText: string;
-  buttonHref: string;
+  // next-intl's localized Href: accepts a string pathname or the object form
+  // `{ pathname, query }` so callers can pass a query (e.g. ?redirect=) that
+  // still gets locale-prefixed/translated. A bare string with a query baked in
+  // bypasses localization, so prefer the object form when there's a query.
+  buttonHref: ComponentProps<typeof Link>["href"];
   className?: string;
 };
 
@@ -43,7 +48,6 @@ export function NoiseCTA({
         {subtitle}
       </p>
       <div className="relative z-10 mt-10">
-        {/* @ts-expect-error -- buttonHref is string-typed prop; runtime URL is a valid pathname */}
         <Link href={buttonHref}>
           <motion.span
             whileHover={{ scale: 1.02 }}

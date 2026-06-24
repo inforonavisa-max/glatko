@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -31,6 +31,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [oauthOnlyProviders, setOauthOnlyProviders] = useState<string[]>([]);
   const [mode, setMode] = useState<"email" | "phone">("email");
+  // Carry ?redirect= onto the "register now" link so a cold pro who creates an
+  // account (rather than logging in) still returns to the wizard. Read in an
+  // effect — reading window during render would mismatch SSR (null) vs client.
+  const [registerRedirect, setRegisterRedirect] = useState<string | null>(null);
+  useEffect(() => {
+    setRegisterRedirect(readPostLoginRedirect());
+  }, []);
 
   function isInvalidCredentialsError(err: { code?: string; message?: string }) {
     if (err.code === "invalid_credentials") return true;
@@ -241,7 +248,14 @@ export default function LoginPage() {
 
             <p className="mt-8 text-center text-sm text-gray-500 dark:text-neutral-400">
               {t("auth.noAccount")}{" "}
-              <Link href="/register" className="font-semibold text-teal-600 hover:text-teal-500 dark:text-teal-400">
+              <Link
+                href={
+                  registerRedirect
+                    ? { pathname: "/register", query: { redirect: registerRedirect } }
+                    : "/register"
+                }
+                className="font-semibold text-teal-600 hover:text-teal-500 dark:text-teal-400"
+              >
                 {t("auth.registerNow")}
               </Link>
             </p>

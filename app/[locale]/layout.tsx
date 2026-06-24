@@ -95,36 +95,50 @@ export default async function LocaleLayout({ children, params }: Props) {
     onboarding_completed: boolean | null;
   };
   let profileBannerRow: ProfileBannerRow | null = null;
+  let isPro = false;
 
-  if (userId && (routing.locales as readonly string[]).includes(locale)) {
+  if (userId) {
+    const localeValid = (routing.locales as readonly string[]).includes(locale);
     try {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("preferred_locale, full_name, onboarding_completed")
-        .eq("id", userId)
-        .maybeSingle();
+      // The profile-banner read and the pro-status read are independent — run
+      // them in parallel so an authed page pays one round-trip, not two serial
+      // ones. (profile read is additionally gated on a valid locale.)
+      const [profileRes, proProfileRes] = await Promise.all([
+        localeValid
+          ? supabase
+              .from("profiles")
+              .select("preferred_locale, full_name, onboarding_completed")
+              .eq("id", userId)
+              .maybeSingle()
+          : null,
+        supabase
+          .from("glatko_professional_profiles")
+          .select("id, verification_status")
+          .eq("id", userId)
+          .single(),
+      ]);
 
+      const profile = profileRes?.data ?? null;
       profileBannerRow = profile;
+      isPro =
+        !!proProfileRes.data &&
+        proProfileRes.data.verification_status === "approved";
 
-      if (profile && profile.preferred_locale !== locale) {
-        await supabase
+      // Convergence write — must never block (or break) the render. Fire and
+      // forget: not awaited, both outcomes swallowed so it can't reject loudly.
+      if (localeValid && profile && profile.preferred_locale !== locale) {
+        void supabase
           .from("profiles")
           .update({ preferred_locale: locale })
-          .eq("id", userId);
+          .eq("id", userId)
+          .then(
+            () => {},
+            () => {},
+          );
       }
     } catch {
-      /* never break layout for locale sync */
+      /* never break layout for auth/profile reads */
     }
-  }
-
-  let isPro = false;
-  if (userId) {
-    const { data: proProfile } = await supabase
-      .from("glatko_professional_profiles")
-      .select("id, verification_status")
-      .eq("id", userId)
-      .single();
-    isPro = !!proProfile && proProfile.verification_status === "approved";
   }
 
   const onboardingFirstName =

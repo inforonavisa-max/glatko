@@ -4,6 +4,7 @@ import { createAdminClient, mergeSessionCookieOptions } from '@/supabase/server'
 import { trySendCustomerWelcomeEmail } from '@/lib/email/customer-welcome';
 import { glatkoCaptureException } from '@/lib/sentry/glatko-capture';
 import { defaultLocale } from '@/i18n/routing';
+import { isSafeInternalPath } from '@/lib/auth/redirect';
 
 function resolveBaseUrl(request: NextRequest): string {
   const url = new URL(request.url);
@@ -14,10 +15,7 @@ export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const rawNext = url.searchParams.get('next') ?? '/';
-  const next =
-    rawNext.startsWith('/') && !rawNext.startsWith('//') && rawNext.length <= 512
-      ? rawNext
-      : '/';
+  const next = isSafeInternalPath(rawNext) ? rawNext : '/';
 
   const baseUrl = resolveBaseUrl(request);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

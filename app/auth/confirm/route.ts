@@ -15,6 +15,7 @@ import { createServerClient } from "@supabase/ssr";
 import { mergeSessionCookieOptions } from "@/supabase/server";
 import { glatkoCaptureException } from "@/lib/sentry/glatko-capture";
 import { defaultLocale } from "@/i18n/routing";
+import { isSafeInternalPath } from "@/lib/auth/redirect";
 
 // Mirrors the verifyOtp `type` parameter from @supabase/supabase-js.
 // Inlined here so we don't depend on the gotrue-js export surface.
@@ -35,11 +36,8 @@ const VALID_TYPES: ReadonlySet<EmailOtpType> = new Set<EmailOtpType>([
   "email",
 ]);
 
-function isValidNext(raw: string | null): raw is string {
-  return Boolean(
-    raw && raw.startsWith("/") && !raw.startsWith("//") && raw.length <= 512,
-  );
-}
+// Shared open-redirect guard (also rejects backslash-prefixed paths).
+const isValidNext = isSafeInternalPath;
 
 function loginRedirect(origin: string, error: string): NextResponse {
   return NextResponse.redirect(`${origin}/${defaultLocale}/login?error=${error}`);

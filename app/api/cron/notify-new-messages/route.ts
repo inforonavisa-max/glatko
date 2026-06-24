@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { notifyNewMessages } from "@/lib/cron/notifyNewMessages";
 
+// Per-run ceiling (mirrors health-reminders). The worker does sequential
+// per-recipient SMS/email sends; without this the route inherits Vercel's low
+// default timeout and can be killed mid-loop, silently dropping recipients.
+export const maxDuration = 60;
+
 /**
  * G-MSG-1 new-message cron — runs every 5 min (vercel.json).
  *
