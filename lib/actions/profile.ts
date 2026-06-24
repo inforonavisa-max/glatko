@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { createClient } from "@/supabase/server";
+import { safeFetchImage } from "@/lib/utils/safe-image-fetch";
 import {
   createProfileFieldsSchema,
   createPasswordSchema,
@@ -273,34 +274,35 @@ export async function adoptOAuthAvatar(): Promise<
     return { success: true as const, url: profile.avatar_url, skipped: true };
   }
 
-  // Read the provider picture from the trusted server-side session metadata
-  // (never from client input).
-  const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+  // Read the provider picture from the OAuth IDENTITY, NOT user_metadata.
+  // user_metadata is writable by the user (updateUser({ data: { picture }})),
+  // so trusting it would let a user point this server-side fetch at an
+  // internal / cloud-metadata endpoint (SSRF) and land the response in the
+  // public avatars bucket. identity_data is written by the provider and is not
+  // user-modifiable. (DB-verified: Google identity_data carries `picture`.)
+  const googleIdentity = (user.identities ?? []).find(
+    (i) => i.provider === "google",
+  );
+  const idData = (googleIdentity?.identity_data ?? {}) as Record<
+    string,
+    unknown
+  >;
   const picture =
-    (typeof meta.picture === "string" && meta.picture) ||
-    (typeof meta.avatar_url === "string" && meta.avatar_url) ||
+    (typeof idData.picture === "string" && idData.picture) ||
+    (typeof idData.avatar_url === "string" && idData.avatar_url) ||
     "";
-  if (!picture || !/^https?:\/\//i.test(picture)) {
+  if (!picture) {
     return { success: true as const, url: null, skipped: true };
   }
 
-  let bytes: ArrayBuffer;
-  let contentType: string;
-  try {
-    const res = await fetch(picture, { redirect: "follow" });
-    if (!res.ok) return { success: true as const, url: null, skipped: true };
-    contentType = (res.headers.get("content-type") ?? "image/jpeg")
-      .split(";")[0]
-      .trim();
-    const allowed = ["image/jpeg", "image/png", "image/webp"];
-    if (!allowed.includes(contentType)) contentType = "image/jpeg";
-    bytes = await res.arrayBuffer();
-  } catch {
+  // Defense-in-depth: https-only + host allowlist + manual redirect validation
+  // + content-type / size / timeout guards. Never requests a non-allowlisted
+  // host, even via a redirect. Returns null (→ skip) on any violation.
+  const image = await safeFetchImage(picture);
+  if (!image) {
     return { success: true as const, url: null, skipped: true };
   }
-  if (!bytes.byteLength || bytes.byteLength > 5 * 1024 * 1024) {
-    return { success: true as const, url: null, skipped: true };
-  }
+  const { bytes, contentType } = image;
 
   const ext = contentType.split("/")[1] ?? "jpeg";
   const filePath = `${user.id}/avatar.${ext}`;
