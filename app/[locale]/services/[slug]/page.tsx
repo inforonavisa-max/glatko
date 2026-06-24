@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { ArrowRight, Users, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import type { Metadata } from "next";
 
 import { PageBackground } from "@/components/ui/PageBackground";
@@ -11,7 +11,6 @@ import { Breadcrumb, type BreadcrumbCrumb } from "@/components/seo/Breadcrumb";
 import { FoundingProviderBadge } from "@/components/glatko/founding/FoundingProviderBadge";
 import {
   getCategoryBySlug,
-  getCategoryWithStats,
   getCitiesServingCategory,
   getSubCategories,
   searchProfessionals,
@@ -111,10 +110,9 @@ export default async function CategoryDetailPage({ params }: Props) {
 
   // Parallel: sub-categories, pro count, cities for areaServed, top pros,
   // related blog posts that link this category via Sanity serviceCategoryRefs.
-  const [subCategories, stats, citiesFromPros, { professionals }, relatedPosts] =
+  const [subCategories, citiesFromPros, { professionals }, relatedPosts] =
     await Promise.all([
       getSubCategories(category.id),
-      getCategoryWithStats(slug),
       getCitiesServingCategory(category.id),
       searchProfessionals({
         locale,
@@ -126,7 +124,6 @@ export default async function CategoryDetailPage({ params }: Props) {
         () => [] as Awaited<ReturnType<typeof getPostsByServiceCategory>>,
       ),
     ]);
-  const proCount = stats?.proCount ?? 0;
 
   const categoryName = pickLocalized(category.name, locale, slug);
   const categoryDesc = pickLocalized(category.description, locale, "");
@@ -230,10 +227,6 @@ export default async function CategoryDetailPage({ params }: Props) {
               {categoryDesc}
             </p>
           )}
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 px-4 py-1.5 text-sm text-teal-700 dark:text-teal-300">
-            <Users className="h-4 w-4" />
-            {proCount} {t("services.prosInCategory")}
-          </div>
         </div>
       </div>
 

@@ -42,13 +42,7 @@
     "title": "Vertrauenswürdige Fachleute in Montenegro",
     "subtitle": "Von Reparaturen bis zu Geschäftsservices – geprüfte Fachleute in ganz Montenegro",
     "cta": "Kostenloses Angebot einholen",
-    "ctaSecondary": "Fachleute entdecken",
-    "trustedBy": "Vertraut in ganz Montenegro",
-    "stats": {
-      "professionals": "Fachleute",
-      "jobsCompleted": "erledigte Aufträge",
-      "avgRating": "Durchschnittsbewertung"
-    }
+    "ctaSecondary": "Fachleute entdecken"
   },
   "categories": {
     "title": "Unsere Servicekategorien",
@@ -1695,7 +1689,6 @@
   "services": {
     "title": "Unsere Dienstleistungen",
     "subtitle": "Wählen Sie die passende Kategorie",
-    "prosInCategory": "Fachleute in dieser Kategorie",
     "metaDescription": "Finden Sie auf Glatko geprüfte Fachleute für {name} in ganz Montenegro. Angebote vergleichen, Bewertungen prüfen und schnell buchen – gratis anfragen.",
     "viewAllPros": "Alle Fachleute anzeigen",
     "requestInCategory": "Dienstleistung in dieser Kategorie anfordern",

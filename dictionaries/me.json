@@ -42,13 +42,7 @@
     "title": "Pouzdani profesionalci u Crnoj Gori",
     "subtitle": "Od kućnih popravki do poslovnih usluga — provjereni stručnjaci širom Crne Gore",
     "cta": "Zatražite besplatnu ponudu",
-    "ctaSecondary": "Pregledajte profesionalce",
-    "trustedBy": "Platforma od povjerenja širom Crne Gore",
-    "stats": {
-      "professionals": "profesionalaca",
-      "jobsCompleted": "završenih poslova",
-      "avgRating": "Prosječna ocjena"
-    }
+    "ctaSecondary": "Pregledajte profesionalce"
   },
   "categories": {
     "title": "Kategorije usluga",
@@ -1695,7 +1689,6 @@
   "services": {
     "title": "Naše usluge",
     "subtitle": "Izaberite odgovarajuću kategoriju",
-    "prosInCategory": "stručnjaka u ovoj kategoriji",
     "metaDescription": "Pronađite provjerene {name} stručnjake širom Crne Gore na Glatku. Uporedite ponude pouzdanih lokalnih profesionalaca i rezervišite brzo i besplatno.",
     "viewAllPros": "Svi stručnjaci",
     "requestInCategory": "Zatražite uslugu u ovoj kategoriji",

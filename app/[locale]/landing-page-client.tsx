@@ -37,7 +37,6 @@ const HeroCollisionBeams = dynamic<{
   { ssr: false, loading: () => null },
 );
 import { SpotlightCard } from "@/components/landing/spotlight-card";
-import { HeroStatChip } from "@/components/landing/stat-chip";
 import {
   SectionReveal,
   StaggerItem,
@@ -159,12 +158,6 @@ export default function LandingPageClient({
 
   const heroTitle = t("hero.title");
 
-  const heroStats = [
-    { value: "100+", labelKey: "hero.stats.professionals" as const },
-    { value: "500+", labelKey: "hero.stats.jobsCompleted" as const },
-    { value: "4.9", labelKey: "hero.stats.avgRating" as const },
-  ];
-
   return (
     <>
       {/* Organization schema lives in the locale layout (single source);
@@ -243,32 +236,8 @@ export default function LandingPageClient({
               </motion.span>
             </Link>
           </motion.div>
-          <div ref={heroCollisionTargetRef} className="min-h-[1px] w-full">
-            <motion.p
-              variants={fadeUpVariants}
-              initial="hidden"
-              animate="visible"
-              custom={3}
-              style={reduced ? undefined : { willChange: "transform, opacity" }}
-              className="mt-8 text-sm text-gray-500 dark:text-white/40"
-            >
-              {t("hero.trustedBy")}
-            </motion.p>
-            <motion.div
-              variants={fadeUpVariants}
-              initial="hidden"
-              animate="visible"
-              custom={4}
-              style={reduced ? undefined : { willChange: "transform, opacity" }}
-              className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm"
-            >
-              {heroStats.map((stat) => (
-                <HeroStatChip key={stat.labelKey}>
-                  {stat.value} {t(stat.labelKey)}
-                </HeroStatChip>
-              ))}
-            </motion.div>
-          </div>
+          {/* Collision-beam target (vanity trust stats removed — G-VANITY) */}
+          <div ref={heroCollisionTargetRef} className="min-h-[1px] w-full" />
         </div>
       </section>
 

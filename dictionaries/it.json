@@ -42,13 +42,7 @@
     "title": "Professionisti affidabili in Montenegro",
     "subtitle": "Dalle riparazioni domestiche ai servizi per le aziende — professionisti affidabili in tutto il Montenegro",
     "cta": "Richiedi un Preventivo Gratuito",
-    "ctaSecondary": "Scopri i Professionisti",
-    "trustedBy": "Affidabili in tutto il Montenegro",
-    "stats": {
-      "professionals": "Professionisti",
-      "jobsCompleted": "Lavori Completati",
-      "avgRating": "Valutazione Media"
-    }
+    "ctaSecondary": "Scopri i Professionisti"
   },
   "categories": {
     "title": "Le Nostre Categorie di Servizio",
@@ -1695,7 +1689,6 @@
   "services": {
     "title": "I nostri servizi",
     "subtitle": "Scegli la categoria giusta per le tue esigenze",
-    "prosInCategory": "professionisti in questa categoria",
     "metaDescription": "Trova professionisti {name} verificati in tutto il Montenegro su Glatko. Confronta i preventivi di esperti locali affidabili e prenota subito, gratis.",
     "viewAllPros": "Vedi tutti i professionisti",
     "requestInCategory": "Richiedi servizio in questa categoria",
