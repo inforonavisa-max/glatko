@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 
+import { getTranslations } from "next-intl/server";
+
 import { createClient, createAdminClient } from "@/supabase/server";
 import { sendAdminProApplicationEmail } from "@/lib/email/pro-emails";
 import { glatkoCaptureException } from "@/lib/sentry/glatko-capture";
@@ -66,33 +68,19 @@ export async function submitProfessionalApplication(
   _prev: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  const t = await getTranslations("becomePro.errors");
   const supabase = createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { success: false, error: "Authentication required" };
+  if (!user) return { success: false, error: t("auth") };
 
-  // Anti-tamper: re-read avatar from DB; the client cannot trick us into
-  // accepting a foreign avatar URL by passing it via formData.
-  const { data: profile, error: profileErr } = await supabase
-    .from("profiles")
-    .select("avatar_url, full_name")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  if (profileErr) {
-    return { success: false, error: profileErr.message };
-  }
-
-  const dbAvatar = profile?.avatar_url?.trim() ?? "";
-  if (!dbAvatar) {
-    return { success: false, error: "Avatar required" };
-  }
-
-  const submittedAvatar = String(formData.get("avatar_url") ?? "").trim();
-  if (submittedAvatar !== dbAvatar) {
-    return { success: false, error: "Avatar mismatch — please re-upload" };
-  }
+  // Avatar is OPTIONAL (G-FUNNEL): it is persisted independently via
+  // updateAvatar (scoped to the user's own storage path), so the submit
+  // neither writes nor gates on it. The old hard "Avatar required" guard
+  // stranded every pro who had no photo yet (e.g. OAuth users without a
+  // Google picture) — they could not pass step 0, so nothing was ever
+  // written. A missing photo is now surfaced as a soft "add a photo" nudge.
 
   // Parse + validate base profile fields
   const baseRaw = {
@@ -118,12 +106,7 @@ export async function submitProfessionalApplication(
   };
   const parsed = PROFILE_BASE_FIELDS.safeParse(baseRaw);
   if (!parsed.success) {
-    return {
-      success: false,
-      error:
-        parsed.error.issues[0]?.message ??
-        "Validation failed",
-    };
+    return { success: false, error: t("validation") };
   }
 
   // Coerce to canonical lowercase at the write site: this is the path that
@@ -138,10 +121,10 @@ export async function submitProfessionalApplication(
   ).trim();
 
   if (categoryIds.length === 0) {
-    return { success: false, error: "Select at least one service" };
+    return { success: false, error: t("selectService") };
   }
   if (!primaryCategoryId || !categoryIds.includes(primaryCategoryId)) {
-    return { success: false, error: "Pick a primary service" };
+    return { success: false, error: t("pickPrimary") };
   }
 
   // JSON fields: applicationAnswers, portfolioImages, pricingModel,
@@ -221,7 +204,12 @@ export async function submitProfessionalApplication(
     .upsert(profilePayload, { onConflict: "id" });
 
   if (profileWriteErr) {
-    return { success: false, error: profileWriteErr.message };
+    glatkoCaptureException(new Error(profileWriteErr.message), {
+      module: "become-a-pro/actions",
+      op: "profile_upsert",
+      professionalId: user.id,
+    });
+    return { success: false, error: t("generic") };
   }
 
   // Replace pro_services rows for this user (full overwrite — wizard
@@ -241,7 +229,12 @@ export async function submitProfessionalApplication(
       .from("glatko_pro_services")
       .insert(serviceRows);
     if (servicesErr) {
-      return { success: false, error: servicesErr.message };
+      glatkoCaptureException(new Error(servicesErr.message), {
+        module: "become-a-pro/actions",
+        op: "services_insert",
+        professionalId: user.id,
+      });
+      return { success: false, error: t("generic") };
     }
   }
 
@@ -263,7 +256,12 @@ export async function submitProfessionalApplication(
       .from("glatko_pro_application_answers")
       .insert(answerRows);
     if (answersErr) {
-      return { success: false, error: answersErr.message };
+      glatkoCaptureException(new Error(answersErr.message), {
+        module: "become-a-pro/actions",
+        op: "answers_insert",
+        professionalId: user.id,
+      });
+      return { success: false, error: t("generic") };
     }
   }
 

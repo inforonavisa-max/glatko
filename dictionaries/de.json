@@ -574,10 +574,30 @@
       "documentsUpload": "Verifizierungsdokumente",
       "comingSoon": "Datei-Upload kommt bald",
       "avatarTitle": "Profilfoto",
-      "avatarHint": "Pflicht — JPG, PNG oder WebP, max. 5 MB.",
+      "avatarHint": "Optional, aber empfohlen — JPG, PNG oder WebP, max. 5 MB.",
       "avatarRequired": "Bitte laden Sie ein Profilfoto hoch, bevor Sie fortfahren oder die Bewerbung absenden.",
       "categoryRequired": "Wählen Sie mindestens einen Servicebereich.",
-      "reviewNote": "Ihre Bewerbung wird von unserem Team innerhalb von 24-48 Stunden geprüft."
+      "reviewNote": "Ihre Bewerbung wird von unserem Team innerhalb von 24-48 Stunden geprüft.",
+      "avatarNudge": "Füge ein Foto hinzu — Profile mit Foto erhalten deutlich mehr Aufträge.",
+      "nextHint": {
+        "step0": "Gib Firmenname, Telefon und Stadt an, um fortzufahren.",
+        "step1": "Wähle mindestens eine Dienstleistung und eine Hauptdienstleistung.",
+        "step3": "Gib einen Preis ein, um fortzufahren."
+      },
+      "status": {
+        "pendingTitle": "Bewerbung erhalten",
+        "pendingDesc": "Deine Bewerbung ist in der Prüfung. Unser Team prüft sie innerhalb von 1–2 Werktagen und benachrichtigt dich per E-Mail.",
+        "inReviewTitle": "Bewerbung wird geprüft",
+        "inReviewDesc": "Unser Team prüft deine Bewerbung gerade. Du erhältst das Ergebnis in Kürze per E-Mail.",
+        "approvedTitle": "Du bist freigeschaltet",
+        "approvedDesc": "Glückwunsch! Du bist jetzt als Profi auf Glatko aktiv. Sieh dir Aufträge in deinem Dashboard an.",
+        "rejectedTitle": "Bewerbung nicht genehmigt",
+        "rejectedDesc": "Deine Bewerbung wurde diesmal nicht genehmigt. Bei Fragen erreichst du uns unter info@glatko.app.",
+        "dashboardCta": "Zum Dashboard",
+        "addPhotoTitle": "Profilfoto hinzufügen",
+        "addPhotoDesc": "Deinem Profil fehlt ein Foto. Profis mit Foto bekommen deutlich mehr Kundeninteresse.",
+        "addPhotoCta": "Foto hinzufügen"
+      }
     },
     "profile": {
       "about": "Über",
@@ -2017,6 +2037,13 @@
     "legalLink": {
       "title": "Rechtliche Anforderungen für Dienstleister in Montenegro",
       "body": "DOO-Gründung, Genehmigungen, Steuern in Montenegro? Die englischsprachigen Leitfäden von <link>RoNa Legal</link> helfen weiter."
+    },
+    "errors": {
+      "auth": "Bitte melde dich an, um fortzufahren.",
+      "selectService": "Wähle mindestens eine Dienstleistung aus.",
+      "pickPrimary": "Wähle eine Hauptdienstleistung aus.",
+      "validation": "Einige Angaben stimmen nicht. Bitte überprüfe die Felder.",
+      "generic": "Deine Bewerbung konnte nicht gesendet werden. Bitte versuche es gleich erneut."
     }
   },
   "validation": {

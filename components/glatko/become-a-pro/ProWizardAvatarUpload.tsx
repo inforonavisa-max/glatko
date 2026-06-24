@@ -5,7 +5,7 @@ import { useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertCircle, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { updateAvatar } from "@/lib/actions/profile";
 
@@ -40,51 +40,50 @@ export function ProWizardAvatarUpload({
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
-  function clearPending() {
-    if (preview) URL.revokeObjectURL(preview);
-    setPreview(null);
-    setPendingFile(null);
-  }
-
+  // Single-step: picking a file uploads immediately. The old two-step
+  // (pick → preview → separate "Upload" button) stranded users who saw the
+  // preview, assumed it was done, and hit a disabled "Next" — the avatar
+  // never persisted (G-FUNNEL root cause).
   function onFilePick(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
 
     if (!AVATAR_TYPES.includes(file.type)) {
+      setError(tAvatar("uploadError"));
       toast.error(tAvatar("uploadError"));
       return;
     }
     if (file.size > AVATAR_MAX) {
+      setError(tAvatar("maxSize"));
       toast.error(tAvatar("maxSize"));
       return;
     }
 
-    clearPending();
-    setPendingFile(file);
-    setPreview(URL.createObjectURL(file));
-  }
+    setError(null);
+    const objectUrl = URL.createObjectURL(file);
+    setPreview(objectUrl);
 
-  function confirmUpload() {
-    if (!pendingFile) return;
-    const file = pendingFile;
     const fd = new FormData();
     fd.append("avatar", file);
     startTransition(async () => {
       const res = await updateAvatar(fd);
-      clearPending();
+      URL.revokeObjectURL(objectUrl);
+      setPreview(null);
       if ("error" in res && res.error) {
-        const err = res.error;
-        if (err === "file_too_large") toast.error(tAvatar("maxSize"));
-        else if (err === "invalid_type") toast.error(tAvatar("uploadError"));
-        else if (err === "no_file") toast.error(tAvatar("uploadError"));
-        else toast.error(tAvatar("uploadError"));
+        const msg =
+          res.error === "file_too_large"
+            ? tAvatar("maxSize")
+            : tAvatar("uploadError");
+        setError(msg);
+        toast.error(msg);
         return;
       }
       if ("success" in res && res.success && "url" in res && res.url) {
+        setError(null);
         toast.success(tAvatar("uploadSuccess"));
         onUrlChange(res.url);
         router.refresh();
@@ -93,6 +92,7 @@ export function ProWizardAvatarUpload({
   }
 
   const showUrl = preview ?? initialUrl ?? null;
+  const hasAvatar = Boolean((preview ?? initialUrl)?.trim());
 
   return (
     <div className="rounded-2xl border border-gray-200/80 bg-gray-50/50 p-5 dark:border-white/[0.08] dark:bg-white/[0.03]">
@@ -121,6 +121,11 @@ export function ProWizardAvatarUpload({
               {initials(displayName, email)}
             </div>
           )}
+          {pending && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <Loader2 className="h-6 w-6 animate-spin text-white" aria-hidden />
+            </div>
+          )}
         </div>
 
         <div className="mt-4 flex w-full min-w-0 flex-1 flex-col items-center sm:mt-0 sm:items-stretch">
@@ -132,49 +137,35 @@ export function ProWizardAvatarUpload({
             onChange={onFilePick}
             disabled={pending}
           />
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-            <button
-              type="button"
-              onClick={() => fileRef.current?.click()}
-              disabled={pending}
-              className={cn(
-                "rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-2 text-xs font-medium text-white shadow-lg shadow-teal-500/25 transition-opacity",
-                "disabled:opacity-60"
-              )}
-            >
-              {tAvatar("chooseFile")}
-            </button>
-            {pendingFile && (
-              <>
-                <p className="w-full text-center text-xs font-medium text-amber-700 dark:text-amber-400 sm:text-left">
-                  ↓ {tAvatar("uploadInstruction")}
-                </p>
-                <button
-                  type="button"
-                  onClick={confirmUpload}
-                  disabled={pending}
-                  className={cn(
-                    "rounded-xl bg-gray-100 px-4 py-2 text-xs font-medium text-gray-800 transition-colors hover:bg-gray-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/[0.14]",
-                    "disabled:opacity-60"
-                  )}
-                >
-                  {pending ? (
-                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                  ) : (
-                    tAvatar("upload")
-                  )}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => clearPending()}
-                  disabled={pending}
-                  className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-medium text-gray-600 dark:border-white/10 dark:text-white/70"
-                >
-                  {tAvatar("discardPreview")}
-                </button>
-              </>
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            disabled={pending}
+            className={cn(
+              "inline-flex items-center justify-center gap-2 self-center rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 px-4 py-2 text-xs font-medium text-white shadow-lg shadow-teal-500/25 transition-opacity sm:self-start",
+              "disabled:opacity-60",
             )}
-          </div>
+          >
+            {pending ? (
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+            ) : (
+              <Camera className="h-4 w-4" aria-hidden />
+            )}
+            {hasAvatar ? tAvatar("upload") : tAvatar("chooseFile")}
+          </button>
+
+          {!hasAvatar && !pending && (
+            <p className="mt-2 text-center text-xs font-medium text-amber-700 dark:text-amber-400 sm:text-left">
+              {t("avatarNudge")}
+            </p>
+          )}
+
+          {error && (
+            <p className="mt-2 flex items-center gap-1.5 text-center text-xs font-medium text-red-600 dark:text-red-400 sm:text-left">
+              <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              {error}
+            </p>
+          )}
         </div>
       </div>
     </div>

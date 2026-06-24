@@ -574,10 +574,30 @@
       "documentsUpload": "Documenti di Verifica",
       "comingSoon": "Caricamento file in arrivo",
       "avatarTitle": "Foto profilo",
-      "avatarHint": "Obbligatorio — JPG, PNG o WebP, max 5 MB.",
+      "avatarHint": "Facoltativa ma consigliata — JPG, PNG o WebP, max 5 MB.",
       "avatarRequired": "Carica una foto profilo prima di continuare o inviare la candidatura.",
       "categoryRequired": "Seleziona almeno un'area di servizio.",
-      "reviewNote": "La tua candidatura sarà esaminata dal nostro team entro 24-48 ore."
+      "reviewNote": "La tua candidatura sarà esaminata dal nostro team entro 24-48 ore.",
+      "avatarNudge": "Aggiungi una foto — i profili con foto ricevono molti più lavori.",
+      "nextHint": {
+        "step0": "Inserisci nome dell'attività, telefono e città per continuare.",
+        "step1": "Seleziona almeno un servizio e un servizio principale.",
+        "step3": "Inserisci un prezzo per continuare."
+      },
+      "status": {
+        "pendingTitle": "Candidatura ricevuta",
+        "pendingDesc": "La tua candidatura è in coda per la revisione. Il nostro team la esamina entro 1–2 giorni lavorativi e ti invia l'esito via e-mail.",
+        "inReviewTitle": "Candidatura in revisione",
+        "inReviewDesc": "Il nostro team sta esaminando la tua candidatura. Riceverai l'esito via e-mail a breve.",
+        "approvedTitle": "Sei approvato",
+        "approvedDesc": "Congratulazioni! Ora sei attivo come professionista su Glatko. Vai alla dashboard per vedere i lavori.",
+        "rejectedTitle": "Candidatura non approvata",
+        "rejectedDesc": "La tua candidatura non è stata approvata questa volta. Per domande scrivici a info@glatko.app.",
+        "dashboardCta": "Vai alla dashboard",
+        "addPhotoTitle": "Aggiungi una foto profilo",
+        "addPhotoDesc": "Al tuo profilo manca una foto. I professionisti con foto ricevono molto più interesse dai clienti.",
+        "addPhotoCta": "Aggiungi foto"
+      }
     },
     "profile": {
       "about": "Informazioni",
@@ -2017,6 +2037,13 @@
     "legalLink": {
       "title": "Requisiti legali per i fornitori di servizi in Montenegro",
       "body": "Costituzione DOO, permessi e tasse in Montenegro? Consulta le guide di <link>RoNa Legal</link> per professionisti e aziende."
+    },
+    "errors": {
+      "auth": "Accedi per continuare.",
+      "selectService": "Seleziona almeno un servizio.",
+      "pickPrimary": "Scegli un servizio principale.",
+      "validation": "Alcuni dati non sono corretti. Controlla i campi.",
+      "generic": "Non siamo riusciti a inviare la tua candidatura. Riprova tra poco."
     }
   },
   "validation": {

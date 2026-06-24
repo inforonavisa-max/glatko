@@ -574,10 +574,30 @@
       "documentsUpload": "Doğrulama Belgeleri",
       "comingSoon": "Dosya yükleme yakında",
       "avatarTitle": "Profil fotoğrafı",
-      "avatarHint": "Zorunlu — JPG, PNG veya WebP, en fazla 5 MB.",
+      "avatarHint": "Opsiyonel ama önerilir — JPG, PNG veya WebP, en fazla 5 MB.",
       "avatarRequired": "Devam etmek ve başvuruyu göndermek için profil fotoğrafı yükleyin.",
       "categoryRequired": "En az bir hizmet alanı seçin.",
-      "reviewNote": "Başvurunuz ekibimiz tarafından 24-48 saat içinde incelenecektir."
+      "reviewNote": "Başvurunuz ekibimiz tarafından 24-48 saat içinde incelenecektir.",
+      "avatarNudge": "Fotoğraf ekle — fotoğraflı profiller çok daha fazla iş alır.",
+      "nextHint": {
+        "step0": "Devam etmek için işletme adı, telefon ve şehir gerekli.",
+        "step1": "En az bir hizmet alanı ve birincil hizmeti seç.",
+        "step3": "Devam etmek için bir fiyat gir."
+      },
+      "status": {
+        "pendingTitle": "Başvurun alındı",
+        "pendingDesc": "Başvurun inceleme sırasında. Ekibimiz 1-2 iş günü içinde değerlendirir ve sonucu e-posta ile bildirir.",
+        "inReviewTitle": "Başvurun inceleniyor",
+        "inReviewDesc": "Ekibimiz başvurunu şu anda inceliyor. Sonucu kısa süre içinde e-posta ile alacaksın.",
+        "approvedTitle": "Başvurun onaylandı",
+        "approvedDesc": "Tebrikler! Artık Glatko'da profesyonel olarak görünüyorsun. Panelinden işlere göz at.",
+        "rejectedTitle": "Başvurun onaylanmadı",
+        "rejectedDesc": "Başvurun şu an için onaylanmadı. Sorularını info@glatko.app adresine iletebilirsin.",
+        "dashboardCta": "Panele git",
+        "addPhotoTitle": "Profil fotoğrafı ekle",
+        "addPhotoDesc": "Profilin eksik görünüyor. Fotoğraf ekleyen profesyoneller müşterilerden çok daha fazla ilgi görüyor.",
+        "addPhotoCta": "Fotoğraf ekle"
+      }
     },
     "profile": {
       "about": "Hakkında",
@@ -2017,6 +2037,13 @@
     "legalLink": {
       "title": "Karadağ'da hizmet sağlayıcı için yasal gereklilikler",
       "body": "Karadağ'da DOO kurmak, izin almak veya vergi konuları için <link>RoNa Legal</link>'in rehberlerine göz atabilirsiniz."
+    },
+    "errors": {
+      "auth": "Devam etmek için giriş yapmalısın.",
+      "selectService": "En az bir hizmet alanı seç.",
+      "pickPrimary": "Birincil hizmet alanını seç.",
+      "validation": "Girdiğin bilgilerde bir sorun var. Lütfen alanları kontrol et.",
+      "generic": "Başvuru gönderilemedi. Lütfen birazdan tekrar dene."
     }
   },
   "validation": {

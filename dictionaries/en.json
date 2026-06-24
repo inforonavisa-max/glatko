@@ -574,10 +574,30 @@
       "documentsUpload": "Verification Documents",
       "comingSoon": "File upload coming soon",
       "avatarTitle": "Profile photo",
-      "avatarHint": "Required — JPG, PNG or WebP, max 5 MB.",
+      "avatarHint": "Optional but recommended — JPG, PNG or WebP, max 5 MB.",
       "avatarRequired": "Please upload a profile photo before continuing or submitting your application.",
       "categoryRequired": "Select at least one service category.",
-      "reviewNote": "Your application will be reviewed by our team within 24-48 hours."
+      "reviewNote": "Your application will be reviewed by our team within 24-48 hours.",
+      "avatarNudge": "Add a photo — profiles with a photo get far more jobs.",
+      "nextHint": {
+        "step0": "Add your business name, phone and city to continue.",
+        "step1": "Select at least one service and a primary service.",
+        "step3": "Enter a price to continue."
+      },
+      "status": {
+        "pendingTitle": "Application received",
+        "pendingDesc": "Your application is in the review queue. Our team reviews it within 1–2 business days and emails you the result.",
+        "inReviewTitle": "Application under review",
+        "inReviewDesc": "Our team is reviewing your application right now. You'll get the result by email soon.",
+        "approvedTitle": "You're approved",
+        "approvedDesc": "Congratulations! You're now live as a pro on Glatko. Head to your dashboard to view jobs.",
+        "rejectedTitle": "Application not approved",
+        "rejectedDesc": "Your application wasn't approved this time. Reach us at info@glatko.app with any questions.",
+        "dashboardCta": "Go to dashboard",
+        "addPhotoTitle": "Add a profile photo",
+        "addPhotoDesc": "Your profile is missing a photo. Pros with a photo get noticeably more customer interest.",
+        "addPhotoCta": "Add photo"
+      }
     },
     "profile": {
       "about": "About",
@@ -2017,6 +2037,13 @@
     "legalLink": {
       "title": "Legal requirements for service providers in Montenegro",
       "body": "Setting up a DOO, permits, tax in Montenegro? See <link>RoNa Legal</link>'s guides for English-speaking expats and businesses."
+    },
+    "errors": {
+      "auth": "Please sign in to continue.",
+      "selectService": "Select at least one service.",
+      "pickPrimary": "Choose a primary service.",
+      "validation": "Some details look off. Please check the fields.",
+      "generic": "We couldn't submit your application. Please try again shortly."
     }
   },
   "validation": {

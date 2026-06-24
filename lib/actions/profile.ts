@@ -237,6 +237,98 @@ export async function deleteAvatar() {
   return { success: true as const };
 }
 
+/**
+ * G-FUNNEL: adopt an OAuth provider's profile picture as the user's avatar.
+ *
+ * Called once on the become-a-pro wizard mount for users who have no avatar
+ * yet. handle_new_user does NOT copy the OAuth `picture` into profiles, so
+ * Google/etc. users arrive with a null avatar and previously hit the hard
+ * "Avatar required" wall. This re-hosts the provider picture in our own
+ * `avatars` bucket (so it renders through the same supabase-storage path as
+ * uploaded avatars — no remote-image allowlist needed) and persists it.
+ *
+ * Idempotent + best-effort: skips when an avatar already exists or no
+ * provider picture is present, and never throws into the caller.
+ */
+export async function adoptOAuthAvatar(): Promise<
+  | { success: true; url: string | null; skipped?: boolean }
+  | { error: string }
+> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "unauthorized" as const };
+  }
+
+  // Already has an avatar? leave it alone.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("avatar_url")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (profile?.avatar_url && profile.avatar_url.trim().length > 0) {
+    return { success: true as const, url: profile.avatar_url, skipped: true };
+  }
+
+  // Read the provider picture from the trusted server-side session metadata
+  // (never from client input).
+  const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+  const picture =
+    (typeof meta.picture === "string" && meta.picture) ||
+    (typeof meta.avatar_url === "string" && meta.avatar_url) ||
+    "";
+  if (!picture || !/^https?:\/\//i.test(picture)) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  let bytes: ArrayBuffer;
+  let contentType: string;
+  try {
+    const res = await fetch(picture, { redirect: "follow" });
+    if (!res.ok) return { success: true as const, url: null, skipped: true };
+    contentType = (res.headers.get("content-type") ?? "image/jpeg")
+      .split(";")[0]
+      .trim();
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(contentType)) contentType = "image/jpeg";
+    bytes = await res.arrayBuffer();
+  } catch {
+    return { success: true as const, url: null, skipped: true };
+  }
+  if (!bytes.byteLength || bytes.byteLength > 5 * 1024 * 1024) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  const ext = contentType.split("/")[1] ?? "jpeg";
+  const filePath = `${user.id}/avatar.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(filePath, bytes, { upsert: true, contentType });
+  if (uploadError) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  const { data: urlData } = supabase.storage
+    .from("avatars")
+    .getPublicUrl(filePath);
+  const publicUrl = urlData.publicUrl;
+
+  const { error: updateError } = await supabase
+    .from("profiles")
+    .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+    .eq("id", user.id);
+  if (updateError) {
+    return { success: true as const, url: null, skipped: true };
+  }
+
+  revalidateProfile();
+  return { success: true as const, url: publicUrl };
+}
+
 export async function updateLanguagePreference(locale: string) {
   const supabase = createClient();
   const {
