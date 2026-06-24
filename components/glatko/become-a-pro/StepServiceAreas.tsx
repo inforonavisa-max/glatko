@@ -9,8 +9,8 @@ import type { ServiceCategory, MultiLangText } from "@/types/glatko";
 import type { Locale } from "@/i18n/routing";
 import type { useTranslations } from "next-intl";
 
-const MAX_ROOT_CATEGORIES = 3;
-const MAX_SUBS_PER_ROOT = 5;
+const MAX_ROOT_CATEGORIES = 6;
+const MAX_SUBS_PER_ROOT = 10;
 
 function categoryLabel(cat: ServiceCategory, locale: Locale): string {
   const n = cat.name as MultiLangText;
