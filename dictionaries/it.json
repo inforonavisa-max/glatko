@@ -53,33 +53,6 @@
   "categories": {
     "title": "Le Nostre Categorie di Servizio",
     "subtitle": "Trova il professionista giusto per le tue esigenze",
-    "home": {
-      "title": "Pulizia Casa & Ristrutturazione",
-      "description": "Pulizia ville, pulizia profonda, tinteggiatura, elettricista, idraulica",
-      "generalCleaning": "Pulizia Generale",
-      "deepCleaning": "Pulizia Profonda",
-      "villaAirbnb": "Pulizia Villa / Airbnb",
-      "renovation": "Ristrutturazione & Rinnovamento",
-      "painting": "Tinteggiatura & Decorazione",
-      "electrical": "Impianto Elettrico",
-      "plumbing": "Impianto Idraulico",
-      "acHeating": "Climatizzazione & Riscaldamento",
-      "furnitureAssembly": "Montaggio Mobili",
-      "garden": "Manutenzione Giardino",
-      "pool": "Pulizia Piscina"
-    },
-    "boat": {
-      "title": "Manutenzione Nautica & Skipper",
-      "description": "Antivegetativa, revisione motore, noleggio skipper, pulizia carena",
-      "captainHire": "Noleggio Skipper",
-      "antifouling": "Antivegetativa",
-      "engineService": "Revisione Motore",
-      "hullCleaning": "Pulizia & Lucidatura Carena",
-      "winterization": "Rimessaggio Invernale",
-      "charterPrep": "Preparazione Charter",
-      "emergencyRepair": "Riparazione d'Emergenza",
-      "haulOut": "Alaggio & Trasporto"
-    },
     "getQuote": "Richiedi Preventivo",
     "p0Roots": {
       "boat-services": "Servizi nautici",

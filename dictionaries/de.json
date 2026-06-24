@@ -53,33 +53,6 @@
   "categories": {
     "title": "Unsere Servicekategorien",
     "subtitle": "Finden Sie die passende Fachkraft für Ihre Bedürfnisse",
-    "home": {
-      "title": "Hausreinigung & Renovierung",
-      "description": "Villareinigung, Grundreinigung, Malerarbeiten, Elektrik, Sanitär",
-      "generalCleaning": "Allgemeine Reinigung",
-      "deepCleaning": "Grundreinigung",
-      "villaAirbnb": "Villa- / Airbnb-Reinigung",
-      "renovation": "Renovierung & Umbau",
-      "painting": "Maler- & Lackierarbeiten",
-      "electrical": "Elektroinstallation",
-      "plumbing": "Sanitärinstallation",
-      "acHeating": "Klimaanlage & Heizung",
-      "furnitureAssembly": "Möbelmontage",
-      "garden": "Gartenpflege",
-      "pool": "Poolreinigung"
-    },
-    "boat": {
-      "title": "Bootswartung & Kapitän",
-      "description": "Antifouling, Motorservice, Kapitänvermittlung, Rumpfreinigung",
-      "captainHire": "Kapitän buchen",
-      "antifouling": "Antifouling",
-      "engineService": "Motorservice",
-      "hullCleaning": "Rumpfreinigung & Politur",
-      "winterization": "Einwinterung",
-      "charterPrep": "Chartervorbereitung",
-      "emergencyRepair": "Notfallreparatur",
-      "haulOut": "Kranen & Transport"
-    },
     "getQuote": "Angebot einholen",
     "p0Roots": {
       "boat-services": "Bootsdienste",

@@ -53,33 +53,6 @@
   "categories": {
     "title": "Kategorije usluga",
     "subtitle": "Pronađite pravog profesionalca za vaše potrebe",
-    "home": {
-      "title": "Čišćenje doma i renoviranje",
-      "description": "Čišćenje vila, dubinsko čišćenje, farbanje, elektrika, vodovod",
-      "generalCleaning": "Generalno čišćenje",
-      "deepCleaning": "Dubinsko čišćenje",
-      "villaAirbnb": "Čišćenje vila / Airbnb",
-      "renovation": "Renoviranje i rekonstrukcija",
-      "painting": "Farbanje i dekoracija",
-      "electrical": "Elektroinstalacije",
-      "plumbing": "Vodoinstalacije",
-      "acHeating": "Klima i grijanje",
-      "furnitureAssembly": "Montaža namještaja",
-      "garden": "Održavanje bašte",
-      "pool": "Čišćenje bazena"
-    },
-    "boat": {
-      "title": "Održavanje plovila i kapetan",
-      "description": "Antifouling, servis motora, angažovanje kapetana, čišćenje trupa",
-      "captainHire": "Angažovanje kapetana",
-      "antifouling": "Antifouling",
-      "engineService": "Servis motora",
-      "hullCleaning": "Čišćenje i poliranje trupa",
-      "winterization": "Zimovanje",
-      "charterPrep": "Priprema za čarter",
-      "emergencyRepair": "Hitna popravka",
-      "haulOut": "Izvlačenje i transport"
-    },
     "getQuote": "Zatražite ponudu",
     "p0Roots": {
       "boat-services": "Usluge za plovila",

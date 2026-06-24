@@ -53,33 +53,6 @@
   "categories": {
     "title": "فئات خدماتنا",
     "subtitle": "اعثر على المحترف المناسب لاحتياجاتك",
-    "home": {
-      "title": "تنظيف المنزل والتجديد",
-      "description": "تنظيف الفلل، تنظيف عميق، طلاء، كهرباء، سباكة",
-      "generalCleaning": "تنظيف عام",
-      "deepCleaning": "تنظيف عميق",
-      "villaAirbnb": "تنظيف فلل / Airbnb",
-      "renovation": "تجديد وإعادة تأهيل",
-      "painting": "طلاء وديكور",
-      "electrical": "أعمال كهربائية",
-      "plumbing": "أعمال سباكة",
-      "acHeating": "تكييف وتدفئة",
-      "furnitureAssembly": "تركيب أثاث",
-      "garden": "صيانة الحدائق",
-      "pool": "تنظيف المسابح"
-    },
-    "boat": {
-      "title": "صيانة القوارب وربان",
-      "description": "مانع الحشف البحري، صيانة المحرك، استئجار ربان، تنظيف الهيكل",
-      "captainHire": "استئجار ربان",
-      "antifouling": "مانع الحشف البحري",
-      "engineService": "صيانة المحرك",
-      "hullCleaning": "تنظيف وتلميع الهيكل",
-      "winterization": "تجهيز لفصل الشتاء",
-      "charterPrep": "إعداد للتأجير البحري",
-      "emergencyRepair": "إصلاح طارئ",
-      "haulOut": "سحب ونقل القارب"
-    },
     "getQuote": "اطلب عرض سعر",
     "p0Roots": {
       "boat-services": "خدمات القوارب",

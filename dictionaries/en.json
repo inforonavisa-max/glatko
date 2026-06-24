@@ -53,33 +53,6 @@
   "categories": {
     "title": "Our Service Categories",
     "subtitle": "Find the right professional for your needs",
-    "home": {
-      "title": "Home Cleaning & Renovation",
-      "description": "Villa cleaning, deep cleaning, painting, electrical, plumbing",
-      "generalCleaning": "General Cleaning",
-      "deepCleaning": "Deep Cleaning",
-      "villaAirbnb": "Villa / Airbnb Cleaning",
-      "renovation": "Renovation & Remodeling",
-      "painting": "Painting & Decorating",
-      "electrical": "Electrical Work",
-      "plumbing": "Plumbing",
-      "acHeating": "AC & Heating",
-      "furnitureAssembly": "Furniture Assembly",
-      "garden": "Garden Maintenance",
-      "pool": "Pool Cleaning"
-    },
-    "boat": {
-      "title": "Boat Maintenance & Captain",
-      "description": "Antifouling, engine service, captain hire, hull cleaning",
-      "captainHire": "Captain Hire",
-      "antifouling": "Antifouling",
-      "engineService": "Engine Service",
-      "hullCleaning": "Hull Cleaning & Polishing",
-      "winterization": "Winterization",
-      "charterPrep": "Charter Preparation",
-      "emergencyRepair": "Emergency Repair",
-      "haulOut": "Haul-Out & Transport"
-    },
     "getQuote": "Get a Quote",
     "p0Roots": {
       "boat-services": "Boat Services",

@@ -53,33 +53,6 @@
   "categories": {
     "title": "Hizmet Kategorilerimiz",
     "subtitle": "İhtiyacınıza uygun profesyonel bulun",
-    "home": {
-      "title": "Ev Temizlik & Tadilat",
-      "description": "Villa temizliği, derin temizlik, boya-badana, elektrik, tesisat",
-      "generalCleaning": "Genel Temizlik",
-      "deepCleaning": "Derin Temizlik",
-      "villaAirbnb": "Villa / Airbnb Temizliği",
-      "renovation": "Tadilat & Renovasyon",
-      "painting": "Boya-Badana",
-      "electrical": "Elektrik Tesisatı",
-      "plumbing": "Su Tesisatı",
-      "acHeating": "Klima & Isıtma",
-      "furnitureAssembly": "Mobilya Montajı",
-      "garden": "Bahçe Bakımı",
-      "pool": "Havuz Temizliği"
-    },
-    "boat": {
-      "title": "Tekne Bakım & Kaptan",
-      "description": "Antifouling, motor servis, kaptan kiralama, gövde temizlik",
-      "captainHire": "Kaptan Kiralama",
-      "antifouling": "Antifouling",
-      "engineService": "Motor Servis",
-      "hullCleaning": "Gövde Temizlik & Polisaj",
-      "winterization": "Kışlama",
-      "charterPrep": "Charter Hazırlık",
-      "emergencyRepair": "Acil Onarım",
-      "haulOut": "Karaya Çıkarma & Transport"
-    },
     "getQuote": "Teklif Al",
     "p0Roots": {
       "boat-services": "Tekne Hizmetleri",
