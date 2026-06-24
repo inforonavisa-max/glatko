@@ -50,7 +50,10 @@ const nextConfig = {
     const renames = [
       { from: "general-cleaning", to: "regular-cleaning" },
       { from: "villa-airbnb", to: "villa-cleaning" },
-      { from: "engine-service", to: "boat-engine-service" },
+      // The 085 dup-merge boat slugs (engine-service / captain-rental /
+      // electronics-gps) are redirected in middleware.ts — it covers all 9
+      // localized segments (/hizmetler, /uslugi, …) + the /[city] variant, which
+      // this /services-only map cannot. Do NOT re-add them here (single source).
       { from: "captain-hire", to: "captain-daily" },
       { from: "winterization", to: "winter-storage" },
       { from: "charter-prep", to: "charter-cleaning" },
