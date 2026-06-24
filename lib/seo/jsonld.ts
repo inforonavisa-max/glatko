@@ -429,6 +429,28 @@ export function generateHowToSchema(input: {
 }
 
 /**
+ * Serialize a schema object to a string that is safe to inject into a
+ * `<script type="application/ld+json">` element via dangerouslySetInnerHTML.
+ *
+ * Plain JSON.stringify does NOT neutralize the `</script>` sequence: inside a
+ * raw-text `<script>` element the HTML parser closes the element at a literal
+ * `</script`, so any user-controlled field (provider bio/business name, review
+ * body, customer display name) containing `</script><script>…</script>` would
+ * break out and execute — a stored XSS. Escaping `<`, `>` and `&` as JSON
+ * `\\uXXXX` unicode escapes keeps the JSON valid (these only ever appear inside
+ * string values, never in the structural JSON) while making breakout
+ * impossible. U+2028/U+2029 are escaped too for strict JS-string safety.
+ */
+export function serializeJsonLd(schema: object): string {
+  return JSON.stringify(schema)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
+/**
  * Spread onto a `<script>` element to render a JSON-LD blob.
  * Stable JSON.stringify (no whitespace) keeps SSR HTML diffs deterministic.
  */
@@ -436,7 +458,7 @@ export function jsonLdScriptProps(schema: object) {
   return {
     type: "application/ld+json" as const,
     dangerouslySetInnerHTML: {
-      __html: JSON.stringify(schema),
+      __html: serializeJsonLd(schema),
     },
   };
 }

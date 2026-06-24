@@ -1,4 +1,5 @@
 import type { ProfessionalProfile } from "@/types/glatko";
+import { jsonLdScriptProps } from "@/lib/seo/jsonld";
 
 interface QuoteReview {
   id: string;
@@ -67,10 +68,5 @@ export function ProviderSchema({ pro, reviews, canonicalUrl }: Props) {
       : undefined,
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <script {...jsonLdScriptProps(schema)} />;
 }
