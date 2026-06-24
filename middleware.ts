@@ -124,6 +124,43 @@ export async function middleware(request: NextRequest) {
         }
     }
 
+    // ── #132 follow-up: hard 308s for the 3 merged boat-service slugs ──────
+    // Migration 085 deactivated engine-service / captain-rental / electronics-gps
+    // (merged into their survivors). next.config redirects() only catch the EN
+    // `/services/<slug>` hub — verified on prod: the 8 localized segments
+    // (/hizmetler, /uslugi, /dienstleistungen, …) and the /[city] variant fall
+    // through to a 200. A real HTTP 308 across every locale + city suffix + query
+    // can only be issued here (same reason as the block above). Slugs are
+    // locale-neutral; the localized "/services" segment is derived from the
+    // pathnames SSOT so it can't drift (see i18n/routing.ts "/services/[slug]").
+    {
+        const segs = pathname.split('/').filter(Boolean);
+        if (segs.length >= 3 && isLocaleSegment(segs[0])) {
+            const RETIRED_BOAT_SLUGS: Record<string, string> = {
+                'engine-service': 'boat-engine-service',
+                'captain-rental': 'captain-daily',
+                'electronics-gps': 'electrical-electronics',
+            };
+            const [locale, segment, slug, ...rest] = segs;
+            const survivor = RETIRED_BOAT_SLUGS[slug];
+            // Only the "/services/[slug]" entry (a pure locale→path object) is
+            // cast; routing.pathnames as a whole has mixed string|object values.
+            const servicesPaths = routing.pathnames['/services/[slug]'] as Record<
+                string,
+                string
+            >;
+            const servicesSeg = servicesPaths[locale]?.split('/')[1];
+            if (survivor && servicesSeg && segment === servicesSeg) {
+                const tail = rest.length ? `/${rest.join('/')}` : '';
+                const target = `/${locale}/${segment}/${survivor}${tail}`;
+                return NextResponse.redirect(
+                    new URL(`${target}${request.nextUrl.search}`, request.url),
+                    308,
+                );
+            }
+        }
+    }
+
     // ── H0: health vertical flag guard ────────────────────────────────────
     // HEALTH_VERTICAL_ENABLED=false (Production) → every localized /saglik/*
     // (+ future /saglik-pro/*) URL 404s, EXCEPT the coming-soon page (K2).
