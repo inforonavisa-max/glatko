@@ -99,6 +99,12 @@ export async function getProfessionalProfileBySlug(
 
   return {
     ...pro,
+    // Disintermediation (G-DISINT): the public profile is customer-facing —
+    // never hand the pro's phone to the client (no WhatsApp/Viber deep-links,
+    // no JSON-LD telephone). Phone stays only on the pro's own panel / admin /
+    // post-acceptance matched-customer reveal. Closes the #135 by-slug bypass
+    // (this path read the base table with SELECT *).
+    phone: null,
     profile: pro.profiles ?? undefined,
     services: (services as ProService[]) ?? [],
   } as ProfessionalProfile;

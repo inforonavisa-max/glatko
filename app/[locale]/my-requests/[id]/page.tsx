@@ -65,27 +65,26 @@ export default async function CustomerRequestQuotesPage({ params }: Props) {
     notFound();
   }
 
-  // avatar_url + phone live on `profiles`, not glatko_professional_profiles —
-  // pull them in a second query keyed off the quote pro IDs.
+  // avatar_url lives on `profiles`, not glatko_professional_profiles — pull it
+  // in a second query keyed off the quote pro IDs. Disintermediation
+  // (G-DISINT): phone is deliberately NOT fetched here — a quote is a
+  // pre-acceptance offer, so the customer contacts the pro in-platform (the
+  // message thread), never via an off-platform WhatsApp/Viber deep-link.
   type QuotePro = { id: string };
   type Quote = { glatko_professional_profiles: QuotePro | null };
   const quotes = ((request.glatko_request_quotes as unknown as Quote[]) ?? [])
     .map((q) => q.glatko_professional_profiles?.id)
     .filter((v): v is string => Boolean(v));
 
-  const proExtras: Record<
-    string,
-    { avatar_url: string | null; phone: string | null }
-  > = {};
+  const proExtras: Record<string, { avatar_url: string | null }> = {};
   if (quotes.length > 0) {
     const { data: profiles } = await supabase
       .from("profiles")
-      .select("id, avatar_url, phone")
+      .select("id, avatar_url")
       .in("id", quotes);
     for (const p of profiles ?? []) {
       proExtras[p.id as string] = {
         avatar_url: (p.avatar_url as string | null) ?? null,
-        phone: (p.phone as string | null) ?? null,
       };
     }
   }

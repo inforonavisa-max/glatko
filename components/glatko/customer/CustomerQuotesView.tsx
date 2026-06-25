@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import {
   Star,
   MapPin,
-  MessageCircle,
   MessageSquare,
   Clock,
   ShieldCheck,
@@ -60,7 +59,7 @@ interface RequestPayload {
 
 interface Props {
   request: RequestPayload;
-  proExtras: Record<string, { avatar_url: string | null; phone: string | null }>;
+  proExtras: Record<string, { avatar_url: string | null }>;
   dispatchedAt: string | null;
   locale: string;
 }
@@ -80,10 +79,6 @@ function formatTime(seconds: number): string {
   const mm = Math.floor(seconds / 60);
   const ss = seconds % 60;
   return `${mm}:${ss.toString().padStart(2, "0")}`;
-}
-
-function digitsOnly(s: string): string {
-  return s.replace(/\D/g, "");
 }
 
 export function CustomerQuotesView({
@@ -152,20 +147,6 @@ export function CustomerQuotesView({
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, [dispatchedAt, quoteCount]);
-
-  function handleWhatsApp(pro: QuotePro) {
-    const phone = proExtras[pro.id]?.phone;
-    if (!phone) return;
-    const message = encodeURIComponent(
-      t("customer.quotes.whatsappMessage") +
-        ` "${request.title}"`,
-    );
-    window.open(
-      `https://wa.me/${digitsOnly(phone)}?text=${message}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
-  }
 
   const categoryName = pickName(
     request.glatko_service_categories?.name ?? null,
@@ -264,10 +245,7 @@ export function CustomerQuotesView({
           {sortedQuotes.map((quote, idx) => {
             const pro = quote.glatko_professional_profiles;
             if (!pro) return null;
-            const extras = proExtras[pro.id] ?? {
-              avatar_url: null,
-              phone: null,
-            };
+            const extras = proExtras[pro.id] ?? { avatar_url: null };
             const isBest = idx === 0 && quoteCount > 1;
             const tier = pro.verification_tier ?? "basic";
             const businessName = pro.business_name ?? "";
@@ -386,16 +364,9 @@ export function CustomerQuotesView({
                       : t("messaging.sendMessage")}
                   </button>
                   <div className="flex gap-2">
-                    {extras.phone && (
-                      <button
-                        type="button"
-                        onClick={() => handleWhatsApp(pro)}
-                        className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        {t("customer.quotes.whatsappCta")}
-                      </button>
-                    )}
+                    {/* Disintermediation (G-DISINT): off-platform WhatsApp
+                        removed — first contact is the in-app message thread
+                        (button above). */}
                     <a
                       href={`/${locale}/provider/${pro.id}`}
                       className="flex-1 px-3 py-2 border border-gray-300 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-neutral-800 text-center"
