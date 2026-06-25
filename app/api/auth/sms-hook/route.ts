@@ -169,7 +169,9 @@ export async function POST(request: NextRequest) {
 
   const text = template.replace(/\{otp\}/g, otp);
 
-  const result = await sendSms({ to: phone, text });
+  // OTP must not be retried: a retry-after-ambiguous-failure could deliver the
+  // same code twice. The 10s timeout still applies. (G-NOTIFICATION-RESILIENCE-01)
+  const result = await sendSms({ to: phone, text, retries: 0 });
   if (!result.ok) {
     console.error("[GLATKO:sms-hook] SMS send failed", result.error);
     glatkoCaptureException(new Error(`SMS hook send failed: ${result.error}`), {

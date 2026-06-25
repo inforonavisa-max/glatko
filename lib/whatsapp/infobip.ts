@@ -141,6 +141,11 @@ export async function sendWhatsAppTemplate({
     ],
   };
 
+  // Bound the request so a hung socket returns cleanly instead of blocking to
+  // the route's maxDuration (G-NOTIFICATION-RESILIENCE-01).
+  const WA_TIMEOUT_MS = 10_000;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), WA_TIMEOUT_MS);
   let response: Response;
   try {
     response = await fetch(endpoint, {
@@ -152,11 +157,19 @@ export async function sendWhatsAppTemplate({
       },
       body: JSON.stringify(payload),
       cache: "no-store",
+      signal: controller.signal,
     });
   } catch (err) {
+    if ((err as { name?: string })?.name === "AbortError") {
+      console.error("[GLATKO:wa] Infobip request timed out", WA_TIMEOUT_MS);
+      glatkoCaptureException(err, { module: "whatsapp-infobip", phase: "timeout" });
+      return { ok: false, error: "wa_timeout" };
+    }
     console.error("[GLATKO:wa] network error calling Infobip", err);
     glatkoCaptureException(err, { module: "whatsapp-infobip", phase: "fetch" });
     return { ok: false, error: "wa_network_error" };
+  } finally {
+    clearTimeout(timer);
   }
 
   const rawText = await response.text();
@@ -168,10 +181,13 @@ export async function sendWhatsAppTemplate({
   }
 
   if (!response.ok) {
+    // Log only the extracted error text + status — NEVER the raw body, which
+    // echoes the destination phone (messages[].to) into Vercel logs in
+    // cleartext (PII). Mirrors the SMS client. (G-NOTIFICATION-RESILIENCE-01)
     console.error(
       "[GLATKO:wa] Infobip returned non-2xx",
       response.status,
-      typeof body === "string" ? body : JSON.stringify(body),
+      extractInfobipError(body, response.status),
     );
     glatkoCaptureException(new Error(`Infobip WhatsApp HTTP ${response.status}`), {
       module: "whatsapp-infobip",

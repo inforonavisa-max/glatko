@@ -39,6 +39,13 @@ export interface NotificationPayload {
   body?: string;
   data?: Record<string, unknown>;
   priority?: NotificationPriority;
+  /**
+   * Background/cron callers set this so the underlying createNotification AWAITS
+   * the external (SMS/WhatsApp) dispatch instead of fire-and-forget — preventing
+   * the serverless function from freezing mid-fetch. See
+   * G-NOTIFICATION-RESILIENCE-01. Interactive callers omit it.
+   */
+  waitForExternal?: boolean;
 }
 
 export interface ProviderResult {
@@ -79,13 +86,16 @@ class ResendEmailProvider implements NotificationProvider {
       };
     }
     try {
-      await createNotification({
-        user_id: payload.to.userId,
-        type: payload.type,
-        title: payload.title,
-        body: payload.body,
-        data: payload.data,
-      });
+      await createNotification(
+        {
+          user_id: payload.to.userId,
+          type: payload.type,
+          title: payload.title,
+          body: payload.body,
+          data: payload.data,
+        },
+        { waitForExternal: payload.waitForExternal },
+      );
       return { success: true, channel: this.channel };
     } catch (err) {
       glatkoCaptureException(err, {

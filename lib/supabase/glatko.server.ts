@@ -1158,13 +1158,26 @@ export async function calculateTrustBadges(
 
 // ─── G6: Notifications ───
 
-export async function createNotification(data: {
-  user_id: string;
-  type: string;
-  title: string;
-  body?: string;
-  data?: Record<string, unknown>;
-}): Promise<void> {
+export async function createNotification(
+  data: {
+    user_id: string;
+    type: string;
+    title: string;
+    body?: string;
+    data?: Record<string, unknown>;
+  },
+  opts?: {
+    /**
+     * Await the external (SMS/WhatsApp) dispatch instead of fire-and-forget.
+     * Interactive callers leave this false so the user's request never blocks
+     * on an outbound SMS. Background/cron callers (match-dispatch, expire cron)
+     * MUST set it true — otherwise the serverless function returns and Vercel
+     * freezes it mid-fetch, tearing the Infobip socket down ("other side
+     * closed"). See G-NOTIFICATION-RESILIENCE-01.
+     */
+    waitForExternal?: boolean;
+  },
+): Promise<void> {
   const admin = createAdminClient();
 
   const { data: recipient, error: profileErr } = await admin
@@ -1236,24 +1249,49 @@ export async function createNotification(data: {
     }
   }
 
-  const { error } = await admin.from("glatko_notifications").insert(data);
-  if (error) {
+  const { data: inserted, error } = await admin
+    .from("glatko_notifications")
+    .insert(data)
+    .select("id")
+    .single();
+  if (error || !inserted) {
     console.error("[GLATKO:notifications] createNotification insert failed:", error);
     return;
   }
 
-  // Faz 2-A: external-channel (SMS/Viber/WhatsApp) dispatch — fire-and-forget,
-  // AFTER the in-app row so it never blocks/breaks in-app. Off by default (env
-  // kill-switch). Talks to the Infobip Messages API directly — NEVER through the
-  // email provider (no recursion). Chat messages are skipped here (delivered by
-  // the unread-gated cron in Faz 2-C).
-  void dispatchExternalNotification({
+  // Faz 2-A: external-channel (SMS/Viber/WhatsApp) dispatch AFTER the in-app row
+  // so it never blocks/breaks in-app. Off by default (env kill-switch). Talks to
+  // Infobip directly — NEVER through the email provider (no recursion). Chat
+  // messages are skipped here (delivered by the unread-gated cron in Faz 2-C).
+  //
+  // G-NOTIFICATION-RESILIENCE-01:
+  //  • On a confirmed send we stamp external_sent_at — until now a silently
+  //    dropped SMS was invisible (only Sentry saw it) and the queue looked
+  //    "delivered" via email_sent_at. The stamp lets a future sweep retry.
+  //  • Fire-and-forget for interactive callers; AWAITED for cron/background
+  //    callers (opts.waitForExternal) so the function isn't frozen mid-fetch.
+  const externalP = dispatchExternalNotification({
     user_id: data.user_id,
     type: data.type,
     title: data.title,
     body: data.body,
     data: data.data,
-  }).catch(() => {});
+  })
+    .then(async (r) => {
+      if (r?.sent) {
+        await admin
+          .from("glatko_notifications")
+          .update({ external_sent_at: new Date().toISOString() })
+          .eq("id", inserted.id);
+      }
+    })
+    .catch(() => {});
+
+  if (opts?.waitForExternal) {
+    await externalP;
+  } else {
+    void externalP;
+  }
 
   try {
     await dispatchNotificationEmail({
