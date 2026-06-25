@@ -1428,7 +1428,8 @@
     },
     "newRequestMatch": {
       "title": "Novi zahtjev",
-      "body": "Novi zahtjev koji odgovara vašim uslugama"
+      "body": "Novi zahtjev koji odgovara vašim uslugama",
+      "sms": "U vašoj regiji ima novi zahtjev koji odgovara vašim uslugama. Otvorite ga i pošaljite ponudu:"
     },
     "sms": {
       "otp": "Vaš Glatko verifikacioni kod: {otp}"

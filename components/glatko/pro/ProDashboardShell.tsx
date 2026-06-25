@@ -4,7 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Search, Gavel, User, Settings, Menu, X, CheckCircle, MessageSquare, Package, CalendarDays, UserCog } from "lucide-react";
+import { Home, Search, Gavel, User, Settings, Menu, X, CheckCircle, MessageSquare, Package, CalendarDays, UserCog, Briefcase } from "lucide-react";
 import { BackgroundGrids } from "@/components/aceternity/background-grids";
 import { cn } from "@/lib/utils";
 import type { ProfessionalProfile } from "@/types/glatko";
@@ -15,6 +15,7 @@ interface Props {
   locale: string;
   translations: {
     home: string;
+    leads: string;
     requests: string;
     bids: string;
     profile: string;
@@ -28,6 +29,7 @@ interface Props {
 
 const NAV_ITEMS = [
   { key: "home", href: "/pro/dashboard", icon: Home, exact: true },
+  { key: "leads", href: "/pro/dashboard/leads", icon: Briefcase },
   { key: "requests", href: "/pro/dashboard/requests", icon: Search },
   { key: "bids", href: "/pro/dashboard/bids", icon: Gavel },
   { key: "inbox", href: "/messages", icon: MessageSquare },

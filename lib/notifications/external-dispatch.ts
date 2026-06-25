@@ -3,6 +3,7 @@ import { glatkoCaptureException } from "@/lib/sentry/glatko-capture";
 import { sendSms } from "@/lib/sms/infobip";
 import { sendWhatsAppTemplate } from "@/lib/whatsapp/infobip";
 import { buildWhatsAppTemplateMessage } from "@/lib/notifications/whatsapp-templates";
+import { resolveExternalLink } from "@/lib/notifications/external-link";
 import { getDictionary, type LanguageCode } from "@/dictionaries";
 import { locales } from "@/i18n/routing";
 
@@ -243,6 +244,16 @@ export type ExternalSenders = {
   loadStatusDict: (
     locale: LanguageCode,
   ) => Promise<Record<string, string> | undefined>;
+  /**
+   * Recipient-locale SMS body for the types we translate at send-time (Faz 3-B).
+   * Returns undefined for not-yet-localized types → caller sends the stored
+   * title/body (still with a deep link). Coerced locale guarantees one of the 9
+   * app languages, so there is NO English fallback for localized types.
+   */
+  loadSmsCopy: (
+    type: string,
+    locale: LanguageCode,
+  ) => Promise<string | undefined>;
 };
 
 const defaultSenders: ExternalSenders = {
@@ -251,6 +262,15 @@ const defaultSenders: ExternalSenders = {
   loadStatusDict: async (locale) => {
     const dict = await getDictionary(locale);
     return (dict as { status?: Record<string, string> }).status;
+  },
+  loadSmsCopy: async (type, locale) => {
+    if (type !== "new_request_match") return undefined;
+    const dict = await getDictionary(locale);
+    return (
+      dict as {
+        notifications?: { newRequestMatch?: { sms?: string } };
+      }
+    ).notifications?.newRequestMatch?.sms;
   },
 };
 
@@ -293,8 +313,16 @@ export async function deliverExternal(
     }
   }
 
-  // 2) SMS (Faz 2-A, unchanged): the proven path, no link.
-  const text = composeSmsText(params.title, params.body);
+  // 2) SMS — Faz 3-B: the proven path, now with a deep link so the recipient
+  // can act on the notification (composeSmsText keeps the URL whole, trimming
+  // only the message to fit). For localized types (new_request_match) the body
+  // is the recipient-locale copy instead of the stored English; other types
+  // keep their stored title/body but gain the link.
+  const link = resolveExternalLink(params.type, params.data, decision.locale);
+  const localizedBody = await senders.loadSmsCopy(params.type, decision.locale);
+  const text = localizedBody
+    ? composeSmsText(localizedBody, undefined, link)
+    : composeSmsText(params.title, params.body, link);
   const res = await senders.sendSms({ to: decision.phone, text });
   if (res.ok) {
     console.log(

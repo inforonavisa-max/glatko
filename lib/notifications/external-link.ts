@@ -50,12 +50,12 @@ export function resolveExternalLink(
         requestId ? `/my-requests/${requestId}` : "/dashboard/requests",
       );
     case "new_request_match":
-      return localizedUrl(
-        locale,
-        requestId
-          ? `/pro/dashboard/requests/${requestId}`
-          : "/pro/dashboard/requests",
-      );
+      // The ONLY screen where a pro can act on a match (send a quote) is
+      // /pro/dashboard/leads. G-REVIEW-R1 (K4) closed bid intake on
+      // /requests/[id] — that page is now view-only — so deep-linking there
+      // dead-ends. /leads lists the pro's active leads (this one included),
+      // each with a "Send Quote" button. No [id] path param: it's a list.
+      return localizedUrl(locale, "/pro/dashboard/leads");
     case "thread_message":
       return localizedUrl(
         locale,

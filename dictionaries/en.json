@@ -1428,7 +1428,8 @@
     },
     "newRequestMatch": {
       "title": "New request for you",
-      "body": "A customer posted a request that matches your services"
+      "body": "A customer posted a request that matches your services",
+      "sms": "A new request in your area matches your services. Open it and send a quote:"
     },
     "sms": {
       "otp": "Your Glatko verification code: {otp}"

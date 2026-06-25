@@ -33,6 +33,7 @@ export default async function ProDashboardLayout({ children, params }: Props) {
       locale={locale}
       translations={{
         home: t("proDashboard.nav.home"),
+        leads: t("nav.leads"),
         requests: t("proDashboard.nav.requests"),
         bids: t("proDashboard.nav.bids"),
         profile: t("proDashboard.nav.profile"),

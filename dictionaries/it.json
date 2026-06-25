@@ -1428,7 +1428,8 @@
     },
     "newRequestMatch": {
       "title": "Nuova richiesta",
-      "body": "Nuova richiesta compatibile con i tuoi servizi"
+      "body": "Nuova richiesta compatibile con i tuoi servizi",
+      "sms": "C'è una nuova richiesta nella tua zona adatta ai tuoi servizi. Aprila e invia un preventivo:"
     },
     "sms": {
       "otp": "Il tuo codice di verifica Glatko: {otp}"

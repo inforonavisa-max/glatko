@@ -1428,7 +1428,8 @@
     },
     "newRequestMatch": {
       "title": "Neue Anfrage",
-      "body": "Neue passende Serviceanfrage"
+      "body": "Neue passende Serviceanfrage",
+      "sms": "In Ihrer Region gibt es eine neue Anfrage, die zu Ihren Leistungen passt. Öffnen und Angebot senden:"
     },
     "sms": {
       "otp": "Ihr Glatko-Bestätigungscode: {otp}"

@@ -1428,7 +1428,8 @@
     },
     "newRequestMatch": {
       "title": "Yeni talep",
-      "body": "Hizmetlerinizle eşleşen yeni bir talep var"
+      "body": "Hizmetlerinizle eşleşen yeni bir talep var",
+      "sms": "Bölgenizde hizmetlerinizle eşleşen yeni bir talep var. Açıp teklif gönderin:"
     },
     "sms": {
       "otp": "Glatko doğrulama kodunuz: {otp}"
