@@ -1,0 +1,55 @@
+-- 087b_pii_drop_broad_policies.sql  (RESTRICTIVE half — the actual leak fix)
+--
+-- 🔴 Closes the proven anon + cross-authenticated read of customer/pro PII.
+-- Drops the two over-broad public SELECT policies. After this, anon + non-owner
+-- users can read NOTHING from the base tables (so no column, incl PII, is
+-- reachable); public/cross-user reads go exclusively through the PII-free views
+-- from 087a. Owner + admin policies are untouched (owner self-view, admin full,
+-- anon INSERT of pending requests all keep working).
+--
+-- DEPENDS ON: 087a (views) being live AND the repointed app code being deployed.
+-- Therefore NOT applied until merge. Validated via BEGIN…ROLLBACK + SET LOCAL
+-- ROLE anon (anon base reads → 0 rows; views → intact).
+--
+-- IDEMPOTENT: DROP POLICY IF EXISTS.
+--
+-- Policies REMOVED:
+--   professional_profiles: "Anyone can view active profiles" (roles=public,
+--     is_active=true) — exposed ALL columns (phone, company_documents KYC URLs,
+--     admin_notes, tier_documents) to anon + every authenticated user.
+--   service_requests: "Public can view active requests" (roles=public,
+--     status<>draft/cancelled) — exposed anonymous_email/address/location to
+--     anon + every authenticated user.
+--
+-- Policies KEPT (untouched, verified present):
+--   professional_profiles: "Users manage own profile" (auth.uid()=id),
+--     "Admins manage all profiles" (is_admin()).
+--   service_requests: "Customers manage own requests" (auth.uid()=customer_id),
+--     "Admins manage all requests" (is_admin()),
+--     "Anonymous can submit pending requests" (anon INSERT, pending_moderation).
+
+DROP POLICY IF EXISTS "Anyone can view active profiles" ON public.glatko_professional_profiles;
+DROP POLICY IF EXISTS "Public can view active requests" ON public.glatko_service_requests;
+
+-- ───────────────── Defense-in-depth: revoke anon's base-table SELECT ─────────────────
+-- The policy drop above already makes anon read 0 rows (no permissive SELECT
+-- policy), so PII is unreachable. This REVOKE is belt-and-suspenders: even if a
+-- future policy accidentally re-grants anon rows, anon still cannot SELECT the
+-- base professional_profiles table at all — customer-facing reads go ONLY through
+-- the PII-free glatko_public_professionals view (owner-rights; its anon GRANT is
+-- on the view, unaffected by this).
+--
+-- Why TABLE-level (not column-level as first scoped): Postgres cannot "subtract"
+-- a single column from an existing table-level SELECT grant — a table grant
+-- implies every column. Revoking the whole base-table SELECT from anon is the
+-- clean, effective form (anon needs no base column — it reads the view).
+--
+-- Why anon ONLY (NOT authenticated): column/table grants are role-level, not
+-- row-level. The pro's own panel + admin read the base table as `authenticated`,
+-- gated to their rows by the kept "Users manage own profile" / "Admins manage
+-- all profiles" policies. Revoking from authenticated would break the owner
+-- reading their OWN phone + admin reads. RLS (not grants) is what scopes them.
+-- service_requests SELECT is left as-is for anon (anon still INSERTs pending
+-- requests + reads them back by id via the kept owner/anon-insert policies; the
+-- policy drop already removes anon's broad SELECT of others' requests).
+REVOKE SELECT ON public.glatko_professional_profiles FROM anon;

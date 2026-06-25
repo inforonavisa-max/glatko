@@ -38,7 +38,8 @@ export function ProviderSchema({ pro, reviews, canonicalUrl }: Props) {
           addressCountry: "ME",
         }
       : undefined,
-    telephone: pro.phone || undefined,
+    // Disintermediation (G-DISINT): no telephone in public JSON-LD — the pro's
+    // phone must not reach the client/crawlers from a customer-facing surface.
     aggregateRating:
       pro.total_reviews > 0
         ? {

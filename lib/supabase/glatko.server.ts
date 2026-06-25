@@ -84,9 +84,12 @@ export async function getProfessionalProfileBySlug(
 ): Promise<ProfessionalProfile | null> {
   const supabase = createClient();
 
+  // PII lockdown (087): public profile reads the PII-free view (no phone /
+  // company_documents / admin_notes / raw tier_documents). full_name + avatar_url
+  // are flat columns on the view.
   const { data: pro, error } = await supabase
-    .from("glatko_professional_profiles")
-    .select("*, profiles!glatko_professional_profiles_id_fkey(full_name, avatar_url)")
+    .from("glatko_public_professionals")
+    .select("*")
     .eq("slug", slug)
     .single();
 
@@ -99,7 +102,10 @@ export async function getProfessionalProfileBySlug(
 
   return {
     ...pro,
-    profile: pro.profiles ?? undefined,
+    profile:
+      pro.full_name || pro.avatar_url
+        ? { full_name: pro.full_name, avatar_url: pro.avatar_url }
+        : undefined,
     services: (services as ProService[]) ?? [],
   } as ProfessionalProfile;
 }
@@ -114,9 +120,8 @@ export async function getProfessionalsForSitemap(): Promise<
 > {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("glatko_professional_profiles")
+    .from("glatko_public_professionals")
     .select("slug, updated_at")
-    .eq("is_active", true)
     .eq("verification_status", "approved");
 
   if (error || !data) return [];
@@ -339,6 +344,35 @@ export async function getServiceRequest(requestId: string) {
     return null;
   }
   return data;
+}
+
+/**
+ * PII lockdown (087): a pro's view of a request they were MATCHED to. Reads the
+ * auth.uid()-scoped glatko_matched_request view (address + customer first name
+ * YES; anonymous_email / precise geo / customer_id NO). Returns null if the
+ * caller is not a matched pro for this request. Replaces the prior getServiceRequest
+ * call on the pro request-detail page (that returned all columns incl PII).
+ */
+export async function getMatchedRequestForPro(requestId: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("glatko_matched_request")
+    .select("*")
+    .eq("id", requestId)
+    .maybeSingle();
+  if (error || !data) return null;
+  const { data: category } = await supabase
+    .from("glatko_service_categories")
+    .select("id, slug, name, icon, parent_id")
+    .eq("id", data.category_id as string)
+    .maybeSingle();
+  return {
+    ...data,
+    category: category ?? null,
+    customer: data.customer_full_name
+      ? { full_name: data.customer_full_name as string }
+      : null,
+  };
 }
 
 interface CreateServiceRequestInput {
@@ -1355,17 +1389,15 @@ export async function searchProfessionals(params: {
   const { page = 1, limit = 12 } = params;
   const offset = (page - 1) * limit;
 
+  // PII lockdown (087): the public directory reads the PII-free view (no phone /
+  // company_documents / admin_notes / raw tier_documents) — this is an anon-facing
+  // surface, and post-087b the base table is unreadable by anon anyway. The view
+  // already filters is_active=true; full_name/avatar_url are flat columns. The
+  // view carries no PostgREST FK metadata, so the category services embed is
+  // fetched separately below (mirrors getProfessionalProfileBySlug).
   let q = supabase
-    .from("glatko_professional_profiles")
-    .select(
-      `*,
-      profile:profiles!id(full_name, avatar_url),
-      services:glatko_pro_services(
-        category:glatko_service_categories(id, slug, name, icon)
-      )`,
-      { count: "exact" }
-    )
-    .eq("is_active", true)
+    .from("glatko_public_professionals")
+    .select("*", { count: "exact" })
     .eq("is_verified", true);
 
   if (params.categorySlug) {
@@ -1426,8 +1458,39 @@ export async function searchProfessionals(params: {
   const { data, error, count } = await q;
   if (error) throw error;
 
+  const rows = (data ?? []) as Array<Record<string, unknown>>;
+
+  // Attach category services for the result set (separate fetch — the view has
+  // no FK metadata for a PostgREST embed) + reshape flat full_name/avatar_url
+  // into the `profile` object the cards expect.
+  const ids = rows.map((p) => p.id as string);
+  const servicesByPro: Record<string, Array<{ category: unknown }>> = {};
+  if (ids.length > 0) {
+    const { data: svc } = await supabase
+      .from("glatko_pro_services")
+      .select(
+        "professional_id, category:glatko_service_categories(id, slug, name, icon)",
+      )
+      .in("professional_id", ids);
+    for (const s of (svc ?? []) as Array<{
+      professional_id: string;
+      category: unknown;
+    }>) {
+      (servicesByPro[s.professional_id] ??= []).push({ category: s.category });
+    }
+  }
+
+  const professionals = rows.map((p) => ({
+    ...p,
+    profile:
+      p.full_name || p.avatar_url
+        ? { full_name: p.full_name, avatar_url: p.avatar_url }
+        : undefined,
+    services: servicesByPro[p.id as string] ?? [],
+  })) as Array<Record<string, unknown>>;
+
   return {
-    professionals: data || [],
+    professionals,
     total: count || 0,
     page,
     totalPages: Math.ceil((count || 0) / limit),
@@ -1600,27 +1663,29 @@ export async function getCitiesServingCategory(
   // Same root/sub semantics as searchProfessionals: a root category's
   // areaServed should include cities from pros offering any sub-category.
   const categoryIds = await expandRootCategoryIds(supabase, categoryId);
-  const { data, error } = await supabase
+  // PII lockdown (087): resolve offering pros via the junction, then read their
+  // city from the PII-free view. The prior `professional_id!inner(...)` embed of
+  // the base table would return 0 rows for anon once 087b drops the broad policy.
+  const { data: svc } = await supabase
     .from("glatko_pro_services")
-    .select(
-      "professional:professional_id!inner(location_city, is_active, is_verified)",
-    )
-    .in("category_id", categoryIds)
-    .eq("professional.is_active", true)
-    .eq("professional.is_verified", true);
+    .select("professional_id")
+    .in("category_id", categoryIds);
+  const proIds = Array.from(
+    new Set((svc ?? []).map((s) => s.professional_id as string)),
+  );
+  if (proIds.length === 0) return [];
+
+  const { data, error } = await supabase
+    .from("glatko_public_professionals")
+    .select("location_city")
+    .in("id", proIds)
+    .eq("is_verified", true);
 
   if (error || !data) return [];
 
   const cities = new Set<string>();
-  for (const row of data as Array<{
-    professional:
-      | { location_city: string | null }
-      | Array<{ location_city: string | null }>
-      | null;
-  }>) {
-    const rel = row.professional;
-    const profile = Array.isArray(rel) ? rel[0] : rel;
-    const city = profile?.location_city;
+  for (const row of data as Array<{ location_city: string | null }>) {
+    const city = row.location_city;
     if (city && typeof city === "string" && city.trim().length > 0) {
       cities.add(city.trim());
     }

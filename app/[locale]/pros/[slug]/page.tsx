@@ -9,8 +9,6 @@ import {
   Globe,
   Languages,
   MapPin,
-  MessageCircle,
-  Phone,
   Star,
   Eye,
 } from "lucide-react";
@@ -26,7 +24,6 @@ import {
 import { TrustBadge } from "@/components/glatko/trust/TrustBadge";
 import { VerifiedBadgeWithProof } from "@/components/glatko/verification/VerifiedBadgeWithProof";
 import { FoundingProviderBadge } from "@/components/glatko/founding/FoundingProviderBadge";
-import { ContactLinkButton } from "@/components/glatko/provider/ContactLinkButton";
 import type {
   VerificationData,
   VerificationDoc,
@@ -508,30 +505,10 @@ export default async function ProviderProfileBySlugPage({ params }: PageProps) {
             >
               {t("pro.profile.requestQuote")}
             </Link>
-            {profile.phone && (
-              <>
-                <ContactLinkButton
-                  href={`https://wa.me/${profile.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Merhaba, Glatko üzerinden ulaşıyorum.")}`}
-                  channel="whatsapp"
-                  providerId={id}
-                  providerSlug={slug}
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:bg-[#20BD5A] hover:shadow-xl hover:shadow-[#25D366]/30"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  WhatsApp
-                </ContactLinkButton>
-                <ContactLinkButton
-                  href={`viber://chat?number=${encodeURIComponent(profile.phone.replace(/[^0-9+]/g, ""))}`}
-                  channel="viber"
-                  providerId={id}
-                  providerSlug={slug}
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#7360F2] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#7360F2]/25 transition-all hover:bg-[#6352E0] hover:shadow-xl hover:shadow-[#7360F2]/30"
-                >
-                  <Phone className="h-4 w-4" />
-                  Viber
-                </ContactLinkButton>
-              </>
-            )}
+            {/* Disintermediation (G-DISINT): off-platform WhatsApp/Viber
+                deep-links removed. First contact is in-platform via the
+                request/quote flow above (which opens an in-app message thread
+                once a pro quotes); number exchange is free afterwards in DM. */}
           </div>
         </div>
       </div>

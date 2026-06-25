@@ -42,13 +42,7 @@
     "title": "Karadağ'da Güvenilir Profesyoneller",
     "subtitle": "Ev tamiratından iş hizmetlerine — Karadağ genelinde güvenilir profesyoneller",
     "cta": "Ücretsiz Teklif Al",
-    "ctaSecondary": "Profesyonelleri Keşfet",
-    "trustedBy": "Karadağ genelinde güveniliyor",
-    "stats": {
-      "professionals": "Profesyonel",
-      "jobsCompleted": "Tamamlanan İş",
-      "avgRating": "Ortalama Puan"
-    }
+    "ctaSecondary": "Profesyonelleri Keşfet"
   },
   "categories": {
     "title": "Hizmet Kategorilerimiz",
@@ -1695,7 +1689,6 @@
   "services": {
     "title": "Hizmetlerimiz",
     "subtitle": "İhtiyacınıza uygun kategoriyi seçin",
-    "prosInCategory": "profesyonel bu kategoride",
     "metaDescription": "Karadağ'da Glatko'da doğrulanmış {name} profesyonellerini bulun. Yerel uzmanlardan teklif karşılaştırın, hızlıca rezervasyon yapın — talep ücretsiz.",
     "viewAllPros": "Tüm Profesyonelleri Gör",
     "requestInCategory": "Bu Kategoride Hizmet Talep Et",

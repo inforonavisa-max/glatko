@@ -1,7 +1,7 @@
 import { createClient } from "@/supabase/server";
 import { redirect, notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { getServiceRequest, getProfessionalProfile } from "@/lib/supabase/glatko.server";
+import { getMatchedRequestForPro, getProfessionalProfile } from "@/lib/supabase/glatko.server";
 import { ProRequestDetail } from "@/components/glatko/pro/ProRequestDetail";
 
 type Props = {
@@ -17,7 +17,7 @@ export default async function ProRequestDetailPage({ params }: Props) {
   if (!user) redirect(`/${locale}/login?redirect=/pro/dashboard/requests/${id}`);
 
   const [request, profile] = await Promise.all([
-    getServiceRequest(id),
+    getMatchedRequestForPro(id),
     getProfessionalProfile(user.id),
   ]);
 

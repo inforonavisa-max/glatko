@@ -215,35 +215,33 @@ function RequestServiceWizardInner({ categories, userId }: Props) {
 
     (async () => {
       const supabase = createClient();
+      // PII lockdown (087): read the PII-free public view for the pro fields.
+      // Services come from pro_services separately (public-readable; the view
+      // has no FK for PostgREST embedding).
       const { data, error } = await supabase
-        .from("glatko_professional_profiles")
-        .select(
-          `
-          id,
-          business_name,
-          avg_rating,
-          total_reviews,
-          is_active,
-          is_verified,
-          services:glatko_pro_services(
-            category:glatko_service_categories(name)
-          )
-        `
-        )
+        .from("glatko_public_professionals")
+        .select("id, business_name, avg_rating, total_reviews, is_active, is_verified")
         .eq("id", preferredProId)
-        .eq("is_active", true)
         .maybeSingle();
 
       if (cancelled) return;
-      setPreferredProLoading(false);
 
       if (error || !data) {
+        setPreferredProLoading(false);
         setPreferredPro(null);
         setPreferredProError(true);
         return;
       }
 
-      const svc = data.services as
+      const { data: svcRows } = await supabase
+        .from("glatko_pro_services")
+        .select("category:glatko_service_categories(name)")
+        .eq("professional_id", preferredProId);
+
+      if (cancelled) return;
+      setPreferredProLoading(false);
+
+      const svc = svcRows as
         | { category?: { name?: Record<string, string> } | null }[]
         | null;
       const catLabels: string[] = [];

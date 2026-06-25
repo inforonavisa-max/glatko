@@ -34,7 +34,7 @@ export default async function ProviderIdRedirect({ params }: PageProps) {
 
   const supabase = createClient();
   const { data } = await supabase
-    .from("glatko_professional_profiles")
+    .from("glatko_public_professionals")
     .select("slug")
     .eq("id", id)
     .maybeSingle();

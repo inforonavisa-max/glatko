@@ -42,13 +42,7 @@
     "title": "Trusted Professionals in Montenegro",
     "subtitle": "From home repairs to business services — trusted professionals across Montenegro",
     "cta": "Get a Free Quote",
-    "ctaSecondary": "Browse Professionals",
-    "trustedBy": "Trusted across Montenegro",
-    "stats": {
-      "professionals": "Professionals",
-      "jobsCompleted": "Jobs Completed",
-      "avgRating": "Average Rating"
-    }
+    "ctaSecondary": "Browse Professionals"
   },
   "categories": {
     "title": "Our Service Categories",
@@ -1695,7 +1689,6 @@
   "services": {
     "title": "Our Services",
     "subtitle": "Choose the right category for your needs",
-    "prosInCategory": "professionals in this category",
     "metaDescription": "Find verified {name} professionals across Montenegro on Glatko. Compare quotes from trusted local experts and book quickly — free to request.",
     "viewAllPros": "View All Professionals",
     "requestInCategory": "Request Service in This Category",
