@@ -18,17 +18,22 @@ export async function expireOldRequests() {
       customer_id: string;
       title?: string | null;
     };
-    await createNotification({
-      user_id: row.customer_id,
-      type: "status_change",
-      title: "Request expired",
-      body: "Your service request has expired after 7 days",
-      data: {
-        requestId: row.id,
-        requestTitle: row.title ?? "",
-        statusCode: "expired",
+    await createNotification(
+      {
+        user_id: row.customer_id,
+        type: "status_change",
+        title: "Request expired",
+        body: "Your service request has expired after 7 days",
+        data: {
+          requestId: row.id,
+          requestTitle: row.title ?? "",
+          statusCode: "expired",
+        },
       },
-    }).catch(() => {});
+      // Cron path: await the external SMS so an in-flight Infobip fetch isn't
+      // killed when the function returns (G-NOTIFICATION-RESILIENCE-01).
+      { waitForExternal: true },
+    ).catch(() => {});
   }
 
   return data?.length || 0;

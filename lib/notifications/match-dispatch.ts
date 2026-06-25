@@ -130,6 +130,10 @@ async function sendMatchToPro(params: {
           municipality: request.municipality,
           categoryNames: request.categoryNames,
         },
+        // Cron (activate-waitlists) + admin-approve both run this. Await the
+        // external SMS so the serverless function isn't frozen mid-fetch
+        // (G-NOTIFICATION-RESILIENCE-01 — the SocketError root cause).
+        waitForExternal: true,
       },
       ["email"],
     );

@@ -68,40 +68,33 @@ function extractInfobipError(body: unknown, status: number): string {
   return `sms_http_${status}`;
 }
 
-/**
- * Sends a single SMS. Never throws — returns a discriminated result so callers
- * can branch without try/catch. Failures are logged and reported to Sentry.
- *
- * `error` is either a stable machine code (sms_not_configured,
- * sms_network_error, sms_no_message_id, sms_http_<status>) or the raw Infobip
- * rejection text — useful for diagnosing sender/scope/trial issues.
- */
-export async function sendSms({
-  to,
-  text,
-}: {
-  to: string;
-  text: string;
-}): Promise<SendSmsResult> {
-  const config = getConfig();
-  if (!config) {
-    console.error(
-      "[GLATKO:sms] Infobip not configured (INFOBIP_API_KEY / INFOBIP_BASE_URL / INFOBIP_SMS_SENDER)",
-    );
-    return { ok: false, error: "sms_not_configured" };
-  }
+/** Per-attempt fetch timeout. A hung socket otherwise blocks until the route's
+ *  maxDuration, at which point the frozen function tears the socket down
+ *  ("other side closed"). Bounding it turns a hang into a clean {ok:false}. */
+const SMS_TIMEOUT_MS = 10_000;
+/** Backoff before each retry (ms). Length also caps the retry count. */
+const SMS_RETRY_BACKOFF_MS = [300, 800] as const;
 
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+/** One attempt + whether the failure is worth retrying (transient). */
+type SmsAttempt = { result: SendSmsResult; retryable: boolean };
+
+async function attemptSendSms(
+  config: InfobipConfig,
+  to: string,
+  text: string,
+  timeoutMs: number,
+): Promise<SmsAttempt> {
   const endpoint = `${config.origin}${SMS_PATH}`;
   const payload = {
     messages: [
-      {
-        sender: config.sender,
-        destinations: [{ to }],
-        content: { text },
-      },
+      { sender: config.sender, destinations: [{ to }], content: { text } },
     ],
   };
 
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   let response: Response;
   try {
     response = await fetch(endpoint, {
@@ -113,11 +106,21 @@ export async function sendSms({
       },
       body: JSON.stringify(payload),
       cache: "no-store",
+      signal: controller.signal,
     });
   } catch (err) {
+    // Timeout (our abort): the request may have been received, so do NOT retry
+    // — a retry could duplicate the SMS. Genuine network failure: retry.
+    if ((err as { name?: string })?.name === "AbortError") {
+      console.error("[GLATKO:sms] Infobip request timed out", timeoutMs);
+      glatkoCaptureException(err, { module: "sms-infobip", phase: "timeout" });
+      return { result: { ok: false, error: "sms_timeout" }, retryable: false };
+    }
     console.error("[GLATKO:sms] network error calling Infobip", err);
     glatkoCaptureException(err, { module: "sms-infobip", phase: "fetch" });
-    return { ok: false, error: "sms_network_error" };
+    return { result: { ok: false, error: "sms_network_error" }, retryable: true };
+  } finally {
+    clearTimeout(timer);
   }
 
   const rawText = await response.text();
@@ -140,7 +143,11 @@ export async function sendSms({
       module: "sms-infobip",
       status: String(response.status),
     });
-    return { ok: false, error: extractInfobipError(body, response.status) };
+    return {
+      result: { ok: false, error: extractInfobipError(body, response.status) },
+      // 5xx = server-side, safe to retry; 4xx = our request is wrong, do not.
+      retryable: response.status >= 500,
+    };
   }
 
   const first = (body as InfobipSendResponse | null)?.messages?.[0];
@@ -155,7 +162,7 @@ export async function sendSms({
       module: "sms-infobip",
       status: statusName ?? "rejected",
     });
-    return { ok: false, error: statusName ?? "sms_rejected" };
+    return { result: { ok: false, error: statusName ?? "sms_rejected" }, retryable: false };
   }
 
   if (!first?.messageId) {
@@ -165,8 +172,57 @@ export async function sendSms({
       "[GLATKO:sms] Infobip response missing messageId",
       statusName ?? "unknown",
     );
-    return { ok: false, error: "sms_no_message_id" };
+    return { result: { ok: false, error: "sms_no_message_id" }, retryable: false };
   }
 
-  return { ok: true, messageId: first.messageId, status: statusName };
+  return {
+    result: { ok: true, messageId: first.messageId, status: statusName },
+    retryable: false,
+  };
+}
+
+/**
+ * Sends a single SMS. Never throws — returns a discriminated result so callers
+ * can branch without try/catch. Failures are logged and reported to Sentry.
+ *
+ * Resilience (G-NOTIFICATION-RESILIENCE-01):
+ *  • `timeoutMs` bounds each attempt with an AbortController so a hung socket
+ *    returns {ok:false, error:"sms_timeout"} instead of blocking to maxDuration.
+ *  • `retries` re-sends ONLY on transient failures (genuine network error / 5xx)
+ *    with backoff. Timeouts and permanent failures (4xx, rejected, missing id)
+ *    are never retried. OTP callers pass `retries: 0` to avoid duplicate codes.
+ *
+ * `error` is either a stable machine code (sms_not_configured, sms_timeout,
+ * sms_network_error, sms_no_message_id, sms_http_<status>) or the raw Infobip
+ * rejection text — useful for diagnosing sender/scope/trial issues.
+ */
+export async function sendSms({
+  to,
+  text,
+  timeoutMs = SMS_TIMEOUT_MS,
+  retries = 1,
+}: {
+  to: string;
+  text: string;
+  timeoutMs?: number;
+  retries?: number;
+}): Promise<SendSmsResult> {
+  const config = getConfig();
+  if (!config) {
+    console.error(
+      "[GLATKO:sms] Infobip not configured (INFOBIP_API_KEY / INFOBIP_BASE_URL / INFOBIP_SMS_SENDER)",
+    );
+    return { ok: false, error: "sms_not_configured" };
+  }
+
+  const maxAttempts = Math.max(0, retries) + 1;
+  let last: SendSmsResult = { ok: false, error: "sms_not_attempted" };
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const { result, retryable } = await attemptSendSms(config, to, text, timeoutMs);
+    if (result.ok) return result;
+    last = result;
+    if (!retryable || attempt === maxAttempts - 1) return result;
+    await sleep(SMS_RETRY_BACKOFF_MS[attempt] ?? 800);
+  }
+  return last;
 }
