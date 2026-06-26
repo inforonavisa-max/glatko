@@ -634,6 +634,7 @@
         "flexible": "Esnek",
         "specific_date": "Belirli tarih"
       },
+      "messageCustomer": "Müşteriye yaz",
       "sendQuote": "Teklif Gönder",
       "quoteAlreadySent": "Teklif gönderildi",
       "requestNotActive": "Talep kapandı",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Daha fazla teklif geliyor",
       "waitingTimer": "Kalan süre",
       "waitlistActivated": "Harika seçenekler için ek profesyonelleri devreye aldık.",
+      "contactPro": "İletişime geç",
       "quotesReceived": "Alınan teklifler",
       "quotesSortedByPrice": "Fiyata göre sıralandı (en düşük önce).",
       "noQuotesYet": "Teklifler yolda",

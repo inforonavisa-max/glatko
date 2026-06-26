@@ -634,6 +634,7 @@
         "flexible": "Гибко",
         "specific_date": "Конкретная дата"
       },
+      "messageCustomer": "Написать клиенту",
       "sendQuote": "Отправить предложение",
       "quoteAlreadySent": "Предложение отправлено",
       "requestNotActive": "Заявка закрыта",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Скоро придут ещё предложения",
       "waitingTimer": "Осталось времени",
       "waitlistActivated": "Мы активировали дополнительных специалистов, чтобы вы получили отличные варианты.",
+      "contactPro": "Связаться",
       "quotesReceived": "Полученные предложения",
       "quotesSortedByPrice": "Отсортировано по цене (сначала самая низкая).",
       "noQuotesYet": "Предложения уже идут",

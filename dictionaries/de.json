@@ -634,6 +634,7 @@
         "flexible": "Flexibel",
         "specific_date": "Bestimmtes Datum"
       },
+      "messageCustomer": "Kunde anschreiben",
       "sendQuote": "Angebot senden",
       "quoteAlreadySent": "Angebot gesendet",
       "requestNotActive": "Anfrage geschlossen",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Weitere Angebote sind unterwegs",
       "waitingTimer": "Verbleibende Zeit",
       "waitlistActivated": "Wir haben zusätzliche Profis aktiviert, damit Sie tolle Optionen erhalten.",
+      "contactPro": "Kontakt aufnehmen",
       "quotesReceived": "Erhaltene Angebote",
       "quotesSortedByPrice": "Nach Preis sortiert (niedrigster zuerst).",
       "noQuotesYet": "Angebote sind unterwegs",

@@ -634,6 +634,7 @@
         "flexible": "Flexible timing",
         "specific_date": "Specific date"
       },
+      "messageCustomer": "Message customer",
       "sendQuote": "Send Quote",
       "quoteAlreadySent": "Quote sent",
       "requestNotActive": "Request closed",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "More quotes are on the way",
       "waitingTimer": "Time left",
       "waitlistActivated": "We've activated additional pros to make sure you get great options.",
+      "contactPro": "Get in touch",
       "quotesReceived": "Quotes received",
       "quotesSortedByPrice": "Sorted by price (lowest first).",
       "noQuotesYet": "Quotes are on the way",

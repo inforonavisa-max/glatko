@@ -634,6 +634,7 @@
         "flexible": "Flessibile",
         "specific_date": "Data specifica"
       },
+      "messageCustomer": "Scrivi al cliente",
       "sendQuote": "Invia preventivo",
       "quoteAlreadySent": "Preventivo inviato",
       "requestNotActive": "Richiesta chiusa",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Altri preventivi sono in arrivo",
       "waitingTimer": "Tempo rimanente",
       "waitlistActivated": "Abbiamo attivato altri professionisti per assicurarti ottime opzioni.",
+      "contactPro": "Contatta",
       "quotesReceived": "Preventivi ricevuti",
       "quotesSortedByPrice": "Ordinati per prezzo (più basso prima).",
       "noQuotesYet": "I preventivi sono in arrivo",

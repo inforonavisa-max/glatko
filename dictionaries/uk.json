@@ -634,6 +634,7 @@
         "flexible": "Гнучко",
         "specific_date": "Конкретна дата"
       },
+      "messageCustomer": "Написати клієнту",
       "sendQuote": "Надіслати пропозицію",
       "quoteAlreadySent": "Пропозицію надіслано",
       "requestNotActive": "Запит закрито",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Скоро надійдуть ще пропозиції",
       "waitingTimer": "Залишилося часу",
       "waitlistActivated": "Ми активували додаткових фахівців, щоб ви отримали чудові варіанти.",
+      "contactPro": "Зв'язатися",
       "quotesReceived": "Отримані пропозиції",
       "quotesSortedByPrice": "Сортовано за ціною (нижча першою).",
       "noQuotesYet": "Пропозиції на підході",
