@@ -101,6 +101,7 @@ export function CustomerQuotesView({
   const [threadError, setThreadError] = useState<string | null>(null);
 
   async function handleStartChat(quote: Quote) {
+    if (openingThread) return; // ignore re-entry while a thread is opening
     const pro = quote.glatko_professional_profiles;
     if (!pro) return;
     setOpeningThread(quote.id);
@@ -254,7 +255,17 @@ export function CustomerQuotesView({
             return (
               <div
                 key={quote.id}
-                className={`rounded-xl border p-6 bg-white dark:bg-neutral-900 hover:shadow-lg transition-shadow ${
+                role="button"
+                tabIndex={0}
+                aria-busy={openingThread === quote.id}
+                onClick={() => handleStartChat(quote)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleStartChat(quote);
+                  }
+                }}
+                className={`cursor-pointer rounded-xl border p-6 bg-white dark:bg-neutral-900 hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${
                   isBest
                     ? "border-emerald-300 dark:border-emerald-700 ring-2 ring-emerald-200 dark:ring-emerald-900"
                     : "border-gray-200 dark:border-neutral-800"
@@ -283,6 +294,7 @@ export function CustomerQuotesView({
                   <div className="flex-1 min-w-0">
                     <a
                       href={`/${locale}/provider/${pro.id}`}
+                      onClick={(e) => e.stopPropagation()}
                       className="font-semibold text-gray-900 dark:text-white hover:underline truncate block"
                     >
                       {businessName}
@@ -354,14 +366,17 @@ export function CustomerQuotesView({
                 <div className="space-y-2">
                   <button
                     type="button"
-                    onClick={() => handleStartChat(quote)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleStartChat(quote);
+                    }}
                     disabled={openingThread === quote.id}
                     className="w-full px-3 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     <MessageSquare className="h-4 w-4" />
                     {openingThread === quote.id
                       ? t("messaging.openingThread")
-                      : t("messaging.sendMessage")}
+                      : t("customer.quotes.contactPro")}
                   </button>
                   <div className="flex gap-2">
                     {/* Disintermediation (G-DISINT): off-platform WhatsApp
@@ -369,6 +384,7 @@ export function CustomerQuotesView({
                         (button above). */}
                     <a
                       href={`/${locale}/provider/${pro.id}`}
+                      onClick={(e) => e.stopPropagation()}
                       className="flex-1 px-3 py-2 border border-gray-300 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-neutral-800 text-center"
                     >
                       {t("customer.quotes.viewProfile")}

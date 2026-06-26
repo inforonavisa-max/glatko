@@ -634,6 +634,7 @@
         "flexible": "مرن",
         "specific_date": "تاريخ محدد"
       },
+      "messageCustomer": "مراسلة العميل",
       "sendQuote": "إرسال عرض السعر",
       "quoteAlreadySent": "تم إرسال العرض",
       "requestNotActive": "الطلب مغلق",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "المزيد من العروض في طريقها إليك",
       "waitingTimer": "الوقت المتبقي",
       "waitlistActivated": "قمنا بتفعيل محترفين إضافيين لضمان حصولك على خيارات رائعة.",
+      "contactPro": "تواصل",
       "quotesReceived": "العروض المستلمة",
       "quotesSortedByPrice": "مرتّبة حسب السعر (الأقل أولاً).",
       "noQuotesYet": "العروض في طريقها",

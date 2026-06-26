@@ -634,6 +634,7 @@
         "flexible": "Fleksibilno",
         "specific_date": "Određeni datum"
       },
+      "messageCustomer": "Poruka klijentu",
       "sendQuote": "Pošalji ponudu",
       "quoteAlreadySent": "Ponuda poslata",
       "requestNotActive": "Zahtjev zatvoren",
@@ -2303,6 +2304,7 @@
       "waitingMoreQuotes": "Stiže još ponuda",
       "waitingTimer": "Preostalo vrijeme",
       "waitlistActivated": "Aktivirali smo dodatne profesionalce da biste dobili odlične opcije.",
+      "contactPro": "Stupi u kontakt",
       "quotesReceived": "Pristigle ponude",
       "quotesSortedByPrice": "Sortirano po cijeni (najniža prva).",
       "noQuotesYet": "Ponude su na putu",

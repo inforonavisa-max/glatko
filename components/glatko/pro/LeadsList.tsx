@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { openOrCreateThread } from "@/app/[locale]/messages/actions";
 import {
   Clock,
   MapPin,
@@ -75,6 +78,9 @@ interface Props {
   leads: Lead[];
   threadByRequestId?: Record<string, ThreadInfo>;
   locale: string;
+  /** The logged-in pro's profile id (= professional_id). Lets the pro open a
+   *  thread with the customer once they've quoted (G-QUOTE-MESSAGING-FLOW-01). */
+  proId: string;
 }
 
 const URGENCY_KEY: Record<string, string> = {
@@ -104,8 +110,39 @@ export function LeadsList({
   leads,
   threadByRequestId = {},
   locale,
+  proId,
 }: Props) {
   const t = useTranslations();
+  const router = useRouter();
+  const [openingFor, setOpeningFor] = useState<string | null>(null);
+  const [msgError, setMsgError] = useState<string | null>(null);
+
+  async function handleMessageCustomer(
+    requestId: string,
+    quoteId: string | null,
+  ) {
+    if (openingFor) return; // ignore re-entry while a thread is opening
+    setOpeningFor(requestId);
+    setMsgError(null);
+    try {
+      const result = await openOrCreateThread({
+        request_id: requestId,
+        professional_id: proId,
+        initial_quote_id: quoteId,
+      });
+      if (!result.success || !result.data) {
+        setMsgError(result.error ?? t("messaging.openThreadError"));
+        setOpeningFor(null);
+        return;
+      }
+      router.push(`/${locale}/messages/${result.data.thread_id}`);
+    } catch (err) {
+      setMsgError(
+        err instanceof Error ? err.message : t("messaging.openThreadError"),
+      );
+      setOpeningFor(null);
+    }
+  }
 
   if (leads.length === 0) {
     return (
@@ -268,11 +305,35 @@ export function LeadsList({
                     )}
                   </Link>
                 )}
+                {/* G-QUOTE-MESSAGING: once the pro has quoted, let them open the
+                    thread instead of waiting for the customer to message first.
+                    Hidden once a thread exists ("View thread" above takes over). */}
+                {sentQuote && !threadByRequestId[lead.request_id] && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleMessageCustomer(lead.request_id, sentQuote.id)
+                    }
+                    disabled={openingFor === lead.request_id}
+                    className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-60"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    {openingFor === lead.request_id
+                      ? t("messaging.openingThread")
+                      : t("pro.leads.messageCustomer")}
+                  </button>
+                )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {msgError && (
+        <div className="mt-4 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-3 text-sm text-red-700 dark:text-red-400">
+          {msgError}
+        </div>
+      )}
     </div>
   );
 }

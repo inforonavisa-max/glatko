@@ -127,6 +127,7 @@ export default async function ProLeadsPage({ params }: Props) {
       leads={JSON.parse(JSON.stringify(leads))}
       threadByRequestId={threadByRequestId}
       locale={locale}
+      proId={user.id}
     />
   );
 }
